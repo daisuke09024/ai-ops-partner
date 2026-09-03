@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>事例⑧: 診断納品物5点の自動生成、議事録1本から初稿5点｜AI業務改革パートナー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans JP"', 'sans-serif'] }, colors: { primary: {50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e3a5f',900:'#0f1d35'}, accent:'#f97316' } } } }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- Header -->
+  <header class="bg-primary-900 text-white">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="text-sm font-semibold text-blue-300 hover:text-white transition-colors">← トップページに戻る</a>
+      <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="text-sm bg-accent hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-full transition-colors">無料トライアルに申し込む</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-600 text-white py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-sm text-blue-300 font-semibold tracking-widest uppercase mb-4 reveal">Case Study 08</p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6 reveal reveal-delay-1">診断納品物5点の自動生成<br>議事録1本から初稿5点を届ける</h1>
+      <div class="flex flex-wrap gap-3 reveal reveal-delay-2">
+        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">議事録 → 5点</span>
+        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">ROI試算</span>
+        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">ロードマップ</span>
+        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">診断レポート</span>
+      </div>
+      <!-- Impact numbers -->
+      <div class="grid grid-cols-3 gap-6 mt-12 max-w-lg reveal reveal-delay-3">
+        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">1<span class="text-lg text-blue-300">本</span></p><p class="text-xs text-blue-200/60 mt-1">入力はヒアリング議事録</p></div>
+        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">5<span class="text-lg text-blue-300">点</span></p><p class="text-xs text-blue-200/60 mt-1">生成される納品物の初稿</p></div>
+        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">数日</p><p class="text-xs text-blue-200/60 mt-1">従来の初稿づくりの工数</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-6 space-y-16">
+
+      <!-- 課題背景 -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm flex-shrink-0">課題</span>
+          <h2 class="text-2xl font-bold">診断・提案の初稿づくりに、1件ごとに数日かかる</h2>
+        </div>
+        <div class="bg-red-50 rounded-2xl p-6 md:p-8 border border-red-100">
+          <p class="text-gray-700 leading-relaxed mb-4">ヒアリングの後に作る資料は多い。テーマ整理・ROI試算・ロードマップ・診断レポート。</p>
+          <p class="text-gray-700 leading-relaxed mb-4">成果物が多いほど、<strong class="text-red-600">1件ごとに数日単位の工数</strong>がかかる構造だった。</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">成果物が5種類</span>
+            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">1件で数日</span>
+            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">型が担当者に依存</span>
+            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">「何が届くか」を口頭で説明</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 矢印 -->
+      <div class="flex justify-center text-primary-400"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <!-- 実施内容 -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm flex-shrink-0">施策</span>
+          <h2 class="text-2xl font-bold">議事録1本から、納品物5点の初稿をAIが生成する</h2>
+        </div>
+        <div class="bg-blue-50 rounded-2xl p-6 md:p-8 border border-blue-100 space-y-4">
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
+            <div><p class="font-semibold text-gray-800">ヒアリング議事録を入力</p><p class="text-gray-600 text-sm mt-1">商談で取った議事録1本を、そのまま渡す。</p></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
+            <div><p class="font-semibold text-gray-800">5点の初稿を自動生成</p><p class="text-gray-600 text-sm mt-1">AI活用テーマ一覧・ROIレポート・ロードマップ・診断レポート・プロンプト集の5点が揃う。</p></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
+            <div><p class="font-semibold text-gray-800">人は判断と仕上げに集中</p><p class="text-gray-600 text-sm mt-1">初稿を叩き台に、優先順位と数字の裁定を人が行う。</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 構成 -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm flex-shrink-0">構成</span>
+          <h2 class="text-2xl font-bold">納品物5点の構成</h2>
+        </div>
+        <div class="bg-indigo-50 rounded-2xl p-4 md:p-6 border border-indigo-100">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-white rounded-xl p-5 border border-indigo-100">
+              <p class="text-2xl mb-2">📋</p>
+              <p class="text-xs font-bold text-indigo-600 tracking-widest">01 ／ Excel</p>
+              <p class="font-bold text-gray-800 mt-1">AI活用テーマ一覧</p>
+              <p class="text-xs text-gray-500 mt-2">業務ごとの候補テーマと優先度</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-indigo-100">
+              <p class="text-2xl mb-2">📈</p>
+              <p class="text-xs font-bold text-indigo-600 tracking-widest">02 ／ PDF</p>
+              <p class="font-bold text-gray-800 mt-1">ROI可視化レポート</p>
+              <p class="text-xs text-gray-500 mt-2">削減時間と投資回収の試算</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-indigo-100">
+              <p class="text-2xl mb-2">🗓️</p>
+              <p class="text-xs font-bold text-indigo-600 tracking-widest">03 ／ Excel</p>
+              <p class="font-bold text-gray-800 mt-1">PJロードマップ</p>
+              <p class="text-xs text-gray-500 mt-2">着手順と時期の計画</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-indigo-100">
+              <p class="text-2xl mb-2">🩺</p>
+              <p class="text-xs font-bold text-indigo-600 tracking-widest">04 ／ PDF</p>
+              <p class="font-bold text-gray-800 mt-1">AI活用診断レポート</p>
+              <p class="text-xs text-gray-500 mt-2">現在地と構造的な課題の整理</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-indigo-100">
+              <p class="text-2xl mb-2">💬</p>
+              <p class="text-xs font-bold text-indigo-600 tracking-widest">05 ／ Word</p>
+              <p class="font-bold text-gray-800 mt-1">初期プロンプト集</p>
+              <p class="text-xs text-gray-500 mt-2">現場がすぐ使える依頼文の型</p>
+            </div>
+            <div class="bg-indigo-100/60 rounded-xl p-5 border border-dashed border-indigo-200 flex flex-col justify-center">
+              <p class="text-xs font-bold text-indigo-600 tracking-widest">入力</p>
+              <p class="font-bold text-gray-800 mt-1">ヒアリング議事録 1本</p>
+              <p class="text-xs text-gray-500 mt-2">ここから上の5点が生成される</p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-3">納品物そのものは商品のため、ここに載せるのは構成までです。架空企業で作った現物一式は、無料相談の場でお見せします。</p>
+        </div>
+      </div>
+
+      <!-- 矢印 -->
+      <div class="flex justify-center text-primary-400"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <!-- 成果 -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center font-bold text-sm flex-shrink-0">成果</span>
+          <h2 class="text-2xl font-bold">「議事録を渡すと5点届く」を現物で示せる</h2>
+        </div>
+        <div class="bg-green-50 rounded-2xl p-6 md:p-8 border border-green-100">
+          <div class="grid sm:grid-cols-2 gap-6 mb-6">
+            <div class="text-center bg-white rounded-xl p-6 border border-green-200">
+              <p class="text-4xl font-extrabold text-green-700">5<span class="text-xl">点</span></p>
+              <p class="text-sm text-gray-500 mt-2">議事録1本から揃う初稿</p>
+            </div>
+            <div class="text-center bg-white rounded-xl p-6 border border-green-200">
+              <p class="text-4xl font-extrabold text-green-700">現物</p>
+              <p class="text-sm text-gray-500 mt-2">架空企業で作った見本一式</p>
+            </div>
+          </div>
+          <p class="text-gray-700 leading-relaxed">営業の段階で「何が届くか」を実物で見せられるようになった。<strong>定型の納品物があるビジネスなら、ヒアリングから初稿までをAIに任せられる</strong>。</p>
+        </div>
+      </div>
+
+      <!-- Before/After -->
+      <div class="reveal">
+        <h2 class="text-2xl font-bold mb-6 text-center">Before / After</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+            <p class="text-sm font-bold text-red-500 mb-3">BEFORE</p>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 初稿づくりに1件で数日</li>
+              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 成果物ごとに手で組み立てる</li>
+              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 「何が届くか」は口頭で説明</li>
+              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 型が担当者に依存する</li>
+            </ul>
+          </div>
+          <div class="bg-primary-50 rounded-2xl p-6 border border-blue-200">
+            <p class="text-sm font-bold text-green-600 mb-3">AFTER</p>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 議事録1本から5点の初稿</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 人は判断と仕上げに集中</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 現物の見本で「何が届くか」を示せる</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 型がAIに乗って再現できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-primary-900 text-white text-center">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-4 reveal">同じような課題を抱えていませんか？</h2>
+      <p class="text-blue-100/70 mb-8 reveal reveal-delay-1">無料トライアルでは、御社の特定業務1つをAIで実際に改善します。</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-2">
+        <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full transition-colors">無料トライアルに申し込む</a>
+        <a href="../index.html" class="inline-flex items-center gap-2 border-2 border-white/20 hover:border-white/40 text-white font-semibold px-8 py-4 rounded-full transition-colors">トップページへ</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-primary-900 border-t border-white/10 text-blue-100/40 py-6"><div class="max-w-5xl mx-auto px-6 text-center text-sm">&copy; 2026 AI業務改革パートナー</div></footer>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

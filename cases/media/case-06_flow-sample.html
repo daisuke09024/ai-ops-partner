@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>請求から料金回収までの業務フロー</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Urbanist:wght@600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --paper: #F7F9FC;
+    --ink: #1E293B;
+    --muted: #475569;
+    --rule: rgba(30,41,59,0.12);
+    --fs: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', system-ui, sans-serif;
+    --fd: 'Urbanist', 'Noto Sans JP', system-ui, sans-serif;
+    --fm: 'Geist Mono', ui-monospace, monospace;
+  }
+  body {
+    font-family: var(--fs); background: var(--paper); color: var(--ink);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 2.5rem 2rem;
+  }
+  .frame { max-width: 1680px; width: 100%; }
+  .eyebrow {
+    font-family: var(--fm); font-size: 0.66rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  h1 {
+    font-family: var(--fd); font-size: clamp(1.4rem, 2.2vw + 0.7rem, 1.9rem);
+    font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; margin-bottom: 0.35rem;
+  }
+  .sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem; }
+  .wrap { overflow-x: auto; }
+  svg { width: 100%; min-width: 1280px; display: block; }
+  svg text.t { font-family: var(--fs); }
+  svg text.m { font-family: var(--fm); }
+  footer {
+    margin-top: 1.25rem; padding-top: 0.75rem; border-top: 1px solid var(--rule);
+    font-family: var(--fm); font-size: 0.66rem; letter-spacing: 0.1em; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Swimlane · ai-ops</p>
+    <h1>請求から料金回収までの業務フロー</h1>
+    <p class="sub">標準BtoBモデル｜請求前準備から月次締め・監査まで／6ロール × 6フェーズ・46プロセス</p>
+    <div class="wrap">
+      <svg viewBox="0 0 1920 1160" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="billing-swimlane-title billing-swimlane-desc">
+        <title id="billing-swimlane-title">請求から料金回収までの業務フロー</title>
+        <desc id="billing-swimlane-desc">営業・CS、請求売掛管理、承認経理財務、顧客、外部機関、システム群の6レーンを縦に、請求前準備から締め・統制までの6フェーズを横に置いたスイムレーン図。標準処理を実線、判定から分岐する例外・差戻しを破線で示し、外部機関から請求・売掛管理へ戻る入金データの受け渡しを焦点として強調している。</desc>
+        <defs>
+          <marker id="ar-light" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#475569"/></marker>
+          <marker id="ar-ac-light" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4285F4"/></marker>
+          <marker id="ar-lk-light" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0052CC"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#F7F9FC"/>
+        <rect x="248" y="32" width="248" height="40" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="372" y="58" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">① 請求前準備</text>
+        <rect x="528" y="32" width="248" height="40" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="652" y="58" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">② 計算・承認・発行</text>
+        <rect x="808" y="32" width="248" height="40" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="932" y="58" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">③ 顧客照合・支払</text>
+        <rect x="1088" y="32" width="248" height="40" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="1212" y="58" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">④ 入金消込・会計</text>
+        <rect x="1368" y="32" width="248" height="40" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="1492" y="58" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">⑤ 督促・回収</text>
+        <rect x="1648" y="32" width="248" height="40" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="1772" y="58" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">⑥ 締め・統制</text>
+        <rect x="32" y="88" width="192" height="104" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="128" y="136" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">営業・CS</text>
+        <text x="128" y="156" fill="#64748B" font-size="12" class="t" text-anchor="middle">営業担当・CS担当</text>
+        <line x1="32" y1="200" x2="1896" y2="200" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <rect x="32" y="208" width="192" height="272" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="128" y="340" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">請求・売掛管理</text>
+        <text x="128" y="360" fill="#64748B" font-size="12" class="t" text-anchor="middle">請求担当・売掛管理担当</text>
+        <line x1="32" y1="488" x2="1896" y2="488" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <rect x="32" y="496" width="192" height="272" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="128" y="620" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">承認・経理・財務</text>
+        <text x="128" y="640" fill="#64748B" font-size="12" class="t" text-anchor="middle">部門長・経理責任者</text>
+        <text x="128" y="656" fill="#64748B" font-size="12" class="t" text-anchor="middle">財務担当</text>
+        <line x1="32" y1="776" x2="1896" y2="776" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <rect x="32" y="784" width="192" height="160" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="128" y="860" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">顧客</text>
+        <text x="128" y="880" fill="#64748B" font-size="12" class="t" text-anchor="middle">購買・経理・支払担当</text>
+        <line x1="32" y1="952" x2="1896" y2="952" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <rect x="32" y="960" width="192" height="48" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="128" y="972" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">外部機関</text>
+        <text x="128" y="992" fill="#64748B" font-size="12" class="t" text-anchor="middle">銀行・決済代行</text>
+        <text x="128" y="1008" fill="#64748B" font-size="12" class="t" text-anchor="middle">回収会社・弁護士</text>
+        <line x1="32" y1="1016" x2="1896" y2="1016" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <rect x="32" y="1024" width="192" height="48" rx="6" fill="#E2EDFB" stroke="rgba(30,41,59,0.12)" stroke-width="1"/>
+        <text x="128" y="1036" fill="#1E293B" font-size="16" font-weight="700" class="t" text-anchor="middle">システム群</text>
+        <text x="128" y="1056" fill="#64748B" font-size="12" class="t" text-anchor="middle">CRM・請求・WF・決済GW</text>
+        <text x="128" y="1072" fill="#64748B" font-size="12" class="t" text-anchor="middle">債権管理・ERP・BI</text>
+        <line x1="32" y1="1080" x2="1896" y2="1080" stroke="#D0D7DE" stroke-width="1"/>
+        <path d="M 372.0 132 L 372.0 148" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 372.0 252 L 372.0 268" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 372.0 308 L 372.0 324" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 628.0 252 L 628.0 268" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 628.0 308 L 628.0 324" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 628.0 364 L 628.0 380" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1188.0 252 L 1188.0 268" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1188.0 308 L 1188.0 324" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1188.0 364 L 1188.0 380" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1468.0 252 L 1468.0 268" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1468.0 308 L 1468.0 324" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 652.0 540 L 652.0 556" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 652.0 596 L 652.0 612" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 652.0 652 L 652.0 668" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 652.0 708 L 652.0 724" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1212.0 540 L 1212.0 556" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1468.0 540 L 1468.0 556" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1468.0 596 L 1468.0 612" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1772.0 540 L 1772.0 556" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1772.0 596 L 1772.0 612" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1772.0 652 L 1772.0 668" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 932.0 828 L 932.0 844" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 932.0 884 L 932.0 900" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 628.0 420 L 628.0 436" fill="none" stroke="#0052CC" stroke-width="1" stroke-dasharray="6,4" marker-end="url(#ar-lk-light)"/>
+        <path d="M 1188.0 420 L 1188.0 436" fill="none" stroke="#0052CC" stroke-width="1" stroke-dasharray="6,4" marker-end="url(#ar-lk-light)"/>
+        <path d="M 1468.0 364 L 1468.0 380" fill="none" stroke="#0052CC" stroke-width="1" stroke-dasharray="6,4" marker-end="url(#ar-lk-light)"/>
+        <path d="M 372.0 188 L 372.0 212" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 496 344.0 L 504 344.0 Q 512 344.0 512 336.0 L 512 240.0 Q 512 232.0 520 232.0 L 528 232.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 728 344.0 L 744 344.0 Q 752 344.0 752 352.0 L 752 500" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1288 344.0 L 1304 344.0 Q 1312 344.0 1312 352.0 L 1312 500" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 776 744.0 L 784 744.0 Q 792 744.0 792 752.0 L 792 800.0 Q 792 808.0 800 808.0 L 808 808.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 932.0 940 L 932.0 964" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1056 984.0 L 1064 984.0 Q 1072 984.0 1072 976.0 L 1072 240.0 Q 1072 232.0 1080 232.0 L 1088 232.0" fill="none" stroke="#4285F4" stroke-width="1.2" marker-end="url(#ar-ac-light)"/>
+        <path d="M 1336 576.0 L 1344 576.0 Q 1352 576.0 1352 568.0 L 1352 240.0 Q 1352 232.0 1360 232.0 L 1368 232.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1468.0 420 L 1468.0 500" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1368 632.0 L 1360 632.0 Q 1352 632.0 1352 640.0 L 1352 976.0 Q 1352 984.0 1360 984.0 L 1368 984.0" fill="none" stroke="#0052CC" stroke-width="1" stroke-dasharray="6,4" marker-end="url(#ar-lk-light)"/>
+        <path d="M 1468.0 964 L 1468.0 708" fill="none" stroke="#0052CC" stroke-width="1" stroke-dasharray="6,4" marker-end="url(#ar-lk-light)"/>
+        <path d="M 1568 688.0 L 1584 688.0 Q 1592 688.0 1592 680.0 L 1592 528.0 Q 1592 520.0 1600 520.0 L 1648 520.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 496 1048.0 L 532 1048.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 636 1048.0 L 668 1048.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 772 1048.0 L 808 1048.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1056 1048.0 L 1088 1048.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1336 1048.0 L 1368 1048.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <path d="M 1616 1048.0 L 1648 1048.0" fill="none" stroke="#475569" stroke-width="1" marker-end="url(#ar-light)"/>
+        <rect x="248" y="92" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="248" y="92" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="372" y="118" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">契約・請求先の確認</text>
+        <rect x="248" y="148" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="248" y="148" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="372" y="174" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">支払条件・単価の登録</text>
+        <rect x="248" y="212" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="248" y="212" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="372" y="238" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">利用実績の取込</text>
+        <rect x="248" y="268" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="248" y="268" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="372" y="294" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">契約・実績・単価の照合</text>
+        <rect x="248" y="324" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="248" y="324" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="372" y="350" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">請求対象の確定</text>
+        <rect x="528" y="212" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="212" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="628" y="238" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">基本・従量料金の計算</text>
+        <rect x="528" y="268" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="268" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="628" y="294" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">割引・返金・税の計算</text>
+        <rect x="528" y="324" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="324" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="628" y="350" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">重複・異常値の検知</text>
+        <polygon points="628,380 728,400 628,420 528,400" fill="#F7F9FC" stroke="#F7F9FC" stroke-width="1"/>
+        <polygon points="628,380 728,400 628,420 528,400" fill="rgba(0,82,204,0.06)" stroke="#0052CC" stroke-width="1"/>
+        <text x="628" y="406" fill="#0052CC" font-size="16" font-weight="500" class="t" text-anchor="middle">不一致?</text>
+        <rect x="528" y="436" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="436" width="200" height="40" rx="6" fill="rgba(0,82,204,0.06)" stroke="#0052CC" stroke-width="1"/>
+        <text x="628" y="462" fill="#0052CC" font-size="16" font-weight="500" class="t" text-anchor="middle">訂正・再発行</text>
+        <rect x="1088" y="212" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1088" y="212" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1188" y="238" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">入金データの取込</text>
+        <rect x="1088" y="268" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1088" y="268" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1188" y="294" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">請求番号・金額で消込</text>
+        <rect x="1088" y="324" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1088" y="324" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1188" y="350" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">手動消込・振替の承認</text>
+        <polygon points="1188,380 1288,400 1188,420 1088,400" fill="#F7F9FC" stroke="#F7F9FC" stroke-width="1"/>
+        <polygon points="1188,380 1288,400 1188,420 1088,400" fill="rgba(0,82,204,0.06)" stroke="#0052CC" stroke-width="1"/>
+        <text x="1188" y="406" fill="#0052CC" font-size="16" font-weight="500" class="t" text-anchor="middle">未消込?</text>
+        <rect x="1088" y="436" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1088" y="436" width="200" height="40" rx="6" fill="rgba(0,82,204,0.06)" stroke="#0052CC" stroke-width="1"/>
+        <text x="1188" y="462" fill="#0052CC" font-size="16" font-weight="500" class="t" text-anchor="middle">調査・仮受金</text>
+        <rect x="1368" y="212" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1368" y="212" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1468" y="238" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">期日前リマインド</text>
+        <rect x="1368" y="268" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1368" y="268" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1468" y="294" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">延滞・除外の判定</text>
+        <polygon points="1468,324 1568,344 1468,364 1368,344" fill="#F7F9FC" stroke="#F7F9FC" stroke-width="1"/>
+        <polygon points="1468,324 1568,344 1468,364 1368,344" fill="rgba(0,82,204,0.06)" stroke="#0052CC" stroke-width="1"/>
+        <text x="1468" y="350" fill="#0052CC" font-size="16" font-weight="500" class="t" text-anchor="middle">期日超過?</text>
+        <rect x="1368" y="380" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1368" y="380" width="200" height="40" rx="6" fill="rgba(0,82,204,0.06)" stroke="#0052CC" stroke-width="1"/>
+        <text x="1468" y="406" fill="#0052CC" font-size="16" font-weight="500" class="t" text-anchor="middle">一次〜三次督促</text>
+        <rect x="528" y="500" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="500" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="652" y="526" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">ワークフロー承認</text>
+        <rect x="528" y="556" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="556" width="248" height="40" rx="6" fill="rgba(66,133,244,0.08)" stroke="#4285F4" stroke-width="1.2"/>
+        <text x="652" y="582" fill="#4285F4" font-size="16" font-weight="500" class="t" text-anchor="middle">請求確定</text>
+        <rect x="528" y="612" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="612" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="652" y="638" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">売掛計上</text>
+        <rect x="528" y="668" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="668" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="652" y="694" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">電子配信・郵送</text>
+        <rect x="528" y="724" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="528" y="724" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="652" y="750" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">送達確認</text>
+        <rect x="1088" y="500" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1088" y="500" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1212" y="526" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">入金・手数料の仕訳</text>
+        <rect x="1088" y="556" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1088" y="556" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1212" y="582" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">日次銀行照合</text>
+        <rect x="1368" y="500" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1368" y="500" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1468" y="526" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">支払約束・分割の承認</text>
+        <rect x="1368" y="556" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1368" y="556" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1468" y="582" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">サービス停止の判定</text>
+        <polygon points="1468,612 1568,632 1468,652 1368,632" fill="#F7F9FC" stroke="#F7F9FC" stroke-width="1"/>
+        <polygon points="1468,612 1568,632 1468,652 1368,632" fill="rgba(0,82,204,0.06)" stroke="#0052CC" stroke-width="1"/>
+        <text x="1468" y="638" fill="#0052CC" font-size="16" font-weight="500" class="t" text-anchor="middle">約束不履行?</text>
+        <rect x="1368" y="668" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1368" y="668" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1468" y="694" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">貸倒引当・償却</text>
+        <rect x="1648" y="500" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1648" y="500" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1772" y="526" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">請求台帳・GL照合</text>
+        <rect x="1648" y="556" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1648" y="556" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1772" y="582" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">債権年齢表・DSO分析</text>
+        <rect x="1648" y="612" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1648" y="612" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1772" y="638" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">月次締め</text>
+        <rect x="1648" y="668" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1648" y="668" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="1772" y="694" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">監査証跡の保管</text>
+        <rect x="808" y="788" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="808" y="788" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="932" y="814" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">請求内容の照合</text>
+        <rect x="808" y="844" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="808" y="844" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="932" y="870" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">支払承認</text>
+        <rect x="808" y="900" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="808" y="900" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="932" y="926" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">振込／口座振替／カード</text>
+        <rect x="808" y="964" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="808" y="964" width="248" height="40" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1"/>
+        <text x="932" y="990" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">決済結果・銀行明細の連携</text>
+        <rect x="1368" y="964" width="200" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1368" y="964" width="200" height="40" rx="6" fill="rgba(0,82,204,0.06)" stroke="#0052CC" stroke-width="1"/>
+        <text x="1468" y="990" fill="#0052CC" font-size="16" font-weight="500" class="t" text-anchor="middle">回収委託・法的対応</text>
+        <rect x="248" y="1028" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="248" y="1028" width="248" height="40" rx="6" fill="rgba(30,41,59,0.05)" stroke="#475569" stroke-width="1"/>
+        <text x="372" y="1054" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">CRM（契約・顧客）</text>
+        <rect x="532" y="1028" width="104" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="532" y="1028" width="104" height="40" rx="6" fill="rgba(30,41,59,0.05)" stroke="#475569" stroke-width="1"/>
+        <text x="584" y="1054" fill="#1E293B" font-size="12" font-weight="500" class="t" text-anchor="middle">請求システム</text>
+        <rect x="668" y="1028" width="104" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="668" y="1028" width="104" height="40" rx="6" fill="rgba(30,41,59,0.05)" stroke="#475569" stroke-width="1"/>
+        <text x="720" y="1054" fill="#1E293B" font-size="12" font-weight="500" class="t" text-anchor="middle">ワークフロー</text>
+        <rect x="808" y="1028" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="808" y="1028" width="248" height="40" rx="6" fill="rgba(30,41,59,0.05)" stroke="#475569" stroke-width="1"/>
+        <text x="932" y="1054" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">電子請求基盤</text>
+        <rect x="1088" y="1028" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1088" y="1028" width="248" height="40" rx="6" fill="rgba(30,41,59,0.05)" stroke="#475569" stroke-width="1"/>
+        <text x="1212" y="1054" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">債権管理・消込</text>
+        <rect x="1368" y="1028" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1368" y="1028" width="248" height="40" rx="6" fill="rgba(30,41,59,0.05)" stroke="#475569" stroke-width="1"/>
+        <text x="1492" y="1054" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">ERP・会計</text>
+        <rect x="1648" y="1028" width="248" height="40" rx="6" fill="#F7F9FC"/>
+        <rect x="1648" y="1028" width="248" height="40" rx="6" fill="rgba(30,41,59,0.05)" stroke="#475569" stroke-width="1"/>
+        <text x="1772" y="1054" fill="#1E293B" font-size="16" font-weight="500" class="t" text-anchor="middle">BI・監査ログ</text>
+        <line x1="32" y1="1104" x2="1896" y2="1104" stroke="rgba(30,41,59,0.12)" stroke-width="0.8"/>
+        <text x="32" y="1124" fill="#475569" font-size="12" class="m" letter-spacing="0.14em">LEGEND</text>
+        <line x1="152" y1="1120" x2="184" y2="1120" stroke="#475569" stroke-width="1.2"/>
+        <text x="196" y="1124" fill="#475569" font-size="12" class="t">実線：標準処理</text>
+        <line x1="320" y1="1120" x2="352" y2="1120" stroke="#0052CC" stroke-width="1.2" stroke-dasharray="6,4"/>
+        <text x="364" y="1124" fill="#475569" font-size="12" class="t">破線：例外・差戻し</text>
+        <polygon points="528,1108 544,1120 528,1132 512,1120" fill="none" stroke="#0052CC" stroke-width="1"/>
+        <text x="556" y="1124" fill="#475569" font-size="12" class="t">菱形：判定</text>
+        <rect x="656" y="1108" width="32" height="20" rx="4" fill="rgba(66,133,244,0.08)" stroke="#4285F4" stroke-width="1.2"/>
+        <text x="700" y="1124" fill="#475569" font-size="12" class="t">強調：外部→内部の受け渡し</text>
+        <rect x="896" y="1108" width="32" height="20" rx="4" fill="rgba(30,41,59,0.05)" stroke="#475569" stroke-width="1"/>
+        <text x="940" y="1124" fill="#475569" font-size="12" class="t">灰箱：システム群</text>
+      </svg>
+    </div>
+    <footer>DIAGRAM DESIGN · AI-OPS PROFILE · 2026-08-19</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>事例⑥: 業務フロー図の自動生成、46工程を1枚に｜AI業務改革パートナー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans JP"', 'sans-serif'] }, colors: { primary: {50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e3a5f',900:'#0f1d35'}, accent:'#f97316' } } } }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans JP', sans-serif; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- Header -->
+  <header class="bg-primary-900 text-white">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="text-sm font-semibold text-blue-300 hover:text-white transition-colors">← トップページに戻る</a>
+      <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="text-sm bg-accent hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-full transition-colors">無料トライアルに申し込む</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-600 text-white py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-sm text-blue-300 font-semibold tracking-widest uppercase mb-4 reveal">Case Study 06</p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6 reveal reveal-delay-1">業務フロー図の自動生成<br>46工程を1枚のスイムレーンに</h1>
+      <div class="flex flex-wrap gap-3 reveal reveal-delay-2">
+        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">スイムレーン</span>
+        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">自動配置</span>
+        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">機械検査</span>
+        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">業務の棚卸し</span>
+      </div>
+      <!-- Impact numbers -->
+      <div class="grid grid-cols-3 gap-6 mt-12 max-w-lg reveal reveal-delay-3">
+        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">46<span class="text-lg text-blue-300">工程</span></p><p class="text-xs text-blue-200/60 mt-1">1枚に収まる工程数</p></div>
+        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">44<span class="text-lg text-blue-300">本</span></p><p class="text-xs text-blue-200/60 mt-1">工程をつなぐ矢印</p></div>
+        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">6<span class="text-lg text-blue-300">×</span>6</p><p class="text-xs text-blue-200/60 mt-1">部門×フェーズ</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-6 space-y-16">
+
+      <!-- 課題背景 -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm flex-shrink-0">課題</span>
+          <h2 class="text-2xl font-bold">現状の流れが、部門ごとの口伝えでしか残っていない</h2>
+        </div>
+        <div class="bg-red-50 rounded-2xl p-6 md:p-8 border border-red-100">
+          <p class="text-gray-700 leading-relaxed mb-4">業務改善の相談を受けても、今どう回っているかを指し示す共通の絵がない。</p>
+          <p class="text-gray-700 leading-relaxed mb-4">手で描けば数日かかる。描き上がった頃には現場が変わっている。結果、<strong class="text-red-600">どこに無駄があるかの議論が、人の記憶に依存する</strong>。</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">共通の絵がない</span>
+            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">手描きは数日</span>
+            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">描いた頃には古い</span>
+            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">議論が記憶頼み</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 矢印 -->
+      <div class="flex justify-center text-primary-400"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <!-- 実施内容 -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm flex-shrink-0">施策</span>
+          <h2 class="text-2xl font-bold">業務の記述から、46工程のスイムレーンを自動生成する</h2>
+        </div>
+        <div class="bg-blue-50 rounded-2xl p-6 md:p-8 border border-blue-100 space-y-4">
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
+            <div><p class="font-semibold text-gray-800">部門をレーン、時系列をフェーズに</p><p class="text-gray-600 text-sm mt-1">業務の記述から、部門・工程・判断分岐・使用システムを抜き出す。レーンとフェーズに割り付ける。</p></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
+            <div><p class="font-semibold text-gray-800">座標計算と配置を自動化</p><p class="text-gray-600 text-sm mt-1">1工程1担当の対応を構造で保証する。描き漏れや箱の重なりは機械検査が弾く。</p></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
+            <div><p class="font-semibold text-gray-800">ラベルを差し替えて横展開</p><p class="text-gray-600 text-sm mt-1">同じ生成器で別の業務にも展開できる。相手がブラウザ上でドラッグして直せる版も、同じ構造から出せる。</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 画面 -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm flex-shrink-0">画面</span>
+          <h2 class="text-2xl font-bold">見本（標準BtoBモデル・請求から料金回収まで）</h2>
+        </div>
+        <div class="bg-indigo-50 rounded-2xl p-4 md:p-6 border border-indigo-100">
+          <a href="media/case-06_flow-sample.html" target="_blank" rel="noopener" class="block">
+            <img src="media/case-06_flow.jpg" alt="請求から料金回収までの業務フロー。6部門のレーンと6フェーズに46工程が配置されたスイムレーン図" class="w-full h-auto rounded-xl border border-indigo-100 bg-white" loading="lazy">
+          </a>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-3">
+            <p class="text-xs text-gray-500">架空の標準モデルです。特定の企業の業務ではありません。</p>
+            <a href="media/case-06_flow-sample.html" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-sm font-semibold text-indigo-700 hover:text-indigo-900">見本を実寸で開く（別タブ） →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 矢印 -->
+      <div class="flex justify-center text-primary-400"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+
+      <!-- 成果 -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center font-bold text-sm flex-shrink-0">成果</span>
+          <h2 class="text-2xl font-bold">「見せる図」と「相手が直せる図」を同じ構造から出し分ける</h2>
+        </div>
+        <div class="bg-green-50 rounded-2xl p-6 md:p-8 border border-green-100">
+          <div class="grid sm:grid-cols-2 gap-6 mb-6">
+            <div class="text-center bg-white rounded-xl p-6 border border-green-200">
+              <p class="text-4xl font-extrabold text-green-700">1<span class="text-xl">枚</span></p>
+              <p class="text-sm text-gray-500 mt-2">46工程・44本の矢印が収まる</p>
+            </div>
+            <div class="text-center bg-white rounded-xl p-6 border border-green-200">
+              <p class="text-4xl font-extrabold text-green-700">機械検査</p>
+              <p class="text-sm text-gray-500 mt-2">描き漏れと箱の重なりを弾く</p>
+            </div>
+          </div>
+          <p class="text-gray-700 leading-relaxed">標準的なBtoBモデルの見本を1枚用意した。同じ構造から相手が直せる版も生成できるので、渡した後に相手の手で育つ。<strong>まず「今の回り方」を1枚にすると、どこから自動化すべきかが先に見える</strong>。</p>
+        </div>
+      </div>
+
+      <!-- Before/After -->
+      <div class="reveal">
+        <h2 class="text-2xl font-bold mb-6 text-center">Before / After</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+            <p class="text-sm font-bold text-red-500 mb-3">BEFORE</p>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 現状の流れは部門ごとの口伝え</li>
+              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 手で描くと数日かかる</li>
+              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 描き上がる頃には現場が変わる</li>
+              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 無駄の議論が人の記憶に依存</li>
+            </ul>
+          </div>
+          <div class="bg-primary-50 rounded-2xl p-6 border border-blue-200">
+            <p class="text-sm font-bold text-green-600 mb-3">AFTER</p>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 業務の記述から46工程を自動配置</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 描き漏れ・重なりは機械検査が弾く</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> ラベル差し替えで別業務に展開</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 相手が直せる版も同じ構造から</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-primary-900 text-white text-center">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-4 reveal">同じような課題を抱えていませんか？</h2>
+      <p class="text-blue-100/70 mb-8 reveal reveal-delay-1">無料トライアルでは、御社の特定業務1つをAIで実際に改善します。</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-2">
+        <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full transition-colors">無料トライアルに申し込む</a>
+        <a href="../index.html" class="inline-flex items-center gap-2 border-2 border-white/20 hover:border-white/40 text-white font-semibold px-8 py-4 rounded-full transition-colors">トップページへ</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-primary-900 border-t border-white/10 text-blue-100/40 py-6"><div class="max-w-5xl mx-auto px-6 text-center text-sm">&copy; 2026 AI業務改革パートナー</div></footer>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
