@@ -11,7 +11,7 @@ AI業務改革パートナー LP。GitHub → Vercel の自動デプロイ。本
 | `/demo/` | 動くデモの索引（実演動画・触れるダッシュボード） | ブランチ `feat/demo-index`・本番未反映 |
 | `/ecosystem/` | AIの使い方の「型」 | ブランチ `feat/ecosystem`・本番未反映 |
 
-`/demo/` と `/ecosystem/` は `<meta name="robots" content="noindex, nofollow">` を入れてある。
+`/demo/` と `/ecosystem/` は `<meta name="robots" content="noindex, nofollow">` を入れてある。`/demo/kpi-dashboard_demo.html` にも同じ1行を足してあり、**これがコピー元（デモ制作PJ側の `demo-app/kpi-dashboard_demo.html`）との唯一の差分**。コピーし直す時はこの1行を入れ直す。
 
 ## preview URL（ブランチ固定・push のたびに最新を指す）
 
