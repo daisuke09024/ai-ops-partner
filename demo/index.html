@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>デモ・成果物紹介｜AI業務改革パートナー</title>
+  <meta name="robots" content="noindex, nofollow">
+  <title>動くデモ｜AI業務改革パートナー</title>
+  <meta name="description" content="実際に構築した画面が、そのまま動きます。60秒の実演動画と、その場で触れるダッシュボードをご覧いただけます。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -20,11 +22,11 @@
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
     .demo-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .demo-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    .placeholder-img {
-      background: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%);
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 12px; overflow: hidden;
+    .demo-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(15,29,53,0.12); }
+    .soon { background-image: repeating-linear-gradient(135deg, #f1f5f9 0 12px, #e8edf5 12px 24px); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
@@ -32,124 +34,143 @@
 
   <!-- Header -->
   <header class="bg-primary-900 text-white">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
       <a href="../index.html" class="text-sm font-semibold text-blue-300 hover:text-white transition-colors">← トップページに戻る</a>
       <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="text-sm bg-accent hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-full transition-colors">無料トライアルに申し込む</a>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-600 text-white py-20 md:py-28">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <p class="text-sm text-blue-300 font-semibold tracking-widest uppercase mb-4 reveal">Demo & Deliverables</p>
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6 reveal reveal-delay-1">
-        実際の成果物・<br>デモンストレーション
-      </h1>
-      <p class="text-blue-100/70 text-lg max-w-2xl mx-auto reveal reveal-delay-2">
-        実際に構築したAIツールやダッシュボードの画面をご覧いただけます。<br>
-        「こんなことができるのか」を、実物でご確認ください。
-      </p>
+  <section class="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-600 text-white py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6 reveal reveal-delay-1">
+          動くデモで見る、<br class="sm:hidden">AI業務改革
+        </h1>
+        <p class="text-blue-100/80 text-base md:text-lg max-w-2xl mx-auto mb-10 reveal reveal-delay-2">
+          実際に構築した画面が、そのまま動きます。<br class="hidden sm:block">
+          説明を読むかわりに、見て・触ってご確認ください。
+        </p>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <div class="bg-white/5 border border-white/15 rounded-2xl p-3 md:p-4">
+          <video class="w-full rounded-xl bg-white" autoplay muted loop playsinline preload="metadata" poster="media/mechanism_30s_poster.jpg">
+            <source src="media/mechanism_30s.webm" type="video/webm">
+            <source src="media/mechanism_30s.mp4" type="video/mp4">
+          </video>
+          <p class="text-xs text-blue-100/60 mt-3 text-center">30秒・音は出ません／AIが下書きを作り、人が判断するまでの流れ</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-10 reveal reveal-delay-3">
+        <a href="#jitsuen" class="text-sm border border-white/25 hover:border-white/50 text-white font-semibold px-5 py-2.5 rounded-full transition-colors">事例の実演を見る</a>
+        <a href="#sawaru" class="text-sm bg-white text-primary-900 hover:bg-blue-50 font-bold px-5 py-2.5 rounded-full transition-colors">ダッシュボードを触ってみる</a>
+      </div>
     </div>
   </section>
 
-  <!-- Demo Items -->
-  <section class="py-16 md:py-24">
+  <!-- 事例の実演 -->
+  <section id="jitsuen" class="py-16 md:py-24 scroll-mt-4">
     <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-10 reveal">
+        <p class="text-sm font-bold text-primary-600 mb-3">事例の実演</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold leading-snug mb-4">60秒で、導入後の画面がそのまま動きます</h2>
+        <p class="text-gray-600 leading-relaxed">音は出ません。字幕だけで追えます。画面に出ている社名・数値はすべて架空データです。</p>
+      </div>
 
-      <!-- Demo 01 -->
-      <div class="mb-20 reveal">
-        <div class="flex items-center gap-3 mb-8">
-          <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">デモ 01</span>
-          <h2 class="text-2xl font-bold">売上可視化ダッシュボード</h2>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <!-- Placeholder screenshot area -->
-          <div class="placeholder-img aspect-video">
-            <div class="text-center p-8">
-              <div class="text-5xl mb-4">📊</div>
-              <p class="text-primary-700 font-semibold text-sm">スクリーンショット差し替え予定</p>
-              <p class="text-primary-500 text-xs mt-2">顧客別売上達成率ダッシュボード</p>
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- 事例① -->
+        <div class="demo-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm reveal">
+          <video class="w-full bg-gray-100" autoplay muted loop playsinline preload="metadata" poster="../cases/media/case-01_demo_poster.jpg">
+            <source src="../cases/media/case-01_demo.webm" type="video/webm">
+            <source src="../cases/media/case-01_demo.mp4" type="video/mp4">
+          </video>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">事例①</span>
+              <span class="text-xs text-gray-400">60秒・音なし</span>
             </div>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold mb-4 text-primary-900">顧客別・担当者別の売上達成率をリアルタイムで可視化</h3>
-            <p class="text-gray-600 leading-relaxed mb-6">Excelの手作業集計をゼロにし、毎朝9時に自動更新されるダッシュボードを構築。マネージャーが「誰の案件が遅れているか」を瞬時に把握できるように。</p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">Looker Studio</span>
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">Google Sheets</span>
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">GAS（自動更新）</span>
+            <h3 class="text-xl font-bold text-primary-900 mb-3 leading-snug">毎日250分の転記が、0分になりました</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">案件ごとに分かれていたシートの書式を揃え、集計をGASに任せました。達成率が下がった顧客はアラートが自動で拾います。</p>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+              <div class="bg-primary-50 rounded-xl px-4 py-3 border border-blue-100">
+                <p class="text-xl font-extrabold text-primary-700">80<span class="text-sm">時間/月</span></p>
+                <p class="text-xs text-gray-500 mt-0.5">工数削減</p>
+              </div>
+              <div class="bg-primary-50 rounded-xl px-4 py-3 border border-blue-100">
+                <p class="text-xl font-extrabold text-primary-700">月次→即時</p>
+                <p class="text-xs text-gray-500 mt-0.5">未達の検知</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">GAS</span>
+              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">自動集計</span>
+              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">ダッシュボード</span>
             </div>
             <a href="../cases/case-01.html" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-800 transition-colors text-sm">
-              事例詳細を見る
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              事例①の詳細を見る
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
         </div>
-      </div>
 
-      <hr class="border-gray-100 mb-20">
-
-      <!-- Demo 02 -->
-      <div class="mb-20 reveal">
-        <div class="flex items-center gap-3 mb-8">
-          <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">デモ 02</span>
-          <h2 class="text-2xl font-bold">AI議事録 × リスク検知アラート</h2>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div class="order-2 md:order-1">
-            <h3 class="text-xl font-bold mb-4 text-primary-900">会議終了の瞬間、要約とリスクがSlackに届く</h3>
-            <p class="text-gray-600 leading-relaxed mb-6">Google Meet × Gemini連携で、会議終了後30秒以内に構造化された議事録がSlackへ通知。解約兆候・増額機会などのキーワードを自動検知し、担当チャンネルへ即時アラート。</p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">Google Meet</span>
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">Gemini</span>
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">Slack Webhook</span>
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">NotebookLM</span>
+        <!-- 事例② -->
+        <div class="demo-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm reveal reveal-delay-1">
+          <video class="w-full bg-gray-100" autoplay muted loop playsinline preload="metadata" poster="media/case-02_demo_poster.jpg">
+            <source src="media/case-02_demo.webm" type="video/webm">
+            <source src="media/case-02_demo.mp4" type="video/mp4">
+          </video>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">事例②</span>
+              <span class="text-xs text-gray-400">60秒・音なし</span>
+            </div>
+            <h3 class="text-xl font-bold text-primary-900 mb-3 leading-snug">議事録を書く時間が、なくなりました</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">会議が終わると議事録が自動でできます。「解約」「他社と比較」「増額」といった一言をAIが拾い、担当者へ通知します。</p>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+              <div class="bg-primary-50 rounded-xl px-4 py-3 border border-blue-100">
+                <p class="text-xl font-extrabold text-primary-700">100<span class="text-sm">%</span></p>
+                <p class="text-xs text-gray-500 mt-0.5">作成工数の削減</p>
+              </div>
+              <div class="bg-primary-50 rounded-xl px-4 py-3 border border-blue-100">
+                <p class="text-xl font-extrabold text-primary-700">即時</p>
+                <p class="text-xs text-gray-500 mt-0.5">危機・機会の検知</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">議事録の自動化</span>
+              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">リスク検知</span>
+              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">通知</span>
             </div>
             <a href="../cases/case-02.html" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-800 transition-colors text-sm">
-              事例詳細を見る
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              事例②の詳細を見る
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
-          <!-- Placeholder screenshot area -->
-          <div class="placeholder-img aspect-video order-1 md:order-2" style="background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);">
-            <div class="text-center p-8">
-              <div class="text-5xl mb-4">🔔</div>
-              <p class="text-purple-700 font-semibold text-sm">スクリーンショット差し替え予定</p>
-              <p class="text-purple-500 text-xs mt-2">Slackアラート通知イメージ</p>
-            </div>
-          </div>
         </div>
+
       </div>
 
-      <hr class="border-gray-100 mb-20">
-
-      <!-- Demo 03 -->
-      <div class="mb-20 reveal">
-        <div class="flex items-center gap-3 mb-8">
-          <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full">デモ 03</span>
-          <h2 class="text-2xl font-bold">資料作成半自動化フロー</h2>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <!-- Placeholder screenshot area -->
-          <div class="placeholder-img aspect-video" style="background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);">
-            <div class="text-center p-8">
-              <div class="text-5xl mb-4">📝</div>
-              <p class="text-green-700 font-semibold text-sm">スクリーンショット差し替え予定</p>
-              <p class="text-green-500 text-xs mt-2">Claude × 提案書自動生成フロー</p>
+      <!-- 事例③（準備中） -->
+      <div class="mt-8 reveal reveal-delay-2">
+        <div class="bg-white rounded-2xl border border-dashed border-gray-300 overflow-hidden">
+          <div class="grid md:grid-cols-2">
+            <div class="soon flex items-center justify-center py-14 md:py-0 md:min-h-[220px]">
+              <div class="text-center">
+                <span class="inline-block bg-white/90 text-gray-500 text-xs font-bold px-4 py-1.5 rounded-full border border-gray-200">実演の動画は準備中</span>
+              </div>
             </div>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold mb-4 text-primary-900">提案書・報告書を「型」から自動生成</h3>
-            <p class="text-gray-600 leading-relaxed mb-6">過去の成功提案書をNotionに蓄積し、Claude AIが新規案件に合わせた提案書ドラフトを自動生成。担当者の作業は「事実確認と微調整」のみになり、作成時間を最大70%削減。</p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">Claude AI</span>
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">Notion</span>
-              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">Make（自動化）</span>
+            <div class="p-6 md:p-8">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">事例③</span>
+              </div>
+              <h3 class="text-xl font-bold text-primary-900 mb-3 leading-snug">提案書の下書きが、5分で出てきます</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-5">過去の資料を型にして、AIが提案書・報告書の下書きを作ります。実演の動画は制作中です。事例の中身は先にご覧いただけます。</p>
+              <a href="../cases/case-03.html" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-800 transition-colors text-sm">
+                事例③の詳細を見る
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
             </div>
-            <a href="../cases/case-03.html" class="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-800 transition-colors text-sm">
-              事例詳細を見る
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
         </div>
       </div>
@@ -157,42 +178,56 @@
     </div>
   </section>
 
-  <!-- Video Section -->
-  <section class="py-16 bg-gray-50">
+  <!-- 触ってみる -->
+  <section id="sawaru" class="py-16 md:py-24 bg-gray-50 scroll-mt-4">
     <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-12 reveal">
-        <h2 class="text-2xl md:text-3xl font-extrabold mb-4">動画デモ</h2>
-        <p class="text-gray-500">実際の操作画面を動画でご覧いただけます</p>
+      <div class="mb-10 reveal">
+        <p class="text-sm font-bold text-primary-600 mb-3">触ってみる</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold leading-snug mb-4">動画と同じダッシュボードを、その場で操作できます</h2>
+        <p class="text-gray-600 leading-relaxed">事例①の実演に出てくる画面そのものです。ブラウザだけで動きます。ログインは要りません。</p>
       </div>
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Video placeholder 1 -->
-        <div class="demo-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm reveal">
-          <div class="placeholder-img aspect-video">
-            <div class="text-center p-8">
-              <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mx-auto mb-3">
-                <svg width="28" height="28" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-              </div>
-              <p class="text-primary-700 font-semibold text-sm">動画差し替え予定</p>
-            </div>
+
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden reveal reveal-delay-1">
+        <div class="grid md:grid-cols-2">
+          <div class="bg-primary-900 p-4 md:p-6 flex items-center">
+            <img src="media/kpi-dashboard_thumb.jpg" alt="顧客別売上ダッシュボードの画面。当月サマリのタイル5枚と、顧客別の達成状況の表。" class="w-full rounded-xl border border-white/10" width="1920" height="1080" loading="lazy">
           </div>
-          <div class="p-6">
-            <h3 class="font-bold text-lg mb-2">ダッシュボード操作デモ</h3>
-            <p class="text-gray-500 text-sm">売上可視化ツールの実際の操作フローを約3分でご紹介</p>
+          <div class="p-6 md:p-8">
+            <h3 class="text-xl font-bold text-primary-900 mb-4 leading-snug">顧客別売上ダッシュボード（架空データ）</h3>
+            <ul class="space-y-2.5 text-sm text-gray-700 mb-6">
+              <li class="flex items-start gap-2"><span class="text-primary-500 mt-0.5">●</span><span>「導入前 / 導入後」を切り替えて、変わったところを見る</span></li>
+              <li class="flex items-start gap-2"><span class="text-primary-500 mt-0.5">●</span><span>顧客の行をクリックして、12か月の推移と担当メモを開く</span></li>
+              <li class="flex items-start gap-2"><span class="text-primary-500 mt-0.5">●</span><span>達成率で並べ替える／担当・状態で絞り込む</span></li>
+              <li class="flex items-start gap-2"><span class="text-primary-500 mt-0.5">●</span><span>アラートから、対象の顧客へ1クリックで飛ぶ</span></li>
+            </ul>
+            <a href="kpi-dashboard_demo.html" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-3 rounded-full transition-colors text-sm">
+              ダッシュボードを開く
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            </a>
+            <p class="text-xs text-gray-500 mt-4 leading-relaxed">別のタブで開きます。社名・数値はすべて架空です。入力したものはどこにも送信されません。</p>
           </div>
         </div>
-        <!-- Video placeholder 2 -->
-        <div class="demo-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm reveal reveal-delay-1">
-          <div class="placeholder-img aspect-video" style="background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);">
-            <div class="text-center p-8">
-              <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-3">
-                <svg width="28" height="28" fill="none" stroke="#7c3aed" stroke-width="2" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-              </div>
-              <p class="text-purple-700 font-semibold text-sm">動画差し替え予定</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 長編（準備中） -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="bg-white rounded-2xl border border-dashed border-gray-300 p-6 md:p-10 reveal">
+        <div class="flex flex-col md:flex-row md:items-center gap-6">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">準備中</span>
+              <span class="text-xs text-gray-400">約2分30秒・音声あり</span>
             </div>
+            <h2 class="text-xl md:text-2xl font-bold text-primary-900 mb-3 leading-snug">ナレーション付きの通し解説を仕上げています</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">導入前の課題から、実際に作る場面、導入後の数字までを続けて説明する長編です。公開までは、上の60秒の実演をご覧ください。商談前に個別でお送りすることもできます。</p>
           </div>
-          <div class="p-6">
-            <h3 class="font-bold text-lg mb-2">AI議事録 × Slack通知デモ</h3>
-            <p class="text-gray-500 text-sm">会議終了からSlack通知まで、リアルタイムの動作をご確認</p>
+          <div class="flex-shrink-0">
+            <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-700 hover:bg-primary-50 font-bold px-6 py-3 rounded-full transition-colors text-sm">
+              無料で相談する
+            </a>
           </div>
         </div>
       </div>
@@ -203,7 +238,7 @@
   <section class="py-16 bg-primary-900 text-white text-center">
     <div class="max-w-3xl mx-auto px-6">
       <h2 class="text-2xl md:text-3xl font-extrabold mb-4 reveal">御社の業務でも、同じことができます</h2>
-      <p class="text-blue-100/70 mb-8 reveal reveal-delay-1">無料トライアルでは、御社の特定業務1つをAIで実際に改善します。<br>まずはヒアリング（60〜90分）から始めましょう。</p>
+      <p class="text-blue-100/70 mb-8 reveal reveal-delay-1">無料トライアルでは、御社の特定業務1つをAIで実際に改善します。<br class="hidden sm:block">まずはヒアリング（60〜90分）から始めましょう。</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-2">
         <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full transition-colors">
           無料トライアルに申し込む
@@ -220,11 +255,21 @@
   </footer>
 
   <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(e => {
-      e.forEach(t => { if (t.isIntersecting) t.target.classList.add('visible'); });
+    // スクロールで表示
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+    // 画面の外に出た動画は止める（同時再生の負荷を下げる）
+    var vids = document.querySelectorAll('video');
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { var p = e.target.play(); if (p && p.catch) p.catch(function () {}); }
+        else { e.target.pause(); }
+      });
+    }, { threshold: 0.15 });
+    vids.forEach(function (v) { vio.observe(v); });
   </script>
 </body>
 </html>

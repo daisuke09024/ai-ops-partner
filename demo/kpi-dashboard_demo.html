@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サンプル商事 顧客別売上ダッシュボード（デモ）</title>
+<style>
+:root{
+  /* ベース（LP cases/case-01 の primary / accent に合わせる） */
+  --p900:#0f1d35; --p800:#1e3a5f; --p700:#1d4ed8; --p600:#2563eb; --p500:#3b82f6;
+  --p400:#60a5fa; --p300:#93c5fd; --p200:#bfdbfe; --p100:#dbeafe; --p50:#eff6ff;
+  --accent:#f97316; --accent-bg:#fff7ed; --accent-bd:#fed7aa;
+  /* 状態 */
+  --ok:#15803d;  --ok-bg:#dcfce7;  --ok-bd:#bbf7d0;
+  --warn:#b45309; --warn-bg:#fef3c7; --warn-bd:#fde68a;
+  --bad:#b91c1c; --bad-bg:#fee2e2; --bad-bd:#fecaca;
+  --demo:#dc2626;
+  /* 文字・面 */
+  --ink:#111827; --ink2:#374151; --muted:#6b7280; --faint:#9ca3af;
+  --line:#e5e7eb; --line2:#f1f5f9;
+  --card:#ffffff; --bg:#f6f8fb; --head-bd:#1c3153;
+  /* 形 */
+  --r:12px; --r2:8px; --r3:999px;
+  --shadow:0 1px 2px rgba(15,29,53,.06), 0 1px 3px rgba(15,29,53,.05);
+  --pad:20px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:system-ui,-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--pad)}
+
+/* ============ ヘッダ ============ */
+.hd{background:var(--p900);color:#fff;border-bottom:3px solid var(--head-bd)}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:16px;flex-wrap:wrap}
+.hd-l{min-width:0}
+.hd-co{font-size:12px;color:var(--p300);letter-spacing:.08em;white-space:nowrap}
+.hd-ttl{font-size:20px;font-weight:800;margin:2px 0 0;white-space:nowrap}
+.hd-sub{font-size:12px;color:#a9c4e8;margin-top:3px;white-space:nowrap}
+.hd-r{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.badge-demo{
+  background:var(--demo);color:#fff;font-weight:800;font-size:12px;letter-spacing:.14em;
+  padding:5px 12px;border-radius:var(--r2);white-space:nowrap;
+}
+.badge-fake{
+  border:1px solid rgba(255,255,255,.28);color:#cfe0f7;font-size:11px;
+  padding:5px 10px;border-radius:var(--r2);white-space:nowrap;
+}
+
+/* ============ ツールバー ============ */
+.tb{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.tb .wrap{display:flex;align-items:center;gap:14px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r2);overflow:visible;background:var(--line2)}
+.seg button{
+  appearance:none;border:0;background:transparent;cursor:pointer;
+  font:inherit;font-size:13px;font-weight:700;color:var(--muted);
+  padding:7px 16px;white-space:nowrap;border-radius:var(--r2);
+}
+.seg button.on{background:var(--p900);color:#fff}
+.seg-lbl{font-size:11px;color:var(--faint);white-space:nowrap;margin-right:2px}
+.btn{
+  appearance:none;cursor:pointer;font:inherit;font-size:13px;font-weight:700;
+  background:var(--card);color:var(--p700);border:1px solid var(--p200);
+  padding:7px 14px;border-radius:var(--r2);white-space:nowrap;
+}
+.btn:hover{background:var(--p50)}
+.btn-x{margin-left:auto}
+.tb-note{font-size:11px;color:var(--faint);white-space:nowrap}
+
+/* ============ セクション ============ */
+main{padding:22px 0 40px}
+section{margin-bottom:24px}
+.sec-hd{display:flex;align-items:baseline;gap:12px;margin:0 0 10px;flex-wrap:wrap}
+.sec-ttl{font-size:15px;font-weight:800;margin:0;white-space:nowrap}
+.sec-note{font-size:12px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+
+/* ============ KPI タイル ============ */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow);min-width:0}
+.kpi .k-lbl{font-size:11px;color:var(--muted);font-weight:700;white-space:nowrap;letter-spacing:.02em}
+.kpi .k-val{font-size:26px;font-weight:800;letter-spacing:-.01em;margin-top:4px;white-space:nowrap;line-height:1.2}
+.kpi .k-val .u{font-size:13px;font-weight:700;color:var(--muted);margin-left:3px}
+.kpi .k-sub{font-size:11px;color:var(--faint);margin-top:3px;white-space:nowrap}
+.kpi.k-accent{border-color:var(--accent-bd);background:var(--accent-bg)}
+.kpi.k-accent .k-val{color:#c2410c}
+.kpi.k-bad .k-val{color:var(--bad)}
+.kpi.k-ok .k-val{color:var(--ok)}
+.dot-live{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:5px;vertical-align:1px}
+
+/* ============ フィルタ ============ */
+.filters{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-left:auto}
+.fl{display:inline-flex;align-items:center;gap:6px}
+.fl label{font-size:11px;color:var(--muted);font-weight:700;white-space:nowrap}
+.fl select{
+  font:inherit;font-size:12px;padding:5px 8px;border:1px solid var(--line);
+  border-radius:var(--r2);background:var(--card);color:var(--ink);cursor:pointer;
+}
+.hitcount{font-size:11px;color:var(--faint);white-space:nowrap}
+
+/* ============ テーブル ============ */
+.tablewrap{overflow-x:auto}
+table.grid{border-collapse:collapse;width:100%;min-width:860px;font-size:13px}
+table.grid th,table.grid td{padding:9px 12px;border-bottom:1px solid var(--line2);text-align:left;vertical-align:middle}
+table.grid thead th{
+  background:var(--p50);color:var(--p800);font-size:11px;font-weight:800;
+  border-bottom:1px solid var(--p200);white-space:nowrap;cursor:pointer;user-select:none;
+  letter-spacing:.02em;
+}
+table.grid thead th .ar{color:var(--p400);font-size:10px;margin-left:3px}
+table.grid thead th.sorted{background:var(--p100)}
+table.grid thead th.sorted .ar{color:var(--p700)}
+table.grid tbody tr{cursor:pointer}
+table.grid tbody tr:hover{background:var(--p50)}
+table.grid tbody tr.sel{background:var(--p100);box-shadow:inset 3px 0 0 var(--p600)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.c-name{font-weight:700;white-space:nowrap}
+td.c-own{color:var(--muted);white-space:nowrap}
+.rate{display:flex;align-items:center;gap:8px;min-width:150px}
+.rate .track{flex:1;height:7px;background:var(--line2);border-radius:var(--r3);position:relative}
+.rate .fill{position:absolute;left:0;top:0;bottom:0;border-radius:var(--r3);background:var(--p500)}
+.rate .fill.w{background:var(--warn)}
+.rate .fill.b{background:var(--bad)}
+.rate .pc{font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;width:54px;text-align:right}
+.mom{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mom.up{color:var(--ok)} .mom.dn{color:var(--bad)}
+.st{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:var(--r3);white-space:nowrap;border:1px solid}
+.st.ok{background:var(--ok-bg);color:var(--ok);border-color:var(--ok-bd)}
+.st.w{background:var(--warn-bg);color:var(--warn);border-color:var(--warn-bd)}
+.st.b{background:var(--bad-bg);color:var(--bad);border-color:var(--bad-bd)}
+.rowhint{font-size:11px;color:var(--faint);padding:8px 12px;border-top:1px solid var(--line2);white-space:nowrap}
+
+/* ============ 詳細パネル ============ */
+.detail{margin-top:12px;border:1px solid var(--p200);background:var(--card);border-radius:var(--r);box-shadow:var(--shadow)}
+.detail.empty{display:none}
+.dt-hd{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--p50);border-radius:var(--r) var(--r) 0 0;flex-wrap:wrap}
+.dt-name{font-size:15px;font-weight:800;white-space:nowrap}
+.dt-meta{font-size:12px;color:var(--muted);white-space:nowrap}
+.dt-close{margin-left:auto}
+.dt-body{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;padding:16px}
+.dt-memo h4{margin:0 0 6px;font-size:12px;font-weight:800;color:var(--p800);white-space:nowrap}
+.dt-memo p{margin:0 0 12px;font-size:13px;color:var(--ink2)}
+.dt-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fact{background:var(--p50);border:1px solid var(--p100);border-radius:var(--r2);padding:8px 10px}
+.fact .f-l{font-size:10px;color:var(--muted);font-weight:700;white-space:nowrap}
+.fact .f-v{font-size:16px;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ============ 棒グラフ（CSS） ============ */
+.chart{padding:14px 16px 6px}
+.legend{display:flex;gap:16px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.lg{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:700;white-space:nowrap}
+.sw{width:12px;height:10px;border-radius:2px;display:inline-block}
+.sw.t{background:var(--p200)} .sw.a{background:var(--p600)} .sw.f{background:transparent;border:1px dashed var(--p300)}
+.sw.line{height:0;border-top:2px solid var(--accent);border-radius:0;width:14px}
+.plot{display:flex;align-items:flex-end;gap:6px;height:190px;padding-bottom:0}
+.grp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0}
+.bars{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:100%;width:100%}
+.bar{width:44%;max-width:26px;border-radius:3px 3px 0 0;min-height:2px}
+.bar.t{background:var(--p200)}
+.bar.a{background:var(--p600)}
+.bar.a.w{background:var(--warn)}
+.bar.a.b{background:var(--bad)}
+.bar.f{background:transparent;border:1px dashed var(--p300);border-bottom:0}
+.xaxis{display:flex;gap:6px;border-top:1px solid var(--line);padding-top:6px;margin-top:0}
+.xt{flex:1;text-align:center;font-size:11px;color:var(--muted);white-space:nowrap;min-width:0}
+.xt.now{color:var(--p700);font-weight:800}
+.chart-foot{display:flex;justify-content:space-between;gap:12px;padding:6px 0 10px;flex-wrap:wrap}
+.chart-foot span{font-size:11px;color:var(--faint)}
+
+/* 詳細パネルの小さい棒グラフ */
+.mini .plot{height:132px}
+.mcol{position:relative;width:100%;height:100%;display:flex;align-items:flex-end;justify-content:center}
+.mbar{width:56%;max-width:22px;border-radius:3px 3px 0 0;background:var(--p600);min-height:2px}
+.mbar.w{background:var(--warn)} .mbar.b{background:var(--bad)}
+.mbar.f{background:var(--line2)}
+.mtgt{position:absolute;left:8%;right:8%;height:2px;background:var(--accent);border-radius:2px}
+
+/* ============ アラート ============ */
+.alerts{display:grid;gap:8px;padding:14px 16px}
+.al{display:flex;align-items:center;gap:10px 12px;border:1px solid;border-radius:var(--r2);padding:10px 14px;background:var(--card);flex-wrap:wrap}
+.al-tags{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.al-main{flex:1 1 300px;min-width:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.al.hi{border-color:var(--bad-bd);background:var(--bad-bg)}
+.al.md{border-color:var(--warn-bd);background:var(--warn-bg)}
+.al-tag{font-size:10px;font-weight:800;padding:3px 8px;border-radius:var(--r3);white-space:nowrap;border:1px solid}
+.al.hi .al-tag{background:#fff;color:var(--bad);border-color:var(--bad-bd)}
+.al.md .al-tag{background:#fff;color:var(--warn);border-color:var(--warn-bd)}
+.al-name{font-weight:800;white-space:nowrap}
+.al-txt{font-size:13px;color:var(--ink2);min-width:0}
+.al-own{margin-left:auto;font-size:11px;color:var(--muted);white-space:nowrap}
+.al-go{font-size:12px;font-weight:700;color:var(--p700);white-space:nowrap;cursor:pointer;border:0;background:transparent;font-family:inherit}
+.al-empty{font-size:13px;color:var(--muted);padding:4px 2px}
+
+/* ============ Before ビュー ============ */
+.before-lead{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.pill-bad{background:var(--bad-bg);color:var(--bad);border:1px solid var(--bad-bd);font-size:12px;font-weight:800;padding:5px 12px;border-radius:var(--r3);white-space:nowrap}
+.sheets{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.sh-hd{background:#f8fafc;border-bottom:1px solid var(--line);padding:9px 12px;border-radius:var(--r) var(--r) 0 0;display:flex;align-items:center;gap:8px}
+.sh-tab{font-size:11px;font-weight:800;color:var(--ink2);white-space:nowrap}
+.sh-owner{font-size:10px;color:var(--faint);white-space:nowrap;margin-left:auto}
+.sh-body{overflow-x:auto}
+table.mini-t{border-collapse:collapse;width:100%;min-width:250px;font-size:11px}
+table.mini-t th,table.mini-t td{padding:5px 8px;border-bottom:1px solid var(--line2);white-space:nowrap;text-align:left}
+table.mini-t th{background:#fbfcfe;color:var(--muted);font-weight:700;font-size:10px}
+table.mini-t td.n{text-align:right;font-variant-numeric:tabular-nums}
+.sh-foot{padding:8px 12px;font-size:10px;color:var(--faint);border-top:1px solid var(--line2);line-height:1.5}
+.before-pains{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.pain{background:var(--card);border:1px solid var(--bad-bd);border-left:4px solid var(--bad);border-radius:var(--r2);padding:12px 14px}
+.pain b{display:block;font-size:13px;color:var(--bad);white-space:nowrap}
+.pain span{font-size:12px;color:var(--ink2)}
+
+/* ============ フッタ ============ */
+footer{border-top:1px solid var(--line);background:var(--card);padding:16px 0;margin-top:8px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer p{margin:0;font-size:12px;color:var(--muted)}
+
+/* ============ 幅対応 ============ */
+@media (max-width:1120px){
+  .dt-body{grid-template-columns:1fr}
+}
+@media (max-width:1000px){
+  .kpi{padding:12px 13px}
+  .kpi .k-val{font-size:23px}
+}
+@media (max-width:900px){
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .sheets{grid-template-columns:1fr}
+  .before-pains{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <div class="hd-l">
+      <div class="hd-co">SAMPLE CORP / 架空データ</div>
+      <h1 class="hd-ttl">サンプル商事 顧客別売上ダッシュボード</h1>
+      <div class="hd-sub">2026年度（1月〜12月）／ 当月 9月 ／ 12社・担当3名</div>
+    </div>
+    <div class="hd-r">
+      <span class="badge-fake">架空データ</span>
+      <span class="badge-demo">DEMO</span>
+    </div>
+  </div>
+</header>
+
+<div class="tb">
+  <div class="wrap">
+    <span class="seg-lbl">表示</span>
+    <div class="seg" id="viewSeg">
+      <button type="button" id="btnBefore">Before（導入前）</button>
+      <button type="button" id="btnAfter" class="on">After（導入後）</button>
+    </div>
+    <span class="tb-note" id="tbNote">統合ダッシュボード／転記なしで自動集計</span>
+    <button type="button" class="btn btn-x" id="btnReset">デモデータに戻す</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ============================ AFTER ============================ -->
+<div id="afterView">
+
+  <!-- 1. KPI -->
+  <section class="wrap">
+    <div class="sec-hd">
+      <h2 class="sec-ttl">当月サマリ</h2>
+      <span class="sec-note">9月／全12社の合計。数値は架空です</span>
+    </div>
+    <div class="kpis">
+      <div class="kpi">
+        <div class="k-lbl">当月売上</div>
+        <div class="k-val" id="kpiRev">0<span class="u">千円</span></div>
+        <div class="k-sub" id="kpiRevSub">前月比 0.0%</div>
+      </div>
+      <div class="kpi" id="kpiRateCard">
+        <div class="k-lbl">目標達成率</div>
+        <div class="k-val" id="kpiRate">0<span class="u">%</span></div>
+        <div class="k-sub" id="kpiRateSub">目標 0 千円</div>
+      </div>
+      <div class="kpi k-bad">
+        <div class="k-lbl">要注意顧客数</div>
+        <div class="k-val" id="kpiRisk">0<span class="u">社</span></div>
+        <div class="k-sub">達成率80%未満</div>
+      </div>
+      <div class="kpi k-accent">
+        <div class="k-lbl">転記作業</div>
+        <div class="k-val">0<span class="u">分</span></div>
+        <div class="k-sub">導入前は 250分／日</div>
+      </div>
+      <div class="kpi k-ok">
+        <div class="k-lbl">最終更新</div>
+        <div class="k-val" id="kpiUpd"><span class="dot-live"></span>たった今</div>
+        <div class="k-sub">自動集計（1時間ごと）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 顧客別 達成状況 -->
+  <section class="wrap">
+    <div class="sec-hd">
+      <h2 class="sec-ttl">顧客別 達成状況</h2>
+      <span class="sec-note">行をクリックすると月次推移とメモが開きます</span>
+      <div class="filters">
+        <span class="fl"><label for="fOwner">担当</label>
+          <select id="fOwner">
+            <option value="">すべて</option>
+            <option value="担当A">担当A</option>
+            <option value="担当B">担当B</option>
+            <option value="担当C">担当C</option>
+          </select>
+        </span>
+        <span class="fl"><label for="fState">状態</label>
+          <select id="fState">
+            <option value="">すべて</option>
+            <option value="ok">順調</option>
+            <option value="w">注意</option>
+            <option value="b">要介入</option>
+          </select>
+        </span>
+        <span class="hitcount" id="hitCount">12社</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="tablewrap">
+        <table class="grid" id="tbl">
+          <thead>
+            <tr>
+              <th data-k="name">顧客<span class="ar"></span></th>
+              <th data-k="owner">担当<span class="ar"></span></th>
+              <th data-k="target" class="num">目標（千円）<span class="ar"></span></th>
+              <th data-k="actual" class="num">実績（千円）<span class="ar"></span></th>
+              <th data-k="rate">達成率<span class="ar"></span></th>
+              <th data-k="mom" class="num">前月比<span class="ar"></span></th>
+              <th data-k="rank">状態<span class="ar"></span></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="rowhint">列見出しをクリックすると並べ替えできます</div>
+    </div>
+
+    <div class="detail empty" id="detail">
+      <div class="dt-hd">
+        <span class="dt-name" id="dtName">顧客名</span>
+        <span class="dt-meta" id="dtMeta">担当A</span>
+        <button type="button" class="btn dt-close" id="dtClose">閉じる</button>
+      </div>
+      <div class="dt-body">
+        <div class="mini">
+          <div class="legend">
+            <span class="lg"><i class="sw a"></i>実績</span>
+            <span class="lg"><i class="sw line"></i>目標</span>
+            <span class="lg"><i class="sw f"></i>10月以降は計画</span>
+          </div>
+          <div class="plot" id="dtPlot"></div>
+          <div class="xaxis" id="dtAxis"></div>
+          <div class="chart-foot"><span>単位: 千円／月</span><span id="dtScale">最大 0 千円</span></div>
+        </div>
+        <div class="dt-memo">
+          <h4>担当メモ</h4>
+          <p id="dtMemo">メモ</p>
+          <h4>年初来（1月〜9月）</h4>
+          <div class="dt-facts">
+            <div class="fact"><div class="f-l">累計実績（千円）</div><div class="f-v" id="dtYtdA">0</div></div>
+            <div class="fact"><div class="f-l">累計達成率</div><div class="f-v" id="dtYtdR">0%</div></div>
+            <div class="fact"><div class="f-l">未達の月</div><div class="f-v" id="dtMiss">0か月</div></div>
+            <div class="fact"><div class="f-l">最高の月</div><div class="f-v" id="dtBest">1月</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 月次推移 -->
+  <section class="wrap">
+    <div class="sec-hd">
+      <h2 class="sec-ttl">月次推移（全社）</h2>
+      <span class="sec-note">目標と実績の比較。10月以降は計画のみ</span>
+    </div>
+    <div class="card chart">
+      <div class="legend">
+        <span class="lg"><i class="sw t"></i>目標</span>
+        <span class="lg"><i class="sw a"></i>実績</span>
+        <span class="lg"><i class="sw f"></i>計画（実績はこれから）</span>
+      </div>
+      <div class="plot" id="mPlot"></div>
+      <div class="xaxis" id="mAxis"></div>
+      <div class="chart-foot"><span>単位: 千円／月・全12社合計</span><span id="mScale">最大 0 千円</span></div>
+    </div>
+  </section>
+
+  <!-- 4. アラート -->
+  <section class="wrap">
+    <div class="sec-hd">
+      <h2 class="sec-ttl">アラート</h2>
+      <span class="sec-note">達成率80%未満／2か月連続未達／前月比マイナス15%以下 を自動抽出</span>
+    </div>
+    <div class="card">
+      <div class="alerts" id="alerts"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================ BEFORE ============================ -->
+<div id="beforeView" style="display:none">
+  <section class="wrap">
+    <div class="sec-hd">
+      <h2 class="sec-ttl">Before：案件ごとに分散した3枚のシート</h2>
+      <span class="sec-note">担当ごとに別ファイル。全体像は手で1枚に集めないと分からない</span>
+    </div>
+    <div class="before-lead">
+      <span class="pill-bad">転記 250分／日</span>
+      <span class="pill-bad">フォーマットが3種類</span>
+      <span class="pill-bad">未達の検知は翌月</span>
+    </div>
+    <div class="sheets" id="sheets"></div>
+    <div class="before-pains">
+      <div class="pain"><b>集計が手作業</b><span>3枚を全体シートへ転記。1日250分、月あたり80時間相当。</span></div>
+      <div class="pain"><b>全体像が見えない</b><span>合計は月末にしか出ない。今どの顧客が危ないかは分からない。</span></div>
+      <div class="pain"><b>検知が後手</b><span>未達に気づくのは翌月。打ち手が1か月遅れる。</span></div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>架空データによるデモです。AI業務改革パートナー</p>
+    <p id="footStamp">生成: 0</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------------- 乱数（seed で再現・ボタンで seed を振り直す） ---------------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var rnd=null;
+function rr(lo,hi){return lo+rnd()*(hi-lo);}
+
+/* ---------------- 定数 ---------------- */
+var MONTHS=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+var CUR=8; // 当月＝9月（0始まり）
+
+var DEFS=[
+  {name:'テスト工業',        owner:'担当A', base:9200, p:'good', memo:'定期案件が安定。10月から追加ラインの立ち上げが決まっており、上振れの余地がある。'},
+  {name:'ダミー物産',        owner:'担当B', base:7400, p:'bad',  memo:'主力商材の入れ替えで7月から失速。値引き交渉が長引いており、9月も回復せず。来週に責任者と条件の再設計を行う。'},
+  {name:'架空システムズ',    owner:'担当C', base:11800, p:'good', memo:'更新契約が通り、下期の見通しは堅い。追加のオプション提案を9月中に出す。'},
+  {name:'モデル製作所',      owner:'担当A', base:6100, p:'warn', memo:'8月・9月と小幅な未達。担当者の異動で発注のリズムが崩れている。窓口の再設定が必要。'},
+  {name:'ひな型ホールディングス',owner:'担当B', base:13500, p:'good', memo:'グループ3社への横展開が進行中。年間目標は前倒しで達成の見込み。'},
+  {name:'デモ電機',          owner:'担当C', base:8600, p:'drop', memo:'8月まで好調だったが、9月に大口の検収が翌月へずれた。数字上の落ち込みで、実態の失注ではない。'},
+  {name:'仮想ロジスティクス',owner:'担当A', base:5200, p:'warn', memo:'単価は維持できているが数量が伸びない。9月に提案した新プランの返答待ち。'},
+  {name:'テストフーズ',      owner:'担当B', base:7900, p:'good', memo:'季節要因で夏場に伸びるパターン。10月以降はやや落ちる前提で計画済み。'},
+  {name:'ダミー印刷',        owner:'担当C', base:4300, p:'bad',  memo:'内製化の方針が出て発注が縮小。撤退か、別領域での提案かの判断が要る。'},
+  {name:'架空トレーディング',owner:'担当A', base:10400, p:'good', memo:'新規の取り扱い品目が寄与。担当Aの中では最も伸びている。'},
+  {name:'見本メディカル',    owner:'担当B', base:6800, p:'warn', memo:'審査の関係で計上が翌月にずれやすい。実質は目標線に乗っている。'},
+  {name:'例示エンジニアリング',owner:'担当C', base:9000, p:'good', memo:'保守の比率が高く変動が小さい。安定した基礎収益として計算できる。'}
+];
+
+var data=[], sort={k:'rate',d:1}, selected=null, stamp=Date.now();
+
+/* ---------------- データ生成 ---------------- */
+function gen(){
+  data=DEFS.map(function(d){
+    var target=[],actual=[],i,base;
+    for(i=0;i<12;i++){
+      // 目標は緩やかな右肩上がり（周期を作らない＝前月比が全社そろってマイナスにならないように）
+      base=d.base*(0.92+i*0.014)*rr(0.985,1.03);
+      target.push(Math.round(base/10)*10);
+    }
+    for(i=0;i<=CUR;i++){
+      var ratio;
+      if(d.p==='good')      ratio=rr(1.00,1.12);
+      else if(d.p==='warn') ratio=rr(0.86,0.99);
+      else if(d.p==='bad')  ratio=rr(0.68,0.82);
+      else                  ratio=rr(1.03,1.11); // drop
+      if(d.p==='warn'&&i>=CUR-1) ratio=rr(0.87,0.97);
+      if(d.p==='bad' &&i>=CUR-1) ratio=rr(0.66,0.79);
+      actual.push(Math.round(target[i]*ratio/10)*10);
+    }
+    if(d.p==='drop'){ actual[CUR]=Math.round(actual[CUR-1]*rr(0.76,0.83)/10)*10; }
+    for(i=CUR+1;i<12;i++) actual.push(null);
+
+    var t=target[CUR],a=actual[CUR],prev=actual[CUR-1];
+    var rate=a/t*100, mom=(a-prev)/prev*100;
+    var ytdT=0,ytdA=0,miss=0,best=0;
+    for(i=0;i<=CUR;i++){ ytdT+=target[i]; ytdA+=actual[i]; if(actual[i]<target[i])miss++; if(actual[i]>actual[best])best=i; }
+    var rank = rate>=100?0 : (rate>=80?1:2);
+    return {name:d.name,owner:d.owner,memo:d.memo,p:d.p,target:target,actual:actual,
+            t:t,a:a,rate:rate,mom:mom,rank:rank,ytdT:ytdT,ytdA:ytdA,miss:miss,best:best,
+            miss2:(actual[CUR]<target[CUR]&&actual[CUR-1]<target[CUR-1])};
+  });
+}
+
+/* ---------------- 整形 ---------------- */
+function nf(n){return Math.round(n).toLocaleString('ja-JP');}
+function pc(n){return n.toFixed(1)+'%';}
+function stCls(r){return r===0?'ok':(r===1?'w':'b');}
+function stTxt(r){return r===0?'順調':(r===1?'注意':'要介入');}
+
+/* ---------------- KPI ---------------- */
+function renderKpi(){
+  var t=0,a=0,prev=0,risk=0;
+  data.forEach(function(d){ t+=d.t; a+=d.a; prev+=d.actual[CUR-1]; if(d.rank===2)risk++; });
+  var mom=(a-prev)/prev*100;
+  document.getElementById('kpiRev').innerHTML=nf(a)+'<span class="u">千円</span>';
+  document.getElementById('kpiRevSub').textContent='前月比 '+(mom>=0?'+':'')+mom.toFixed(1)+'%（'+(mom>=0?'増':'減')+'）';
+  var rate=a/t*100;
+  document.getElementById('kpiRate').innerHTML=rate.toFixed(1)+'<span class="u">%</span>';
+  document.getElementById('kpiRateSub').textContent='目標 '+nf(t)+' 千円';
+  var card=document.getElementById('kpiRateCard');
+  card.className='kpi '+(rate>=100?'k-ok':(rate>=95?'':'k-bad'));
+  document.getElementById('kpiRisk').innerHTML=risk+'<span class="u">社</span>';
+}
+function renderStamp(){
+  var m=Math.floor((Date.now()-stamp)/60000);
+  document.getElementById('kpiUpd').innerHTML='<span class="dot-live"></span>'+(m<1?'たった今':m+'分前');
+}
+
+/* ---------------- テーブル ---------------- */
+function filtered(){
+  var o=document.getElementById('fOwner').value, s=document.getElementById('fState').value;
+  var rows=data.filter(function(d){
+    if(o&&d.owner!==o)return false;
+    if(s&&stCls(d.rank)!==s)return false;
+    return true;
+  });
+  var k=sort.k,dir=sort.d;
+  rows.sort(function(x,y){
+    var a=x[k],b=y[k];
+    if(k==='name'||k==='owner') return dir*String(a).localeCompare(String(b),'ja');
+    return dir*(a-b);
+  });
+  return rows;
+}
+function renderTable(){
+  var rows=filtered(), tb=document.getElementById('tbody');
+  tb.innerHTML='';
+  rows.forEach(function(d){
+    var tr=document.createElement('tr');
+    tr.setAttribute('data-name',d.name);
+    if(selected===d.name) tr.className='sel';
+    var cls=stCls(d.rank), fill=cls==='ok'?'':(cls==='w'?' w':' b');
+    tr.innerHTML=
+      '<td class="c-name">'+d.name+'</td>'+
+      '<td class="c-own">'+d.owner+'</td>'+
+      '<td class="num">'+nf(d.t)+'</td>'+
+      '<td class="num">'+nf(d.a)+'</td>'+
+      '<td><span class="rate"><span class="track"><span class="fill'+fill+'" style="width:'+Math.min(100,d.rate)+'%"></span></span>'+
+        '<span class="pc">'+pc(d.rate)+'</span></span></td>'+
+      '<td class="num"><span class="mom '+(d.mom>=0?'up':'dn')+'">'+(d.mom>=0?'+':'')+d.mom.toFixed(1)+'%（'+(d.mom>=0?'増':'減')+'）</span></td>'+
+      '<td><span class="st '+cls+'">'+stTxt(d.rank)+'</span></td>';
+    tr.addEventListener('click',function(){ select(d.name); });
+    tb.appendChild(tr);
+  });
+  document.getElementById('hitCount').textContent=rows.length+'社';
+  var ths=document.querySelectorAll('#tbl thead th');
+  for(var i=0;i<ths.length;i++){
+    var on=ths[i].getAttribute('data-k')===sort.k;
+    ths[i].className=(ths[i].classList.contains('num')?'num ':'')+(on?'sorted':'');
+    ths[i].querySelector('.ar').textContent=on?(sort.d>0?'▲':'▼'):'';
+  }
+}
+
+/* ---------------- 詳細パネル ---------------- */
+function select(name){
+  selected=name;
+  var d=null,i;
+  for(i=0;i<data.length;i++) if(data[i].name===name) d=data[i];
+  if(!d){ closeDetail(); return; }
+  var box=document.getElementById('detail');
+  box.className='detail';
+  document.getElementById('dtName').textContent=d.name;
+  document.getElementById('dtMeta').textContent=d.owner+'／'+stTxt(d.rank);
+  document.getElementById('dtMemo').textContent=d.memo;
+  document.getElementById('dtYtdA').textContent=nf(d.ytdA);
+  document.getElementById('dtYtdR').textContent=(d.ytdA/d.ytdT*100).toFixed(1)+'%';
+  document.getElementById('dtMiss').textContent=d.miss+'か月';
+  document.getElementById('dtBest').textContent=MONTHS[d.best];
+
+  var max=0;
+  for(i=0;i<12;i++){ max=Math.max(max,d.target[i],d.actual[i]||0); }
+  var plot=document.getElementById('dtPlot'), ax=document.getElementById('dtAxis');
+  plot.innerHTML=''; ax.innerHTML='';
+  for(i=0;i<12;i++){
+    var g=document.createElement('div'); g.className='grp';
+    var col=document.createElement('div'); col.className='mcol';
+    var b=document.createElement('div');
+    var future=(i>CUR);
+    var r=future?0:(d.actual[i]/d.target[i]);
+    b.className='mbar'+(future?' f':(r>=1?'':(r>=0.8?' w':' b')));
+    b.style.height=(future?0.6:(d.actual[i]/max*100))+'%';
+    b.title=MONTHS[i]+' 実績 '+(future?'計画のみ':nf(d.actual[i]));
+    var tg=document.createElement('div'); tg.className='mtgt';
+    tg.style.bottom='calc('+(d.target[i]/max*100)+'% - 1px)';
+    tg.title=MONTHS[i]+' 目標 '+nf(d.target[i]);
+    col.appendChild(b); col.appendChild(tg); g.appendChild(col); plot.appendChild(g);
+    var x=document.createElement('div'); x.className='xt'+(i===CUR?' now':''); x.textContent=MONTHS[i].replace('月',''); ax.appendChild(x);
+  }
+  document.getElementById('dtScale').textContent='最大 '+nf(max)+' 千円';
+  renderTable();
+}
+function closeDetail(){
+  selected=null;
+  document.getElementById('detail').className='detail empty';
+  renderTable();
+}
+
+/* ---------------- 月次推移（全社） ---------------- */
+function renderMonthly(){
+  var t=[],a=[],i,j;
+  for(i=0;i<12;i++){ t[i]=0; a[i]=0; }
+  data.forEach(function(d){ for(j=0;j<12;j++){ t[j]+=d.target[j]; if(d.actual[j]!==null) a[j]+=d.actual[j]; } });
+  var max=0; for(i=0;i<12;i++) max=Math.max(max,t[i],a[i]);
+  var plot=document.getElementById('mPlot'), ax=document.getElementById('mAxis');
+  plot.innerHTML=''; ax.innerHTML='';
+  for(i=0;i<12;i++){
+    var g=document.createElement('div'); g.className='grp';
+    var bars=document.createElement('div'); bars.className='bars';
+    var bt=document.createElement('div'); bt.className='bar t';
+    bt.style.height=(t[i]/max*100)+'%'; bt.title=MONTHS[i]+' 目標 '+nf(t[i]);
+    var ba=document.createElement('div');
+    var future=(i>CUR), r=future?0:a[i]/t[i];
+    ba.className='bar '+(future?'f':('a'+(r>=1?'':(r>=0.8?' w':' b'))));
+    ba.style.height=(future?(t[i]/max*100):(a[i]/max*100))+'%';
+    ba.title=MONTHS[i]+(future?' 実績なし（計画のみ）':' 実績 '+nf(a[i]));
+    bars.appendChild(bt); bars.appendChild(ba); g.appendChild(bars); plot.appendChild(g);
+    var x=document.createElement('div'); x.className='xt'+(i===CUR?' now':'');
+    x.textContent=(i===CUR?'当月 ':'')+MONTHS[i]; ax.appendChild(x);
+  }
+  document.getElementById('mScale').textContent='最大 '+nf(max)+' 千円';
+}
+
+/* ---------------- アラート ---------------- */
+function renderAlerts(){
+  var box=document.getElementById('alerts'); box.innerHTML='';
+  var list=[];
+  data.forEach(function(d){
+    // 1顧客1行にまとめる（同じ顧客が条件ごとに何度も出ないように）
+    var tags=[],txts=[],lv='md';
+    if(d.rate<80){ tags.push('達成率80%未満'); lv='hi';
+      txts.push('当月の達成率 '+pc(d.rate)+'（目標との差 '+nf(d.t-d.a)+' 千円）'); }
+    if(d.miss2)   { tags.push('2か月連続未達'); txts.push('8月・9月とも目標に届かず'); }
+    if(d.mom<=-15){ tags.push('前月比マイナス15%以下'); txts.push('前月から '+Math.abs(d.mom).toFixed(1)+'% の減少'); }
+    if(tags.length) list.push({lv:lv,tags:tags,d:d,txt:txts.join('／')+'。'});
+  });
+  list.sort(function(x,y){ return (x.lv==='hi'?0:1)-(y.lv==='hi'?0:1) || x.d.rate-y.d.rate; });
+  if(!list.length){ box.innerHTML='<div class="al-empty">条件に当たる顧客はありません。</div>'; return; }
+  list.forEach(function(al){
+    var el=document.createElement('div'); el.className='al '+al.lv;
+    var chips=al.tags.map(function(t){return '<span class="al-tag">'+t+'</span>';}).join('');
+    el.innerHTML='<span class="al-tags">'+chips+'</span>'+
+      '<span class="al-main"><span class="al-name">'+al.d.name+'</span><span class="al-txt">'+al.txt+'</span></span>'+
+      '<span class="al-own">'+al.d.owner+'</span>'+
+      '<button type="button" class="al-go">詳細を見る</button>';
+    el.querySelector('.al-go').addEventListener('click',function(){
+      document.getElementById('fOwner').value=''; document.getElementById('fState').value='';
+      select(al.d.name);
+      document.getElementById('detail').scrollIntoView({block:'center'});
+    });
+    box.appendChild(el);
+  });
+}
+
+/* ---------------- Before ビュー ---------------- */
+function renderBefore(){
+  var box=document.getElementById('sheets'); box.innerHTML='';
+  var owners=['担当A','担当B','担当C'];
+  owners.forEach(function(own,oi){
+    var rows=data.filter(function(d){return d.owner===own;});
+    var html='<div class="sheet"><div class="sh-hd">'+
+      '<span class="sh-tab">案件シート_'+String.fromCharCode(65+oi)+'.xlsx</span>'+
+      '<span class="sh-owner">'+own+' が管理</span></div>'+
+      '<div class="sh-body"><table class="mini-t"><thead><tr>'+
+      '<th>顧客</th><th>9月目標</th><th>9月実績</th><th>入力日</th></tr></thead><tbody>';
+    rows.forEach(function(d,i){
+      html+='<tr><td>'+d.name+'</td><td class="n">'+nf(d.t)+'</td><td class="n">'+nf(d.a)+'</td><td>9/'+(12+i*3)+'</td></tr>';
+    });
+    html+='</tbody></table></div><div class="sh-foot">フォーマットは担当ごとに別。合計は全体シートへ手で転記。</div></div>';
+    box.insertAdjacentHTML('beforeend',html);
+  });
+}
+
+/* ---------------- 描画一式 ---------------- */
+function renderAll(){
+  renderKpi(); renderTable(); renderMonthly(); renderAlerts(); renderBefore(); renderStamp();
+  document.getElementById('footStamp').textContent='データ生成: '+new Date(stamp).toLocaleString('ja-JP');
+}
+
+/* ---------------- イベント ---------------- */
+document.getElementById('fOwner').addEventListener('change',renderTable);
+document.getElementById('fState').addEventListener('change',renderTable);
+document.getElementById('dtClose').addEventListener('click',closeDetail);
+
+var ths=document.querySelectorAll('#tbl thead th');
+for(var i=0;i<ths.length;i++){
+  (function(th){
+    th.addEventListener('click',function(){
+      var k=th.getAttribute('data-k');
+      if(sort.k===k) sort.d=-sort.d; else { sort.k=k; sort.d=(k==='name'||k==='owner')?1:-1; }
+      renderTable();
+    });
+  })(ths[i]);
+}
+
+function setView(v){
+  var before=(v==='before');
+  document.getElementById('beforeView').style.display=before?'':'none';
+  document.getElementById('afterView').style.display=before?'none':'';
+  document.getElementById('btnBefore').className=before?'on':'';
+  document.getElementById('btnAfter').className=before?'':'on';
+  document.getElementById('tbNote').textContent=before
+    ? '3枚のシートに分散／全体像は手で集計'
+    : '統合ダッシュボード／転記なしで自動集計';
+}
+document.getElementById('btnBefore').addEventListener('click',function(){setView('before');});
+document.getElementById('btnAfter').addEventListener('click',function(){setView('after');});
+
+document.getElementById('btnReset').addEventListener('click',function(){
+  rnd=mulberry32((Math.random()*1e9)|0);
+  stamp=Date.now(); selected=null;
+  document.getElementById('fOwner').value=''; document.getElementById('fState').value='';
+  document.getElementById('detail').className='detail empty';
+  gen(); renderAll();
+});
+
+/* ---------------- 起動 ---------------- */
+var q=new URLSearchParams(location.search);
+rnd=mulberry32(q.has('seed')?parseInt(q.get('seed'),10):20260902);
+gen(); renderAll();
+setInterval(renderStamp,20000);
+
+})();
+</script>
+
+<!-- ============================ デモモード（?demo=1）============================
+     台本（DEMO.steps の JSON）で自動操作し、字幕ボックス・赤枠・「実演」ラベル・章カード・総括カードを DOM で重ねる。
+     ?demo が無い時は body.dm が付かず、下の CSS も JS も一切効かない（通常表示は不変）。
+     ?demo=1&seek=30   … 30.0 秒時点の状態に固定して止める（スクショ・機械ゲート用。遷移アニメも切る）
+     ?demo=1&zoom=1.5  … 拡大率を固定（既定は viewport から 1280x720 に対する倍率を自動算出。1920x1080 なら 1.5）
+     録画は demo-clips/record_case01.mjs、検査は demo-clips/shots_case01.mjs。 -->
+<style id="dmStyle">
+body.dm-seek *,body.dm-seek *::before,body.dm-seek *::after{transition:none!important;animation:none!important}
+/* デモ中だけ最上部にヘッダ色の帯を足し、実演ラベルをそこに置く（ダッシュボードのタイトルを隠さない） */
+body.dm::before{content:"";display:block;position:sticky;top:0;height:56px;background:#0f1d35;z-index:30}
+body.dm .tb{top:56px}
+.dm-probe{position:fixed;inset:0;visibility:hidden;pointer-events:none;z-index:-1}
+.dm-ov{position:fixed;inset:0;z-index:900;display:none;pointer-events:none}
+.dm-ov.on{display:flex}
+/* 章カード・総括カード（翼式: ティール→青のグラデに白の太字） */
+.dm-card,.dm-sum{align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;
+  background:linear-gradient(135deg,#57b6bb 0%,#3f86b9 48%,#2b4f90 100%)}
+.dm-card h2{margin:0;font-size:60px;font-weight:900;letter-spacing:.04em;white-space:nowrap;text-shadow:0 2px 12px rgba(0,0,0,.15)}
+.dm-sum .s-k{font-size:22px;font-weight:700;opacity:.92;white-space:nowrap}
+.dm-sum .s-n{display:flex;align-items:baseline;gap:22px;margin:6px 0 4px;white-space:nowrap}
+.dm-sum .s-n b{font-size:96px;font-weight:900;line-height:1.1;letter-spacing:-.01em}
+.dm-sum .s-n i{font-style:normal;font-size:56px;font-weight:800;opacity:.85}
+.dm-sum .s-h{font-size:32px;font-weight:800;white-space:nowrap;background:rgba(255,255,255,.16);padding:8px 28px;border-radius:999px}
+.dm-sum .s-line{width:120px;height:2px;background:rgba(255,255,255,.55);margin:36px 0 22px}
+.dm-sum .s-brand{font-size:32px;font-weight:900;letter-spacing:.06em;white-space:nowrap}
+.dm-sum .s-note{font-size:15px;opacity:.85;margin-top:8px;white-space:nowrap}
+/* 2段比較の図解（翼式①: 従来 と AI を同じ工程数で上下に並べ、下端に濃色の結論バー） */
+.dm-dg{align-items:center;justify-content:center;background:#f6f8fb;color:#111827}
+.dm-dg .g{width:1200px;display:flex;flex-direction:column;gap:18px}
+.dm-dg .g-ttl{font-size:26px;font-weight:900;white-space:nowrap;text-align:center;margin-bottom:4px;color:#0f1d35}
+.dm-row{display:flex;align-items:center;gap:18px;border-radius:14px;padding:22px 24px;border:2px solid}
+.dm-row.old{background:#f1f5f9;border-color:#cbd5e1}
+.dm-row.new{background:#eaf2ff;border-color:#93c5fd}
+.dm-row .r-lbl{width:140px;flex-shrink:0;font-size:20px;font-weight:900;white-space:nowrap;line-height:1.3}
+.dm-row.old .r-lbl{color:#475569}
+.dm-row.new .r-lbl{color:#1d4ed8}
+.dm-row .r-lbl small{display:block;font-size:13px;font-weight:700;opacity:.8;white-space:nowrap}
+.dm-steps{flex:1;display:flex;align-items:center;min-width:0}
+.dm-step{flex:1;min-width:0;background:#fff;border:2px solid;border-radius:10px;padding:10px 8px 10px 10px;display:flex;gap:10px;align-items:center;height:84px}
+.dm-row.old .dm-step{border-color:#cbd5e1}
+.dm-row.new .dm-step{border-color:#93c5fd}
+.dm-step b{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff}
+.dm-row.old .dm-step b{background:#64748b}
+.dm-row.new .dm-step b{background:#2563eb}
+.dm-step .l{display:block;white-space:nowrap;font-size:16px;font-weight:700;line-height:1.35;font-style:normal}
+.dm-ar{width:26px;flex-shrink:0;position:relative;height:2px;background:#94a3b8}
+.dm-ar::after{content:"";position:absolute;right:-1px;top:-6px;border-left:9px solid #94a3b8;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.dm-row.new .dm-ar{background:#3b82f6}
+.dm-row.new .dm-ar::after{border-left-color:#3b82f6}
+.dm-row .r-num{width:150px;flex-shrink:0;text-align:right;white-space:nowrap;font-size:40px;font-weight:900;line-height:1}
+.dm-row .r-num small{display:block;font-size:13px;font-weight:700;margin-top:6px;white-space:nowrap}
+.dm-row.old .r-num{color:#b91c1c}
+.dm-row.new .r-num{color:#1d4ed8}
+.dm-bar{background:#0f1d35;color:#fff;border-radius:12px;padding:16px 24px;text-align:center;font-size:22px;font-weight:800;white-space:nowrap}
+/* 実演ラベル（翼式⑥: 左上の帯。左に白地の「実演」、右に機能名） */
+.dm-lbl{position:fixed;top:6px;left:16px;z-index:1100;display:none;align-items:center;gap:18px;background:rgba(70,110,158,.93);padding:7px 26px 7px 7px;border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.18);pointer-events:none}
+.dm-lbl.on{display:flex}
+.dm-lbl .l-a{background:#fff;color:#1e3a5f;font-weight:900;font-size:24px;padding:2px 14px;border-radius:2px;white-space:nowrap;line-height:1.3}
+.dm-lbl .l-b{color:#fff;font-weight:900;font-size:24px;white-space:nowrap;line-height:1.3}
+/* 字幕ボックス（翼式⑤: 画面下中央の白箱に黒の太字1文、薄いティールの枠） */
+.dm-sub{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);z-index:1100;display:none;min-width:62%;max-width:94%;background:#fff;border:3px solid #a9cfd6;border-radius:6px;padding:10px 28px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.18);pointer-events:none}
+.dm-sub.on{display:block}
+.dm-sub span{white-space:nowrap;font-size:34px;font-weight:800;color:#111827;line-height:1.4;letter-spacing:.01em}
+/* 赤枠（翼式③: 対象の矩形に沿って移動する） */
+.dm-frame{position:fixed;z-index:1050;display:none;border:5px solid #e5252b;border-radius:8px;box-sizing:border-box;pointer-events:none;
+  box-shadow:0 0 0 2px rgba(255,255,255,.75),0 6px 22px rgba(229,37,43,.25);transition:left .45s,top .45s,width .45s,height .45s}
+.dm-frame.on{display:block}
+/* 疑似カーソル（CSS の clip-path だけ。SVG 不使用） */
+.dm-cur{position:fixed;left:0;top:0;z-index:1200;display:none;width:24px;height:32px;pointer-events:none;transition:transform .8s cubic-bezier(.35,0,.25,1)}
+.dm-cur.on{display:block}
+.dm-cur::before{content:"";position:absolute;inset:0;background:#111;clip-path:polygon(0 0,0 84%,26% 68%,42% 100%,58% 92%,42% 62%,68% 62%)}
+.dm-cur::after{content:"";position:absolute;left:3px;top:4px;width:17px;height:23px;background:#fff;clip-path:polygon(0 0,0 84%,26% 68%,42% 100%,58% 92%,42% 62%,68% 62%)}
+.dm-ring{position:fixed;left:0;top:0;z-index:1190;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:3px solid #e5252b;opacity:0;pointer-events:none}
+.dm-ring.go{animation:dmRing .5s ease-out}
+@keyframes dmRing{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.4)}}
+</style>
+<script>
+(function(){
+'use strict';
+var Q=new URLSearchParams(location.search);
+if(!Q.has('demo')) return;
+
+/* ---------------- 台本（JSON）。t=秒。1ステップに複数の指示を同居させてよい ----------------
+   scene : chapter | diagram | app | summary（全画面の切替。ハードカット）
+   sub   : 字幕（1文・全角28字以内・nowrap）。null で消す
+   label : 「実演｜◯◯AI」ラベルの表示 true/false
+   frame : 赤枠を当てる要素のセレクタ。null で消す（枠は rAF で対象の矩形を追い続けるのでスクロールにも追随する）
+   view  : before | after（アプリ側のトグルを押す）
+   select: {id,value}（アプリ側の <select> を変えて change を発火）
+   cursor: セレクタの中心へ疑似カーソルを移動 ／ click: セレクタを実クリック（カーソルも移動＋リング）
+   scroll: セレクタが画面中央に来るようにスクロール（0.9秒のイージング。seek 時は即時） */
+var DEMO={
+  label:'KPI可視化AI',
+  chapter:'KPI可視化・集計自動化',
+  duration:60,
+  steps:[
+    {t:0,    scene:'chapter'},
+    {t:4,    scene:'diagram', sub:'案件ごとに分散した3枚のシート。転記250分/日'},
+    {t:4.6,  frame:'#dmOld'},
+    {t:9.4,  frame:'#dmNew'},
+    {t:13.4, frame:null},
+    {t:14,   scene:'app', view:'before', label:true, sub:'AIが集計し、達成率を自動で判定'},
+    {t:14.8, frame:'#sheets'},
+    {t:18.2, cursor:'#btnAfter', frame:null},
+    {t:19.2, click:'#btnAfter'},
+    {t:19.8, frame:'.kpis'},
+    {t:24,   sub:'危ない顧客を、その日のうちに検知', frame:null},
+    {t:24.6, cursor:'#fState'},
+    {t:25.6, select:{id:'fState',value:'b'}},
+    {t:26.0, frame:'#tbl'},
+    {t:28.6, cursor:'#tbody tr:first-child td.c-name'},
+    {t:29.6, click:'#tbody tr:first-child td.c-name', frame:null},
+    {t:29.9, frame:'#tbody tr.sel'},
+    {t:30.6, scroll:'#detail'},
+    {t:32.0, frame:'#detail .mini'},
+    {t:36.4, frame:'#detail .dt-memo'},
+    {t:40,   sub:'担当者への通知まで自動', frame:null, scroll:'#alerts'},
+    {t:41.4, frame:'#alerts'},
+    {t:50,   scene:'summary', label:false, sub:null, frame:null, cursor:null}
+  ]
+};
+
+function step(n,l1,l2){return '<div class="dm-step"><b>'+n+'</b><span><i class="l">'+l1+'</i><i class="l">'+l2+'</i></span></div>';}
+function ar(){return '<div class="dm-ar"></div>';}
+var DIAGRAM_HTML=
+  '<div class="g"><div class="g-ttl">売上集計の流れ ― 従来 と AIがいる職場</div>'+
+  '<div class="dm-row old" id="dmOld"><div class="r-lbl">従来<small>担当者が手作業</small></div><div class="dm-steps">'+
+    step(1,'担当ごとに','3枚のシート')+ar()+step(2,'全体シートへ','手で転記')+ar()+step(3,'合計が出るのは','月末')+ar()+step(4,'未達の検知は','翌月')+
+  '</div><div class="r-num">250分<small>毎日の転記</small></div></div>'+
+  '<div class="dm-row new" id="dmNew"><div class="r-lbl">AIがいる職場<small>AIが自動集計</small></div><div class="dm-steps">'+
+    step(1,'3枚のシートは','そのまま')+ar()+step(2,'AIが自動で','集計')+ar()+step(3,'ダッシュボード','を毎日更新')+ar()+step(4,'要介入を','その日に検知')+
+  '</div><div class="r-num">0分<small>転記なし</small></div></div>'+
+  '<div class="dm-bar">転記 250分/日 → 0分 ｜ 月80時間を、顧客への打ち手に使う</div></div>';
+var SUMMARY_HTML=
+  '<div class="s-k">毎日の転記作業</div>'+
+  '<div class="s-n"><b>250分</b><i>→</i><b>0分</b></div>'+
+  '<div class="s-h">月80時間の削減</div>'+
+  '<div class="s-line"></div>'+
+  '<div class="s-brand">AI業務改革パートナー</div>'+
+  '<div class="s-note">架空データによる実演デモ</div>';
+
+/* ---------------- 部品 ---------------- */
+var els={}, Z=1, VH=720, frameSel=null, ticks=0;
+function mk(cls,html){var d=document.createElement('div');d.className=cls;if(html)d.innerHTML=html;document.body.appendChild(d);return d;}
+function build(){
+  els.probe=mk('dm-probe');
+  els.card=mk('dm-ov dm-card','<h2>'+DEMO.chapter+'</h2>');
+  els.dg=mk('dm-ov dm-dg',DIAGRAM_HTML);
+  els.sum=mk('dm-ov dm-sum',SUMMARY_HTML);
+  els.frame=mk('dm-frame');
+  els.lbl=mk('dm-lbl','<span class="l-a">実演</span><span class="l-b">'+DEMO.label+'</span>');
+  els.sub=mk('dm-sub','<span></span>');
+  els.ring=mk('dm-ring');
+  els.cur=mk('dm-cur');
+}
+/* 拡大率: 1280x720 のレイアウトを viewport いっぱいに（1920x1080 なら 1.5）。zoom 後の座標系の差は probe で実測して吸収する */
+function applyZoom(){
+  var z=Q.has('zoom')?parseFloat(Q.get('zoom')):Math.max(1,Math.min(window.innerWidth/1280,window.innerHeight/720));
+  document.documentElement.style.zoom=String(z);
+  var r=els.probe.getBoundingClientRect();
+  Z=r.width/els.probe.offsetWidth||1;      // getBoundingClientRect の値 ÷ CSSpx
+  VH=els.probe.offsetHeight;              // CSSpx での viewport 高さ
+}
+function rect(el){var r=el.getBoundingClientRect();return {l:r.left/Z,t:r.top/Z,w:r.width/Z,h:r.height/Z};}
+
+/* ---------------- 赤枠は毎フレーム対象を追う ---------------- */
+function tick(){
+  ticks++;
+  var el=frameSel?document.querySelector(frameSel):null;
+  if(el){
+    var r=rect(el);
+    els.frame.style.left=(r.l-3)+'px'; els.frame.style.top=(r.t-3)+'px';
+    els.frame.style.width=(r.w+6)+'px'; els.frame.style.height=(r.h+6)+'px';
+    els.frame.classList.add('on');
+  } else els.frame.classList.remove('on');
+  requestAnimationFrame(tick);
+}
+
+/* ---------------- カーソル・クリック ---------------- */
+var curX=980,curY=430;
+function placeCursor(x,y){curX=x;curY=y;els.cur.style.transform='translate('+x+'px,'+y+'px)';}
+function moveCursor(sel){var el=document.querySelector(sel);if(!el)return;var r=rect(el);placeCursor(r.l+r.w/2,r.t+r.h/2);}
+function doClick(sel){
+  var el=document.querySelector(sel);if(!el)return;
+  moveCursor(sel);
+  els.ring.style.left=curX+'px';els.ring.style.top=curY+'px';
+  els.ring.classList.remove('go');void els.ring.offsetWidth;els.ring.classList.add('go');
+  el.click();
+}
+
+/* ---------------- スクロール（CSSpx 基準・zoom に依存しない） ---------------- */
+function absTop(el){var t=0;while(el){t+=el.offsetTop;el=el.offsetParent;}return t;}
+function scrollToEl(sel,instant){
+  var el=document.querySelector(sel);if(!el)return;
+  // offsetTop / offsetHeight は CSSpx。scrollY / scrollHeight は getBoundingClientRect と同じ座標系（CSSpx × Z）なので Z で揃える
+  var maxS=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+  var target=Math.max(0,Math.min(maxS,(absTop(el)-(VH-el.offsetHeight)/2)*Z));
+  if(instant){window.scrollTo(0,target);return;}
+  var from=window.scrollY,t0=performance.now(),dur=900;
+  (function f(now){
+    var p=Math.min(1,(now-t0)/dur), e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+    window.scrollTo(0,from+(target-from)*e);
+    if(p<1)requestAnimationFrame(f);
+  })(t0);
+}
+
+/* ---------------- シーン ---------------- */
+function setScene(name){
+  els.card.classList.toggle('on',name==='chapter');
+  els.dg.classList.toggle('on',name==='diagram');
+  els.sum.classList.toggle('on',name==='summary');
+  if(name==='app'){ window.scrollTo(0,0); els.cur.classList.add('on'); placeCursor(curX,curY); }
+  else els.cur.classList.remove('on');
+}
+
+/* ---------------- 1ステップ適用 ---------------- */
+function apply(s,instant){
+  if('scene' in s) setScene(s.scene);
+  if('view' in s) document.getElementById(s.view==='before'?'btnBefore':'btnAfter').click();
+  if('label' in s) els.lbl.classList.toggle('on',!!s.label);
+  if('sub' in s){ if(s.sub){els.sub.firstChild.textContent=s.sub;els.sub.classList.add('on');} else els.sub.classList.remove('on'); }
+  if('select' in s){ var sl=document.getElementById(s.select.id); sl.value=s.select.value; sl.dispatchEvent(new Event('change')); }
+  if('cursor' in s){ if(s.cursor) moveCursor(s.cursor); else els.cur.classList.remove('on'); }
+  if('click' in s) doClick(s.click);
+  if('scroll' in s) scrollToEl(s.scroll,instant);
+  if('frame' in s) frameSel=s.frame;
+}
+
+/* ---------------- 起動 ---------------- */
+build();
+document.body.classList.add('dm');
+applyZoom();
+requestAnimationFrame(tick);
+var seek=Q.has('seek')?parseFloat(Q.get('seek')):null;
+if(seek!==null && !isNaN(seek)){
+  document.body.classList.add('dm-seek');
+  DEMO.steps.forEach(function(s){ if(s.t<=seek+1e-6) apply(s,true); });
+} else {
+  DEMO.steps.forEach(function(s){ setTimeout(function(){apply(s,false);}, s.t*1000); });
+}
+window.__dm={steps:DEMO.steps,duration:DEMO.duration,seek:seek,frameSel:function(){return frameSel;},Z:function(){return Z;},VH:function(){return VH;},ticks:function(){return ticks;},apply:function(s,instant){apply(s,!!instant);}};
+})();
+</script>
+</body>
+</html>
