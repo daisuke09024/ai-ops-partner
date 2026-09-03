@@ -93,25 +93,16 @@ body{font-family:var(--fj);background:var(--bg);color:var(--tx);line-height:1.85
 .hs-n{font-family:var(--fe);font-size:clamp(1.2rem,2vw,1.6rem);font-weight:800;color:var(--blue);line-height:1.2}
 .hs-l{font-size:.82rem;color:var(--tx3);margin-top:3px}
 
-/* Hero visual */
-.hero-vis{position:relative;display:flex;align-items:center;justify-content:center}
-.hero-vis-inner{position:relative;width:100%;aspect-ratio:1/1;max-width:480px}
-.hero-card{position:absolute;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.9);border-radius:var(--r2);box-shadow:var(--sh3);padding:24px;transition:var(--tr)}
-.hero-card:hover{transform:translateY(-4px) scale(1.02)}
-.hc-1{top:5%;left:0;width:72%;z-index:3;animation:floatA 6s ease-in-out infinite}
-.hc-2{top:40%;right:0;width:65%;z-index:2;animation:floatB 7s ease-in-out infinite}
-.hc-3{bottom:2%;left:8%;width:55%;z-index:1;animation:floatC 8s ease-in-out infinite}
-@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes floatC{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:10px}
-.hc-icon-b{background:var(--blue-bg2)}
-.hc-icon-t{background:var(--teal-bg)}
-.hc-icon-a{background:var(--amber-bg)}
-.hc-title{font-size:.88rem;font-weight:700;margin-bottom:4px}
-.hc-desc{font-size:.75rem;color:var(--tx3);line-height:1.5}
-.hc-bar{height:6px;background:var(--bg3);border-radius:3px;margin-top:10px;overflow:hidden}
-.hc-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--blue-l))}
+/* Hero background — 実演デモ動画を薄く敷く（文字は前面） */
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.hero-bg video,.hero-bg img{position:absolute;left:0;top:0;width:100%;height:126%;object-fit:cover;object-position:center top;opacity:.34;filter:blur(2.5px) saturate(.7);transform:scale(1.04);transform-origin:center top}
+.hero-bg img.hero-bg-still{display:none}
+.hero-bg-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(250,251,254,.97) 0,rgba(250,251,254,0) 210px),linear-gradient(100deg,rgba(250,251,254,.95) 0%,rgba(250,251,254,.9) 32%,rgba(244,247,255,.72) 58%,rgba(240,244,255,.55) 100%)}
+.hero-bg-note{position:absolute;right:clamp(20px,4vw,48px);bottom:30px;z-index:1;font-size:.75rem;color:var(--tx2);letter-spacing:.02em}
+@media(prefers-reduced-motion:reduce){
+    .hero-bg video{display:none}
+    .hero-bg img.hero-bg-still{display:block}
+}
 
 .scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tx3);font-size:.7rem;font-family:var(--fe);font-weight:500;letter-spacing:.15em;animation:bob 2.5s ease-in-out infinite}
 .scroll-ind::after{content:'';width:1px;height:24px;background:linear-gradient(to bottom,var(--tx3),transparent)}
@@ -119,8 +110,10 @@ body{font-family:var(--fj);background:var(--bg);color:var(--tx);line-height:1.85
 
 @media(max-width:900px){
     .hero-grid{grid-template-columns:1fr}
-    .hero-vis{display:none}
     .hero-stats{grid-template-columns:repeat(2,1fr)}
+    .hero-bg video,.hero-bg img{opacity:.26}
+    .hero-bg-scrim{background:linear-gradient(to top,rgba(250,251,254,.97) 0,rgba(250,251,254,0) 210px),linear-gradient(178deg,rgba(250,251,254,.93) 0%,rgba(250,251,254,.88) 55%,rgba(240,244,255,.72) 100%)}
+    .hero-bg-note{display:none}
 }
 
 /* === SECTION STYLES === */
@@ -347,6 +340,14 @@ body{font-family:var(--fj);background:var(--bg);color:var(--tx);line-height:1.85
 
 <!-- HERO -->
 <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+        <video class="hero-bg-mv" autoplay muted loop playsinline preload="metadata" poster="media/hero_demo_poster.jpg">
+            <source src="media/hero_demo.webm" type="video/webm">
+            <source src="media/hero_demo.mp4" type="video/mp4">
+        </video>
+        <img class="hero-bg-still" src="media/hero_demo_poster.jpg" alt="">
+        <span class="hero-bg-scrim"></span>
+    </div>
     <div class="w">
         <div class="hero-grid">
             <div class="hero-text">
@@ -364,30 +365,9 @@ body{font-family:var(--fj);background:var(--bg);color:var(--tx);line-height:1.85
                     <div class="hs"><div class="hs-n">40名+</div><div class="hs-l">組織で実践済</div></div>
                 </div>
             </div>
-            <div class="hero-vis">
-                <div class="hero-vis-inner">
-                    <div class="hero-card hc-1">
-                        <div class="hc-icon hc-icon-b">📊</div>
-                        <div class="hc-title">KPIダッシュボード構築</div>
-                        <div class="hc-desc">月間80時間の工数削減を実現</div>
-                        <div class="hc-bar"><div class="hc-bar-fill" style="width:85%"></div></div>
-                    </div>
-                    <div class="hero-card hc-2">
-                        <div class="hc-icon hc-icon-t">⚡</div>
-                        <div class="hc-title">議事録AI自動生成</div>
-                        <div class="hc-desc">作成工数を100%削減</div>
-                        <div class="hc-bar"><div class="hc-bar-fill" style="width:100%"></div></div>
-                    </div>
-                    <div class="hero-card hc-3">
-                        <div class="hc-icon hc-icon-a">🚀</div>
-                        <div class="hc-title">資料作成の半自動化</div>
-                        <div class="hc-desc">月間500時間を削減</div>
-                        <div class="hc-bar"><div class="hc-bar-fill" style="width:72%"></div></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+    <div class="hero-bg-note">背景：売上集計を自動化した実際の画面（架空データ・音なし）</div>
     <div class="scroll-ind">SCROLL</div>
 </section>
 
@@ -654,6 +634,18 @@ body{font-family:var(--fj);background:var(--bg);color:var(--tx);line-height:1.85
 function tgCase(b){const i=b.parentElement;document.querySelectorAll('.case-i').forEach(x=>{if(x!==i)x.classList.remove('on')});i.classList.toggle('on')}
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+(function(){
+    var mq=window.matchMedia('(prefers-reduced-motion: reduce)');
+    var v=document.querySelector('.hero-bg-mv');
+    if(!v)return;
+    function apply(){
+        if(mq.matches){v.removeAttribute('autoplay');v.pause();}
+        else{var p=v.play();if(p&&p.catch)p.catch(function(){});}
+    }
+    apply();
+    if(mq.addEventListener)mq.addEventListener('change',apply);
+    else if(mq.addListener)mq.addListener(apply);
+})();
 </script>
 </body>
 </html>
