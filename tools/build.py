@@ -41,7 +41,7 @@ CSS = r"""
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--fj);background:var(--bg);color:var(--tx);line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img,video{max-width:100%;display:block}
+img,video{max-width:100%;height:auto;display:block}
 a{color:inherit}
 .w{max-width:var(--c);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 .sec{padding:clamp(56px,8vw,96px) 0}
@@ -205,7 +205,7 @@ a{color:inherit}
 .kp b .ja{font-family:var(--fj)}
 .chero-vis{position:relative;justify-self:end;width:100%;max-width:540px}
 .chero-vis a,.chero-vis .fr{display:block;position:relative;aspect-ratio:16/9;border-radius:var(--r2);overflow:hidden;background:var(--bg3);box-shadow:var(--sh3);border:6px solid #fff}
-.chero-vis img{width:100%;height:100%;object-fit:cover}
+.chero-vis img{width:100%;height:100%;object-fit:cover;aspect-ratio:auto}
 .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 .play span{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--sh3);padding-left:4px;transition:var(--tr)}
 .chero-vis a:hover .play span{transform:scale(1.08)}
@@ -228,7 +228,7 @@ a{color:inherit}
 .blk h2{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:800;line-height:1.45;letter-spacing:-.01em}
 .blk .sub{font-size:.9rem;color:var(--tx3);margin:-10px 0 16px}
 .fig{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:10px;box-shadow:var(--sh)}
-.fig img{width:100%;border-radius:12px}
+.fig img{width:100%;height:auto;aspect-ratio:16/9;border-radius:12px}
 .fig-cap{font-size:.8rem;color:var(--tx3);margin-top:10px;padding:0 6px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .vid{background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
 .vid video{width:100%;border-radius:12px;aspect-ratio:16/9;background:#000}
