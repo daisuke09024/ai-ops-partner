@@ -493,7 +493,7 @@ def build_case(c, prev_c, next_c):
         incl = f"""<div class="blk fi" id="incl"><div class="blk-h"><span class="tag tag-b">含む</span><h2>この事例に含めている仕組み</h2></div><p class="sub">別々に動いている2つの仕組みを、資料づくりの一連の流れとしてここにまとめています。</p><div class="incl">{"".join(cards)}</div></div>"""
     # side
     src_note = c.get("source_note", "")
-    toc = [("overview", "全体像"), ("demo", "実演"), ("story", "課題・やったこと・成果"), ("honest", "できた3つ、まだ1つ"), ("line", "仕組みの一本線"), ("hint", "御社への転用")]
+    toc = [("overview", "全体像"), ("demo", "実演"), ("story", "課題・やったこと・成果"), ("honest", "動かしてから足した1手"), ("line", "仕組みの一本線"), ("hint", "御社への転用")]
     if c.get("includes"): toc.insert(3, ("incl", "含めている仕組み"))
     toc_html = "".join(f'<li><a href="#{i}">{esc(t)}</a></li>' for i, t in toc)
     side = f"""<aside class="side">
@@ -542,9 +542,9 @@ def build_case(c, prev_c, next_c):
 <div class="sbox sbox-g"><h3><span class="lb">成果</span>{esc(sh['seika_t'])}</h3><p>{esc(sh['seika'])}</p></div>
 </div></div>
 {incl}
-<div class="blk fi" id="honest"><div class="blk-h"><span class="tag tag-r">正直に</span><h2>できた3つと、まだ届かない1つ</h2></div>
+<div class="blk fi" id="honest"><div class="blk-h"><span class="tag tag-g">仕組み</span><h2>動かしてから足した1手</h2></div>
 <p class="sub">{esc(c['src_wow'])}</p>
-<div class="fig"><img class="zoomable" src="media/case-{num}_zukai_m.webp" alt="{esc(c['src_title'])}：ここまでできたことと、まだ届かないこと" width="1600" height="900" data-cap="できた3つと、まだ届かない1つ"><div class="fig-cap"><span>図解を押すと拡大</span><span>4つのうち3つが動いている</span></div></div></div>
+<div class="fig"><img class="zoomable" src="media/case-{num}_zukai_m.webp" alt="{esc(c['src_title'])}：ここまでできたことと、まだ届かないこと" width="1600" height="900" data-cap="動かしてから足した1手"><div class="fig-cap"><span>図解を押すと拡大</span><span>運用で見えた穴と、その塞ぎ方</span></div></div></div>
 
 <div class="blk fi" id="line"><div class="blk-h"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
 <div class="fig"><img class="zoomable" src="media/case-{num}_zukai_s.webp" alt="{esc(c['src_title'])}：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>成果の数字つき</span></div></div></div>
