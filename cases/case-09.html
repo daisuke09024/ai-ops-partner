@@ -208,7 +208,7 @@ a{color:inherit}
 @media(max-width:900px){.chero-grid{grid-template-columns:1fr}.chero-vis{justify-self:stretch;max-width:100%}}
 @media(max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
 
-/* case body（β 物語順: 課題→変えたこと→実演→結果→仕組み→転用） */
+/* case body（β 物語順: 課題→変えたこと→デモ→結果→仕組み→転用） */
 .chero{background:linear-gradient(180deg,#f7f9fc,#fff);border-bottom:1px solid var(--border)}
 .chero::before{display:none}
 .chero-vis .fr{border:1px solid var(--border);box-shadow:0 20px 50px rgba(15,29,53,.12);background:#fff}
@@ -321,7 +321,5 @@ const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.a
 (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
 
 (function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
-(function(){const links=[...document.querySelectorAll('.toc a')];const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(!secs.length)return;
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});secs.forEach(s=>io.observe(s));})();
 </script>
 </body></html>

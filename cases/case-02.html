@@ -208,7 +208,7 @@ a{color:inherit}
 @media(max-width:900px){.chero-grid{grid-template-columns:1fr}.chero-vis{justify-self:stretch;max-width:100%}}
 @media(max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
 
-/* case body（β 物語順: 課題→変えたこと→実演→結果→仕組み→転用） */
+/* case body（β 物語順: 課題→変えたこと→デモ→結果→仕組み→転用） */
 .chero{background:linear-gradient(180deg,#f7f9fc,#fff);border-bottom:1px solid var(--border)}
 .chero::before{display:none}
 .chero-vis .fr{border:1px solid var(--border);box-shadow:0 20px 50px rgba(15,29,53,.12);background:#fff}
@@ -294,7 +294,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>録画が終わると、Gemini が議事録を書いて Slack に届ける</h2></div><p class="csub">Google Meet の録画が終わった時点で、Gemini が見出しつきの議事録を書く。議事録は Slack に届き、NotebookLM にも入る。会話の中の解約の兆しと増額の機会は AI が拾い、担当のチャンネルへ流す。会議に出なくても、その日のうちに状況が分かる。</p><div class="tools"><small>使った道具</small><span>Google Meet</span><span>Gemini</span><span>Slack</span><span>NotebookLM</span><span>GAS</span></div>
 <div class="in fi"><div class="fig"><img class="zoomable" src="media/case-02_zukai.webp" alt="議事録の完全自動化（前職・組織導入）の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
 <section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-02_demo_poster.jpg" controls aria-label="議事録の完全自動化（前職・組織導入）の実演（60秒・音なし・架空データ）"><source src="media/case-02_demo.webm" type="video/webm"><source src="media/case-02_demo.mp4" type="video/mp4"></video>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-02_demo_poster.jpg" controls aria-label="議事録の完全自動化（前職・組織導入）のデモ（60秒・音なし・架空データ）"><source src="media/case-02_demo.webm" type="video/webm"><source src="media/case-02_demo.mp4" type="video/mp4"></video>
 <div class="vid-cap"><b>60秒・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
 <section class="csec" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>会議中は議論だけ。解約の兆しがその日に届く</h2></div>
 <div class="nums fi"><div class="num big"><small>議事録の作成工数</small><b class="long">会議のたび<span class="ar">→</span>100%削減</b></div><div class="num"><small>Slackへの通知</small><b>即時</b></div><div class="num"><small>リスクと機会の検知</small><b>AIが自動</b></div></div><p class="csub" style="margin-top:0">議事録を書く仕事が消え、会議中は議論に集中できる。過去の議事録は NotebookLM に溜まり、施策を考える時にすぐ引ける。解約の兆しが担当チャンネルに届くので、マネージャーが早く動ける。</p><div class="src">数字の出どころ: 前職で公開済みの実績スライド</div></div></section>
@@ -323,7 +323,5 @@ const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.a
 (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
 
 (function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
-(function(){const links=[...document.querySelectorAll('.toc a')];const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(!secs.length)return;
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});secs.forEach(s=>io.observe(s));})();
 </script>
 </body></html>

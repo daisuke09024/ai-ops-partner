@@ -226,7 +226,7 @@ a{color:inherit}
 @media(max-width:900px){.chero-grid{grid-template-columns:1fr}.chero-vis{justify-self:stretch;max-width:100%}}
 @media(max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
 
-/* case body（β 物語順: 課題→変えたこと→実演→結果→仕組み→転用） */
+/* case body（β 物語順: 課題→変えたこと→デモ→結果→仕組み→転用） */
 .chero{background:linear-gradient(180deg,#f7f9fc,#fff);border-bottom:1px solid var(--border)}
 .chero::before{display:none}
 .chero-vis .fr{border:1px solid var(--border);box-shadow:0 20px 50px rgba(15,29,53,.12);background:#fff}
@@ -323,8 +323,6 @@ document.querySelectorAll('.chip[data-cat]').forEach(b=>b.addEventListener('clic
 
 JS_CASE = r"""
 (function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
-(function(){const links=[...document.querySelectorAll('.toc a')];const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(!secs.length)return;
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});secs.forEach(s=>io.observe(s));})();
 """
 
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
@@ -433,7 +431,7 @@ def build_index():
 </div>
 <div class="hero-vid fi">
 <div class="hero-vid-fr">
-<video autoplay muted loop playsinline preload="metadata" poster="media/hero_demo_poster.jpg" aria-label="売上集計をAIが自動化する画面の実演。架空データ・音なし"><source src="media/hero_demo.webm" type="video/webm"><source src="media/hero_demo.mp4" type="video/mp4"></video>
+<video autoplay muted loop playsinline preload="metadata" poster="media/hero_demo_poster.jpg" aria-label="売上集計をAIが自動化する画面のデモ。架空データ・音なし"><source src="media/hero_demo.webm" type="video/webm"><source src="media/hero_demo.mp4" type="video/mp4"></video>
 <img class="still" src="media/hero_demo_poster.jpg" alt="自動集計ダッシュボードの画面（架空データ）">
 </div>
 <div class="hero-vid-cap"><b>3枚のシート → 自動集計ダッシュボード</b><span>デモ 12秒・架空データ</span></div>
@@ -474,7 +472,7 @@ def kp_tile(k):
     return f'<div class="kp"><small>{esc(k["l"])}</small><b>{v}</b></div>'
 
 def build_case(c, prev_c, next_c):
-    """事例ページ（β 物語順）: FV → 課題 → 変えたこと → 実演（動画のある事例だけ）→ 結果 → 仕組み → 含む（09）→ 御社への転用。
+    """事例ページ（β 物語順）: FV → 課題 → 変えたこと → デモ（動画のある事例だけ）→ 結果 → 仕組み → 含む（09）→ 御社への転用。
     任意項目: c["sakamoto_note"]（なぜこの組み方にしたか。あれば仕組みの下に出す）／ c["detail_m"]=true（図解Mを折りたたみで出す。既定は出さない）"""
     num = c["num"]; sh = c["src_sheet"]; face = c["src_face"]
     title = f"事例{num}：{c['headline']}｜{BRAND}"
@@ -496,7 +494,7 @@ def build_case(c, prev_c, next_c):
 <div class="in fi">{zukai('', c['src_title'] + 'の図解（これまでとAI導入後）', overview_cap)}</div></div></section>"""
     if c["video"]:
         sec_demo = f"""<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}の実演（60秒・音なし・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}のデモ（60秒・音なし・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
 <div class="vid-cap"><b>60秒・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>"""
     else:
         sec_demo = ""
