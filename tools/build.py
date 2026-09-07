@@ -234,6 +234,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.5rem,3vw,2.2rem)}
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
+.num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
 .src{max-width:1100px;margin:0 auto;font-size:.78rem;color:var(--tx3)}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
@@ -488,9 +489,11 @@ def build_case(c, prev_c, next_c):
         sec_demo = ""
     if "before" in face:
         sub = f'<div class="sub">{esc(face["sub"])}</div>' if face.get("sub") else ""
-        big = f'<div class="num big"><small>{esc(face["label"])}</small><b>{esc(face["before"])}<span class="ar">→</span>{esc(face["after"])}</b>{sub}</div>'
+        long = " long" if len(face["before"]) + len(face["after"]) > 9 else ""
+        big = f'<div class="num big"><small>{esc(face["label"])}</small><b class="{long.strip()}">{esc(face["before"])}<span class="ar">→</span>{esc(face["after"])}</b>{sub}</div>'
     else:
-        big = f'<div class="num big"><small>{esc(face.get("sub",""))}</small><b>{esc(face["big"])}</b></div>'
+        long = " long" if len(face["big"]) > 7 else ""
+        big = f'<div class="num big"><small>{esc(face.get("sub",""))}</small><b class="{long.strip()}">{esc(face["big"])}</b></div>'
     others = "".join(f'<div class="num"><small>{esc(k["l"])}</small><b>{esc(k["v"])}</b></div>' for k in c["kpi"][1:3])
     sec_result = f"""<section class="csec{'' if c['video'] else ' alt'}" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>{esc(sh['seika_t'])}</h2></div>
 <div class="nums fi">{big}{others}</div><p class="csub" style="margin-top:0">{esc(sh['seika'])}</p><div class="src">数字の出どころ: {esc(c.get('source_note',''))}</div></div></section>"""
