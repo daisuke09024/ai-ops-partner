@@ -17,8 +17,21 @@ SITE = "https://ai-ops-partner.vercel.app"
 TALLY = "https://tally.so/r/QKdxx1"
 BRAND = "AI業務改革パートナー"
 
+# 公開文の用語の置換表（内輪語→社外の言葉）。JSON に残っていても build 時に置き換え、警告を出す（坂本 2026-09-08 裁定 3a）
+GLOSSARY = [("FB", "修正"), ("レール", "流れ"), ("ブリーフ", "依頼メモ"), ("裁定", "決定"), ("回収枠", "答えを返す枠"), ("話者分離", "話した人の分離"), ("記帳", "記録")]
+_glossary_hits = []
+
+def pub(s):
+    """公開文に内輪語が残っていたら置き換える（esc の前段）"""
+    s = str(s)
+    for k, v in GLOSSARY:
+        if k in s and not (k == "ブリーフ" and "依頼メモ（ブリーフ）" in s):
+            _glossary_hits.append(f"{k}→{v}: {s[:40]}")
+            s = s.replace(k, v)
+    return s
+
 def esc(s):
-    return html.escape(str(s), quote=True)
+    return html.escape(pub(s), quote=True)
 
 # ------------------------------------------------------------------ CSS
 CSS = r"""
@@ -407,13 +420,13 @@ def build_index():
 <section class="hero"><div class="w">
 <div class="hero-grid">
 <div class="hero-text">
-<div class="eyebrow">Cases &amp; Demos — AI業務改革パートナー</div>
+<div class="eyebrow">事例とデモ ／ AI業務改革パートナー</div>
 <h1>AIに任せた業務の、<br><em>実物だけ。</em></h1>
-<p class="hero-lead">前職の45名組織、顧客の環境、自社の運用で実際に動いたものを、図解と60秒の実演で載せています。構想や試作はありません。</p>
+<p class="hero-lead">前職の45名組織、顧客の環境、自社の運用で実際に動いたものを、図解と60秒のデモで載せています。構想や試作はありません。</p>
 <div class="hero-btns"><a href="#cases" class="btn btn-p">事例を見る ↓</a><a href="{TALLY}" class="btn btn-o" target="_blank" rel="noopener">30分、無料で相談する</a></div>
 <div class="stats">
 <div class="st"><div class="st-n">9</div><div class="st-l">事例</div></div>
-<div class="st"><div class="st-n">{n_video}</div><div class="st-l">60秒の実演</div></div>
+<div class="st"><div class="st-n">{n_video}</div><div class="st-l">60秒のデモ</div></div>
 <div class="st"><div class="st-n">10</div><div class="st-l">動いている仕組み</div></div>
 <div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額（前職3事例）</div></div>
 </div>
@@ -423,7 +436,7 @@ def build_index():
 <video autoplay muted loop playsinline preload="metadata" poster="media/hero_demo_poster.jpg" aria-label="売上集計をAIが自動化する画面の実演。架空データ・音なし"><source src="media/hero_demo.webm" type="video/webm"><source src="media/hero_demo.mp4" type="video/mp4"></video>
 <img class="still" src="media/hero_demo_poster.jpg" alt="自動集計ダッシュボードの画面（架空データ）">
 </div>
-<div class="hero-vid-cap"><b>3枚のシート → 自動集計ダッシュボード</b><span>実演 12秒・架空データ</span></div>
+<div class="hero-vid-cap"><b>3枚のシート → 自動集計ダッシュボード</b><span>デモ 12秒・架空データ</span></div>
 </div>
 </div>
 <div class="rules">
@@ -434,7 +447,7 @@ def build_index():
 </div></section>
 
 <section class="sec" id="cases"><div class="w">
-<div class="sec-head"><div><div class="eyebrow">Cases</div><h2 class="h2">事例</h2><p class="lead">1件1ページ。全体像の図解、60秒の実演、できたことと届いていないこと、まで載せています。</p></div><div class="count"><span id="ccount">9</span><small>件</small></div></div>
+<div class="sec-head"><div><div class="eyebrow">Cases</div><h2 class="h2">事例</h2><p class="lead">1件1ページ。課題、変えたこと、60秒のデモ、結果まで載せています。</p></div><div class="count"><span id="ccount">9</span><small>件</small></div></div>
 <div class="filters"><div class="frow"><span class="flb">導入先</span>{chips_site}</div><div class="frow"><span class="flb">業務</span>{chips_cat}</div></div>
 <div class="grid">{"".join(case_card(c, "") for c in cases)}</div>
 </div></section>
@@ -473,7 +486,7 @@ def build_case(c, prev_c, next_c):
     ill = ill_src(num, "", "").replace("cases/", "", 1)
     def zukai(suffix, alt, cap):
         return f'<div class="fig"><img class="zoomable" src="media/case-{num}_zukai{suffix}.webp" alt="{esc(alt)}" width="1600" height="900" data-cap="{esc(cap)}"><div class="fig-cap"><span>図解を押すと拡大</span><span>{esc(cap)}</span></div></div>'
-    badges = f'<div class="bds"><span class="bd bd-site">{esc(site_label)}</span><span class="bd bd-cat">{esc(c["cat"])}</span>{"<span class=\"bd bd-video\">60秒デモあり</span>" if c["video"] else ""}</div>'
+    badges = f'<div class="bds"><span class="bd bd-site">{esc(site_label)}</span><span class="bd bd-cat">{esc(c["cat"])}</span>{"<span class=\"bd bd-video\">デモあり</span>" if c["video"] else ""}</div>'
     fv = f"""<section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE {num}</span></div>
 <div class="chero-grid"><div>{badges}<h1>{esc(c['headline'])}</h1><p class="lead">{esc(c['lead'])}</p><div class="kpis">{kpis}</div></div>
 <div class="chero-vis fi"><div class="fr"><img src="{ill}" alt="{esc(c['src_title'])}のイメージ" width="1600" height="900"></div></div></div></div></section>"""
@@ -482,7 +495,7 @@ def build_case(c, prev_c, next_c):
     sec_change = f"""<section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>{esc(sh['jisshi_t'])}</h2></div><p class="csub">{esc(sh['jisshi'])}</p><div class="tools"><small>使った道具</small>{tools}</div>
 <div class="in fi">{zukai('', c['src_title'] + 'の図解（これまでとAI導入後）', overview_cap)}</div></div></section>"""
     if c["video"]:
-        sec_demo = f"""<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">実演</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
+        sec_demo = f"""<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
 <div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}の実演（60秒・音なし・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
 <div class="vid-cap"><b>60秒・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>"""
     else:
@@ -560,10 +573,14 @@ def main():
     elif a.check:
         print("素材は揃っている"); return
     cases = DATA["cases"]
+    _glossary_hits.clear()
     open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(build_index())
     for i, c in enumerate(cases):
         prev_c = cases[i - 1]; next_c = cases[(i + 1) % len(cases)]
         open(os.path.join(ROOT, "cases", f"case-{c['num']}.html"), "w", encoding="utf-8").write(build_case(c, prev_c, next_c))
+    if _glossary_hits:
+        print("!! 内輪語を置き換えた（JSON 側も直すこと）:", file=sys.stderr)
+        for h in sorted(set(_glossary_hits)): print("   ", h, file=sys.stderr)
     print(f"index.html と cases/case-01〜{cases[-1]['num']}.html を書き出した")
 
 if __name__ == "__main__":
