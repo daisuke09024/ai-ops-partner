@@ -45,8 +45,7 @@ img,video{max-width:100%;height:auto;display:block}
 a{color:inherit}
 .w{max-width:var(--c);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 .sec{padding:clamp(56px,8vw,96px) 0}
-.eyebrow{font-family:var(--fe);font-size:.78rem;font-weight:700;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.eyebrow::before{content:'';width:22px;height:2px;background:var(--blue);border-radius:2px}
+.eyebrow{font-family:var(--fe);font-size:.74rem;font-weight:700;letter-spacing:.16em;color:var(--blue);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:900;line-height:1.4;letter-spacing:-.02em;margin-bottom:12px}
 .lead{font-size:1rem;color:var(--tx2);max-width:760px}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px;flex-wrap:wrap}
@@ -91,34 +90,36 @@ a{color:inherit}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* ===== index: hero ===== */
-.hero{padding:calc(64px + clamp(48px,7vw,88px)) 0 clamp(48px,6vw,72px);position:relative;overflow:hidden;background:linear-gradient(135deg,#f0f4ff 0%,#e6edff 35%,#f6f3ff 70%,#fafbfe 100%)}
-.hero::before{content:'';position:absolute;top:-30%;right:-10%;width:60vw;height:60vw;max-width:820px;max-height:820px;background:radial-gradient(circle,rgba(37,99,235,.10) 0%,transparent 70%);pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center;position:relative;z-index:1}
-.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:900;line-height:1.3;letter-spacing:-.03em;margin:8px 0 18px}
+.hero{padding:calc(64px + clamp(40px,6vw,60px)) 0 clamp(40px,5vw,52px);position:relative;background:linear-gradient(180deg,#f7f9fc 0%,#fff 100%);border-bottom:1px solid var(--border)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
+.hero h1{font-size:clamp(1.9rem,4.6vw,2.8rem);font-weight:900;line-height:1.28;letter-spacing:-.03em;margin:8px 0 18px}
 .hero h1 em{font-style:normal;color:var(--blue)}
-.hero-lead{font-size:1.02rem;color:var(--tx2);margin-bottom:28px;max-width:560px}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.st{padding:14px 10px;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04);text-align:center;display:flex;flex-direction:column;justify-content:center}
-.st-n{font-family:var(--fe);font-size:clamp(1.3rem,2.2vw,1.7rem);font-weight:800;color:var(--blue);line-height:1.2;letter-spacing:-.02em;white-space:nowrap}
-.st-n small{font-size:.6em;font-weight:700;margin-left:2px}
-.st-l{font-size:.76rem;color:var(--tx3);margin-top:3px;line-height:1.4}
-.hero-vid{position:relative;width:100%;max-width:560px;justify-self:end;padding:12px;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);border-radius:var(--r2);box-shadow:var(--sh3)}
-.hero-vid-fr{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--bg3)}
+.hero-lead{font-size:1rem;color:var(--tx2);margin-bottom:26px;max-width:520px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+.stats{display:flex;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:18px;gap:14px 0}
+.st{padding-right:24px;margin-right:24px;border-right:1px solid var(--border)}
+.st:last-child{border-right:0;margin-right:0;padding-right:0}
+.st-n{font-family:var(--fe);font-size:1.5rem;font-weight:800;color:var(--tx);line-height:1.1;letter-spacing:-.02em;white-space:nowrap}
+.st-n small{font-size:.65em;font-weight:700;color:var(--tx2);margin-left:2px}
+.st-l{font-size:.74rem;color:var(--tx3);margin-top:4px;line-height:1.4}
+.hero-vid{position:relative;width:100%;max-width:560px;justify-self:end;padding:10px;background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:0 20px 50px rgba(15,29,53,.12)}
+.hero-vid-fr{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--dark)}
 .hero-vid-fr video,.hero-vid-fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-vid-fr img.still{display:none}
-.hero-vid-cap{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;margin:10px 4px 0}
-.hero-vid-cap b{font-size:.84rem;font-weight:700}
-.hero-vid-cap span{font-size:.74rem;color:var(--tx3)}
+.hero-vid-cap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;margin:10px 6px 2px}
+.hero-vid-cap b{font-size:.86rem;font-weight:700}
+.hero-vid-cap span{font-size:.74rem;color:var(--tx2);font-weight:700;padding:3px 10px;border-radius:100px;background:var(--bg2)}
 @media(prefers-reduced-motion:reduce){.hero-vid-fr video{display:none}.hero-vid-fr img.still{display:block}}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-vid{justify-self:stretch;max-width:100%}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-vid{justify-self:stretch;max-width:100%}}
+@media(max-width:640px){.st{border-right:0;padding-right:18px;margin-right:0}}
 
 /* 読み方の帯 */
-.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(28px,4vw,40px)}
-.rule{display:flex;gap:12px;align-items:flex-start;padding:16px 18px;background:rgba(255,255,255,.6);border:1px solid rgba(37,99,235,.10);border-radius:var(--r);font-size:.88rem;color:var(--tx2);line-height:1.7}
-.rule b{color:var(--tx);display:block;font-size:.9rem}
-.rule i{flex-shrink:0;width:28px;height:28px;border-radius:8px;background:var(--blue-bg2);color:var(--blue);font-style:normal;font-family:var(--fe);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){.rules{grid-template-columns:1fr}}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(28px,4vw,40px);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:#fff}
+.rule{display:flex;gap:12px;align-items:flex-start;padding:16px 20px;border-right:1px solid var(--border);font-size:.86rem;color:var(--tx2);line-height:1.6}
+.rule:last-child{border-right:0}
+.rule b{color:var(--tx);display:block;font-size:.9rem;margin-bottom:2px}
+.rule i{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--blue-bg2);color:var(--blue);font-style:normal;font-family:var(--fe);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+@media(max-width:768px){.rules{grid-template-columns:1fr}.rule{border-right:0;border-bottom:1px solid var(--border)}.rule:last-child{border-bottom:0}}
 
 /* filters */
 .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
@@ -134,42 +135,41 @@ a{color:inherit}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.grid{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:var(--tr);position:relative}
-.card:hover{transform:translateY(-4px);box-shadow:var(--sh2);border-color:#cbd5e1}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:var(--tr);position:relative}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(15,29,53,.1)}
 .card.hide{display:none}
-.thumb{position:relative;aspect-ratio:16/9;background:var(--bg3);overflow:hidden}
-.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s ease}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--bg2);overflow:hidden;border-bottom:1px solid var(--border)}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
 .card:hover .thumb img{transform:scale(1.03)}
 .cbody{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
-.cmeta{display:flex;align-items:center;gap:8px;font-family:var(--fe);font-size:.74rem;font-weight:700;color:var(--tx3);letter-spacing:.06em;margin-bottom:8px}
-.cmeta .cat{font-family:var(--fj);letter-spacing:0;font-weight:600;color:var(--tx2)}
+.cmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--fe);font-size:.72rem;font-weight:700;color:var(--blue);letter-spacing:.08em;margin-bottom:8px}
+.cmeta .cat{font-family:var(--fj);letter-spacing:0;font-weight:600;color:var(--tx3)}
 .cmeta .cat::before{content:'·';margin-right:8px;color:var(--border2)}
 .cbds{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.card h3{font-size:1.06rem;font-weight:800;line-height:1.55;margin-bottom:8px;letter-spacing:-.01em}
-.card p{font-size:.9rem;color:var(--tx2);line-height:1.7;margin-bottom:14px;flex:1}
-.kpi{background:var(--blue-bg);border:1px solid rgba(37,99,235,.10);border-radius:12px;padding:10px 14px;margin-bottom:12px}
-.kpi small{display:block;font-size:.74rem;color:var(--tx3);font-weight:600}
-.kpi b{font-family:var(--fe);font-size:1.05rem;font-weight:800;color:var(--blue-d);letter-spacing:-.01em;line-height:1.35;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.kpi b .ar{color:var(--tx3);font-weight:400}
-.kpi b .old{color:var(--tx3);text-decoration:line-through;text-decoration-color:var(--rose);font-weight:700}
-.kpi .sub{font-size:.78rem;color:var(--tx2);font-weight:500;font-family:var(--fj);margin-top:2px}
-.more{font-size:.86rem;color:var(--blue);font-weight:700;display:inline-flex;align-items:center;gap:4px;transition:var(--tr)}
-.card:hover .more{gap:9px}
+.card h3{font-size:1.05rem;font-weight:800;line-height:1.55;margin-bottom:8px;letter-spacing:-.01em}
+.card p{font-size:.88rem;color:var(--tx2);line-height:1.7;margin-bottom:16px;flex:1}
+.kpi{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;border-top:1px solid var(--border);padding-top:14px}
+.kpi small{display:block;font-size:.72rem;color:var(--tx3);font-weight:600}
+.kpi b{font-family:var(--fe);font-size:1.25rem;font-weight:800;color:var(--blue-d);letter-spacing:-.01em;line-height:1.3;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.kpi b .ar{color:var(--tx3);font-weight:500}
+.kpi b .old{color:var(--tx3);font-weight:700}
+.kpi .sub{font-size:.76rem;color:var(--tx2);font-weight:500;font-family:var(--fj)}
+.kpi .go{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--blue-bg2);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:800;transition:var(--tr)}
+.card:hover .kpi .go{background:var(--blue);color:#fff}
 
-/* systems (一覧) */
-.sgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-@media(max-width:1100px){.sgrid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:640px){.sgrid{grid-template-columns:repeat(2,1fr)}}
+/* systems (一覧・図解を2列で大きく) */
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:640px){.sgrid{grid-template-columns:1fr}}
 .scard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:zoom-in;transition:var(--tr)}
 .scard:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
-.scard .thumb{aspect-ratio:16/9}
-.sbody{padding:12px 14px 14px}
-.sbody h3{font-size:.9rem;font-weight:800;line-height:1.5;margin:6px 0 4px}
-.sbody p{font-size:.78rem;color:var(--tx3);line-height:1.6}
+.scard .thumb{aspect-ratio:16/9;border-bottom:1px solid var(--border)}
+.sbody{padding:14px 18px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.sbody h3{font-size:.98rem;font-weight:800;line-height:1.5;margin-bottom:3px}
+.sbody p{font-size:.8rem;color:var(--tx3);line-height:1.6}
+.sbody .bd{flex-shrink:0;margin-top:2px}
 
 /* cta */
-.cta{background:linear-gradient(135deg,#0c1222 0%,#1a2240 55%,#0f172a 100%);color:#fff;text-align:center;padding:clamp(64px,9vw,104px) 0;position:relative;overflow:hidden}
-.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:640px;height:640px;background:radial-gradient(circle,rgba(37,99,235,.16) 0%,transparent 70%);pointer-events:none}
+.cta{background:var(--dark);color:#fff;text-align:center;padding:clamp(64px,9vw,96px) 0;position:relative}
 .cta .w{position:relative;z-index:1}
 .cta h2{font-size:clamp(1.4rem,3.6vw,2.2rem);font-weight:900;line-height:1.4;margin-bottom:14px}
 .cta p{color:rgba(255,255,255,.66);font-size:1rem;max-width:640px;margin:0 auto 28px}
@@ -362,28 +362,35 @@ def kpi_html(face):
     """カードの数字タイル。face が before/after 型と big/sub 型の2種"""
     if "before" in face:
         sub = f'<div class="sub">{esc(face["sub"])}</div>' if face.get("sub") else ""
-        return f'<div class="kpi"><small>{esc(face["label"])}</small><b><span class="old">{esc(face["before"])}</span><span class="ar">→</span>{esc(face["after"])}</b>{sub}</div>'
-    return f'<div class="kpi"><small>{esc(face.get("sub",""))}</small><b>{esc(face["big"])}</b></div>'
+        inner = f'<small>{esc(face["label"])}</small><b><span class="old">{esc(face["before"])}</span><span class="ar">→</span>{esc(face["after"])}</b>{sub}'
+    else:
+        inner = f'<small>{esc(face.get("sub",""))}</small><b>{esc(face["big"])}</b>'
+    return f'<div class="kpi"><div>{inner}</div><span class="go" aria-hidden="true">↗</span></div>'
+
+def ill_src(num, root, size=""):
+    """事例カードの挿絵。無ければ図解にフォールバック（挿絵は cases/media/case-NN_ill{_m}.webp）"""
+    name = f"case-{num}_ill{size}.webp"
+    if os.path.exists(os.path.join(ROOT, "cases", "media", name)):
+        return f"{root}cases/media/{name}"
+    return f"{root}cases/media/case-{num}_zukai.webp"
 
 SITE_LABELS = DATA["meta"]["site_labels"]
 
 def case_card(c, root):
     num = c["num"]
-    vid = '<span class="bd bd-video">60秒デモ</span>' if c["video"] else '<span class="bd bd-soon">図解＋成果</span>'
+    vid = '<div class="cbds"><span class="bd bd-video">60秒デモ</span></div>' if c["video"] else ""
     return f"""<a class="card fi" href="{root}cases/case-{num}.html" data-site="{c['site']}" data-cat="{esc(c['cat'])}">
-<div class="thumb"><img src="{root}cases/media/case-{num}_zukai.webp" alt="{esc(c['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE {num}<span class="cat">{esc(c['cat'])}</span></div>
-<div class="cbds"><span class="bd bd-site">{esc(SITE_LABELS[c['site']])}</span>{vid}</div>
-<h3>{esc(c['headline'])}</h3>
+<div class="thumb"><img src="{ill_src(num, root, "_m")}" alt="{esc(c['src_title'])}のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta">CASE {num}<span class="cat">{esc(c['cat'])}</span><span class="cat">{esc(SITE_LABELS[c['site']])}</span></div>
+{vid}<h3>{esc(c['headline'])}</h3>
 <p>{esc(c['src_problem'])}</p>
-{kpi_html(c['src_face'])}
-<span class="more">詳しく見る →</span></div></a>"""
+{kpi_html(c['src_face'])}</div></a>"""
 
 def sys_card(l, root):
     ext = l.get("src_origin") == "external"
     badge = '<span class="bd bd-ext">他社の事例</span>' if ext else f'<span class="bd bd-live">{esc(l["src_status"].split("（")[0].replace("⚡ ","").replace("🧰 ","").replace("🤝 ",""))}</span>'
     return f"""<div class="scard zoomable fi" data-cap="{esc(l['src_title'])}"><div class="thumb"><img src="{root}cases/media/{l['key']}.webp" alt="{esc(l['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody">{badge}<h3>{esc(l['src_title'])}</h3><p>{esc(l['src_problem'])}</p></div></div>"""
+<div class="sbody"><div><h3>{esc(l['src_title'])}</h3><p>{esc(l['src_problem'])}</p></div>{badge}</div></div>"""
 
 # ------------------------------------------------------------------ index
 def build_index():
@@ -401,15 +408,15 @@ def build_index():
 <section class="hero"><div class="w">
 <div class="hero-grid">
 <div class="hero-text">
-<div class="eyebrow">AI業務改革パートナー ／ 事例とデモ</div>
-<h1>業務をAIに任せた、<br><em>実物の記録</em>。</h1>
-<p class="hero-lead">前職の45名組織、顧客の環境、自社の運用で、実際に動いた（動いている）ものだけを載せています。口で説明する代わりに、図解と動く画面で。</p>
-<div class="hero-btns"><a href="#cases" class="btn btn-p">事例を見る ↓</a><a href="{TALLY}" class="btn btn-o" target="_blank" rel="noopener">無料で相談する</a></div>
+<div class="eyebrow">Cases &amp; Demos — AI業務改革パートナー</div>
+<h1>AIに任せた業務の、<br><em>実物だけ。</em></h1>
+<p class="hero-lead">前職の45名組織、顧客の環境、自社の運用で実際に動いたものを、図解と60秒の実演で載せています。構想や試作はありません。</p>
+<div class="hero-btns"><a href="#cases" class="btn btn-p">事例を見る ↓</a><a href="{TALLY}" class="btn btn-o" target="_blank" rel="noopener">30分、無料で相談する</a></div>
 <div class="stats">
 <div class="st"><div class="st-n">9</div><div class="st-l">事例</div></div>
-<div class="st"><div class="st-n">{n_video}</div><div class="st-l">60秒の実演動画</div></div>
+<div class="st"><div class="st-n">{n_video}</div><div class="st-l">60秒の実演</div></div>
 <div class="st"><div class="st-n">10</div><div class="st-l">動いている仕組み</div></div>
-<div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額<br>（前職3事例の合計）</div></div>
+<div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額（前職3事例）</div></div>
 </div>
 </div>
 <div class="hero-vid fi">
@@ -417,13 +424,13 @@ def build_index():
 <video autoplay muted loop playsinline preload="metadata" poster="media/hero_demo_poster.jpg" aria-label="売上集計をAIが自動化する画面の実演。架空データ・音なし"><source src="media/hero_demo.webm" type="video/webm"><source src="media/hero_demo.mp4" type="video/mp4"></video>
 <img class="still" src="media/hero_demo_poster.jpg" alt="自動集計ダッシュボードの画面（架空データ）">
 </div>
-<div class="hero-vid-cap"><b>3枚のシート → 自動集計ダッシュボード</b><span>事例01の実演から12秒・音なし・架空データ</span></div>
+<div class="hero-vid-cap"><b>3枚のシート → 自動集計ダッシュボード</b><span>実演 12秒・架空データ</span></div>
 </div>
 </div>
 <div class="rules">
-<div class="rule"><i>1</i><div><b>実際に動いたものだけ</b>構想や試作は載せていません。導入先を各事例に明記しています。</div></div>
-<div class="rule"><i>2</i><div><b>数字は実測か公開済みの実績</b>前職の数字は公開スライドの値。他社の事例には数字を付けていません。</div></div>
-<div class="rule"><i>3</i><div><b>動画は架空データで再現</b>顧客の実データは映しません。実演は同じ仕組みを架空の会社で動かしたものです。</div></div>
+<div class="rule"><i>1</i><div><b>実際に動いたものだけ</b>導入先を各事例に明記。構想や試作は載せない</div></div>
+<div class="rule"><i>2</i><div><b>数字は実測か公開済みの実績</b>他社の事例には数字を付けない</div></div>
+<div class="rule"><i>3</i><div><b>動画は架空データで再現</b>顧客の実データは映さない</div></div>
 </div>
 </div></section>
 
@@ -434,7 +441,7 @@ def build_index():
 </div></section>
 
 <section class="sec" id="systems" style="background:var(--bg2)"><div class="w">
-<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">1件1ページにはしていない、日々動いている仕組みと、参考にしている他社の実践。図解を押すと拡大します。</p></div><div class="count">10<small>件</small></div></div>
+<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">1件1ページにはしていない、日々動いている仕組みと、参考にしている他社の実践。図解を押すと拡大します。</p></div><div class="count">{len(lists)}<small>件</small></div></div>
 <div class="sgrid">{"".join(sys_card(l, "") for l in lists)}</div>
 </div></section>
 
