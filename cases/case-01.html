@@ -1,198 +1,371 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>事例①: 顧客別売上達成状況の可視化と集計の自動化｜AI業務改革パートナー</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans JP"', 'sans-serif'] }, colors: { primary: {50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e3a5f',900:'#0f1d35'}, accent:'#f97316' } } } }
-  </script>
-  <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans JP', sans-serif; }
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>事例01：売上集計を自動化し、毎日250分の転記を0分に｜AI業務改革パートナー</title>
+<meta name="description" content="案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。前職の45名組織で運用した。">
+<link rel="canonical" href="https://ai-ops-partner.vercel.app/cases/case-01.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI業務改革パートナー">
+<meta property="og:title" content="事例01：売上集計を自動化し、毎日250分の転記を0分に｜AI業務改革パートナー">
+<meta property="og:description" content="案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。前職の45名組織で運用した。">
+<meta property="og:image" content="https://ai-ops-partner.vercel.app/cases/media/case-01_zukai.webp">
+<meta property="og:url" content="https://ai-ops-partner.vercel.app/cases/case-01.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2712%27 fill=%27%232563eb%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --c:1200px;
+  --bg:#fafbfe;--bg2:#f1f4f9;--bg3:#e8edf5;--card:#fff;
+  --dark:#0c1222;--dark2:#1a2240;
+  --tx:#111827;--tx2:#4b5563;--tx3:#6b7280;
+  --blue:#2563eb;--blue-d:#1d4ed8;--blue-l:#60a5fa;--blue-bg:rgba(37,99,235,.06);--blue-bg2:rgba(37,99,235,.12);
+  --amber:#b45309;--amber-bg:rgba(217,119,6,.10);
+  --rose:#be123c;--rose-bg:rgba(225,29,72,.07);
+  --green:#047857;--green-bg:rgba(5,150,105,.09);
+  --violet:#6d28d9;--violet-bg:rgba(109,40,217,.08);
+  --border:#e5e7eb;--border2:#d1d5db;
+  --sh:0 1px 3px rgba(0,0,0,.06);--sh2:0 6px 24px rgba(15,23,42,.08);--sh3:0 16px 48px rgba(15,23,42,.14);
+  --r:14px;--r2:20px;
+  --tr:.25s cubic-bezier(.4,0,.2,1);
+  --fj:'Zen Kaku Gothic New',sans-serif;--fe:'Plus Jakarta Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fj);background:var(--bg);color:var(--tx);line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.w{max-width:var(--c);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.sec{padding:clamp(56px,8vw,96px) 0}
+.eyebrow{font-family:var(--fe);font-size:.78rem;font-weight:700;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--blue);border-radius:2px}
+.h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:900;line-height:1.4;letter-spacing:-.02em;margin-bottom:12px}
+.lead{font-size:1rem;color:var(--tx2);max-width:760px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px;flex-wrap:wrap}
+.count{font-family:var(--fe);font-weight:800;color:var(--blue);font-size:1.4rem;white-space:nowrap}
+.count small{font-family:var(--fj);font-size:.85rem;color:var(--tx3);font-weight:500;margin-left:4px}
+
+/* header */
+.hd{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(250,251,254,.9);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(0,0,0,.05)}
+.hd-in{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--c);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.hd-logo{font-size:1rem;font-weight:900;color:var(--tx);text-decoration:none;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.hd-logo span{color:var(--blue)}
+.hd-logo i{width:8px;height:8px;background:var(--blue);border-radius:50%;display:inline-block}
+.hd-nav{display:flex;align-items:center;gap:26px}
+.hd-nav a{font-size:.88rem;color:var(--tx2);text-decoration:none;font-weight:600;transition:var(--tr)}
+.hd-nav a:hover{color:var(--tx)}
+.hd-cta{background:var(--blue)!important;color:#fff!important;padding:9px 20px!important;border-radius:10px;font-weight:700!important;font-size:.84rem!important;box-shadow:0 2px 8px rgba(37,99,235,.25)}
+.hd-cta:hover{background:var(--blue-d)!important;transform:translateY(-1px)}
+.hd-back{font-size:.86rem;color:var(--tx2);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.hd-back:hover{color:var(--blue)}
+@media(max-width:640px){.hd-nav a:not(.hd-cta){display:none}.hd-nav{gap:12px}}
+.progress{position:fixed;top:64px;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--blue),var(--blue-l));z-index:998;transition:width .1s linear}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;border-radius:12px;font-size:.95rem;font-weight:700;text-decoration:none;transition:var(--tr);cursor:pointer;border:0;font-family:var(--fj);line-height:1.4}
+.btn-p{background:var(--blue);color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.28)}
+.btn-p:hover{background:var(--blue-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.35)}
+.btn-o{background:rgba(255,255,255,.75);color:var(--tx2);border:1px solid var(--border2)}
+.btn-o:hover{background:#fff;color:var(--tx)}
+.btn-w{background:#fff;color:var(--blue-d)}
+.btn-w:hover{background:#eef2ff;transform:translateY(-2px)}
+
+/* badges */
+.bd{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:100px;font-size:.76rem;font-weight:700;line-height:1.5;white-space:nowrap}
+.bd-site{background:var(--violet-bg);color:var(--violet)}
+.bd-cat{background:var(--bg2);color:var(--tx2)}
+.bd-video{background:var(--tx);color:#fff}
+.bd-video::before{content:'▶';font-size:.62rem}
+.bd-soon{background:var(--bg2);color:var(--tx3)}
+.bd-ext{background:var(--amber-bg);color:var(--amber)}
+.bd-live{background:var(--green-bg);color:var(--green)}
+.bd-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== index: hero ===== */
+.hero{padding:calc(64px + clamp(48px,7vw,88px)) 0 clamp(48px,6vw,72px);position:relative;overflow:hidden;background:linear-gradient(135deg,#f0f4ff 0%,#e6edff 35%,#f6f3ff 70%,#fafbfe 100%)}
+.hero::before{content:'';position:absolute;top:-30%;right:-10%;width:60vw;height:60vw;max-width:820px;max-height:820px;background:radial-gradient(circle,rgba(37,99,235,.10) 0%,transparent 70%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center;position:relative;z-index:1}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:900;line-height:1.3;letter-spacing:-.03em;margin:8px 0 18px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-lead{font-size:1.02rem;color:var(--tx2);margin-bottom:28px;max-width:560px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.st{padding:14px 10px;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04);text-align:center;display:flex;flex-direction:column;justify-content:center}
+.st-n{font-family:var(--fe);font-size:clamp(1.3rem,2.2vw,1.7rem);font-weight:800;color:var(--blue);line-height:1.2;letter-spacing:-.02em;white-space:nowrap}
+.st-n small{font-size:.6em;font-weight:700;margin-left:2px}
+.st-l{font-size:.76rem;color:var(--tx3);margin-top:3px;line-height:1.4}
+.hero-vid{position:relative;width:100%;max-width:560px;justify-self:end;padding:12px;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);border-radius:var(--r2);box-shadow:var(--sh3)}
+.hero-vid-fr{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--bg3)}
+.hero-vid-fr video,.hero-vid-fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-vid-fr img.still{display:none}
+.hero-vid-cap{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;margin:10px 4px 0}
+.hero-vid-cap b{font-size:.84rem;font-weight:700}
+.hero-vid-cap span{font-size:.74rem;color:var(--tx3)}
+@media(prefers-reduced-motion:reduce){.hero-vid-fr video{display:none}.hero-vid-fr img.still{display:block}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-vid{justify-self:stretch;max-width:100%}.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* 読み方の帯 */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(28px,4vw,40px)}
+.rule{display:flex;gap:12px;align-items:flex-start;padding:16px 18px;background:rgba(255,255,255,.6);border:1px solid rgba(37,99,235,.10);border-radius:var(--r);font-size:.88rem;color:var(--tx2);line-height:1.7}
+.rule b{color:var(--tx);display:block;font-size:.9rem}
+.rule i{flex-shrink:0;width:28px;height:28px;border-radius:8px;background:var(--blue-bg2);color:var(--blue);font-style:normal;font-family:var(--fe);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+@media(max-width:768px){.rules{grid-template-columns:1fr}}
+
+/* filters */
+.filters{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.frow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.frow .flb{font-size:.78rem;color:var(--tx3);font-weight:700;margin-right:4px;white-space:nowrap}
+.chip{border:1px solid var(--border);background:#fff;color:var(--tx2);padding:7px 14px;border-radius:100px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:var(--fj);transition:var(--tr);display:inline-flex;align-items:center;gap:6px}
+.chip small{font-family:var(--fe);font-size:.72rem;color:var(--tx3);font-weight:700}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.chip.on small{color:rgba(255,255,255,.7)}
+
+/* case cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:var(--tr);position:relative}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh2);border-color:#cbd5e1}
+.card.hide{display:none}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--bg3);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s ease}
+.card:hover .thumb img{transform:scale(1.03)}
+.cbody{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.cmeta{display:flex;align-items:center;gap:8px;font-family:var(--fe);font-size:.74rem;font-weight:700;color:var(--tx3);letter-spacing:.06em;margin-bottom:8px}
+.cmeta .cat{font-family:var(--fj);letter-spacing:0;font-weight:600;color:var(--tx2)}
+.cmeta .cat::before{content:'·';margin-right:8px;color:var(--border2)}
+.cbds{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.card h3{font-size:1.06rem;font-weight:800;line-height:1.55;margin-bottom:8px;letter-spacing:-.01em}
+.card p{font-size:.9rem;color:var(--tx2);line-height:1.7;margin-bottom:14px;flex:1}
+.kpi{background:var(--blue-bg);border:1px solid rgba(37,99,235,.10);border-radius:12px;padding:10px 14px;margin-bottom:12px}
+.kpi small{display:block;font-size:.74rem;color:var(--tx3);font-weight:600}
+.kpi b{font-family:var(--fe);font-size:1.05rem;font-weight:800;color:var(--blue-d);letter-spacing:-.01em;line-height:1.35;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.kpi b .ar{color:var(--tx3);font-weight:400}
+.kpi b .old{color:var(--tx3);text-decoration:line-through;text-decoration-color:var(--rose);font-weight:700}
+.kpi .sub{font-size:.78rem;color:var(--tx2);font-weight:500;font-family:var(--fj);margin-top:2px}
+.more{font-size:.86rem;color:var(--blue);font-weight:700;display:inline-flex;align-items:center;gap:4px;transition:var(--tr)}
+.card:hover .more{gap:9px}
+
+/* systems (一覧) */
+.sgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media(max-width:1100px){.sgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.sgrid{grid-template-columns:repeat(2,1fr)}}
+.scard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:zoom-in;transition:var(--tr)}
+.scard:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
+.scard .thumb{aspect-ratio:16/9}
+.sbody{padding:12px 14px 14px}
+.sbody h3{font-size:.9rem;font-weight:800;line-height:1.5;margin:6px 0 4px}
+.sbody p{font-size:.78rem;color:var(--tx3);line-height:1.6}
+
+/* cta */
+.cta{background:linear-gradient(135deg,#0c1222 0%,#1a2240 55%,#0f172a 100%);color:#fff;text-align:center;padding:clamp(64px,9vw,104px) 0;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:640px;height:640px;background:radial-gradient(circle,rgba(37,99,235,.16) 0%,transparent 70%);pointer-events:none}
+.cta .w{position:relative;z-index:1}
+.cta h2{font-size:clamp(1.4rem,3.6vw,2.2rem);font-weight:900;line-height:1.4;margin-bottom:14px}
+.cta p{color:rgba(255,255,255,.66);font-size:1rem;max-width:640px;margin:0 auto 28px}
+.cta .note{font-size:.8rem;color:rgba(255,255,255,.45);margin-top:14px}
+.ft{padding:36px 0;border-top:1px solid rgba(0,0,0,.05);text-align:center;background:var(--bg)}
+.ft-links{display:flex;justify-content:center;gap:24px;margin-bottom:12px;flex-wrap:wrap}
+.ft-links a{font-size:.84rem;color:var(--tx3);text-decoration:none}
+.ft-links a:hover{color:var(--tx2)}
+.ft-copy{font-size:.75rem;color:var(--tx3)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(12,18,34,.88);z-index:2000;display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lb.on{display:flex}
+.lb img{max-width:min(1600px,96vw);max-height:92vh;width:auto;height:auto;border-radius:10px;box-shadow:var(--sh3);background:#fff}
+.lb-cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.75);font-size:.82rem;white-space:nowrap}
+.zoomable{cursor:zoom-in}
+
+/* ===== case page ===== */
+.chero{padding:calc(64px + clamp(36px,5vw,56px)) 0 clamp(36px,5vw,56px);background:linear-gradient(135deg,#f0f4ff 0%,#e9efff 45%,#fafbfe 100%);position:relative;overflow:hidden}
+.chero::before{content:'';position:absolute;top:-40%;right:-10%;width:52vw;height:52vw;max-width:700px;max-height:700px;background:radial-gradient(circle,rgba(37,99,235,.10) 0%,transparent 70%);pointer-events:none}
+.crumb{font-size:.8rem;color:var(--tx3);display:flex;gap:8px;align-items:center;margin-bottom:16px;font-weight:600}
+.crumb a{color:var(--tx3);text-decoration:none}
+.crumb a:hover{color:var(--blue)}
+.crumb .cur{color:var(--blue);font-family:var(--fe);letter-spacing:.08em}
+.chero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
+.chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero .lead{margin-bottom:24px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:640px}
+.kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.kp small{display:block;font-size:.72rem;color:var(--tx3);font-weight:600;line-height:1.4}
+.kp b{display:block;font-family:var(--fe);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:800;color:var(--blue-d);line-height:1.3;letter-spacing:-.01em;margin-top:3px}
+.kp b .ja{font-family:var(--fj)}
+.chero-vis{position:relative;justify-self:end;width:100%;max-width:540px}
+.chero-vis a,.chero-vis .fr{display:block;position:relative;aspect-ratio:16/9;border-radius:var(--r2);overflow:hidden;background:var(--bg3);box-shadow:var(--sh3);border:6px solid #fff}
+.chero-vis img{width:100%;height:100%;object-fit:cover}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.play span{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--sh3);padding-left:4px;transition:var(--tr)}
+.chero-vis a:hover .play span{transform:scale(1.08)}
+.vis-cap{font-size:.76rem;color:var(--tx3);margin-top:10px;text-align:center}
+@media(max-width:900px){.chero-grid{grid-template-columns:1fr}.chero-vis{justify-self:stretch;max-width:100%}}
+@media(max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
+
+.body{padding:clamp(40px,6vw,64px) 0}
+.body-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(28px,4vw,56px);align-items:start}
+@media(max-width:1060px){.body-grid{grid-template-columns:1fr}.side{position:static!important}}
+.blk{margin-bottom:clamp(40px,6vw,64px)}
+.blk-h{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.tag{flex-shrink:0;padding:6px 12px;border-radius:10px;font-size:.78rem;font-weight:800;letter-spacing:.04em;line-height:1.4}
+.tag-b{background:var(--blue-bg2);color:var(--blue-d)}
+.tag-r{background:var(--rose-bg);color:var(--rose)}
+.tag-a{background:var(--amber-bg);color:var(--amber)}
+.tag-g{background:var(--green-bg);color:var(--green)}
+.tag-v{background:var(--violet-bg);color:var(--violet)}
+.tag-d{background:var(--tx);color:#fff}
+.blk h2{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:800;line-height:1.45;letter-spacing:-.01em}
+.blk .sub{font-size:.9rem;color:var(--tx3);margin:-10px 0 16px}
+.fig{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:10px;box-shadow:var(--sh)}
+.fig img{width:100%;border-radius:12px}
+.fig-cap{font-size:.8rem;color:var(--tx3);margin-top:10px;padding:0 6px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.vid{background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
+.vid video{width:100%;border-radius:12px;aspect-ratio:16/9;background:#000}
+.vid-cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:rgba(255,255,255,.65);font-size:.8rem;padding:10px 6px 2px}
+.vid-cap b{color:#fff}
+.soon{border:2px dashed var(--border2);border-radius:var(--r2);padding:28px 24px;background:var(--bg2);display:flex;gap:16px;align-items:center}
+.soon i{flex-shrink:0;width:48px;height:48px;border-radius:14px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-style:normal;color:var(--tx3);font-size:1.1rem}
+.soon b{display:block;font-size:.98rem;margin-bottom:4px}
+.soon p{font-size:.88rem;color:var(--tx3);line-height:1.7}
+.story{display:grid;grid-template-columns:1fr;gap:14px}
+.sbox{border-radius:var(--r2);padding:22px 24px;border:1px solid var(--border);background:#fff;position:relative}
+.sbox::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:0 4px 4px 0}
+.sbox-r::before{background:var(--rose)}.sbox-b::before{background:var(--blue)}.sbox-g::before{background:var(--green)}
+.sbox h3{font-size:1.05rem;font-weight:800;line-height:1.5;margin-bottom:8px;display:flex;gap:10px;align-items:baseline}
+.sbox h3 .lb{position:static;display:inline-block;background:none;padding:0;font-size:.74rem;font-weight:800;letter-spacing:.08em;cursor:default}
+.sbox-r h3 .lb{color:var(--rose)}.sbox-b h3 .lb{color:var(--blue)}.sbox-g h3 .lb{color:var(--green)}
+.sbox p{font-size:.95rem;color:var(--tx2);line-height:1.85}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px;padding-top:14px;border-top:1px dashed var(--border)}
+.tools small{font-size:.76rem;color:var(--tx3);font-weight:700;margin-right:2px}
+.tools span{font-size:.8rem;background:var(--bg2);color:var(--tx2);padding:4px 11px;border-radius:100px;font-weight:600}
+.callout{border-radius:var(--r2);padding:22px 24px;background:linear-gradient(135deg,rgba(37,99,235,.07),rgba(109,40,217,.06));border:1px solid rgba(37,99,235,.14)}
+.callout b{display:block;font-size:1rem;margin-bottom:6px}
+.callout p{font-size:.95rem;color:var(--tx2)}
+.incl{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.incl{grid-template-columns:1fr}}
+.inc{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:18px 20px}
+.inc .bd{margin-bottom:8px}
+.inc h3{font-size:.98rem;font-weight:800;line-height:1.5;margin-bottom:6px}
+.inc p{font-size:.86rem;color:var(--tx2);line-height:1.7}
+.inc .n{font-family:var(--fe);font-weight:800;color:var(--blue-d);font-size:1.05rem}
+.side{position:sticky;top:88px}
+.sidebox{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:20px 22px;margin-bottom:14px}
+.sidebox h4{font-size:.92rem;font-weight:800;margin-bottom:10px}
+.srow{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.84rem}
+.srow:last-child{border-bottom:0}
+.srow span:first-child{color:var(--tx3);flex-shrink:0}
+.srow span:last-child{text-align:right;font-weight:600;color:var(--tx)}
+.sidecta{background:var(--dark);color:#fff;border-radius:var(--r2);padding:22px}
+.sidecta b{display:block;font-size:.98rem;margin-bottom:6px}
+.sidecta p{font-size:.82rem;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.7}
+.sidecta .btn{width:100%;padding:12px 16px;font-size:.88rem}
+.toc{list-style:none}
+.toc li a{display:block;font-size:.84rem;color:var(--tx2);text-decoration:none;padding:6px 0 6px 12px;border-left:2px solid var(--border);transition:var(--tr)}
+.toc li a:hover,.toc li a.on{color:var(--blue);border-color:var(--blue)}
+.next{background:var(--bg2);padding:clamp(40px,6vw,64px) 0}
+.next .h3{font-size:1.1rem;font-weight:800;margin-bottom:16px}
+.ngrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.ngrid{grid-template-columns:1fr}}
+.ncard{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px;text-decoration:none;color:inherit;transition:var(--tr)}
+.ncard:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.ncard img{width:132px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;flex-shrink:0}
+.ncard small{font-family:var(--fe);font-size:.72rem;color:var(--tx3);font-weight:700;letter-spacing:.06em}
+.ncard b{display:block;font-size:.9rem;line-height:1.5;margin-top:2px}
+.back{margin-top:22px}
+.back a{font-size:.9rem;color:var(--blue);font-weight:700;text-decoration:none}
+
+/* reveal */
+.fi{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.fi{opacity:1;transform:none;transition:none}}
+</style>
 </head>
-<body class="bg-white text-gray-900 antialiased">
+<body>
+<header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
+<section class="chero"><div class="w">
+<div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 01</span></div>
+<div class="chero-grid">
+<div>
+<div class="bds"><span class="bd bd-site">前職・45名組織で導入</span><span class="bd bd-cat">数字の見える化</span><span class="bd bd-video">60秒デモあり</span></div>
+<h1>売上集計を自動化し、毎日250分の転記を0分に</h1>
+<p class="lead">案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。前職の45名組織で運用した。</p>
+<div class="kpis"><div class="kp"><small>毎日の転記作業</small><b>250分<span class="ar">→</span>0分</b></div><div class="kp"><small>年間の削減時間</small><b>960時間</b></div><div class="kp"><small>人件費に換算</small><b>年240万円分</b></div></div>
+</div>
+<div class="chero-vis fi"><a href="#demo" aria-label="実演動画へ"><img src="media/case-01_demo_poster.jpg" alt="実演動画のポスター画像（架空データ）" width="1920" height="1080"><div class="play"><span>▶</span></div></a><div class="vis-cap">60秒の実演動画（音なし・架空データ）へ</div></div>
+</div>
+</div></section>
 
-  <!-- Header -->
-  <header class="bg-primary-900 text-white">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="../index.html" class="text-sm font-semibold text-blue-300 hover:text-white transition-colors">← トップページに戻る</a>
-      <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="text-sm bg-accent hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-full transition-colors">無料トライアルに申し込む</a>
-    </div>
-  </header>
+<section class="body"><div class="w"><div class="body-grid">
+<div class="main">
 
-  <!-- Hero -->
-  <section class="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-600 text-white py-20 md:py-28">
-    <div class="max-w-5xl mx-auto px-6">
-      <p class="text-sm text-blue-300 font-semibold tracking-widest uppercase mb-4 reveal">Case Study 01</p>
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6 reveal reveal-delay-1">顧客別売上達成状況の<br>可視化と集計の自動化</h1>
-      <div class="flex flex-wrap gap-3 reveal reveal-delay-2">
-        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">GAS</span>
-        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">自動集計</span>
-        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">ダッシュボード</span>
-        <span class="bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full">アラート</span>
-      </div>
-      <!-- Impact numbers -->
-      <div class="grid grid-cols-3 gap-6 mt-12 max-w-lg reveal reveal-delay-3">
-        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">80<span class="text-lg text-blue-300">h</span></p><p class="text-xs text-blue-200/60 mt-1">月間工数削減</p></div>
-        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">240<span class="text-lg text-blue-300">万</span></p><p class="text-xs text-blue-200/60 mt-1">年間人件費削減</p></div>
-        <div class="text-center"><p class="text-3xl md:text-4xl font-extrabold">0<span class="text-lg text-blue-300">分</span></p><p class="text-xs text-blue-200/60 mt-1">二重入力工数</p></div>
-      </div>
-    </div>
-  </section>
+<div class="blk fi" id="overview"><div class="blk-h"><span class="tag tag-b">全体像</span><h2>これまでと、AI導入後を1枚で</h2></div>
+<p class="sub">案件ごとにシートが分散し、コスト超過も売上未達も翌月まで分からない</p>
+<div class="fig"><img class="zoomable" src="media/case-01_zukai.webp" alt="売上集計の自動化（前職・45名組織で導入）の図解（これまでとAI導入後）" width="1600" height="900" data-cap="売上集計の自動化（前職・45名組織で導入）"><div class="fig-cap"><span>図解を押すと拡大</span><span>前職・45名組織で導入</span></div></div></div>
 
-  <!-- Main content -->
-  <section class="py-16 md:py-24">
-    <div class="max-w-4xl mx-auto px-6 space-y-16">
+<div class="blk fi" id="demo"><div class="blk-h"><span class="tag tag-d">実演</span><h2>実際の動き</h2></div>
+<p class="sub">見出しの順に、入口から出口まで通しで動かしています。</p>
+<div class="vid"><video autoplay muted loop playsinline preload="metadata" poster="media/case-01_demo_poster.jpg" controls aria-label="売上集計の自動化（前職・45名組織で導入）の実演（60秒・音なし・架空データ）"><source src="media/case-01_demo.webm" type="video/webm"><source src="media/case-01_demo.mp4" type="video/mp4"></video>
+<div class="vid-cap"><b>60秒・音なし・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div>
 
-      <!-- 課題背景 -->
-      <div class="reveal">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm flex-shrink-0">課題</span>
-          <h2 class="text-2xl font-bold">管理の属人化と分散による「検知の遅れ」</h2>
-        </div>
-        <div class="bg-red-50 rounded-2xl p-6 md:p-8 border border-red-100">
-          <p class="text-gray-700 leading-relaxed mb-4">案件ごとにシートが分散し全体像が不透明で、コスト超過や売上未達の把握が困難な状態。</p>
-          <p class="text-gray-700 leading-relaxed mb-4">全体シートへの転記に<strong class="text-red-600">毎日250分（月間80時間相当）</strong>の膨大な工数を要し、状況検知の遅れが解約リスクを増大させていた。</p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">シートが分散</span>
-            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">全体像が不透明</span>
-            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">毎日250分の転記</span>
-            <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">検知の遅れ</span>
-          </div>
-        </div>
-      </div>
+<div class="blk fi" id="story"><div class="blk-h"><span class="tag tag-a">経緯</span><h2>課題、やったこと、成果</h2></div>
+<div class="story">
+<div class="sbox sbox-r"><h3><span class="lb">課題</span>案件ごとにバラバラの売上管理と毎日の転記作業</h3><p>スプレッドシートが案件単位で分散し、全体の売上把握には毎日250分の転記・集計作業が必要だった。マネージャーの時間が「数字を集める」ことに消えていた。</p></div>
+<div class="sbox sbox-b"><h3><span class="lb">やったこと</span>GASによる自動集計とアラート付きダッシュボード</h3><p>分散していたスプレッドシートを自動集計する仕組みを構築し、異常値アラートとダッシュボードに変換。数字が毎朝、自動で揃う状態にした。</p><div class="tools"><small>使った道具</small><span>GAS</span><span>Google スプレッドシート</span></div></div>
+<div class="sbox sbox-g"><h3><span class="lb">成果</span>転記0分・年240万円分（960時間）の削減</h3><p>マネージャーが「数字を集める人」から「数字で動く人」に変わり、戦略的な早期介入が可能になった。45名のマーケティング支援組織で運用された実績。</p></div>
+</div></div>
 
-      <!-- 矢印 -->
-      <div class="flex justify-center text-primary-400"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+<div class="blk fi" id="honest"><div class="blk-h"><span class="tag tag-r">正直に</span><h2>できた3つと、まだ届かない1つ</h2></div>
+<p class="sub">マネージャーが「数字を集める人」から「数字で動く人」に変わった</p>
+<div class="fig"><img class="zoomable" src="media/case-01_zukai_m.webp" alt="売上集計の自動化（前職・45名組織で導入）：ここまでできたことと、まだ届かないこと" width="1600" height="900" data-cap="できた3つと、まだ届かない1つ"><div class="fig-cap"><span>図解を押すと拡大</span><span>4つのうち3つが動いている</span></div></div></div>
 
-      <!-- 実施内容 -->
-      <div class="reveal">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm flex-shrink-0">施策</span>
-          <h2 class="text-2xl font-bold">GASによる自動集計とアラート機能の実装</h2>
-        </div>
-        <div class="bg-blue-50 rounded-2xl p-6 md:p-8 border border-blue-100 space-y-4">
-          <div class="flex items-start gap-3">
-            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
-            <div><p class="font-semibold text-gray-800">集計フォーマットの標準化</p><p class="text-gray-600 text-sm mt-1">全案件のフォーマットを統一し、GASで自動集計システムを構築。</p></div>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
-            <div><p class="font-semibold text-gray-800">条件付きアラートの実装</p><p class="text-gray-600 text-sm mt-1">達成率に応じたアラートを実装し、異常値を即座に特定可能に。</p></div>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="w-8 h-8 rounded-lg bg-blue-200 text-blue-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
-            <div><p class="font-semibold text-gray-800">ダッシュボード作成</p><p class="text-gray-600 text-sm mt-1">全体管理のための二重入力負担を完全に排除する仕組みを実現。</p></div>
-          </div>
-        </div>
-      </div>
+<div class="blk fi" id="line"><div class="blk-h"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
+<div class="fig"><img class="zoomable" src="media/case-01_zukai_s.webp" alt="売上集計の自動化（前職・45名組織で導入）：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>成果の数字つき</span></div></div></div>
 
-      <div class="reveal">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-sm flex-shrink-0">全体像</span>
-          <h2 class="text-2xl font-bold">これまでと、AI導入後</h2>
-        </div>
-        <div class="bg-white rounded-2xl p-3 md:p-4 border border-gray-200">
-          <img src="media/case-01_zukai.png" alt="これまでは案件ごとにシートが分散し転記に250分。AI導入後は自動集計と当日通知で転記0分" class="w-full rounded-xl" loading="lazy" width="1920" height="1080">
-        </div>
-      </div>
+<div class="blk fi" id="hint"><div class="blk-h"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div>
+<div class="callout"><b>売上・KPIの手集計が残っている会社は、ここから始めると一番早く効果が出る</b><p>同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div>
 
-      
-      <!-- 実演 -->
-      <div class="reveal">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm flex-shrink-0">実演</span>
-          <h2 class="text-2xl font-bold">実際の動き（60秒・音なし・架空データ）</h2>
-        </div>
-        <div class="bg-indigo-50 rounded-2xl p-4 md:p-6 border border-indigo-100">
-          <video class="w-full rounded-xl" autoplay muted loop playsinline preload="metadata" poster="media/case-01_demo_poster.jpg">
-            <source src="media/case-01_demo.webm" type="video/webm">
-            <source src="media/case-01_demo.mp4" type="video/mp4">
-          </video>
-          <p class="text-xs text-gray-500 mt-3">架空データで再現したデモです。実際の導入では御社のスプレッドシート・ツールに合わせて構築します。</p>
-        </div>
-      </div>
+</div>
+<aside class="side">
+<div class="sidebox"><h4>この事例の概要</h4>
+<div class="srow"><span>導入先</span><span>前職・45名組織で導入</span></div>
+<div class="srow"><span>業務</span><span>数字の見える化</span></div>
+<div class="srow"><span>使った道具</span><span>GAS・Google スプレッドシート</span></div>
+<div class="srow"><span>実演動画</span><span>あり（60秒）</span></div>
+<div class="srow"><span>数字の出どころ</span><span>前職で公開済みの実績スライド</span></div>
+</div>
+<div class="sidebox"><h4>このページの中身</h4><ul class="toc"><li><a href="#overview">全体像</a></li><li><a href="#demo">実演</a></li><li><a href="#story">課題・やったこと・成果</a></li><li><a href="#honest">できた3つ、まだ1つ</a></li><li><a href="#line">仕組みの一本線</a></li><li><a href="#hint">御社への転用</a></li></ul></div>
+<div class="sidecta"><b>同じ課題がありますか</b><p>御社の業務でどう組み替えるかを、30分で話します。オンライン・無料。</p><a href="https://tally.so/r/QKdxx1" class="btn btn-p" target="_blank" rel="noopener">無料で相談する</a></div>
+</aside>
+</div></div></section>
 
-      <!-- 矢印 -->
-      <div class="flex justify-center text-primary-400"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+<section class="next"><div class="w"><div class="h3">ほかの事例</div><div class="ngrid"><a class="ncard" href="case-09.html"><img src="media/case-09_zukai.webp" alt="" loading="lazy" width="1600" height="900"><div><small>前の事例 · CASE 09</small><b>資料づくり12工程のうち、人がやるのは2回だけ</b></div></a><a class="ncard" href="case-02.html"><img src="media/case-02_zukai.webp" alt="" loading="lazy" width="1600" height="900"><div><small>次の事例 · CASE 02</small><b>議事録を書く仕事をなくし、会議中は議論に集中する</b></div></a></div><div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
 
-      <!-- 成果 -->
-      <div class="reveal">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center font-bold text-sm flex-shrink-0">成果</span>
-          <h2 class="text-2xl font-bold">「工数削減」と「アップセル増加/解約防止」を同時に実現</h2>
-        </div>
-        <div class="bg-green-50 rounded-2xl p-6 md:p-8 border border-green-100">
-          <div class="grid sm:grid-cols-2 gap-6 mb-6">
-            <div class="text-center bg-white rounded-xl p-6 border border-green-200">
-              <p class="text-4xl font-extrabold text-green-700">80<span class="text-xl">h/月</span></p>
-              <p class="text-sm text-gray-500 mt-2">工数削減に成功</p>
-            </div>
-            <div class="text-center bg-white rounded-xl p-6 border border-green-200">
-              <p class="text-4xl font-extrabold text-green-700">リアルタイム</p>
-              <p class="text-sm text-gray-500 mt-2">数値進捗の把握が可能に</p>
-            </div>
-          </div>
-          <p class="text-gray-700 leading-relaxed">リアルタイムで数値進捗が把握可能になり、後手の対応からマネージャーによる<strong>「戦略的な早期介入」</strong>が実現。結果としてアップセル増加・解約減少に貢献。</p>
-        </div>
-      </div>
+<section class="cta"><div class="w">
+<h2>同じような課題を抱えていませんか？</h2>
+<p>御社の業務でどう組み替えるかを、30分で話します。オンライン・無料です。</p>
+<a href="https://tally.so/r/QKdxx1" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
+</div></section>
+<footer class="ft"><div class="w">
+<div class="ft-links"><a href="../index.html#cases">事例</a><a href="../index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
+<p class="ft-copy">© 2026 AI業務改革パートナー</p></div></footer>
+<div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
 
-      <!-- Before/After -->
-      <div class="reveal">
-        <h2 class="text-2xl font-bold mb-6 text-center">Before / After</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-            <p class="text-sm font-bold text-red-500 mb-3">BEFORE</p>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 案件ごとにシートが分散</li>
-              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 毎日250分の手動転記</li>
-              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 数値把握は月次レベル</li>
-              <li class="flex items-start gap-2"><span class="text-red-400">✕</span> 解約リスクの検知が後手</li>
-            </ul>
-          </div>
-          <div class="bg-primary-50 rounded-2xl p-6 border border-blue-200">
-            <p class="text-sm font-bold text-green-600 mb-3">AFTER</p>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> GASで自動集計・一元管理</li>
-              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 転記工数ゼロ</li>
-              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> リアルタイムダッシュボード</li>
-              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> 条件付きアラートで即時検知</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+const lb=document.getElementById('lb');if(lb){const li=lb.querySelector('img'),lc=lb.querySelector('.lb-cap');
+document.querySelectorAll('.zoomable').forEach(el=>{el.addEventListener('click',ev=>{ev.preventDefault();const im=el.tagName==='IMG'?el:el.querySelector('img');li.src=im.dataset.full||im.src;li.alt=im.alt;lc.textContent=el.dataset.cap||im.alt||'';lb.classList.add('on');document.body.style.overflow='hidden'})});
+const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});}
+(function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
 
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="py-16 bg-primary-900 text-white text-center">
-    <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-extrabold mb-4 reveal">同じような課題を抱えていませんか？</h2>
-      <p class="text-blue-100/70 mb-8 reveal reveal-delay-1">無料トライアルでは、御社の特定業務1つをAIで実際に改善します。</p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-2">
-        <a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full transition-colors">無料トライアルに申し込む</a>
-        <a href="../index.html" class="inline-flex items-center gap-2 border-2 border-white/20 hover:border-white/40 text-white font-semibold px-8 py-4 rounded-full transition-colors">トップページへ</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="bg-primary-900 border-t border-white/10 text-blue-100/40 py-6"><div class="max-w-5xl mx-auto px-6 text-center text-sm">&copy; 2026 AI業務改革パートナー</div></footer>
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
-</body>
-</html>
+(function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
+(function(){const links=[...document.querySelectorAll('.toc a')];const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(!secs.length)return;
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});secs.forEach(s=>io.observe(s));})();
+</script>
+</body></html>

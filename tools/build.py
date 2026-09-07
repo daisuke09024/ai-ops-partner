@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI業務改革パートナー｜AIで業務を動かした事例とデモ</title>
-<meta name="description" content="前職の45名組織・顧客の環境・自社の運用で実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。数字は実測、動画は架空データで再現。">
-<link rel="canonical" href="https://ai-ops-partner.vercel.app/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="AI業務改革パートナー">
-<meta property="og:title" content="AI業務改革パートナー｜AIで業務を動かした事例とデモ">
-<meta property="og:description" content="前職の45名組織・顧客の環境・自社の運用で実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。数字は実測、動画は架空データで再現。">
-<meta property="og:image" content="https://ai-ops-partner.vercel.app/cases/media/case-01_zukai.webp">
-<meta property="og:url" content="https://ai-ops-partner.vercel.app/">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2712%27 fill=%27%232563eb%27/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+#!/usr/bin/env python3
+"""LP の生成器。tools/cases.json から index.html（事例のまとめ＝ポートフォリオ）と cases/case-NN.html（事例9本）を書き出す。
 
-<style>
+使い方:
+  python3 tools/build.py            # index.html と cases/*.html を全部作り直す
+  python3 tools/build.py --check    # 生成せず、素材（図解・動画）の欠けだけ報告する
+
+ページの本文は cases.json が正（文言を直す時は HTML ではなく JSON を直してから build する）。
+CSS はこのファイルの中に1本だけ持ち、各 HTML に埋め込む（ページ単体で自己完結させるため）。
+"""
+import argparse, html, json, os, re, sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(HERE, ".."))
+DATA = json.load(open(os.path.join(HERE, "cases.json"), encoding="utf-8"))
+SITE = "https://ai-ops-partner.vercel.app"
+TALLY = "https://tally.so/r/QKdxx1"
+BRAND = "AI業務改革パートナー"
+
+def esc(s):
+    return html.escape(str(s), quote=True)
+
+# ------------------------------------------------------------------ CSS
+CSS = r"""
 :root{
   --c:1200px;
   --bg:#fafbfe;--bg2:#f1f4f9;--bg3:#e8edf5;--card:#fff;
@@ -284,20 +289,125 @@ a{color:inherit}
 .fi{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .fi.vis{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.fi{opacity:1;transform:none;transition:none}}
-</style>
+"""
+
+JS_COMMON = r"""
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+const lb=document.getElementById('lb');if(lb){const li=lb.querySelector('img'),lc=lb.querySelector('.lb-cap');
+document.querySelectorAll('.zoomable').forEach(el=>{el.addEventListener('click',ev=>{ev.preventDefault();const im=el.tagName==='IMG'?el:el.querySelector('img');li.src=im.dataset.full||im.src;li.alt=im.alt;lc.textContent=el.dataset.cap||im.alt||'';lb.classList.add('on');document.body.style.overflow='hidden'})});
+const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});}
+(function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
+"""
+
+JS_INDEX = r"""
+(function(){const cards=[...document.querySelectorAll('#cases .card')];const cnt=document.getElementById('ccount');
+let site='all',cat='all';
+function apply(){let n=0;cards.forEach(c=>{const ok=(site==='all'||c.dataset.site===site)&&(cat==='all'||c.dataset.cat===cat);c.classList.toggle('hide',!ok);if(ok)n++});cnt.textContent=n;}
+document.querySelectorAll('.chip[data-site]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-site]').forEach(x=>x.classList.remove('on'));b.classList.add('on');site=b.dataset.site;apply()}));
+document.querySelectorAll('.chip[data-cat]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-cat]').forEach(x=>x.classList.remove('on'));b.classList.add('on');cat=b.dataset.cat;apply()}));
+})();
+"""
+
+JS_CASE = r"""
+(function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
+(function(){const links=[...document.querySelectorAll('.toc a')];const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(!secs.length)return;
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});secs.forEach(s=>io.observe(s));})();
+"""
+
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
+
+def head(title, desc, url, image, extra=""):
+    return f"""<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(desc)}">
+<link rel="canonical" href="{esc(url)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{BRAND}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:image" content="{esc(image)}">
+<meta property="og:url" content="{esc(url)}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2712%27 fill=%27%232563eb%27/%3E%3C/svg%3E">
+{FONTS}
+{extra}
+<style>{CSS}</style>
 </head>
 <body>
-<header class="hd"><div class="hd-in"><a href="#" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="#cases">事例</a><a href="#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header>
+"""
+
+def header(root):
+    """root: index からは '' / cases からは '../'"""
+    if root == "":
+        nav = f'<a href="#cases">事例</a><a href="#systems">仕組み</a><a href="{TALLY}" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a>'
+        left = f'<a href="#" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a>'
+    else:
+        nav = f'<a href="{root}index.html#cases">事例一覧</a><a href="{root}index.html#systems">仕組み</a><a href="{TALLY}" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a>'
+        left = f'<a href="{root}index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a>'
+    return f'<header class="hd"><div class="hd-in">{left}<nav class="hd-nav">{nav}</nav></div></header>'
+
+def footer(root):
+    return f"""<footer class="ft"><div class="w">
+<div class="ft-links"><a href="{root}index.html#cases">事例</a><a href="{root}index.html#systems">仕組み</a><a href="{TALLY}" target="_blank" rel="noopener">お問い合わせ</a></div>
+<p class="ft-copy">© 2026 {BRAND}</p></div></footer>
+<div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
+"""
+
+def kpi_html(face):
+    """カードの数字タイル。face が before/after 型と big/sub 型の2種"""
+    if "before" in face:
+        sub = f'<div class="sub">{esc(face["sub"])}</div>' if face.get("sub") else ""
+        return f'<div class="kpi"><small>{esc(face["label"])}</small><b><span class="old">{esc(face["before"])}</span><span class="ar">→</span>{esc(face["after"])}</b>{sub}</div>'
+    return f'<div class="kpi"><small>{esc(face.get("sub",""))}</small><b>{esc(face["big"])}</b></div>'
+
+SITE_LABELS = DATA["meta"]["site_labels"]
+
+def case_card(c, root):
+    num = c["num"]
+    vid = '<span class="bd bd-video">60秒デモ</span>' if c["video"] else '<span class="bd bd-soon">図解＋成果</span>'
+    return f"""<a class="card fi" href="{root}cases/case-{num}.html" data-site="{c['site']}" data-cat="{esc(c['cat'])}">
+<div class="thumb"><img src="{root}cases/media/case-{num}_zukai.webp" alt="{esc(c['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta">CASE {num}<span class="cat">{esc(c['cat'])}</span></div>
+<div class="cbds"><span class="bd bd-site">{esc(SITE_LABELS[c['site']])}</span>{vid}</div>
+<h3>{esc(c['headline'])}</h3>
+<p>{esc(c['src_problem'])}</p>
+{kpi_html(c['src_face'])}
+<span class="more">詳しく見る →</span></div></a>"""
+
+def sys_card(l, root):
+    ext = l.get("src_origin") == "external"
+    badge = '<span class="bd bd-ext">他社の事例</span>' if ext else f'<span class="bd bd-live">{esc(l["src_status"].split("（")[0].replace("⚡ ","").replace("🧰 ","").replace("🤝 ",""))}</span>'
+    return f"""<div class="scard zoomable fi" data-cap="{esc(l['src_title'])}"><div class="thumb"><img src="{root}cases/media/{l['key']}.webp" alt="{esc(l['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>
+<div class="sbody">{badge}<h3>{esc(l['src_title'])}</h3><p>{esc(l['src_problem'])}</p></div></div>"""
+
+# ------------------------------------------------------------------ index
+def build_index():
+    cases = DATA["cases"]; lists = DATA["lists"]; meta = DATA["meta"]
+    n_video = sum(1 for c in cases if c["video"])
+    site_counts = {k: sum(1 for c in cases if c["site"] == k) for k in SITE_LABELS}
+    cat_counts = {k: sum(1 for c in cases if c["cat"] == k) for k in meta["cats"]}
+    chips_site = '<button class="chip on" data-site="all">すべて<small>9</small></button>' + "".join(
+        f'<button class="chip" data-site="{k}">{esc(v)}<small>{site_counts[k]}</small></button>' for k, v in SITE_LABELS.items())
+    chips_cat = '<button class="chip on" data-cat="all">すべて</button>' + "".join(
+        f'<button class="chip" data-cat="{esc(k)}">{esc(k)}<small>{cat_counts[k]}</small></button>' for k in meta["cats"] if cat_counts[k])
+    title = f"{BRAND}｜AIで業務を動かした事例とデモ"
+    desc = "前職の45名組織・顧客の環境・自社の運用で実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。数字は実測、動画は架空データで再現。"
+    body = f"""{header("")}
 <section class="hero"><div class="w">
 <div class="hero-grid">
 <div class="hero-text">
 <div class="eyebrow">AI業務改革パートナー ／ 事例とデモ</div>
 <h1>業務をAIに任せた、<br><em>実物の記録</em>。</h1>
 <p class="hero-lead">前職の45名組織、顧客の環境、自社の運用で、実際に動いた（動いている）ものだけを載せています。口で説明する代わりに、図解と動く画面で。</p>
-<div class="hero-btns"><a href="#cases" class="btn btn-p">事例を見る ↓</a><a href="https://tally.so/r/QKdxx1" class="btn btn-o" target="_blank" rel="noopener">無料で相談する</a></div>
+<div class="hero-btns"><a href="#cases" class="btn btn-p">事例を見る ↓</a><a href="{TALLY}" class="btn btn-o" target="_blank" rel="noopener">無料で相談する</a></div>
 <div class="stats">
 <div class="st"><div class="st-n">9</div><div class="st-l">事例</div></div>
-<div class="st"><div class="st-n">5</div><div class="st-l">60秒の実演動画</div></div>
+<div class="st"><div class="st-n">{n_video}</div><div class="st-l">60秒の実演動画</div></div>
 <div class="st"><div class="st-n">10</div><div class="st-l">動いている仕組み</div></div>
 <div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額<br>（前職3事例の合計）</div></div>
 </div>
@@ -319,112 +429,168 @@ a{color:inherit}
 
 <section class="sec" id="cases"><div class="w">
 <div class="sec-head"><div><div class="eyebrow">Cases</div><h2 class="h2">事例</h2><p class="lead">1件1ページ。全体像の図解、60秒の実演、できたことと届いていないこと、まで載せています。</p></div><div class="count"><span id="ccount">9</span><small>件</small></div></div>
-<div class="filters"><div class="frow"><span class="flb">導入先</span><button class="chip on" data-site="all">すべて<small>9</small></button><button class="chip" data-site="zenshoku">前職・45名組織<small>3</small></button><button class="chip" data-site="kokyaku">顧客環境<small>2</small></button><button class="chip" data-site="jisha">自社運用<small>4</small></button></div><div class="frow"><span class="flb">業務</span><button class="chip on" data-cat="all">すべて</button><button class="chip" data-cat="数字の見える化">数字の見える化<small>2</small></button><button class="chip" data-cat="会議・議事録">会議・議事録<small>2</small></button><button class="chip" data-cat="資料・制作物">資料・制作物<small>3</small></button><button class="chip" data-cat="研修・育成">研修・育成<small>1</small></button><button class="chip" data-cat="営業・顧客対応">営業・顧客対応<small>1</small></button></div></div>
-<div class="grid"><a class="card fi" href="cases/case-01.html" data-site="zenshoku" data-cat="数字の見える化">
-<div class="thumb"><img src="cases/media/case-01_zukai.webp" alt="売上集計の自動化（前職・45名組織で導入）の図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 01<span class="cat">数字の見える化</span></div>
-<div class="cbds"><span class="bd bd-site">前職・45名組織</span><span class="bd bd-video">60秒デモ</span></div>
-<h3>売上集計を自動化し、毎日250分の転記を0分に</h3>
-<p>案件ごとにシートが分散し、コスト超過も売上未達も翌月まで分からない</p>
-<div class="kpi"><small>毎日の転記作業</small><b><span class="old">250分</span><span class="ar">→</span>0分</b><div class="sub">年240万円分・960時間の削減</div></div>
-<span class="more">詳しく見る →</span></div></a><a class="card fi" href="cases/case-02.html" data-site="zenshoku" data-cat="会議・議事録">
-<div class="thumb"><img src="cases/media/case-02_zukai.webp" alt="議事録の完全自動化（前職・組織導入）の図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 02<span class="cat">会議・議事録</span></div>
-<div class="cbds"><span class="bd bd-site">前職・45名組織</span><span class="bd bd-video">60秒デモ</span></div>
-<h3>議事録を書く仕事をなくし、会議中は議論に集中する</h3>
-<p>議事録を、まだ人間がタイピングしている</p>
-<div class="kpi"><small>議事録の作成工数</small><b><span class="old">会議のたび</span><span class="ar">→</span>100%削減</b></div>
-<span class="more">詳しく見る →</span></div></a><a class="card fi" href="cases/case-03.html" data-site="zenshoku" data-cat="資料・制作物">
-<div class="thumb"><img src="cases/media/case-03_zukai.webp" alt="資料作成の半自動化（前職・組織導入）の図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 03<span class="cat">資料・制作物</span></div>
-<div class="cbds"><span class="bd bd-site">前職・45名組織</span><span class="bd bd-video">60秒デモ</span></div>
-<h3>資料の骨子を5分で。月2,000時間の資料作成を500時間に</h3>
-<p>資料作成が特定の人に集中している</p>
-<div class="kpi"><small>資料作成の工数（45名の組織全体）</small><b><span class="old">月2,000時間</span><span class="ar">→</span>月500時間</b><div class="sub">年1,500万円分の削減</div></div>
-<span class="more">詳しく見る →</span></div></a><a class="card fi" href="cases/case-04.html" data-site="jisha" data-cat="資料・制作物">
-<div class="thumb"><img src="cases/media/case-04_zukai.webp" alt="研修教材づくり — 31単元を5日での図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 04<span class="cat">資料・制作物</span></div>
-<div class="cbds"><span class="bd bd-site">自社運用</span><span class="bd bd-video">60秒デモ</span></div>
-<h3>研修教材31単元を、設計から5日で形にする</h3>
-<p>研修やマニュアルを作りたいが、まとまった時間が取れず後回しになる</p>
-<div class="kpi"><small>設計から5日で形に</small><b>31単元</b></div>
-<span class="more">詳しく見る →</span></div></a><a class="card fi" href="cases/case-05.html" data-site="kokyaku" data-cat="会議・議事録">
-<div class="thumb"><img src="cases/media/case-05_zukai.webp" alt="人材会社の面談業務AI（某転職エージェント・顧客のNotionに実装）の図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 05<span class="cat">会議・議事録</span></div>
-<div class="cbds"><span class="bd bd-site">顧客環境</span><span class="bd bd-soon">図解＋成果</span></div>
-<h3>面談1件の記録を20分から約4分に。顧客のNotionに業務ごと実装</h3>
-<p>面談のたびに記録を書き起こし、聞く質問も担当者ごとに変わる</p>
-<div class="kpi"><small>面談1件の記録</small><b><span class="old">20分</span><span class="ar">→</span>約4分</b></div>
-<span class="more">詳しく見る →</span></div></a><a class="card fi" href="cases/case-06.html" data-site="kokyaku" data-cat="研修・育成">
-<div class="thumb"><img src="cases/media/case-06_zukai.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）の図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 06<span class="cat">研修・育成</span></div>
-<div class="cbds"><span class="bd bd-site">顧客環境</span><span class="bd bd-soon">図解＋成果</span></div>
-<h3>レクチャーの疑問を、次回ではなく当日のうちに返す</h3>
-<p>研修やレクチャーをやりっぱなしにして、受講者の疑問が次回まで放置される</p>
-<div class="kpi"><small>疑問が解けるまで</small><b><span class="old">次回</span><span class="ar">→</span>当日</b></div>
-<span class="more">詳しく見る →</span></div></a><a class="card fi" href="cases/case-07.html" data-site="jisha" data-cat="数字の見える化">
-<div class="thumb"><img src="cases/media/case-07_zukai.webp" alt="稼働時間の自動集計の図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 07<span class="cat">数字の見える化</span></div>
-<div class="cbds"><span class="bd bd-site">自社運用</span><span class="bd bd-video">60秒デモ</span></div>
-<h3>カレンダーに予定を入れるだけ。稼働時間の集計は0分</h3>
-<p>何に何時間使ったか、分からない</p>
-<div class="kpi"><small>月次の工数集計</small><b><span class="old">手で集計</span><span class="ar">→</span>0分</b></div>
-<span class="more">詳しく見る →</span></div></a><a class="card fi" href="cases/case-08.html" data-site="jisha" data-cat="営業・顧客対応">
-<div class="thumb"><img src="cases/media/case-08_zukai.webp" alt="商談のたびに営業資産が育つレールの図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 08<span class="cat">営業・顧客対応</span></div>
-<div class="cbds"><span class="bd bd-site">自社運用</span><span class="bd bd-soon">図解＋成果</span></div>
-<h3>「商談終わった」の一言で、営業台本と資料が育つ</h3>
-<p>商談後の事務作業が溜まる</p>
-<div class="kpi"><small>の一言で分析→台本→資料まで自動</small><b>「商談終わった」</b></div>
-<span class="more">詳しく見る →</span></div></a><a class="card fi" href="cases/case-09.html" data-site="jisha" data-cat="資料・制作物">
-<div class="thumb"><img src="cases/media/case-09_zukai.webp" alt="資料づくりで人がやることは2つだけの図解" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 09<span class="cat">資料・制作物</span></div>
-<div class="cbds"><span class="bd bd-site">自社運用</span><span class="bd bd-soon">図解＋成果</span></div>
-<h3>資料づくり12工程のうち、人がやるのは2回だけ</h3>
-<p>AIに任せても、結局レビューで時間が溶ける</p>
-<div class="kpi"><small>承認と、最後の目視</small><b>12工程 → 人は2回</b></div>
-<span class="more">詳しく見る →</span></div></a></div>
+<div class="filters"><div class="frow"><span class="flb">導入先</span>{chips_site}</div><div class="frow"><span class="flb">業務</span>{chips_cat}</div></div>
+<div class="grid">{"".join(case_card(c, "") for c in cases)}</div>
 </div></section>
 
 <section class="sec" id="systems" style="background:var(--bg2)"><div class="w">
 <div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">1件1ページにはしていない、日々動いている仕組みと、参考にしている他社の実践。図解を押すと拡大します。</p></div><div class="count">10<small>件</small></div></div>
-<div class="sgrid"><div class="scard zoomable fi" data-cap="AIエコシステム地図"><div class="thumb"><img src="cases/media/list-map.webp" alt="AIエコシステム地図の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-live">稼働中</span><h3>AIエコシステム地図</h3><p>AIに何を任せられるのか、全体像が見えない</p></div></div><div class="scard zoomable fi" data-cap="業務フロー図の自動生成"><div class="thumb"><img src="cases/media/list-flow.webp" alt="業務フロー図の自動生成の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-live">制作で使用中</span><h3>業務フロー図の自動生成</h3><p>「今どう回っているか」を1枚で説明できる人が社内にいない</p></div></div><div class="scard zoomable fi" data-cap="フォーム営業の仕組み一式"><div class="thumb"><img src="cases/media/list-form.webp" alt="フォーム営業の仕組み一式の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-live">営業で使用中</span><h3>フォーム営業の仕組み一式</h3><p>営業文面が毎回コピペ・フォローが漏れる</p></div></div><div class="scard zoomable fi" data-cap="採用LPの制作・納品（某転職エージェント）"><div class="thumb"><img src="cases/media/list-lp.webp" alt="採用LPの制作・納品（某転職エージェント）の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-live">実案件で納品</span><h3>採用LPの制作・納品（某転職エージェント）</h3><p>LP・制作物は外注するしかないと思っている</p></div></div><div class="scard zoomable fi" data-cap="タスクの先回り処理"><div class="thumb"><img src="cases/media/list-saki.webp" alt="タスクの先回り処理の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-live">平日毎日稼働中</span><h3>タスクの先回り処理</h3><p>「やらなきゃ」のまま止まっているタスクがある</p></div></div><div class="scard zoomable fi" data-cap="書かない日記"><div class="thumb"><img src="cases/media/list-nikki.webp" alt="書かない日記の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-live">毎分記録中</span><h3>書かない日記</h3><p>作業記録が続かない</p></div></div><div class="scard zoomable fi" data-cap="マネージャー1on1準備の自動化"><div class="thumb"><img src="cases/media/list-1on1.webp" alt="マネージャー1on1準備の自動化の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-ext">他社の事例</span><h3>マネージャー1on1準備の自動化</h3><p>1on1の準備が、前回の記録を読み返すところから毎回始まる</p></div></div><div class="scard zoomable fi" data-cap="営業商談プロセスのAI全自動化"><div class="thumb"><img src="cases/media/list-shodan.webp" alt="営業商談プロセスのAI全自動化の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-ext">他社の事例</span><h3>営業商談プロセスのAI全自動化</h3><p>商談前後の準備・フォローが、営業担当それぞれのやり方に依存している</p></div></div><div class="scard zoomable fi" data-cap="メンバー成長追跡OS（評価・キャリア設計の脱属人化）"><div class="thumb"><img src="cases/media/list-growth.webp" alt="メンバー成長追跡OS（評価・キャリア設計の脱属人化）の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-ext">他社の事例</span><h3>メンバー成長追跡OS（評価・キャリア設計の脱属人化）</h3><p>メンバーの評価やキャリア設計が、上長の記憶と主観に依存している</p></div></div><div class="scard zoomable fi" data-cap="Slackエンゲージメントスコア月次モニタリング"><div class="thumb"><img src="cases/media/list-slack.webp" alt="Slackエンゲージメントスコア月次モニタリングの図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><span class="bd bd-ext">他社の事例</span><h3>Slackエンゲージメントスコア月次モニタリング</h3><p>メンバーのモチベーション低下に気づくのが、本人が不調を訴えてからになりがち</p></div></div></div>
+<div class="sgrid">{"".join(sys_card(l, "") for l in lists)}</div>
 </div></section>
 
 <section class="cta"><div class="w">
 <h2>まずは30分、いまの業務を聞かせてください。</h2>
 <p>同じような課題があれば、御社の業務でどう組み替えるかをその場で話します。オンライン・無料です。</p>
-<a href="https://tally.so/r/QKdxx1" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
+<a href="{TALLY}" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
 <div class="note">3営業日以内に返信します。売り込みの電話はしません。</div>
 </div></section>
-<footer class="ft"><div class="w">
-<div class="ft-links"><a href="index.html#cases">事例</a><a href="index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
-<p class="ft-copy">© 2026 AI業務改革パートナー</p></div></footer>
-<div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
+{footer("")}
+<script>{JS_COMMON}{JS_INDEX}</script>
+</body></html>"""
+    return head(title, desc, f"{SITE}/", f"{SITE}/cases/media/case-01_zukai.webp") + body
 
-<script>
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
-const lb=document.getElementById('lb');if(lb){const li=lb.querySelector('img'),lc=lb.querySelector('.lb-cap');
-document.querySelectorAll('.zoomable').forEach(el=>{el.addEventListener('click',ev=>{ev.preventDefault();const im=el.tagName==='IMG'?el:el.querySelector('img');li.src=im.dataset.full||im.src;li.alt=im.alt;lc.textContent=el.dataset.cap||im.alt||'';lb.classList.add('on');document.body.style.overflow='hidden'})});
-const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});}
-(function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
+# ------------------------------------------------------------------ case page
+def kp_tile(k):
+    v = esc(k["v"]).replace("→", '<span class="ar">→</span>')
+    return f'<div class="kp"><small>{esc(k["l"])}</small><b>{v}</b></div>'
 
-(function(){const cards=[...document.querySelectorAll('#cases .card')];const cnt=document.getElementById('ccount');
-let site='all',cat='all';
-function apply(){let n=0;cards.forEach(c=>{const ok=(site==='all'||c.dataset.site===site)&&(cat==='all'||c.dataset.cat===cat);c.classList.toggle('hide',!ok);if(ok)n++});cnt.textContent=n;}
-document.querySelectorAll('.chip[data-site]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-site]').forEach(x=>x.classList.remove('on'));b.classList.add('on');site=b.dataset.site;apply()}));
-document.querySelectorAll('.chip[data-cat]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-cat]').forEach(x=>x.classList.remove('on'));b.classList.add('on');cat=b.dataset.cat;apply()}));
-})();
-</script>
-</body></html>
+def build_case(c, prev_c, next_c):
+    num = c["num"]; sh = c["src_sheet"]; face = c["src_face"]
+    title = f"事例{num}：{c['headline']}｜{BRAND}"
+    url = f"{SITE}/cases/case-{num}.html"
+    img = f"{SITE}/cases/media/case-{num}_zukai.webp"
+    site_label = c["site_label"]
+    overview_h = c.get("overview_h", "これまでと、AI導入後を1枚で")
+    # hero visual
+    if c["video"]:
+        vis = f"""<div class="chero-vis fi"><a href="#demo" aria-label="実演動画へ"><img src="media/case-{num}_demo_poster.jpg" alt="実演動画のポスター画像（架空データ）" width="1920" height="1080"><div class="play"><span>▶</span></div></a><div class="vis-cap">60秒の実演動画（音なし・架空データ）へ</div></div>"""
+    else:
+        vis = f"""<div class="chero-vis fi"><div class="fr zoomable" data-cap="{esc(c['src_title'])}"><img src="media/case-{num}_zukai.webp" alt="{esc(c['src_title'])}の図解" width="1600" height="900"></div><div class="vis-cap">全体像の図解（押すと拡大）</div></div>"""
+    # demo block
+    if c["video"]:
+        demo = f"""<div class="vid"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}の実演（60秒・音なし・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
+<div class="vid-cap"><b>60秒・音なし・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div>"""
+        demo_sub = "見出しの順に、入口から出口まで通しで動かしています。"
+    else:
+        demo = """<div class="soon"><i>▶</i><div><b>実演動画は準備中です</b><p>撮影でき次第、ここに60秒の実演（音なし・架空データ）が入ります。それまでは上の図解と、下の「できた3つと、まだ届かない1つ」を見てください。</p></div></div>"""
+        demo_sub = "この事例は動画の前に、図解と成果の数字で公開しています。"
+    tools = "".join(f"<span>{esc(t)}</span>" for t in c["tools"])
+    # includes（統合した仕組み）
+    incl = ""
+    if c.get("includes"):
+        cards = []
+        for k in c["includes"]:
+            x = DATA["includes"][k]; f = x["face"]
+            n = f'<span class="n">{esc(f["big"])}</span> <small style="color:var(--tx3);font-size:.78rem">{esc(f.get("sub",""))}</small>' if "big" in f else ""
+            cards.append(f'<div class="inc"><span class="bd bd-live">{esc(x["status"].split("（")[0].replace("⚡ ","").replace("🌱 ",""))}</span><h3>{esc(x["title"])}</h3>{n}<p>{esc(x["desc"])}</p></div>')
+        incl = f"""<div class="blk fi" id="incl"><div class="blk-h"><span class="tag tag-b">含む</span><h2>この事例に含めている仕組み</h2></div><p class="sub">別々に動いている2つの仕組みを、資料づくりの一連の流れとしてここにまとめています。</p><div class="incl">{"".join(cards)}</div></div>"""
+    # side
+    src_note = c.get("source_note", "")
+    toc = [("overview", "全体像"), ("demo", "実演"), ("story", "課題・やったこと・成果"), ("honest", "できた3つ、まだ1つ"), ("line", "仕組みの一本線"), ("hint", "御社への転用")]
+    if c.get("includes"): toc.insert(3, ("incl", "含めている仕組み"))
+    toc_html = "".join(f'<li><a href="#{i}">{esc(t)}</a></li>' for i, t in toc)
+    side = f"""<aside class="side">
+<div class="sidebox"><h4>この事例の概要</h4>
+<div class="srow"><span>導入先</span><span>{esc(site_label)}</span></div>
+<div class="srow"><span>業務</span><span>{esc(c['cat'])}</span></div>
+<div class="srow"><span>使った道具</span><span>{esc("・".join(c['tools']))}</span></div>
+<div class="srow"><span>実演動画</span><span>{"あり（60秒）" if c['video'] else "準備中"}</span></div>
+<div class="srow"><span>数字の出どころ</span><span>{esc(src_note)}</span></div>
+</div>
+<div class="sidebox"><h4>このページの中身</h4><ul class="toc">{toc_html}</ul></div>
+<div class="sidecta"><b>同じ課題がありますか</b><p>御社の業務でどう組み替えるかを、30分で話します。オンライン・無料。</p><a href="{TALLY}" class="btn btn-p" target="_blank" rel="noopener">無料で相談する</a></div>
+</aside>"""
+    def ncard(x, label):
+        return f'<a class="ncard" href="case-{x["num"]}.html"><img src="media/case-{x["num"]}_zukai.webp" alt="" loading="lazy" width="1600" height="900"><div><small>{label} · CASE {x["num"]}</small><b>{esc(x["headline"])}</b></div></a>'
+    nxt = f'<div class="ngrid">{ncard(prev_c, "前の事例")}{ncard(next_c, "次の事例")}</div>'
+    body = f"""{header("../")}<div class="progress" id="pg"></div>
+<section class="chero"><div class="w">
+<div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE {num}</span></div>
+<div class="chero-grid">
+<div>
+<div class="bds"><span class="bd bd-site">{esc(site_label)}</span><span class="bd bd-cat">{esc(c['cat'])}</span>{'<span class="bd bd-video">60秒デモあり</span>' if c['video'] else ''}</div>
+<h1>{esc(c['headline'])}</h1>
+<p class="lead">{esc(c['lead'])}</p>
+<div class="kpis">{"".join(kp_tile(k) for k in c['kpi'])}</div>
+</div>
+{vis}
+</div>
+</div></section>
+
+<section class="body"><div class="w"><div class="body-grid">
+<div class="main">
+
+<div class="blk fi" id="overview"><div class="blk-h"><span class="tag tag-b">全体像</span><h2>{esc(overview_h)}</h2></div>
+<p class="sub">{esc(c['src_problem'])}</p>
+<div class="fig"><img class="zoomable" src="media/case-{num}_zukai.webp" alt="{esc(c['src_title'])}の図解（これまでとAI導入後）" width="1600" height="900" data-cap="{esc(c['src_title'])}"><div class="fig-cap"><span>図解を押すと拡大</span><span>{esc(site_label)}</span></div></div></div>
+
+<div class="blk fi" id="demo"><div class="blk-h"><span class="tag tag-d">実演</span><h2>実際の動き</h2></div>
+<p class="sub">{esc(demo_sub)}</p>
+{demo}</div>
+
+<div class="blk fi" id="story"><div class="blk-h"><span class="tag tag-a">経緯</span><h2>課題、やったこと、成果</h2></div>
+<div class="story">
+<div class="sbox sbox-r"><h3><span class="lb">課題</span>{esc(sh['haikei_t'])}</h3><p>{esc(sh['haikei'])}</p></div>
+<div class="sbox sbox-b"><h3><span class="lb">やったこと</span>{esc(sh['jisshi_t'])}</h3><p>{esc(sh['jisshi'])}</p><div class="tools"><small>使った道具</small>{tools}</div></div>
+<div class="sbox sbox-g"><h3><span class="lb">成果</span>{esc(sh['seika_t'])}</h3><p>{esc(sh['seika'])}</p></div>
+</div></div>
+{incl}
+<div class="blk fi" id="honest"><div class="blk-h"><span class="tag tag-r">正直に</span><h2>できた3つと、まだ届かない1つ</h2></div>
+<p class="sub">{esc(c['src_wow'])}</p>
+<div class="fig"><img class="zoomable" src="media/case-{num}_zukai_m.webp" alt="{esc(c['src_title'])}：ここまでできたことと、まだ届かないこと" width="1600" height="900" data-cap="できた3つと、まだ届かない1つ"><div class="fig-cap"><span>図解を押すと拡大</span><span>4つのうち3つが動いている</span></div></div></div>
+
+<div class="blk fi" id="line"><div class="blk-h"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
+<div class="fig"><img class="zoomable" src="media/case-{num}_zukai_s.webp" alt="{esc(c['src_title'])}：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>成果の数字つき</span></div></div></div>
+
+<div class="blk fi" id="hint"><div class="blk-h"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div>
+<div class="callout"><b>{esc(c['src_hint'])}</b><p>同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div>
+
+</div>
+{side}
+</div></div></section>
+
+<section class="next"><div class="w"><div class="h3">ほかの事例</div>{nxt}<div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
+
+<section class="cta"><div class="w">
+<h2>同じような課題を抱えていませんか？</h2>
+<p>御社の業務でどう組み替えるかを、30分で話します。オンライン・無料です。</p>
+<a href="{TALLY}" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
+</div></section>
+{footer("../")}
+<script>{JS_COMMON}{JS_CASE}</script>
+</body></html>"""
+    return head(title, c["lead"], url, img) + body
+
+# ------------------------------------------------------------------ main
+def check_assets():
+    missing = []
+    for c in DATA["cases"]:
+        n = c["num"]
+        for f in (f"case-{n}_zukai.webp", f"case-{n}_zukai_m.webp", f"case-{n}_zukai_s.webp"):
+            if not os.path.exists(os.path.join(ROOT, "cases", "media", f)): missing.append(f)
+        if c["video"]:
+            for f in (f"case-{n}_demo.mp4", f"case-{n}_demo.webm", f"case-{n}_demo_poster.jpg"):
+                if not os.path.exists(os.path.join(ROOT, "cases", "media", f)): missing.append(f)
+    for l in DATA["lists"]:
+        if not os.path.exists(os.path.join(ROOT, "cases", "media", f"{l['key']}.webp")): missing.append(f"{l['key']}.webp")
+    for f in ("hero_demo.mp4", "hero_demo.webm", "hero_demo_poster.jpg"):
+        if not os.path.exists(os.path.join(ROOT, "media", f)): missing.append(f)
+    return missing
+
+def main():
+    ap = argparse.ArgumentParser(); ap.add_argument("--check", action="store_true"); a = ap.parse_args()
+    miss = check_assets()
+    if miss:
+        print("!! 素材が足りない:", ", ".join(miss), file=sys.stderr)
+        if a.check: sys.exit(1)
+    elif a.check:
+        print("素材は揃っている"); return
+    cases = DATA["cases"]
+    open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(build_index())
+    for i, c in enumerate(cases):
+        prev_c = cases[i - 1]; next_c = cases[(i + 1) % len(cases)]
+        open(os.path.join(ROOT, "cases", f"case-{c['num']}.html"), "w", encoding="utf-8").write(build_case(c, prev_c, next_c))
+    print(f"index.html と cases/case-01〜{cases[-1]['num']}.html を書き出した")
+
+if __name__ == "__main__":
+    main()
