@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LP の生成器。tools/cases.json から index.html（事例のまとめ＝ポートフォリオ）と cases/case-NN.html（事例9本）を書き出す。
+"""LP の生成器。tools/cases.json から index.html（事例のまとめ＝ポートフォリオ）と cases/case-NN.html（事例9本・β 物語順の型）を書き出す。
 
 使い方:
   python3 tools/build.py            # index.html と cases/*.html を全部作り直す
@@ -213,11 +213,37 @@ a{color:inherit}
 @media(max-width:900px){.chero-grid{grid-template-columns:1fr}.chero-vis{justify-self:stretch;max-width:100%}}
 @media(max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
 
-.body{padding:clamp(40px,6vw,64px) 0}
-.body-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(28px,4vw,56px);align-items:start}
-@media(max-width:1060px){.body-grid{grid-template-columns:1fr}.side{position:static!important}}
-.blk{margin-bottom:clamp(40px,6vw,64px)}
-.blk-h{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+/* case body（β 物語順: 課題→変えたこと→実演→結果→仕組み→転用） */
+.chero{background:linear-gradient(180deg,#f7f9fc,#fff);border-bottom:1px solid var(--border)}
+.chero::before{display:none}
+.chero-vis .fr{border:1px solid var(--border);box-shadow:0 20px 50px rgba(15,29,53,.12);background:#fff}
+.csec{padding:clamp(40px,6vw,64px) 0}
+.csec.tight{padding-top:0}
+.csec.alt{background:var(--bg2)}
+.in{max-width:1100px;margin:0 auto}
+.chd{max-width:1100px;margin:0 auto 16px;display:flex;align-items:center;gap:14px}
+.chd h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;line-height:1.45}
+p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);line-height:1.85}
+.quote{max-width:1100px;margin:0 auto 14px;padding:14px 18px;border-left:4px solid var(--rose);background:var(--rose-bg);border-radius:0 12px 12px 0;font-size:1rem;font-weight:700;color:var(--tx)}
+.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
+.vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
+.vidwrap .vid-cap{padding:10px 8px 2px}
+.nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh)}
+.num small{display:block;font-size:.8rem;color:var(--tx3);font-weight:700}
+.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.5rem,3vw,2.2rem)}
+.num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
+.num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
+.num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
+.src{max-width:1100px;margin:0 auto;font-size:.78rem;color:var(--tx3)}
+.csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
+.note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
+.note-box b{display:block;font-size:.8rem;color:var(--amber);letter-spacing:.06em;margin-bottom:4px}
+.note-box p{font-size:.95rem;color:var(--tx2);line-height:1.85}
+.more-fig{max-width:1100px;margin:16px auto 0}
+.more-fig summary{cursor:pointer;font-size:.9rem;font-weight:700;color:var(--blue);padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:#fff}
+.more-fig[open] summary{margin-bottom:12px}
+@media(max-width:900px){.nums{grid-template-columns:1fr}}
 .tag{flex-shrink:0;padding:6px 12px;border-radius:10px;font-size:.78rem;font-weight:800;letter-spacing:.04em;line-height:1.4}
 .tag-b{background:var(--blue-bg2);color:var(--blue-d)}
 .tag-r{background:var(--rose-bg);color:var(--rose)}
@@ -225,8 +251,6 @@ a{color:inherit}
 .tag-g{background:var(--green-bg);color:var(--green)}
 .tag-v{background:var(--violet-bg);color:var(--violet)}
 .tag-d{background:var(--tx);color:#fff}
-.blk h2{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:800;line-height:1.45;letter-spacing:-.01em}
-.blk .sub{font-size:.9rem;color:var(--tx3);margin:-10px 0 16px}
 .fig{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:10px;box-shadow:var(--sh)}
 .fig img{width:100%;height:auto;aspect-ratio:16/9;border-radius:12px}
 .fig-cap{font-size:.8rem;color:var(--tx3);margin-top:10px;padding:0 6px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -234,18 +258,6 @@ a{color:inherit}
 .vid video{width:100%;border-radius:12px;aspect-ratio:16/9;background:#000}
 .vid-cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:rgba(255,255,255,.65);font-size:.8rem;padding:10px 6px 2px}
 .vid-cap b{color:#fff}
-.soon{border:2px dashed var(--border2);border-radius:var(--r2);padding:28px 24px;background:var(--bg2);display:flex;gap:16px;align-items:center}
-.soon i{flex-shrink:0;width:48px;height:48px;border-radius:14px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-style:normal;color:var(--tx3);font-size:1.1rem}
-.soon b{display:block;font-size:.98rem;margin-bottom:4px}
-.soon p{font-size:.88rem;color:var(--tx3);line-height:1.7}
-.story{display:grid;grid-template-columns:1fr;gap:14px}
-.sbox{border-radius:var(--r2);padding:22px 24px;border:1px solid var(--border);background:#fff;position:relative}
-.sbox::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:0 4px 4px 0}
-.sbox-r::before{background:var(--rose)}.sbox-b::before{background:var(--blue)}.sbox-g::before{background:var(--green)}
-.sbox h3{font-size:1.05rem;font-weight:800;line-height:1.5;margin-bottom:8px;display:flex;gap:10px;align-items:baseline}
-.sbox h3 .lb{position:static;display:inline-block;background:none;padding:0;font-size:.74rem;font-weight:800;letter-spacing:.08em;cursor:default}
-.sbox-r h3 .lb{color:var(--rose)}.sbox-b h3 .lb{color:var(--blue)}.sbox-g h3 .lb{color:var(--green)}
-.sbox p{font-size:.95rem;color:var(--tx2);line-height:1.85}
 .tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px;padding-top:14px;border-top:1px dashed var(--border)}
 .tools small{font-size:.76rem;color:var(--tx3);font-weight:700;margin-right:2px}
 .tools span{font-size:.8rem;background:var(--bg2);color:var(--tx2);padding:4px 11px;border-radius:100px;font-weight:600}
@@ -259,20 +271,6 @@ a{color:inherit}
 .inc h3{font-size:.98rem;font-weight:800;line-height:1.5;margin-bottom:6px}
 .inc p{font-size:.86rem;color:var(--tx2);line-height:1.7}
 .inc .n{font-family:var(--fe);font-weight:800;color:var(--blue-d);font-size:1.05rem}
-.side{position:sticky;top:88px}
-.sidebox{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:20px 22px;margin-bottom:14px}
-.sidebox h4{font-size:.92rem;font-weight:800;margin-bottom:10px}
-.srow{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.84rem}
-.srow:last-child{border-bottom:0}
-.srow span:first-child{color:var(--tx3);flex-shrink:0}
-.srow span:last-child{text-align:right;font-weight:600;color:var(--tx)}
-.sidecta{background:var(--dark);color:#fff;border-radius:var(--r2);padding:22px}
-.sidecta b{display:block;font-size:.98rem;margin-bottom:6px}
-.sidecta p{font-size:.82rem;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.7}
-.sidecta .btn{width:100%;padding:12px 16px;font-size:.88rem}
-.toc{list-style:none}
-.toc li a{display:block;font-size:.84rem;color:var(--tx2);text-decoration:none;padding:6px 0 6px 12px;border-left:2px solid var(--border);transition:var(--tr)}
-.toc li a:hover,.toc li a.on{color:var(--blue);border-color:var(--blue)}
 .next{background:var(--bg2);padding:clamp(40px,6vw,64px) 0}
 .next .h3{font-size:1.1rem;font-weight:800;margin-bottom:16px}
 .ngrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -462,27 +460,44 @@ def kp_tile(k):
     return f'<div class="kp"><small>{esc(k["l"])}</small><b>{v}</b></div>'
 
 def build_case(c, prev_c, next_c):
+    """事例ページ（β 物語順）: FV → 課題 → 変えたこと → 実演（動画のある事例だけ）→ 結果 → 仕組み → 含む（09）→ 御社への転用。
+    任意項目: c["sakamoto_note"]（なぜこの組み方にしたか。あれば仕組みの下に出す）／ c["detail_m"]=true（図解Mを折りたたみで出す。既定は出さない）"""
     num = c["num"]; sh = c["src_sheet"]; face = c["src_face"]
     title = f"事例{num}：{c['headline']}｜{BRAND}"
     url = f"{SITE}/cases/case-{num}.html"
-    img = f"{SITE}/cases/media/case-{num}_zukai.webp"
+    img = f"{SITE}/cases/media/case-{num}_ill.webp"
     site_label = c["site_label"]
-    overview_h = c.get("overview_h", "これまでと、AI導入後を1枚で")
-    # hero visual
-    if c["video"]:
-        vis = f"""<div class="chero-vis fi"><a href="#demo" aria-label="実演動画へ"><img src="media/case-{num}_demo_poster.jpg" alt="実演動画のポスター画像（架空データ）" width="1920" height="1080"><div class="play"><span>▶</span></div></a><div class="vis-cap">60秒の実演動画（音なし・架空データ）へ</div></div>"""
-    else:
-        vis = f"""<div class="chero-vis fi"><div class="fr zoomable" data-cap="{esc(c['src_title'])}"><img src="media/case-{num}_zukai.webp" alt="{esc(c['src_title'])}の図解" width="1600" height="900"></div><div class="vis-cap">全体像の図解（押すと拡大）</div></div>"""
-    # demo block
-    if c["video"]:
-        demo = f"""<div class="vid"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}の実演（60秒・音なし・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
-<div class="vid-cap"><b>60秒・音なし・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div>"""
-        demo_sub = "見出しの順に、入口から出口まで通しで動かしています。"
-    else:
-        demo = """<div class="soon"><i>▶</i><div><b>実演動画は準備中です</b><p>撮影でき次第、ここに60秒の実演（音なし・架空データ）が入ります。それまでは上の図解と、下の「できた3つと、まだ届かない1つ」を見てください。</p></div></div>"""
-        demo_sub = "この事例は動画の前に、図解と成果の数字で公開しています。"
     tools = "".join(f"<span>{esc(t)}</span>" for t in c["tools"])
-    # includes（統合した仕組み）
+    kpis = "".join(kp_tile(k) for k in c["kpi"])
+    ill = ill_src(num, "", "").replace("cases/", "", 1)
+    def zukai(suffix, alt, cap):
+        return f'<div class="fig"><img class="zoomable" src="media/case-{num}_zukai{suffix}.webp" alt="{esc(alt)}" width="1600" height="900" data-cap="{esc(cap)}"><div class="fig-cap"><span>図解を押すと拡大</span><span>{esc(cap)}</span></div></div>'
+    badges = f'<div class="bds"><span class="bd bd-site">{esc(site_label)}</span><span class="bd bd-cat">{esc(c["cat"])}</span>{"<span class=\"bd bd-video\">60秒デモあり</span>" if c["video"] else ""}</div>'
+    fv = f"""<section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE {num}</span></div>
+<div class="chero-grid"><div>{badges}<h1>{esc(c['headline'])}</h1><p class="lead">{esc(c['lead'])}</p><div class="kpis">{kpis}</div></div>
+<div class="chero-vis fi"><div class="fr"><img src="{ill}" alt="{esc(c['src_title'])}のイメージ" width="1600" height="900"></div></div></div></div></section>"""
+    sec_problem = f"""<section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>{esc(sh['haikei_t'])}</h2></div><div class="quote">{esc(c['src_problem'])}</div><p class="csub" style="margin-top:0">{esc(sh['haikei'])}</p></div></section>"""
+    overview_cap = c.get("overview_h", "これまでと、AI導入後")
+    sec_change = f"""<section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>{esc(sh['jisshi_t'])}</h2></div><p class="csub">{esc(sh['jisshi'])}</p><div class="tools"><small>使った道具</small>{tools}</div>
+<div class="in fi">{zukai('', c['src_title'] + 'の図解（これまでとAI導入後）', overview_cap)}</div></div></section>"""
+    if c["video"]:
+        sec_demo = f"""<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">実演</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}の実演（60秒・音なし・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
+<div class="vid-cap"><b>60秒・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>"""
+    else:
+        sec_demo = ""
+    if "before" in face:
+        sub = f'<div class="sub">{esc(face["sub"])}</div>' if face.get("sub") else ""
+        big = f'<div class="num big"><small>{esc(face["label"])}</small><b>{esc(face["before"])}<span class="ar">→</span>{esc(face["after"])}</b>{sub}</div>'
+    else:
+        big = f'<div class="num big"><small>{esc(face.get("sub",""))}</small><b>{esc(face["big"])}</b></div>'
+    others = "".join(f'<div class="num"><small>{esc(k["l"])}</small><b>{esc(k["v"])}</b></div>' for k in c["kpi"][1:3])
+    sec_result = f"""<section class="csec{'' if c['video'] else ' alt'}" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>{esc(sh['seika_t'])}</h2></div>
+<div class="nums fi">{big}{others}</div><p class="csub" style="margin-top:0">{esc(sh['seika'])}</p><div class="src">数字の出どころ: {esc(c.get('source_note',''))}</div></div></section>"""
+    note = f'<div class="note-box"><b>なぜこの組み方にしたか</b><p>{esc(c["sakamoto_note"])}</p></div>' if c.get("sakamoto_note") else ""
+    detail = f'<details class="more-fig"><summary>設計の細部を見る</summary>{zukai("_m", c["src_title"] + "：動かしてから足した1手", "動かしてから足した1手")}</details>' if c.get("detail_m") else ""
+    sec_system = f"""<section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
+<div class="in fi">{zukai('_s', c['src_title'] + '：入口→AI→出口→次の行動の流れと成果', '入口から出口、次の行動まで')}</div>{note}{detail}</div></section>"""
     incl = ""
     if c.get("includes"):
         cards = []
@@ -490,72 +505,21 @@ def build_case(c, prev_c, next_c):
             x = DATA["includes"][k]; f = x["face"]
             n = f'<span class="n">{esc(f["big"])}</span> <small style="color:var(--tx3);font-size:.78rem">{esc(f.get("sub",""))}</small>' if "big" in f else ""
             cards.append(f'<div class="inc"><span class="bd bd-live">{esc(x["status"].split("（")[0].replace("⚡ ","").replace("🌱 ",""))}</span><h3>{esc(x["title"])}</h3>{n}<p>{esc(x["desc"])}</p></div>')
-        incl = f"""<div class="blk fi" id="incl"><div class="blk-h"><span class="tag tag-b">含む</span><h2>この事例に含めている仕組み</h2></div><p class="sub">別々に動いている2つの仕組みを、資料づくりの一連の流れとしてここにまとめています。</p><div class="incl">{"".join(cards)}</div></div>"""
-    # side
-    src_note = c.get("source_note", "")
-    toc = [("overview", "全体像"), ("demo", "実演"), ("story", "課題・やったこと・成果"), ("honest", "動かしてから足した1手"), ("line", "仕組みの一本線"), ("hint", "御社への転用")]
-    if c.get("includes"): toc.insert(3, ("incl", "含めている仕組み"))
-    toc_html = "".join(f'<li><a href="#{i}">{esc(t)}</a></li>' for i, t in toc)
-    side = f"""<aside class="side">
-<div class="sidebox"><h4>この事例の概要</h4>
-<div class="srow"><span>導入先</span><span>{esc(site_label)}</span></div>
-<div class="srow"><span>業務</span><span>{esc(c['cat'])}</span></div>
-<div class="srow"><span>使った道具</span><span>{esc("・".join(c['tools']))}</span></div>
-<div class="srow"><span>実演動画</span><span>{"あり（60秒）" if c['video'] else "準備中"}</span></div>
-<div class="srow"><span>数字の出どころ</span><span>{esc(src_note)}</span></div>
-</div>
-<div class="sidebox"><h4>このページの中身</h4><ul class="toc">{toc_html}</ul></div>
-<div class="sidecta"><b>同じ課題がありますか</b><p>御社の業務でどう組み替えるかを、30分で話します。オンライン・無料。</p><a href="{TALLY}" class="btn btn-p" target="_blank" rel="noopener">無料で相談する</a></div>
-</aside>"""
+        incl = f"""<section class="csec" id="incl"><div class="w"><div class="chd"><span class="tag tag-b">含む</span><h2>この事例に含めている仕組み</h2></div><p class="csub">別々に動いている2つの仕組みを、資料づくりの一連の流れとしてここにまとめています。</p><div class="in incl fi">{"".join(cards)}</div></div></section>"""
+    wow = c.get("src_wow", "").rstrip("。")
+    sec_hint = f"""<section class="csec" id="hint"><div class="w"><div class="chd"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div><div class="in fi"><div class="callout"><b>{esc(c['src_hint'])}</b><p>{esc(wow)}。同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div></div></section>"""
     def ncard(x, label):
-        return f'<a class="ncard" href="case-{x["num"]}.html"><img src="media/case-{x["num"]}_zukai.webp" alt="" loading="lazy" width="1600" height="900"><div><small>{label} · CASE {x["num"]}</small><b>{esc(x["headline"])}</b></div></a>'
+        return f'<a class="ncard" href="case-{x["num"]}.html"><img src="{ill_src(x["num"], "", "_m").replace("cases/", "", 1)}" alt="" loading="lazy" width="1600" height="900"><div><small>{label} · CASE {x["num"]}</small><b>{esc(x["headline"])}</b></div></a>'
     nxt = f'<div class="ngrid">{ncard(prev_c, "前の事例")}{ncard(next_c, "次の事例")}</div>'
     body = f"""{header("../")}<div class="progress" id="pg"></div>
-<section class="chero"><div class="w">
-<div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE {num}</span></div>
-<div class="chero-grid">
-<div>
-<div class="bds"><span class="bd bd-site">{esc(site_label)}</span><span class="bd bd-cat">{esc(c['cat'])}</span>{'<span class="bd bd-video">60秒デモあり</span>' if c['video'] else ''}</div>
-<h1>{esc(c['headline'])}</h1>
-<p class="lead">{esc(c['lead'])}</p>
-<div class="kpis">{"".join(kp_tile(k) for k in c['kpi'])}</div>
-</div>
-{vis}
-</div>
-</div></section>
-
-<section class="body"><div class="w"><div class="body-grid">
-<div class="main">
-
-<div class="blk fi" id="overview"><div class="blk-h"><span class="tag tag-b">全体像</span><h2>{esc(overview_h)}</h2></div>
-<p class="sub">{esc(c['src_problem'])}</p>
-<div class="fig"><img class="zoomable" src="media/case-{num}_zukai.webp" alt="{esc(c['src_title'])}の図解（これまでとAI導入後）" width="1600" height="900" data-cap="{esc(c['src_title'])}"><div class="fig-cap"><span>図解を押すと拡大</span><span>{esc(site_label)}</span></div></div></div>
-
-<div class="blk fi" id="demo"><div class="blk-h"><span class="tag tag-d">実演</span><h2>実際の動き</h2></div>
-<p class="sub">{esc(demo_sub)}</p>
-{demo}</div>
-
-<div class="blk fi" id="story"><div class="blk-h"><span class="tag tag-a">経緯</span><h2>課題、やったこと、成果</h2></div>
-<div class="story">
-<div class="sbox sbox-r"><h3><span class="lb">課題</span>{esc(sh['haikei_t'])}</h3><p>{esc(sh['haikei'])}</p></div>
-<div class="sbox sbox-b"><h3><span class="lb">やったこと</span>{esc(sh['jisshi_t'])}</h3><p>{esc(sh['jisshi'])}</p><div class="tools"><small>使った道具</small>{tools}</div></div>
-<div class="sbox sbox-g"><h3><span class="lb">成果</span>{esc(sh['seika_t'])}</h3><p>{esc(sh['seika'])}</p></div>
-</div></div>
+{fv}
+{sec_problem}
+{sec_change}
+{sec_demo}
+{sec_result}
+{sec_system}
 {incl}
-<div class="blk fi" id="honest"><div class="blk-h"><span class="tag tag-g">仕組み</span><h2>動かしてから足した1手</h2></div>
-<p class="sub">{esc(c['src_wow'])}</p>
-<div class="fig"><img class="zoomable" src="media/case-{num}_zukai_m.webp" alt="{esc(c['src_title'])}：ここまでできたことと、まだ届かないこと" width="1600" height="900" data-cap="動かしてから足した1手"><div class="fig-cap"><span>図解を押すと拡大</span><span>運用で見えた穴と、その塞ぎ方</span></div></div></div>
-
-<div class="blk fi" id="line"><div class="blk-h"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
-<div class="fig"><img class="zoomable" src="media/case-{num}_zukai_s.webp" alt="{esc(c['src_title'])}：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>成果の数字つき</span></div></div></div>
-
-<div class="blk fi" id="hint"><div class="blk-h"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div>
-<div class="callout"><b>{esc(c['src_hint'])}</b><p>同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div>
-
-</div>
-{side}
-</div></div></section>
-
+{sec_hint}
 <section class="next"><div class="w"><div class="h3">ほかの事例</div>{nxt}<div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
 
 <section class="cta"><div class="w">
@@ -573,7 +537,7 @@ def check_assets():
     missing = []
     for c in DATA["cases"]:
         n = c["num"]
-        for f in (f"case-{n}_zukai.webp", f"case-{n}_zukai_m.webp", f"case-{n}_zukai_s.webp"):
+        for f in (f"case-{n}_zukai.webp", f"case-{n}_zukai_m.webp", f"case-{n}_zukai_s.webp", f"case-{n}_ill.webp", f"case-{n}_ill_m.webp"):
             if not os.path.exists(os.path.join(ROOT, "cases", "media", f)): missing.append(f)
         if c["video"]:
             for f in (f"case-{n}_demo.mp4", f"case-{n}_demo.webm", f"case-{n}_demo_poster.jpg"):
