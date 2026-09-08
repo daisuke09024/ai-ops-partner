@@ -74,7 +74,6 @@ a{color:inherit}
 
 /* badges */
 .bd{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:100px;font-size:.76rem;font-weight:700;line-height:1.5;white-space:nowrap}
-.bd-site{background:var(--violet-bg);color:var(--violet)}
 .bd-cat{background:var(--bg2);color:var(--tx2)}
 .bd-video{background:var(--tx);color:#fff}
 .bd-video::before{content:'▶';font-size:.62rem}
@@ -109,12 +108,6 @@ a{color:inherit}
 @media(max-width:640px){.st{border-right:0;padding-right:18px;margin-right:0}}
 
 /* 読み方の帯 */
-.rules{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(28px,4vw,40px);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:#fff}
-.rule{display:flex;gap:12px;align-items:flex-start;padding:16px 20px;border-right:1px solid var(--border);font-size:.86rem;color:var(--tx2);line-height:1.6}
-.rule:last-child{border-right:0}
-.rule b{color:var(--tx);display:block;font-size:.9rem;margin-bottom:2px}
-.rule i{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--blue-bg2);color:var(--blue);font-style:normal;font-family:var(--fe);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){.rules{grid-template-columns:1fr}.rule{border-right:0;border-bottom:1px solid var(--border)}.rule:last-child{border-bottom:0}}
 
 /* filters */
 .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
@@ -224,14 +217,14 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
-.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh)}
+.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh);display:flex;flex-direction:column;justify-content:center}
 .num small{display:block;font-size:.8rem;color:var(--tx3);font-weight:700}
-.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.5rem,3vw,2.2rem)}
+.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.7rem,3.4vw,2.6rem)}
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
+.num b .nw{white-space:nowrap}
 .num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
-.src{max-width:1100px;margin:0 auto;font-size:.78rem;color:var(--tx3)}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
 .note-box b{display:block;font-size:.8rem;color:var(--amber);letter-spacing:.06em;margin-bottom:4px}
@@ -286,20 +279,20 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 </style>
 </head>
 <body>
-<header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
+<header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 02</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-site">前職・組織で導入</span><span class="bd bd-cat">会議・議事録</span><span class="bd bd-video">デモあり</span></div><h1>議事録を書く仕事をなくし、会議中は議論に集中する</h1><p class="lead">Google Meet の録画が終わった時点で Gemini が議事録を作り、Slack に届く。解約の兆しや増額の機会も AI が検知して担当チャンネルへ流す。</p><div class="kpis"><div class="kp"><small>議事録の作成工数</small><b>100%削減</b></div><div class="kp"><small>Slackへの通知</small><b>即時</b></div><div class="kp"><small>リスクと機会の検知</small><b>AIが自動</b></div></div></div>
-<div class="chero-vis fi"><div class="fr"><img src="media/case-02_ill.webp" alt="議事録の完全自動化（前職・組織導入）のイメージ" width="1600" height="900"></div></div></div></div></section>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">会議・議事録</span><span class="bd bd-video">デモあり</span></div><h1>議事録を書く仕事をなくし、会議中は議論に集中する</h1><p class="lead">Google Meet の録画が終わった時点で Gemini が議事録を作り、Slack に届く。解約の兆しや増額の機会も AI が検知して担当チャンネルへ流す。</p><div class="kpis"><div class="kp"><small>議事録の作成工数</small><b>100%削減</b></div><div class="kp"><small>Slackへの通知</small><b>即時</b></div><div class="kp"><small>リスクと機会の検知</small><b>AIが自動</b></div></div></div>
+<div class="chero-vis fi"><div class="fr"><img src="media/case-02_ill.webp" alt="議事録の完全自動化のイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>議事録は人が打ち、見返しても文脈が分からない</h2></div><div class="quote">議事録を、まだ人間がタイピングしている</div><p class="csub" style="margin-top:0">社内外の会議で担当者がタイピングに追われ、議論に入れない。書く人によって粒度が違い、後日見返しても文脈が分からない。案件が多く、どの顧客に解約の兆しや増額の機会があるかを、その日のうちに把握できなかった。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>録画が終わると、Gemini が議事録を書いて Slack に届ける</h2></div><p class="csub">Google Meet の録画が終わった時点で、Gemini が見出しつきの議事録を書く。議事録は Slack に届き、NotebookLM にも入る。会話の中の解約の兆しと増額の機会は AI が拾い、担当のチャンネルへ流す。会議に出なくても、その日のうちに状況が分かる。</p><div class="tools"><small>使った道具</small><span>Google Meet</span><span>Gemini</span><span>Slack</span><span>NotebookLM</span><span>GAS</span></div>
-<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-02_zukai.webp" alt="議事録の完全自動化（前職・組織導入）の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
-<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-02_demo_poster.jpg" controls aria-label="議事録の完全自動化（前職・組織導入）のデモ（60秒・音なし・架空データ）"><source src="media/case-02_demo.webm" type="video/webm"><source src="media/case-02_demo.mp4" type="video/mp4"></video>
+<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-02_zukai.webp" alt="議事録の完全自動化の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
+<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-02_demo_poster.jpg" controls aria-label="議事録の完全自動化のデモ（60秒・架空データ）"><source src="media/case-02_demo.webm" type="video/webm"><source src="media/case-02_demo.mp4" type="video/mp4"></video>
 <div class="vid-cap"><b>60秒・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
 <section class="csec" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>会議中は議論だけ。解約の兆しがその日に届く</h2></div>
-<div class="nums fi"><div class="num big"><small>議事録の作成工数</small><b class="long">会議のたび<span class="ar">→</span>100%削減</b></div><div class="num"><small>Slackへの通知</small><b>即時</b></div><div class="num"><small>リスクと機会の検知</small><b>AIが自動</b></div></div><p class="csub" style="margin-top:0">議事録を書く仕事が消え、会議中は議論に集中できる。過去の議事録は NotebookLM に溜まり、施策を考える時にすぐ引ける。解約の兆しが担当チャンネルに届くので、マネージャーが早く動ける。</p><div class="src">数字の出どころ: 前職で公開済みの実績スライド</div></div></section>
+<div class="nums fi"><div class="num big"><small>議事録の作成工数</small><b class="long"><span class="nw">会議のたび</span><span class="ar">→</span><span class="nw">100%削減</span></b></div><div class="num"><small>Slackへの通知</small><b>即時</b></div><div class="num"><small>リスクと機会の検知</small><b>AIが自動</b></div></div><p class="csub" style="margin-top:0">議事録を書く仕事が消え、会議中は議論に集中できる。過去の議事録は NotebookLM に溜まり、施策を考える時にすぐ引ける。解約の兆しが担当チャンネルに届くので、マネージャーが早く動ける。</p></div></section>
 <section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
-<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-02_zukai_s.webp" alt="議事録の完全自動化（前職・組織導入）：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
+<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-02_zukai_s.webp" alt="議事録の完全自動化：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
 
 <section class="csec" id="hint"><div class="w"><div class="chd"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div><div class="in fi"><div class="callout"><b>議事録は「書く仕事」をやめて「AIの下書きを直す仕事」に変えるのが第一歩</b><p>「タイピングに追われて議論できない」が消えた。同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div></div></section>
 <section class="next"><div class="w"><div class="h3">ほかの事例</div><div class="ngrid"><a class="ncard" href="case-01.html"><img src="media/case-01_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>前の事例 · CASE 01</small><b>売上集計を自動化し、毎日250分の転記を0分に</b></div></a><a class="ncard" href="case-03.html"><img src="media/case-03_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>次の事例 · CASE 03</small><b>資料の骨子を5分で。月2,000時間の資料作成を500時間に</b></div></a></div><div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
@@ -310,7 +303,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <a href="https://tally.so/r/QKdxx1" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
 </div></section>
 <footer class="ft"><div class="w">
-<div class="ft-links"><a href="../index.html#cases">事例</a><a href="../index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
+<div class="ft-links"><a href="../index.html#cases">事例</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
 <p class="ft-copy">© 2026 AI業務改革パートナー</p></div></footer>
 <div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
 

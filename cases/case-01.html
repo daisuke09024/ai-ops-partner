@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>事例01：売上集計を自動化し、毎日250分の転記を0分に｜AI業務改革パートナー</title>
-<meta name="description" content="案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。前職の45名組織で運用した。">
+<meta name="description" content="案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。">
 <link rel="canonical" href="https://ai-ops-partner.vercel.app/cases/case-01.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI業務改革パートナー">
 <meta property="og:title" content="事例01：売上集計を自動化し、毎日250分の転記を0分に｜AI業務改革パートナー">
-<meta property="og:description" content="案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。前職の45名組織で運用した。">
+<meta property="og:description" content="案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。">
 <meta property="og:image" content="https://ai-ops-partner.vercel.app/cases/media/case-01_ill.webp">
 <meta property="og:url" content="https://ai-ops-partner.vercel.app/cases/case-01.html">
 <meta name="twitter:card" content="summary_large_image">
@@ -74,7 +74,6 @@ a{color:inherit}
 
 /* badges */
 .bd{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:100px;font-size:.76rem;font-weight:700;line-height:1.5;white-space:nowrap}
-.bd-site{background:var(--violet-bg);color:var(--violet)}
 .bd-cat{background:var(--bg2);color:var(--tx2)}
 .bd-video{background:var(--tx);color:#fff}
 .bd-video::before{content:'▶';font-size:.62rem}
@@ -109,12 +108,6 @@ a{color:inherit}
 @media(max-width:640px){.st{border-right:0;padding-right:18px;margin-right:0}}
 
 /* 読み方の帯 */
-.rules{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(28px,4vw,40px);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:#fff}
-.rule{display:flex;gap:12px;align-items:flex-start;padding:16px 20px;border-right:1px solid var(--border);font-size:.86rem;color:var(--tx2);line-height:1.6}
-.rule:last-child{border-right:0}
-.rule b{color:var(--tx);display:block;font-size:.9rem;margin-bottom:2px}
-.rule i{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--blue-bg2);color:var(--blue);font-style:normal;font-family:var(--fe);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){.rules{grid-template-columns:1fr}.rule{border-right:0;border-bottom:1px solid var(--border)}.rule:last-child{border-bottom:0}}
 
 /* filters */
 .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
@@ -224,14 +217,14 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
-.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh)}
+.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh);display:flex;flex-direction:column;justify-content:center}
 .num small{display:block;font-size:.8rem;color:var(--tx3);font-weight:700}
-.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.5rem,3vw,2.2rem)}
+.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.7rem,3.4vw,2.6rem)}
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
+.num b .nw{white-space:nowrap}
 .num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
-.src{max-width:1100px;margin:0 auto;font-size:.78rem;color:var(--tx3)}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
 .note-box b{display:block;font-size:.8rem;color:var(--amber);letter-spacing:.06em;margin-bottom:4px}
@@ -286,20 +279,20 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 </style>
 </head>
 <body>
-<header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
+<header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 01</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-site">前職・45名組織で導入</span><span class="bd bd-cat">数字の見える化</span><span class="bd bd-video">デモあり</span></div><h1>売上集計を自動化し、毎日250分の転記を0分に</h1><p class="lead">案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。前職の45名組織で運用した。</p><div class="kpis"><div class="kp"><small>毎日の転記作業</small><b>250分<span class="ar">→</span>0分</b></div><div class="kp"><small>年間の削減時間</small><b>960時間</b></div><div class="kp"><small>人件費に換算</small><b>年240万円分</b></div></div></div>
-<div class="chero-vis fi"><div class="fr"><img src="media/case-01_ill.webp" alt="売上集計の自動化（前職・45名組織で導入）のイメージ" width="1600" height="900"></div></div></div></div></section>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">数字の見える化</span><span class="bd bd-video">デモあり</span></div><h1>売上集計を自動化し、毎日250分の転記を0分に</h1><p class="lead">案件ごとに分かれていたスプレッドシートを、GASが毎朝自動で集計する。達成率の異常はアラートで届く。</p><div class="kpis"><div class="kp"><small>毎日の転記作業</small><b>250分<span class="ar">→</span>0分</b></div><div class="kp"><small>年間の削減時間</small><b>960時間</b></div><div class="kp"><small>人件費に換算</small><b>年240万円分</b></div></div></div>
+<div class="chero-vis fi"><div class="fr"><img src="media/case-01_ill.webp" alt="売上集計の自動化のイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>案件ごとにバラバラの売上管理と毎日の転記作業</h2></div><div class="quote">案件ごとにシートが分散し、コスト超過も売上未達も翌月まで分からない</div><p class="csub" style="margin-top:0">スプレッドシートが案件単位で分散し、全体の売上把握には毎日250分の転記・集計作業が必要だった。マネージャーの時間が「数字を集める」ことに消えていた。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>GASによる自動集計とアラート付きダッシュボード</h2></div><p class="csub">分散していたスプレッドシートを GAS で自動集計し、異常値のアラートとダッシュボードに変換した。数字が毎朝、自動で揃う。</p><div class="tools"><small>使った道具</small><span>GAS</span><span>Google スプレッドシート</span></div>
-<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-01_zukai.webp" alt="売上集計の自動化（前職・45名組織で導入）の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
-<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-01_demo_poster.jpg" controls aria-label="売上集計の自動化（前職・45名組織で導入）のデモ（60秒・音なし・架空データ）"><source src="media/case-01_demo.webm" type="video/webm"><source src="media/case-01_demo.mp4" type="video/mp4"></video>
+<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-01_zukai.webp" alt="売上集計の自動化の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
+<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-01_demo_poster.jpg" controls aria-label="売上集計の自動化のデモ（60秒・架空データ）"><source src="media/case-01_demo.webm" type="video/webm"><source src="media/case-01_demo.mp4" type="video/mp4"></video>
 <div class="vid-cap"><b>60秒・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
 <section class="csec" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>転記0分・年240万円分（960時間）の削減</h2></div>
-<div class="nums fi"><div class="num big"><small>毎日の転記作業</small><b class="">250分<span class="ar">→</span>0分</b><div class="sub">年240万円分・960時間の削減</div></div><div class="num"><small>年間の削減時間</small><b>960時間</b></div><div class="num"><small>人件費に換算</small><b>年240万円分</b></div></div><p class="csub" style="margin-top:0">マネージャーが「数字を集める人」から「数字で動く人」に変わった。異常が出た日に手を打てる。45名のマーケティング支援組織で運用した。</p><div class="src">数字の出どころ: 前職で公開済みの実績スライド</div></div></section>
+<div class="nums fi"><div class="num big"><small>毎日の転記作業</small><b class=""><span class="nw">250分</span><span class="ar">→</span><span class="nw">0分</span></b><div class="sub">年240万円分・960時間の削減</div></div><div class="num"><small>年間の削減時間</small><b>960時間</b></div><div class="num"><small>人件費に換算</small><b>年240万円分</b></div></div><p class="csub" style="margin-top:0">マネージャーが「数字を集める人」から「数字で動く人」に変わった。異常が出た日に手を打てる。</p></div></section>
 <section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
-<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-01_zukai_s.webp" alt="売上集計の自動化（前職・45名組織で導入）：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
+<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-01_zukai_s.webp" alt="売上集計の自動化：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
 
 <section class="csec" id="hint"><div class="w"><div class="chd"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div><div class="in fi"><div class="callout"><b>売上・KPIの手集計が残っている会社は、ここから始めると一番早く効果が出る</b><p>マネージャーが「数字を集める人」から「数字で動く人」に変わった。同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div></div></section>
 <section class="next"><div class="w"><div class="h3">ほかの事例</div><div class="ngrid"><a class="ncard" href="case-09.html"><img src="media/case-09_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>前の事例 · CASE 09</small><b>資料づくり12工程のうち、人がやるのは2回だけ</b></div></a><a class="ncard" href="case-02.html"><img src="media/case-02_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>次の事例 · CASE 02</small><b>議事録を書く仕事をなくし、会議中は議論に集中する</b></div></a></div><div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
@@ -310,7 +303,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <a href="https://tally.so/r/QKdxx1" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
 </div></section>
 <footer class="ft"><div class="w">
-<div class="ft-links"><a href="../index.html#cases">事例</a><a href="../index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
+<div class="ft-links"><a href="../index.html#cases">事例</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
 <p class="ft-copy">© 2026 AI業務改革パートナー</p></div></footer>
 <div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
 

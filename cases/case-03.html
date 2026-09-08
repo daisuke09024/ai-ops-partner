@@ -74,7 +74,6 @@ a{color:inherit}
 
 /* badges */
 .bd{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:100px;font-size:.76rem;font-weight:700;line-height:1.5;white-space:nowrap}
-.bd-site{background:var(--violet-bg);color:var(--violet)}
 .bd-cat{background:var(--bg2);color:var(--tx2)}
 .bd-video{background:var(--tx);color:#fff}
 .bd-video::before{content:'▶';font-size:.62rem}
@@ -109,12 +108,6 @@ a{color:inherit}
 @media(max-width:640px){.st{border-right:0;padding-right:18px;margin-right:0}}
 
 /* 読み方の帯 */
-.rules{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(28px,4vw,40px);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:#fff}
-.rule{display:flex;gap:12px;align-items:flex-start;padding:16px 20px;border-right:1px solid var(--border);font-size:.86rem;color:var(--tx2);line-height:1.6}
-.rule:last-child{border-right:0}
-.rule b{color:var(--tx);display:block;font-size:.9rem;margin-bottom:2px}
-.rule i{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--blue-bg2);color:var(--blue);font-style:normal;font-family:var(--fe);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){.rules{grid-template-columns:1fr}.rule{border-right:0;border-bottom:1px solid var(--border)}.rule:last-child{border-bottom:0}}
 
 /* filters */
 .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
@@ -224,14 +217,14 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
-.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh)}
+.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh);display:flex;flex-direction:column;justify-content:center}
 .num small{display:block;font-size:.8rem;color:var(--tx3);font-weight:700}
-.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.5rem,3vw,2.2rem)}
+.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.7rem,3.4vw,2.6rem)}
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
+.num b .nw{white-space:nowrap}
 .num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
-.src{max-width:1100px;margin:0 auto;font-size:.78rem;color:var(--tx3)}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
 .note-box b{display:block;font-size:.8rem;color:var(--amber);letter-spacing:.06em;margin-bottom:4px}
@@ -286,23 +279,23 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 </style>
 </head>
 <body>
-<header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
+<header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 03</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-site">前職・45名組織で導入</span><span class="bd bd-cat">資料・制作物</span><span class="bd bd-video">デモあり</span></div><h1>資料の骨子を5分で。月2,000時間の資料作成を500時間に</h1><p class="lead">過去の関連資料と最新データを AI が統合して骨子を作る。上司のフィードバックも型にして、全員がエースの初稿から始められる。</p><div class="kpis"><div class="kp"><small>組織全体の資料作成</small><b>月2,000h<span class="ar">→</span>500h</b></div><div class="kp"><small>人件費に換算</small><b>年1,500万円分</b></div><div class="kp"><small>骨子の生成</small><b>5分</b></div></div></div>
-<div class="chero-vis fi"><div class="fr"><img src="media/case-03_ill.webp" alt="資料作成の半自動化（前職・組織導入）のイメージ" width="1600" height="900"></div></div></div></div></section>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">資料・制作物</span><span class="bd bd-video">デモあり</span></div><h1>資料の骨子を5分で。月2,000時間の資料作成を500時間に</h1><p class="lead">過去の関連資料と最新データを AI が統合して骨子を作る。上司のフィードバックも型にして、全員がエースの初稿から始められる。</p><div class="kpis"><div class="kp"><small>組織全体の資料作成</small><b>月2,000h<span class="ar">→</span>500h</b></div><div class="kp"><small>人件費に換算</small><b>年1,500万円分</b></div><div class="kp"><small>骨子の生成</small><b>5分</b></div></div></div>
+<div class="chero-vis fi"><div class="fr"><img src="media/case-03_ill.webp" alt="資料作成の半自動化のイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>月2,000時間が資料作成に消え、質はエース頼み</h2></div><div class="quote">資料作成が特定の人に集中している</div><p class="csub" style="margin-top:0">45名の組織全体で、資料作成に月2,000時間が費やされていた。過去の文脈探し・データ収集・構成づくりが毎回ゼロからで、品質はエース社員のスキルに依存していた。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>過去の資料と最新データから、骨子を5分で作る</h2></div><p class="csub">GAS と Gemini をつなぎ、過去の関連資料と最新データを1回の指示でまとめた骨子を5分で出す。上司のフィードバックを型にして、次の資料に使い回せるようにした。</p><div class="tools"><small>使った道具</small><span>GAS</span><span>Gemini</span><span>Google スライド</span></div>
-<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-03_zukai.webp" alt="資料作成の半自動化（前職・組織導入）の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
-<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-03_demo_poster.jpg" controls aria-label="資料作成の半自動化（前職・組織導入）のデモ（60秒・音なし・架空データ）"><source src="media/case-03_demo.webm" type="video/webm"><source src="media/case-03_demo.mp4" type="video/mp4"></video>
-<div class="vid-cap"><b>60秒・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
+<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-03_zukai.webp" alt="資料作成の半自動化の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
+<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-03_demo_poster.jpg" controls aria-label="資料作成の半自動化のデモ（60秒・架空データ）"><source src="media/case-03_demo.webm" type="video/webm"><source src="media/case-03_demo.mp4" type="video/mp4"></video>
+<div class="vid-cap"><b>60秒・字幕とナレーションつき（自動再生中は無音）</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
 <section class="csec" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>月2,000時間→500時間・年1,500万円分の削減</h2></div>
-<div class="nums fi"><div class="num big"><small>資料作成の工数（45名の組織全体）</small><b class="long">月2,000時間<span class="ar">→</span>月500時間</b><div class="sub">年1,500万円分の削減</div></div><div class="num"><small>人件費に換算</small><b>年1,500万円分</b></div><div class="num"><small>骨子の生成</small><b>5分</b></div></div><p class="csub" style="margin-top:0">3.1人分の時間が空き、エースの型を全員が使える状態になった。</p><div class="src">数字の出どころ: 前職で公開済みの実績スライド</div></div></section>
+<div class="nums fi"><div class="num big"><small>資料作成の工数（組織全体）</small><b class="long"><span class="nw">月2,000時間</span><span class="ar">→</span><span class="nw">月500時間</span></b><div class="sub">年1,500万円分の削減</div></div><div class="num"><small>人件費に換算</small><b>年1,500万円分</b></div><div class="num"><small>骨子の生成</small><b>5分</b></div></div><p class="csub" style="margin-top:0">3.1人分の時間が空き、エースの型を全員が使える状態になった。</p></div></section>
 <section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
-<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-03_zukai_s.webp" alt="資料作成の半自動化（前職・組織導入）：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
+<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-03_zukai_s.webp" alt="資料作成の半自動化：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
 
 <section class="csec" id="hint"><div class="w"><div class="chd"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div><div class="in fi"><div class="callout"><b>エース社員の「資料の作り方」を型にすると、全員がエースの初稿から始められる</b><p>属人スキルを組織の型に変えた。同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div></div></section>
-<section class="next"><div class="w"><div class="h3">ほかの事例</div><div class="ngrid"><a class="ncard" href="case-02.html"><img src="media/case-02_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>前の事例 · CASE 02</small><b>議事録を書く仕事をなくし、会議中は議論に集中する</b></div></a><a class="ncard" href="case-04.html"><img src="media/case-04_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>次の事例 · CASE 04</small><b>研修教材31単元を、設計から5日で形にする</b></div></a></div><div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
+<section class="next"><div class="w"><div class="h3">ほかの事例</div><div class="ngrid"><a class="ncard" href="case-02.html"><img src="media/case-02_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>前の事例 · CASE 02</small><b>議事録を書く仕事をなくし、会議中は議論に集中する</b></div></a><a class="ncard" href="case-04.html"><img src="media/case-04_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>次の事例 · CASE 04</small><b>Claude Code の研修教材31単元を、設計から5日で形にする</b></div></a></div><div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
 
 <section class="cta"><div class="w">
 <h2>同じような課題を抱えていませんか？</h2>
@@ -310,7 +303,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <a href="https://tally.so/r/QKdxx1" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
 </div></section>
 <footer class="ft"><div class="w">
-<div class="ft-links"><a href="../index.html#cases">事例</a><a href="../index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
+<div class="ft-links"><a href="../index.html#cases">事例</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
 <p class="ft-copy">© 2026 AI業務改革パートナー</p></div></footer>
 <div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
 

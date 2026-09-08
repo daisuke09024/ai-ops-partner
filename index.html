@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI業務改革パートナー｜AIで業務を動かした事例とデモ</title>
-<meta name="description" content="前職の45名組織・顧客の環境・自社の運用で実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。数字は実測、動画は架空データで再現。">
+<meta name="description" content="実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。図解と60秒のデモで載せています。">
 <link rel="canonical" href="https://ai-ops-partner.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI業務改革パートナー">
 <meta property="og:title" content="AI業務改革パートナー｜AIで業務を動かした事例とデモ">
-<meta property="og:description" content="前職の45名組織・顧客の環境・自社の運用で実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。数字は実測、動画は架空データで再現。">
+<meta property="og:description" content="実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。図解と60秒のデモで載せています。">
 <meta property="og:image" content="https://ai-ops-partner.vercel.app/cases/media/case-01_zukai.webp">
 <meta property="og:url" content="https://ai-ops-partner.vercel.app/">
 <meta name="twitter:card" content="summary_large_image">
@@ -74,7 +74,6 @@ a{color:inherit}
 
 /* badges */
 .bd{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:100px;font-size:.76rem;font-weight:700;line-height:1.5;white-space:nowrap}
-.bd-site{background:var(--violet-bg);color:var(--violet)}
 .bd-cat{background:var(--bg2);color:var(--tx2)}
 .bd-video{background:var(--tx);color:#fff}
 .bd-video::before{content:'▶';font-size:.62rem}
@@ -109,12 +108,6 @@ a{color:inherit}
 @media(max-width:640px){.st{border-right:0;padding-right:18px;margin-right:0}}
 
 /* 読み方の帯 */
-.rules{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(28px,4vw,40px);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:#fff}
-.rule{display:flex;gap:12px;align-items:flex-start;padding:16px 20px;border-right:1px solid var(--border);font-size:.86rem;color:var(--tx2);line-height:1.6}
-.rule:last-child{border-right:0}
-.rule b{color:var(--tx);display:block;font-size:.9rem;margin-bottom:2px}
-.rule i{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--blue-bg2);color:var(--blue);font-style:normal;font-family:var(--fe);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){.rules{grid-template-columns:1fr}.rule{border-right:0;border-bottom:1px solid var(--border)}.rule:last-child{border-bottom:0}}
 
 /* filters */
 .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
@@ -224,14 +217,14 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
-.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh)}
+.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh);display:flex;flex-direction:column;justify-content:center}
 .num small{display:block;font-size:.8rem;color:var(--tx3);font-weight:700}
-.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.5rem,3vw,2.2rem)}
+.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.7rem,3.4vw,2.6rem)}
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
+.num b .nw{white-space:nowrap}
 .num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
-.src{max-width:1100px;margin:0 auto;font-size:.78rem;color:var(--tx3)}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
 .note-box b{display:block;font-size:.8rem;color:var(--amber);letter-spacing:.06em;margin-bottom:4px}
@@ -286,19 +279,19 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 </style>
 </head>
 <body>
-<header class="hd"><div class="hd-in"><a href="#" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="#cases">事例</a><a href="#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header>
+<header class="hd"><div class="hd-in"><a href="#" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="#cases">事例</a><a href="#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header>
 <section class="hero"><div class="w">
 <div class="hero-grid">
 <div class="hero-text">
-<div class="eyebrow">事例とデモ ／ AI業務改革パートナー</div>
+<div class="eyebrow">事例とデモ</div>
 <h1>AIに任せた業務の、<br><em>実物だけ。</em></h1>
-<p class="hero-lead">前職の45名組織、顧客の環境、自社の運用で実際に動いたものを、図解と60秒のデモで載せています。構想や試作はありません。</p>
+<p class="hero-lead">実際に動いたものだけを、図解と60秒のデモで載せています。構想や試作はありません。</p>
 <div class="hero-btns"><a href="#cases" class="btn btn-p">事例を見る ↓</a><a href="https://tally.so/r/QKdxx1" class="btn btn-o" target="_blank" rel="noopener">30分、無料で相談する</a></div>
 <div class="stats">
 <div class="st"><div class="st-n">9</div><div class="st-l">事例</div></div>
 <div class="st"><div class="st-n">5</div><div class="st-l">60秒のデモ</div></div>
 <div class="st"><div class="st-n">10</div><div class="st-l">動いている仕組み</div></div>
-<div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額（前職3事例）</div></div>
+<div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額（3事例の合計）</div></div>
 </div>
 </div>
 <div class="hero-vid fi">
@@ -309,66 +302,61 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <div class="hero-vid-cap"><b>3枚のシート → 自動集計ダッシュボード</b><span>デモ 12秒・架空データ</span></div>
 </div>
 </div>
-<div class="rules">
-<div class="rule"><i>1</i><div><b>実際に動いたものだけ</b>導入先を各事例に明記。構想や試作は載せない</div></div>
-<div class="rule"><i>2</i><div><b>数字は実測か公開済みの実績</b>他社の事例には数字を付けない</div></div>
-<div class="rule"><i>3</i><div><b>動画は架空データで再現</b>顧客の実データは映さない</div></div>
-</div>
 </div></section>
 
 <section class="sec" id="cases"><div class="w">
 <div class="sec-head"><div><div class="eyebrow">Cases</div><h2 class="h2">事例</h2><p class="lead">1件1ページ。課題、変えたこと、60秒のデモ、結果まで載せています。</p></div><div class="count"><span id="ccount">9</span><small>件</small></div></div>
-<div class="filters"><div class="frow"><span class="flb">導入先</span><button class="chip on" data-site="all">すべて<small>9</small></button><button class="chip" data-site="zenshoku">前職・45名組織<small>3</small></button><button class="chip" data-site="kokyaku">顧客環境<small>2</small></button><button class="chip" data-site="jisha">自社運用<small>4</small></button></div><div class="frow"><span class="flb">業務</span><button class="chip on" data-cat="all">すべて</button><button class="chip" data-cat="数字の見える化">数字の見える化<small>2</small></button><button class="chip" data-cat="会議・議事録">会議・議事録<small>2</small></button><button class="chip" data-cat="資料・制作物">資料・制作物<small>3</small></button><button class="chip" data-cat="研修・育成">研修・育成<small>1</small></button><button class="chip" data-cat="営業・顧客対応">営業・顧客対応<small>1</small></button></div></div>
-<div class="grid"><a class="card fi" href="cases/case-01.html" data-site="zenshoku" data-cat="数字の見える化">
-<div class="thumb"><img src="cases/media/case-01_ill_m.webp" alt="売上集計の自動化（前職・45名組織で導入）のイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 01<span class="cat">数字の見える化</span><span class="cat">前職・45名組織</span></div>
+<div class="filters"><div class="frow"><span class="flb">業務</span><button class="chip on" data-cat="all">すべて</button><button class="chip" data-cat="数字の見える化">数字の見える化<small>2</small></button><button class="chip" data-cat="会議・議事録">会議・議事録<small>2</small></button><button class="chip" data-cat="資料・制作物">資料・制作物<small>3</small></button><button class="chip" data-cat="研修・育成">研修・育成<small>1</small></button><button class="chip" data-cat="営業・顧客対応">営業・顧客対応<small>1</small></button></div></div>
+<div class="grid"><a class="card fi" href="cases/case-01.html" data-cat="数字の見える化">
+<div class="thumb"><img src="cases/media/case-01_ill_m.webp" alt="売上集計の自動化のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta">CASE 01<span class="cat">数字の見える化</span></div>
 <div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>売上集計を自動化し、毎日250分の転記を0分に</h3>
 <p>案件ごとにシートが分散し、コスト超過も売上未達も翌月まで分からない</p>
-<div class="kpi"><div><small>毎日の転記作業</small><b><span class="old">250分</span><span class="ar">→</span>0分</b><div class="sub">年240万円分・960時間の削減</div></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-02.html" data-site="zenshoku" data-cat="会議・議事録">
-<div class="thumb"><img src="cases/media/case-02_ill_m.webp" alt="議事録の完全自動化（前職・組織導入）のイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 02<span class="cat">会議・議事録</span><span class="cat">前職・45名組織</span></div>
+<div class="kpi"><div><small>毎日の転記作業</small><b><span class="old">250分</span><span class="ar">→</span>0分</b><div class="sub">年240万円分・960時間の削減</div></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-02.html" data-cat="会議・議事録">
+<div class="thumb"><img src="cases/media/case-02_ill_m.webp" alt="議事録の完全自動化のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta">CASE 02<span class="cat">会議・議事録</span></div>
 <div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>議事録を書く仕事をなくし、会議中は議論に集中する</h3>
 <p>議事録を、まだ人間がタイピングしている</p>
-<div class="kpi"><div><small>議事録の作成工数</small><b><span class="old">会議のたび</span><span class="ar">→</span>100%削減</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-03.html" data-site="zenshoku" data-cat="資料・制作物">
-<div class="thumb"><img src="cases/media/case-03_ill_m.webp" alt="資料作成の半自動化（前職・組織導入）のイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 03<span class="cat">資料・制作物</span><span class="cat">前職・45名組織</span></div>
+<div class="kpi"><div><small>議事録の作成工数</small><b><span class="old">会議のたび</span><span class="ar">→</span>100%削減</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-03.html" data-cat="資料・制作物">
+<div class="thumb"><img src="cases/media/case-03_ill_m.webp" alt="資料作成の半自動化のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta">CASE 03<span class="cat">資料・制作物</span></div>
 <div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>資料の骨子を5分で。月2,000時間の資料作成を500時間に</h3>
 <p>資料作成が特定の人に集中している</p>
-<div class="kpi"><div><small>資料作成の工数（45名の組織全体）</small><b><span class="old">月2,000時間</span><span class="ar">→</span>月500時間</b><div class="sub">年1,500万円分の削減</div></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-04.html" data-site="jisha" data-cat="資料・制作物">
+<div class="kpi"><div><small>資料作成の工数（組織全体）</small><b><span class="old">月2,000時間</span><span class="ar">→</span>月500時間</b><div class="sub">年1,500万円分の削減</div></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-04.html" data-cat="資料・制作物">
 <div class="thumb"><img src="cases/media/case-04_ill_m.webp" alt="研修教材づくり — 31単元を5日でのイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 04<span class="cat">資料・制作物</span><span class="cat">自社運用</span></div>
-<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>研修教材31単元を、設計から5日で形にする</h3>
+<div class="cbody"><div class="cmeta">CASE 04<span class="cat">資料・制作物</span></div>
+<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>Claude Code の研修教材31単元を、設計から5日で形にする</h3>
 <p>研修やマニュアルを作りたいが、まとまった時間が取れず後回しになる</p>
-<div class="kpi"><div><small>設計から5日で形に</small><b>31単元</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-05.html" data-site="kokyaku" data-cat="会議・議事録">
+<div class="kpi"><div><small>設計から5日で形に</small><b>31単元</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-05.html" data-cat="会議・議事録">
 <div class="thumb"><img src="cases/media/case-05_ill_m.webp" alt="人材会社の面談業務AI（某転職エージェント・顧客のNotionに実装）のイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 05<span class="cat">会議・議事録</span><span class="cat">顧客環境</span></div>
+<div class="cbody"><div class="cmeta">CASE 05<span class="cat">会議・議事録</span></div>
 <h3>面談1件の記録を20分から約4分に。顧客のNotionに業務ごと実装</h3>
 <p>面談のたびに記録を書き起こし、聞く質問も担当者ごとに変わる</p>
-<div class="kpi"><div><small>面談1件の記録</small><b><span class="old">20分</span><span class="ar">→</span>約4分</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-06.html" data-site="kokyaku" data-cat="研修・育成">
+<div class="kpi"><div><small>面談1件の記録</small><b><span class="old">20分</span><span class="ar">→</span>約4分</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-06.html" data-cat="研修・育成">
 <div class="thumb"><img src="cases/media/case-06_ill_m.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）のイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 06<span class="cat">研修・育成</span><span class="cat">顧客環境</span></div>
+<div class="cbody"><div class="cmeta">CASE 06<span class="cat">研修・育成</span></div>
 <h3>レクチャーの疑問を、次回ではなく当日のうちに返す</h3>
 <p>研修やレクチャーをやりっぱなしにして、受講者の疑問が次回まで放置される</p>
-<div class="kpi"><div><small>疑問が解けるまで</small><b><span class="old">次回</span><span class="ar">→</span>当日</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-07.html" data-site="jisha" data-cat="数字の見える化">
+<div class="kpi"><div><small>疑問が解けるまで</small><b><span class="old">次回</span><span class="ar">→</span>当日</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-07.html" data-cat="数字の見える化">
 <div class="thumb"><img src="cases/media/case-07_ill_m.webp" alt="稼働時間の自動集計のイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 07<span class="cat">数字の見える化</span><span class="cat">自社運用</span></div>
+<div class="cbody"><div class="cmeta">CASE 07<span class="cat">数字の見える化</span></div>
 <div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>カレンダーに予定を入れるだけ。稼働時間の集計は0分</h3>
 <p>何に何時間使ったか、分からない</p>
-<div class="kpi"><div><small>月次の工数集計</small><b><span class="old">手で集計</span><span class="ar">→</span>0分</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-08.html" data-site="jisha" data-cat="営業・顧客対応">
+<div class="kpi"><div><small>月次の工数集計</small><b><span class="old">手で集計</span><span class="ar">→</span>0分</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-08.html" data-cat="営業・顧客対応">
 <div class="thumb"><img src="cases/media/case-08_ill_m.webp" alt="商談のたびに営業資産が育つ流れのイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 08<span class="cat">営業・顧客対応</span><span class="cat">自社運用</span></div>
+<div class="cbody"><div class="cmeta">CASE 08<span class="cat">営業・顧客対応</span></div>
 <h3>「商談終わった」の一言で、営業台本と資料が育つ</h3>
 <p>商談後の事務作業が溜まる</p>
-<div class="kpi"><div><small>の一言で分析→台本→資料まで自動</small><b>「商談終わった」</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-09.html" data-site="jisha" data-cat="資料・制作物">
+<div class="kpi"><div><small>商談後の分析→台本→資料</small><b>一言で自動</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-09.html" data-cat="資料・制作物">
 <div class="thumb"><img src="cases/media/case-09_ill_m.webp" alt="資料づくりで人がやることは2つだけのイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE 09<span class="cat">資料・制作物</span><span class="cat">自社運用</span></div>
+<div class="cbody"><div class="cmeta">CASE 09<span class="cat">資料・制作物</span></div>
 <h3>資料づくり12工程のうち、人がやるのは2回だけ</h3>
 <p>AIに任せても、結局レビューで時間が溶ける</p>
 <div class="kpi"><div><small>承認と、最後の目視</small><b>12工程 → 人は2回</b></div><span class="go" aria-hidden="true">↗</span></div></div></a></div>
 </div></section>
 
 <section class="sec" id="systems" style="background:var(--bg2)"><div class="w">
-<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">1件1ページにはしていない、日々動いている仕組みと、参考にしている他社の実践。図解を押すと拡大します。</p></div><div class="count">10<small>件</small></div></div>
+<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">日々動いている仕組み。図解を押すと拡大します。</p></div><div class="count">10<small>件</small></div></div>
 <div class="sgrid"><div class="scard zoomable fi" data-cap="AIエコシステム地図"><div class="thumb"><img src="cases/media/list-map.webp" alt="AIエコシステム地図の図解" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><h3>AIエコシステム地図</h3><p>AIに何を任せられるのか、全体像が見えない</p></div><span class="bd bd-live">稼働中</span></div></div><div class="scard zoomable fi" data-cap="業務フロー図の自動生成"><div class="thumb"><img src="cases/media/list-flow.webp" alt="業務フロー図の自動生成の図解" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><h3>業務フロー図の自動生成</h3><p>「今どう回っているか」を1枚で説明できる人が社内にいない</p></div><span class="bd bd-live">制作で使用中</span></div></div><div class="scard zoomable fi" data-cap="フォーム営業の仕組み一式"><div class="thumb"><img src="cases/media/list-form.webp" alt="フォーム営業の仕組み一式の図解" loading="lazy" width="1600" height="900"></div>
@@ -389,7 +377,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <div class="note">3営業日以内に返信します。売り込みの電話はしません。</div>
 </div></section>
 <footer class="ft"><div class="w">
-<div class="ft-links"><a href="index.html#cases">事例</a><a href="index.html#systems">仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
+<div class="ft-links"><a href="index.html#cases">事例</a><a href="index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
 <p class="ft-copy">© 2026 AI業務改革パートナー</p></div></footer>
 <div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
 
@@ -402,9 +390,8 @@ const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.a
 (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
 
 (function(){const cards=[...document.querySelectorAll('#cases .card')];const cnt=document.getElementById('ccount');
-let site='all',cat='all';
-function apply(){let n=0;cards.forEach(c=>{const ok=(site==='all'||c.dataset.site===site)&&(cat==='all'||c.dataset.cat===cat);c.classList.toggle('hide',!ok);if(ok)n++});cnt.textContent=n;}
-document.querySelectorAll('.chip[data-site]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-site]').forEach(x=>x.classList.remove('on'));b.classList.add('on');site=b.dataset.site;apply()}));
+let cat='all';
+function apply(){let n=0;cards.forEach(c=>{const ok=(cat==='all'||c.dataset.cat===cat);c.classList.toggle('hide',!ok);if(ok)n++});cnt.textContent=n;}
 document.querySelectorAll('.chip[data-cat]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-cat]').forEach(x=>x.classList.remove('on'));b.classList.add('on');cat=b.dataset.cat;apply()}));
 })();
 </script>

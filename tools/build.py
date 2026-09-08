@@ -92,7 +92,6 @@ a{color:inherit}
 
 /* badges */
 .bd{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:100px;font-size:.76rem;font-weight:700;line-height:1.5;white-space:nowrap}
-.bd-site{background:var(--violet-bg);color:var(--violet)}
 .bd-cat{background:var(--bg2);color:var(--tx2)}
 .bd-video{background:var(--tx);color:#fff}
 .bd-video::before{content:'▶';font-size:.62rem}
@@ -127,12 +126,6 @@ a{color:inherit}
 @media(max-width:640px){.st{border-right:0;padding-right:18px;margin-right:0}}
 
 /* 読み方の帯 */
-.rules{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(28px,4vw,40px);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:#fff}
-.rule{display:flex;gap:12px;align-items:flex-start;padding:16px 20px;border-right:1px solid var(--border);font-size:.86rem;color:var(--tx2);line-height:1.6}
-.rule:last-child{border-right:0}
-.rule b{color:var(--tx);display:block;font-size:.9rem;margin-bottom:2px}
-.rule i{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--blue-bg2);color:var(--blue);font-style:normal;font-family:var(--fe);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){.rules{grid-template-columns:1fr}.rule{border-right:0;border-bottom:1px solid var(--border)}.rule:last-child{border-bottom:0}}
 
 /* filters */
 .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
@@ -242,14 +235,14 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
-.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh)}
+.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh);display:flex;flex-direction:column;justify-content:center}
 .num small{display:block;font-size:.8rem;color:var(--tx3);font-weight:700}
-.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.5rem,3vw,2.2rem)}
+.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.7rem,3.4vw,2.6rem)}
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
+.num b .nw{white-space:nowrap}
 .num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
-.src{max-width:1100px;margin:0 auto;font-size:.78rem;color:var(--tx3)}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
 .note-box b{display:block;font-size:.8rem;color:var(--amber);letter-spacing:.06em;margin-bottom:4px}
@@ -314,9 +307,8 @@ const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.a
 
 JS_INDEX = r"""
 (function(){const cards=[...document.querySelectorAll('#cases .card')];const cnt=document.getElementById('ccount');
-let site='all',cat='all';
-function apply(){let n=0;cards.forEach(c=>{const ok=(site==='all'||c.dataset.site===site)&&(cat==='all'||c.dataset.cat===cat);c.classList.toggle('hide',!ok);if(ok)n++});cnt.textContent=n;}
-document.querySelectorAll('.chip[data-site]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-site]').forEach(x=>x.classList.remove('on'));b.classList.add('on');site=b.dataset.site;apply()}));
+let cat='all';
+function apply(){let n=0;cards.forEach(c=>{const ok=(cat==='all'||c.dataset.cat===cat);c.classList.toggle('hide',!ok);if(ok)n++});cnt.textContent=n;}
 document.querySelectorAll('.chip[data-cat]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-cat]').forEach(x=>x.classList.remove('on'));b.classList.add('on');cat=b.dataset.cat;apply()}));
 })();
 """
@@ -354,16 +346,16 @@ def head(title, desc, url, image, extra=""):
 def header(root):
     """root: index からは '' / cases からは '../'"""
     if root == "":
-        nav = f'<a href="#cases">事例</a><a href="#systems">仕組み</a><a href="{TALLY}" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a>'
+        nav = f'<a href="#cases">事例</a><a href="#systems">動いている仕組み</a><a href="{TALLY}" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a>'
         left = f'<a href="#" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a>'
     else:
-        nav = f'<a href="{root}index.html#cases">事例一覧</a><a href="{root}index.html#systems">仕組み</a><a href="{TALLY}" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a>'
+        nav = f'<a href="{root}index.html#cases">事例一覧</a><a href="{root}index.html#systems">動いている仕組み</a><a href="{TALLY}" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a>'
         left = f'<a href="{root}index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a>'
     return f'<header class="hd"><div class="hd-in">{left}<nav class="hd-nav">{nav}</nav></div></header>'
 
 def footer(root):
     return f"""<footer class="ft"><div class="w">
-<div class="ft-links"><a href="{root}index.html#cases">事例</a><a href="{root}index.html#systems">仕組み</a><a href="{TALLY}" target="_blank" rel="noopener">お問い合わせ</a></div>
+<div class="ft-links"><a href="{root}index.html#cases">事例</a><a href="{root}index.html#systems">動いている仕組み</a><a href="{TALLY}" target="_blank" rel="noopener">お問い合わせ</a></div>
 <p class="ft-copy">© 2026 {BRAND}</p></div></footer>
 <div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
 """
@@ -384,14 +376,13 @@ def ill_src(num, root, size=""):
         return f"{root}cases/media/{name}"
     return f"{root}cases/media/case-{num}_zukai.webp"
 
-SITE_LABELS = DATA["meta"]["site_labels"]
 
 def case_card(c, root):
     num = c["num"]
     vid = '<div class="cbds"><span class="bd bd-video">60秒デモ</span></div>' if c["video"] else ""
-    return f"""<a class="card fi" href="{root}cases/case-{num}.html" data-site="{c['site']}" data-cat="{esc(c['cat'])}">
+    return f"""<a class="card fi" href="{root}cases/case-{num}.html" data-cat="{esc(c['cat'])}">
 <div class="thumb"><img src="{ill_src(num, root, "_m")}" alt="{esc(c['src_title'])}のイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE {num}<span class="cat">{esc(c['cat'])}</span><span class="cat">{esc(SITE_LABELS[c['site']])}</span></div>
+<div class="cbody"><div class="cmeta">CASE {num}<span class="cat">{esc(c['cat'])}</span></div>
 {vid}<h3>{esc(c['headline'])}</h3>
 <p>{esc(c['src_problem'])}</p>
 {kpi_html(c['src_face'])}</div></a>"""
@@ -406,27 +397,24 @@ def sys_card(l, root):
 def build_index():
     cases = DATA["cases"]; lists = DATA["lists"]; meta = DATA["meta"]
     n_video = sum(1 for c in cases if c["video"])
-    site_counts = {k: sum(1 for c in cases if c["site"] == k) for k in SITE_LABELS}
     cat_counts = {k: sum(1 for c in cases if c["cat"] == k) for k in meta["cats"]}
-    chips_site = '<button class="chip on" data-site="all">すべて<small>9</small></button>' + "".join(
-        f'<button class="chip" data-site="{k}">{esc(v)}<small>{site_counts[k]}</small></button>' for k, v in SITE_LABELS.items())
     chips_cat = '<button class="chip on" data-cat="all">すべて</button>' + "".join(
         f'<button class="chip" data-cat="{esc(k)}">{esc(k)}<small>{cat_counts[k]}</small></button>' for k in meta["cats"] if cat_counts[k])
     title = f"{BRAND}｜AIで業務を動かした事例とデモ"
-    desc = "前職の45名組織・顧客の環境・自社の運用で実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。数字は実測、動画は架空データで再現。"
+    desc = "実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。図解と60秒のデモで載せています。"
     body = f"""{header("")}
 <section class="hero"><div class="w">
 <div class="hero-grid">
 <div class="hero-text">
-<div class="eyebrow">事例とデモ ／ AI業務改革パートナー</div>
+<div class="eyebrow">事例とデモ</div>
 <h1>AIに任せた業務の、<br><em>実物だけ。</em></h1>
-<p class="hero-lead">前職の45名組織、顧客の環境、自社の運用で実際に動いたものを、図解と60秒のデモで載せています。構想や試作はありません。</p>
+<p class="hero-lead">実際に動いたものだけを、図解と60秒のデモで載せています。構想や試作はありません。</p>
 <div class="hero-btns"><a href="#cases" class="btn btn-p">事例を見る ↓</a><a href="{TALLY}" class="btn btn-o" target="_blank" rel="noopener">30分、無料で相談する</a></div>
 <div class="stats">
 <div class="st"><div class="st-n">9</div><div class="st-l">事例</div></div>
 <div class="st"><div class="st-n">{n_video}</div><div class="st-l">60秒のデモ</div></div>
 <div class="st"><div class="st-n">10</div><div class="st-l">動いている仕組み</div></div>
-<div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額（前職3事例）</div></div>
+<div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額（3事例の合計）</div></div>
 </div>
 </div>
 <div class="hero-vid fi">
@@ -437,21 +425,16 @@ def build_index():
 <div class="hero-vid-cap"><b>3枚のシート → 自動集計ダッシュボード</b><span>デモ 12秒・架空データ</span></div>
 </div>
 </div>
-<div class="rules">
-<div class="rule"><i>1</i><div><b>実際に動いたものだけ</b>導入先を各事例に明記。構想や試作は載せない</div></div>
-<div class="rule"><i>2</i><div><b>数字は実測か公開済みの実績</b>他社の事例には数字を付けない</div></div>
-<div class="rule"><i>3</i><div><b>動画は架空データで再現</b>顧客の実データは映さない</div></div>
-</div>
 </div></section>
 
 <section class="sec" id="cases"><div class="w">
 <div class="sec-head"><div><div class="eyebrow">Cases</div><h2 class="h2">事例</h2><p class="lead">1件1ページ。課題、変えたこと、60秒のデモ、結果まで載せています。</p></div><div class="count"><span id="ccount">9</span><small>件</small></div></div>
-<div class="filters"><div class="frow"><span class="flb">導入先</span>{chips_site}</div><div class="frow"><span class="flb">業務</span>{chips_cat}</div></div>
+<div class="filters"><div class="frow"><span class="flb">業務</span>{chips_cat}</div></div>
 <div class="grid">{"".join(case_card(c, "") for c in cases)}</div>
 </div></section>
 
 <section class="sec" id="systems" style="background:var(--bg2)"><div class="w">
-<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">1件1ページにはしていない、日々動いている仕組みと、参考にしている他社の実践。図解を押すと拡大します。</p></div><div class="count">{len(lists)}<small>件</small></div></div>
+<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">日々動いている仕組み。図解を押すと拡大します。</p></div><div class="count">{len(lists)}<small>件</small></div></div>
 <div class="sgrid">{"".join(sys_card(l, "") for l in lists)}</div>
 </div></section>
 
@@ -478,13 +461,12 @@ def build_case(c, prev_c, next_c):
     title = f"事例{num}：{c['headline']}｜{BRAND}"
     url = f"{SITE}/cases/case-{num}.html"
     img = f"{SITE}/cases/media/case-{num}_ill.webp"
-    site_label = c["site_label"]
     tools = "".join(f"<span>{esc(t)}</span>" for t in c["tools"])
     kpis = "".join(kp_tile(k) for k in c["kpi"])
     ill = ill_src(num, "", "").replace("cases/", "", 1)
     def zukai(suffix, alt, cap):
         return f'<div class="fig"><img class="zoomable" src="media/case-{num}_zukai{suffix}.webp" alt="{esc(alt)}" width="1600" height="900" data-cap="{esc(cap)}"><div class="fig-cap"><span>図解を押すと拡大</span><span>{esc(cap)}</span></div></div>'
-    badges = f'<div class="bds"><span class="bd bd-site">{esc(site_label)}</span><span class="bd bd-cat">{esc(c["cat"])}</span>{"<span class=\"bd bd-video\">デモあり</span>" if c["video"] else ""}</div>'
+    badges = f'<div class="bds"><span class="bd bd-cat">{esc(c["cat"])}</span>{"<span class=\"bd bd-video\">デモあり</span>" if c["video"] else ""}</div>'
     fv = f"""<section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE {num}</span></div>
 <div class="chero-grid"><div>{badges}<h1>{esc(c['headline'])}</h1><p class="lead">{esc(c['lead'])}</p><div class="kpis">{kpis}</div></div>
 <div class="chero-vis fi"><div class="fr"><img src="{ill}" alt="{esc(c['src_title'])}のイメージ" width="1600" height="900"></div></div></div></div></section>"""
@@ -493,21 +475,23 @@ def build_case(c, prev_c, next_c):
     sec_change = f"""<section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>{esc(sh['jisshi_t'])}</h2></div><p class="csub">{esc(sh['jisshi'])}</p><div class="tools"><small>使った道具</small>{tools}</div>
 <div class="in fi">{zukai('', c['src_title'] + 'の図解（これまでとAI導入後）', overview_cap)}</div></div></section>"""
     if c["video"]:
-        sec_demo = f"""<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・音なし・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}のデモ（60秒・音なし・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
-<div class="vid-cap"><b>60秒・字幕つき</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>"""
+        voice = c.get("voice")
+        cap_b = "60秒・字幕とナレーションつき（自動再生中は無音）" if voice else "60秒・字幕つき"
+        sec_demo = f"""<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒・架空データ）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}のデモ（60秒・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
+<div class="vid-cap"><b>{cap_b}</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>"""
     else:
         sec_demo = ""
     if "before" in face:
         sub = f'<div class="sub">{esc(face["sub"])}</div>' if face.get("sub") else ""
         long = " long" if len(face["before"]) + len(face["after"]) > 9 else ""
-        big = f'<div class="num big"><small>{esc(face["label"])}</small><b class="{long.strip()}">{esc(face["before"])}<span class="ar">→</span>{esc(face["after"])}</b>{sub}</div>'
+        big = f'<div class="num big"><small>{esc(face["label"])}</small><b class="{long.strip()}"><span class="nw">{esc(face["before"])}</span><span class="ar">→</span><span class="nw">{esc(face["after"])}</span></b>{sub}</div>'
     else:
         long = " long" if len(face["big"]) > 7 else ""
         big = f'<div class="num big"><small>{esc(face.get("sub",""))}</small><b class="{long.strip()}">{esc(face["big"])}</b></div>'
     others = "".join(f'<div class="num"><small>{esc(k["l"])}</small><b>{esc(k["v"])}</b></div>' for k in c["kpi"][1:3])
     sec_result = f"""<section class="csec{'' if c['video'] else ' alt'}" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>{esc(sh['seika_t'])}</h2></div>
-<div class="nums fi">{big}{others}</div><p class="csub" style="margin-top:0">{esc(sh['seika'])}</p><div class="src">数字の出どころ: {esc(c.get('source_note',''))}</div></div></section>"""
+<div class="nums fi">{big}{others}</div><p class="csub" style="margin-top:0">{esc(sh['seika'])}</p></div></section>"""
     note = f'<div class="note-box"><b>なぜこの組み方にしたか</b><p>{esc(c["sakamoto_note"])}</p></div>' if c.get("sakamoto_note") else ""
     detail = f'<details class="more-fig"><summary>設計の細部を見る</summary>{zukai("_m", c["src_title"] + "：動かしてから足した1手", "動かしてから足した1手")}</details>' if c.get("detail_m") else ""
     sec_system = f"""<section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>

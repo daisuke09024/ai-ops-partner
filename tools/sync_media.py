@@ -8,7 +8,7 @@
 図解は 1920x1080 の PNG を横1600pxの WebP に変換して cases/media/ に置く（1枚 約110KB。Pillow が要る）。
 動画は無加工でコピーする。既にあるファイルは上書きする。
 """
-import argparse, glob, os, shutil, subprocess, sys
+import argparse, glob, os, re, shutil, subprocess, sys
 
 # LPの番号 → 素材の接頭辞（冒頭図解は接頭辞のあとに "_M_" "_S_" "_T3_" が付かないもの）
 CASES = {
@@ -45,7 +45,16 @@ def pick(files, infix):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", required=True)
+    ap.add_argument("--videos-dir", default=None, help="確定動画の家（営業/事例/動画）。case-NN_短編60秒.{mp4,webm} と _poster.jpg を case-NN_demo.* として上書きする")
     a = ap.parse_args()
+    if a.videos_dir:
+        out = os.path.join(ROOT, "cases", "media"); n = 0
+        for f in sorted(os.listdir(a.videos_dir)):
+            m = re.match(r"(case-\d\d)_短編60秒(_poster\.jpg|\.mp4|\.webm)$", f)
+            if not m: continue
+            dst = os.path.join(out, m.group(1) + "_demo" + m.group(2).replace("_poster.jpg", "_poster.jpg"))
+            shutil.copy2(os.path.join(a.videos_dir, f), dst); n += 1; print("video:", f, "->", os.path.relpath(dst, ROOT))
+        print(f"videos: {n} files")
     zdir = os.path.join(a.src, "anim", "zukai", "本番")
     ddir = os.path.join(a.src, "demo-clips")
     out = os.path.join(os.path.dirname(__file__), "..", "cases", "media")
