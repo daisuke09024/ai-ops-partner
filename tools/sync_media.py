@@ -56,10 +56,10 @@ def main():
     for num, pre in CASES.items():
         files = [] if a.no_zukai else sorted(glob.glob(os.path.join(zdir, f"{pre}_*.png")))
         if a.no_zukai:
-            pass
+            pass  # 図解は触らない（LP 側で作り直した版が正本）
         elif not files:
             print(f"!! 図解が無い: {pre}", file=sys.stderr); continue
-        for infix, suf in ((None, ""), ("M", "_m"), ("S", "_s")):
+        for infix, suf in (() if a.no_zukai else ((None, ""), ("M", "_m"), ("S", "_s"))):
             f = pick(files, infix)
             if not f:
                 print(f"!! {pre} の {infix or '冒頭'} が無い", file=sys.stderr); continue
