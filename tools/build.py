@@ -150,7 +150,7 @@ a{color:inherit}
 .cbody{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
 .cmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--fe);font-size:.72rem;font-weight:700;color:var(--blue);letter-spacing:.08em;margin-bottom:8px}
 .cmeta .cat{font-family:var(--fj);letter-spacing:0;font-weight:600;color:var(--tx3)}
-.cmeta .cat::before{content:'·';margin-right:8px;color:var(--border2)}
+.cmeta .cat::before{content:none}
 .cbds{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .card h3{font-size:1.05rem;font-weight:800;line-height:1.55;margin-bottom:8px;letter-spacing:-.01em}
 .card p{font-size:.88rem;color:var(--tx2);line-height:1.7;margin-bottom:16px;flex:1}
@@ -427,7 +427,7 @@ def case_card(c, root):
     vid = '<div class="cbds"><span class="bd bd-video">60秒デモ</span></div>' if c["video"] else ""
     return f"""<a class="card fi" href="{root}cases/case-{num}.html" data-cat="{esc(c['cat'])}">
 <div class="thumb"><img src="{ill_src(num, root, "_m")}" alt="{esc(c['src_title'])}のイメージ" loading="lazy" width="1600" height="900"></div>
-<div class="cbody"><div class="cmeta">CASE {num}<span class="cat">{esc(c['cat'])}</span></div>
+<div class="cbody"><div class="cmeta"><span class="cat">{esc(c['cat'])}</span></div>
 {vid}<h3>{esc(h1_txt(c['headline']))}</h3>
 {kpi_html(c['src_face'])}</div></a>"""
 
@@ -579,7 +579,7 @@ def build_case(c, prev_c, next_c):
     wow = c.get("src_wow", "").rstrip("。")
     sec_hint = f"""<section class="csec" id="hint"><div class="w"><div class="chd"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div><div class="in fi"><div class="callout"><b>{esc(c['src_hint'])}</b><p>{esc(wow)}。同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div></div></section>"""
     def ncard(x, label):
-        return f'<a class="ncard" href="case-{x["num"]}.html"><img src="{ill_src(x["num"], "", "_m").replace("cases/", "", 1)}" alt="" loading="lazy" width="1600" height="900"><div><small>{label} · CASE {x["num"]}</small><b>{esc(h1_txt(x["headline"]))}</b></div></a>'
+        return f'<a class="ncard" href="case-{x["num"]}.html"><img src="{ill_src(x["num"], "", "_m").replace("cases/", "", 1)}" alt="" loading="lazy" width="1600" height="900"><div><small>{label}</small><b>{esc(h1_txt(x["headline"]))}</b></div></a>'
     nxt = f'<div class="ngrid">{ncard(prev_c, "前の事例")}{ncard(next_c, "次の事例")}</div>'
     body = f"""{header("../")}<div class="progress" id="pg"></div>
 {fv}
