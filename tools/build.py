@@ -205,10 +205,12 @@ a{color:inherit}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
 .chero .lead{margin-bottom:24px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:640px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .kp small{display:block;font-size:.72rem;color:var(--tx3);font-weight:600;line-height:1.4}
 .kp b{display:block;font-family:var(--fe);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:800;color:var(--blue-d);line-height:1.3;letter-spacing:-.01em;margin-top:3px}
+.kp b .nw{white-space:nowrap}.kp b .ar{color:var(--blue);margin:0 3px;font-weight:600}
+.kp b.m{font-size:clamp(.92rem,1.45vw,1.12rem)}.kp b.s{font-size:clamp(.84rem,1.25vw,1rem)}
 .kp b .ja{font-family:var(--fj)}
 .chero-vis{position:relative;justify-self:end;width:100%;max-width:540px}
 .chero-vis a,.chero-vis .fr{display:block;position:relative;aspect-ratio:16/9;border-radius:var(--r2);overflow:hidden;background:var(--bg3);box-shadow:var(--sh3);border:6px solid #fff}
@@ -242,7 +244,8 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
 .num b .nw{white-space:nowrap}
-.num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
+.num b.l{font-size:clamp(1.45rem,2.7vw,2.05rem)}.num b.m{font-size:clamp(1.2rem,2.2vw,1.65rem)}.num b.s{font-size:clamp(1.05rem,1.9vw,1.4rem)}
+.num.big b.l{font-size:clamp(1.7rem,3.6vw,2.7rem)}.num.big b.m{font-size:clamp(1.5rem,3vw,2.2rem)}.num.big b.s{font-size:clamp(1.3rem,2.5vw,1.8rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
@@ -418,7 +421,7 @@ def case_card(c, root):
     return f"""<a class="card fi" href="{root}cases/case-{num}.html" data-cat="{esc(c['cat'])}">
 <div class="thumb"><img src="{ill_src(num, root, "_m")}" alt="{esc(c['src_title'])}のイメージ" loading="lazy" width="1600" height="900"></div>
 <div class="cbody"><div class="cmeta">CASE {num}<span class="cat">{esc(c['cat'])}</span></div>
-{vid}<h3>{esc(c['headline'])}</h3>
+{vid}<h3>{esc(h1_txt(c['headline']))}</h3>
 {kpi_html(c['src_face'])}</div></a>"""
 
 def sys_card(l, root):
@@ -486,15 +489,36 @@ def build_index():
     return head(title, desc, f"{SITE}/", f"{SITE}/cases/media/case-01_zukai.webp") + body
 
 # ------------------------------------------------------------------ case page
+
+def vlen(t):
+    """見た目の長さ。半角（数字・英字・記号）は 0.6、全角は 1 と数える"""
+    return sum(0.6 if ord(ch) < 128 else 1 for ch in t)
+
+def size_cls(t, digits_bonus=True):
+    """xl / l / m / s。数字が1つも無い語（次回→当日 等）は1段小さく"""
+    n = vlen(t)
+    k = 0 if n <= 4.5 else 1 if n <= 7 else 2 if n <= 10 else 3
+    if digits_bonus and not re.search(r"\d", t): k = min(3, k + 1)
+    return ["xl", "l", "m", "s"][k]
+
+def parts(t):
+    """→ の前後を折り返さない。折り返すなら → の後ろだけ"""
+    return '<span class="ar">→</span>'.join(f'<span class="nw">{esc(x.strip())}</span>' for x in t.split("→"))
+
+def h1_html(t):
+    return esc(t).replace("\n", "<br>")
+
+def h1_txt(t):
+    return t.replace("\n", "")
+
 def kp_tile(k):
-    v = esc(k["v"]).replace("→", '<span class="ar">→</span>')
-    return f'<div class="kp"><small>{esc(k["l"])}</small><b>{v}</b></div>'
+    return f'<div class="kp"><small>{esc(k["l"])}</small><b class="{size_cls(k["v"])}">{parts(k["v"])}</b></div>'
 
 def build_case(c, prev_c, next_c):
     """事例ページ（β 物語順）: FV → 課題 → 変えたこと → デモ（動画のある事例だけ）→ 結果 → 仕組み → 含む（09）→ 御社への転用。
     任意項目: c["sakamoto_note"]（なぜこの組み方にしたか。あれば仕組みの下に出す）／ c["detail_m"]=true（図解Mを折りたたみで出す。既定は出さない）"""
     num = c["num"]; sh = c["src_sheet"]; face = c["src_face"]
-    title = f"事例{num}：{c['headline']}｜{BRAND}"
+    title = f"事例{num}：{h1_txt(c['headline'])}｜{BRAND}"
     url = f"{SITE}/cases/case-{num}.html"
     img = f"{SITE}/cases/media/case-{num}_ill.webp"
     tools = "".join(f"<span>{esc(t)}</span>" for t in c["tools"])
@@ -504,7 +528,7 @@ def build_case(c, prev_c, next_c):
         return f'<div class="fig"><img class="zoomable" src="media/case-{num}_zukai{suffix}.webp" alt="{esc(alt)}" width="1600" height="900" data-cap="{esc(cap)}"><div class="fig-cap"><span>図解を押すと拡大</span><span>{esc(cap)}</span></div></div>'
     badges = f'<div class="bds"><span class="bd bd-cat">{esc(c["cat"])}</span>{"<span class=\"bd bd-video\">デモあり</span>" if c["video"] else ""}</div>'
     fv = f"""<section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE {num}</span></div>
-<div class="chero-grid"><div>{badges}<h1>{esc(c['headline'])}</h1><p class="lead">{esc(c['lead'])}</p><div class="kpis">{kpis}</div></div>
+<div class="chero-grid"><div>{badges}<h1>{h1_html(c['headline'])}</h1><p class="lead">{esc(c['lead'])}</p><div class="kpis">{kpis}</div></div>
 <div class="chero-vis fi"><div class="fr"><img src="{ill}" alt="{esc(c['src_title'])}のイメージ" width="1600" height="900"></div></div></div></div></section>"""
     sec_problem = f"""<section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>{esc(sh['haikei_t'])}</h2></div><div class="quote">{esc(c['src_problem'])}</div><p class="csub" style="margin-top:0">{esc(sh['haikei'])}</p></div></section>"""
     overview_cap = c.get("overview_h", "これまでと、AI導入後")
@@ -520,12 +544,10 @@ def build_case(c, prev_c, next_c):
         sec_demo = ""
     if "before" in face:
         sub = f'<div class="sub">{esc(face["sub"])}</div>' if face.get("sub") else ""
-        long = " long" if len(face["before"]) + len(face["after"]) > 9 else ""
-        big = f'<div class="num big"><small>{esc(face["label"])}</small><b class="{long.strip()}"><span class="nw">{esc(face["before"])}</span><span class="ar">→</span><span class="nw">{esc(face["after"])}</span></b>{sub}</div>'
+        big = f'<div class="num big"><small>{esc(face["label"])}</small><b class="{size_cls(face["before"] + "→" + face["after"])}">{parts(face["before"] + "→" + face["after"])}</b>{sub}</div>'
     else:
-        long = " long" if len(face["big"]) > 7 else ""
-        big = f'<div class="num big"><small>{esc(face.get("sub",""))}</small><b class="{long.strip()}">{esc(face["big"])}</b></div>'
-    others = "".join(f'<div class="num"><small>{esc(k["l"])}</small><b>{esc(k["v"])}</b></div>' for k in c["kpi"][1:3])
+        big = f'<div class="num big"><small>{esc(face.get("sub",""))}</small><b class="{size_cls(face["big"])}">{parts(face["big"])}</b></div>'
+    others = "".join(f'<div class="num"><small>{esc(k["l"])}</small><b class="{size_cls(k["v"])}">{parts(k["v"])}</b></div>' for k in c["kpi"][1:3])
     sec_result = f"""<section class="csec{'' if c['video'] else ' alt'}" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>{esc(sh['seika_t'])}</h2></div>
 <div class="nums fi">{big}{others}</div><p class="csub" style="margin-top:0">{esc(sh['seika'])}</p></div></section>"""
     note = f'<div class="note-box"><b>なぜこの組み方にしたか</b><p>{esc(c["sakamoto_note"])}</p></div>' if c.get("sakamoto_note") else ""
@@ -543,7 +565,7 @@ def build_case(c, prev_c, next_c):
     wow = c.get("src_wow", "").rstrip("。")
     sec_hint = f"""<section class="csec" id="hint"><div class="w"><div class="chd"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div><div class="in fi"><div class="callout"><b>{esc(c['src_hint'])}</b><p>{esc(wow)}。同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div></div></section>"""
     def ncard(x, label):
-        return f'<a class="ncard" href="case-{x["num"]}.html"><img src="{ill_src(x["num"], "", "_m").replace("cases/", "", 1)}" alt="" loading="lazy" width="1600" height="900"><div><small>{label} · CASE {x["num"]}</small><b>{esc(x["headline"])}</b></div></a>'
+        return f'<a class="ncard" href="case-{x["num"]}.html"><img src="{ill_src(x["num"], "", "_m").replace("cases/", "", 1)}" alt="" loading="lazy" width="1600" height="900"><div><small>{label} · CASE {x["num"]}</small><b>{esc(h1_txt(x["headline"]))}</b></div></a>'
     nxt = f'<div class="ngrid">{ncard(prev_c, "前の事例")}{ncard(next_c, "次の事例")}</div>'
     body = f"""{header("../")}<div class="progress" id="pg"></div>
 {fv}

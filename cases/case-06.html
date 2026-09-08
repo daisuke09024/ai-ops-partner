@@ -187,10 +187,12 @@ a{color:inherit}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
 .chero .lead{margin-bottom:24px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:640px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .kp small{display:block;font-size:.72rem;color:var(--tx3);font-weight:600;line-height:1.4}
 .kp b{display:block;font-family:var(--fe);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:800;color:var(--blue-d);line-height:1.3;letter-spacing:-.01em;margin-top:3px}
+.kp b .nw{white-space:nowrap}.kp b .ar{color:var(--blue);margin:0 3px;font-weight:600}
+.kp b.m{font-size:clamp(.92rem,1.45vw,1.12rem)}.kp b.s{font-size:clamp(.84rem,1.25vw,1rem)}
 .kp b .ja{font-family:var(--fj)}
 .chero-vis{position:relative;justify-self:end;width:100%;max-width:540px}
 .chero-vis a,.chero-vis .fr{display:block;position:relative;aspect-ratio:16/9;border-radius:var(--r2);overflow:hidden;background:var(--bg3);box-shadow:var(--sh3);border:6px solid #fff}
@@ -224,7 +226,8 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
 .num b .nw{white-space:nowrap}
-.num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
+.num b.l{font-size:clamp(1.45rem,2.7vw,2.05rem)}.num b.m{font-size:clamp(1.2rem,2.2vw,1.65rem)}.num b.s{font-size:clamp(1.05rem,1.9vw,1.4rem)}
+.num.big b.l{font-size:clamp(1.7rem,3.6vw,2.7rem)}.num.big b.m{font-size:clamp(1.5rem,3vw,2.2rem)}.num.big b.s{font-size:clamp(1.3rem,2.5vw,1.8rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
@@ -282,14 +285,14 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <body>
 <header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 06</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">研修・育成</span></div><h1>レクチャーの疑問を、次回ではなく当日のうちに返す</h1><p class="lead">録画から受講者の疑問と、答えられなかった箇所を集める。根拠つきの回答1枚と、次回教材への反映を同じ素材から作る。</p><div class="kpis"><div class="kp"><small>疑問が解けるまで</small><b>次回<span class="ar">→</span>当日</b></div><div class="kp"><small>回答1枚の構成</small><b>結論<span class="ar">→</span>根拠<span class="ar">→</span>出典</b></div><div class="kp"><small>前回の癖が消えたか</small><b>○×で毎回判定</b></div></div></div>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">研修・育成</span></div><h1>レクチャーの疑問を、次回ではなく当日のうちに返す</h1><p class="lead">録画から受講者の疑問と、答えられなかった箇所を集める。根拠つきの回答1枚と、次回教材への反映を同じ素材から作る。</p><div class="kpis"><div class="kp"><small>疑問が解けるまで</small><b class="m"><span class="nw">次回</span><span class="ar">→</span><span class="nw">当日</span></b></div><div class="kp"><small>回答1枚の構成</small><b class="s"><span class="nw">結論</span><span class="ar">→</span><span class="nw">根拠</span><span class="ar">→</span><span class="nw">出典</span></b></div><div class="kp"><small>前回の癖が消えたか</small><b class="m"><span class="nw">○×で毎回判定</span></b></div></div></div>
 <div class="chero-vis fi"><div class="fr"><img src="media/case-06_ill.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）のイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>レクチャーは「やって終わり」になりやすい</h2></div><div class="quote">研修やレクチャーをやりっぱなしにして、受講者の疑問が次回まで放置される</div><p class="csub" style="margin-top:0">内製化支援のレクチャーでは、その場で答えられなかった質問や、あいまいに答えた箇所が必ず出る。録画は残っても、受講者への回答も教材の改善も、次回の準備に押し流されて後回しになる。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>疑問と詰まりを1箇所に集め、AI が論点にまとめて次回の教材へ反映</h2></div><p class="csub">録画を手元で文字に起こし、誰が話したかを分ける。推測で答えた箇所、実演に失敗した箇所、わざと飛ばした箇所を拾う。公式の一次情報で裏を取り直し、受講者へ返す回答1枚（結論→根拠→出典）を作る。自分の誤りの訂正を必ず含める。教材への反映と、次回冒頭で答える枠への積み上げまで、同じ流れで進む。</p><div class="tools"><small>使った道具</small><span>文字起こし（ローカル）</span><span>Claude Code</span></div>
 <div class="in fi"><div class="fig"><img class="zoomable" src="media/case-06_zukai.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
 
 <section class="csec alt" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>疑問が次回まで持ち越されず、当日のうちに解ける</h2></div>
-<div class="nums fi"><div class="num big"><small>疑問が解けるまで</small><b class=""><span class="nw">次回</span><span class="ar">→</span><span class="nw">当日</span></b></div><div class="num"><small>回答1枚の構成</small><b>結論→根拠→出典</b></div><div class="num"><small>前回の癖が消えたか</small><b>○×で毎回判定</b></div></div><p class="csub" style="margin-top:0">第0回・第1回とも、レクチャー後すぐに疑問への回答を1枚にして返した。回ごとに、前回の癖が消えたかを○×で判定し、3回連続○なら「直った」として畳む。送る判断は人が持ち、AI は作るところまで。</p></div></section>
+<div class="nums fi"><div class="num big"><small>疑問が解けるまで</small><b class="m"><span class="nw">次回</span><span class="ar">→</span><span class="nw">当日</span></b></div><div class="num"><small>回答1枚の構成</small><b class="s"><span class="nw">結論</span><span class="ar">→</span><span class="nw">根拠</span><span class="ar">→</span><span class="nw">出典</span></b></div><div class="num"><small>前回の癖が消えたか</small><b class="m"><span class="nw">○×で毎回判定</span></b></div></div><p class="csub" style="margin-top:0">第0回・第1回とも、レクチャー後すぐに疑問への回答を1枚にして返した。回ごとに、前回の癖が消えたかを○×で判定し、3回連続○なら「直った」として畳む。送る判断は人が持ち、AI は作るところまで。</p></div></section>
 <section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
 <div class="in fi"><div class="fig"><img class="zoomable" src="media/case-06_zukai_s.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
 

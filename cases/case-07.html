@@ -187,10 +187,12 @@ a{color:inherit}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
 .chero .lead{margin-bottom:24px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:640px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .kp small{display:block;font-size:.72rem;color:var(--tx3);font-weight:600;line-height:1.4}
 .kp b{display:block;font-family:var(--fe);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:800;color:var(--blue-d);line-height:1.3;letter-spacing:-.01em;margin-top:3px}
+.kp b .nw{white-space:nowrap}.kp b .ar{color:var(--blue);margin:0 3px;font-weight:600}
+.kp b.m{font-size:clamp(.92rem,1.45vw,1.12rem)}.kp b.s{font-size:clamp(.84rem,1.25vw,1rem)}
 .kp b .ja{font-family:var(--fj)}
 .chero-vis{position:relative;justify-self:end;width:100%;max-width:540px}
 .chero-vis a,.chero-vis .fr{display:block;position:relative;aspect-ratio:16/9;border-radius:var(--r2);overflow:hidden;background:var(--bg3);box-shadow:var(--sh3);border:6px solid #fff}
@@ -224,7 +226,8 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
 .num b .nw{white-space:nowrap}
-.num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
+.num b.l{font-size:clamp(1.45rem,2.7vw,2.05rem)}.num b.m{font-size:clamp(1.2rem,2.2vw,1.65rem)}.num b.s{font-size:clamp(1.05rem,1.9vw,1.4rem)}
+.num.big b.l{font-size:clamp(1.7rem,3.6vw,2.7rem)}.num.big b.m{font-size:clamp(1.5rem,3vw,2.2rem)}.num.big b.s{font-size:clamp(1.3rem,2.5vw,1.8rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
@@ -282,7 +285,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <body>
 <header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 07</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">数字の見える化</span><span class="bd bd-video">デモあり</span></div><h1>カレンダーに予定を入れるだけ。稼働時間の集計は0分</h1><p class="lead">Google カレンダーの予定を AI が仕分けし、何に何時間使ったかをダッシュボードに出す。営業に週12時間を確保できているかを実測で追える。</p><div class="kpis"><div class="kp"><small>月次の工数集計</small><b>手集計<span class="ar">→</span>0分</b></div><div class="kp"><small>予定の分類</small><b>AIが自動</b></div><div class="kp"><small>営業時間の目標</small><b>週12hを実測</b></div></div></div>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">数字の見える化</span><span class="bd bd-video">デモあり</span></div><h1>カレンダーに予定を入れるだけ。稼働時間の集計は0分</h1><p class="lead">Google カレンダーの予定を AI が仕分けし、何に何時間使ったかをダッシュボードに出す。営業に週12時間を確保できているかを実測で追える。</p><div class="kpis"><div class="kp"><small>月次の工数集計</small><b class="l"><span class="nw">手集計</span><span class="ar">→</span><span class="nw">0分</span></b></div><div class="kp"><small>予定の分類</small><b class="l"><span class="nw">AIが自動</span></b></div><div class="kp"><small>営業時間の目標</small><b class="l"><span class="nw">週12hを実測</span></b></div></div></div>
 <div class="chero-vis fi"><div class="fr"><img src="media/case-07_ill.webp" alt="稼働時間の自動集計のイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>「何に何時間使ったか」を集計する時間がない</h2></div><div class="quote">何に何時間使ったか、分からない</div><p class="csub" style="margin-top:0">稼働配分は経営判断の材料なのに、工数集計は後回しになりがち。手集計は続かず、感覚で「忙しい」と言うしかなかった。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>カレンダーの予定をAIが自動分類・自動集計</h2></div><p class="csub">Googleカレンダーに予定を入れるだけで、AIが「営業/発信/案件/仕組み化」に自動分類し、ダッシュボードで稼働時間を可視化する。</p><div class="tools"><small>使った道具</small><span>Google カレンダー</span><span>GAS</span><span>Google スプレッドシート</span></div>
@@ -291,7 +294,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-07_demo_poster.jpg" controls aria-label="稼働時間の自動集計のデモ（60秒・架空データ）"><source src="media/case-07_demo.webm" type="video/webm"><source src="media/case-07_demo.mp4" type="video/mp4"></video>
 <div class="vid-cap"><b>60秒・字幕とナレーションつき（自動再生中は無音）</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
 <section class="csec" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>集計0分で「今月の時間の使い方」に即答できる</h2></div>
-<div class="nums fi"><div class="num big"><small>月次の工数集計</small><b class=""><span class="nw">手で集計</span><span class="ar">→</span><span class="nw">0分</span></b></div><div class="num"><small>予定の分類</small><b>AIが自動</b></div><div class="num"><small>営業時間の目標</small><b>週12hを実測</b></div></div><p class="csub" style="margin-top:0">営業時間の確保状況（週12h目標）を実測で追える状態になった。集計という仕事自体が消えた。</p></div></section>
+<div class="nums fi"><div class="num big"><small>月次の工数集計</small><b class="l"><span class="nw">手で集計</span><span class="ar">→</span><span class="nw">0分</span></b></div><div class="num"><small>予定の分類</small><b class="l"><span class="nw">AIが自動</span></b></div><div class="num"><small>営業時間の目標</small><b class="l"><span class="nw">週12hを実測</span></b></div></div><p class="csub" style="margin-top:0">営業時間の確保状況（週12h目標）を実測で追える状態になった。集計という仕事自体が消えた。</p></div></section>
 <section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
 <div class="in fi"><div class="fig"><img class="zoomable" src="media/case-07_zukai_s.webp" alt="稼働時間の自動集計：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
 

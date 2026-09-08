@@ -187,10 +187,12 @@ a{color:inherit}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
 .chero .lead{margin-bottom:24px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:640px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .kp small{display:block;font-size:.72rem;color:var(--tx3);font-weight:600;line-height:1.4}
 .kp b{display:block;font-family:var(--fe);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:800;color:var(--blue-d);line-height:1.3;letter-spacing:-.01em;margin-top:3px}
+.kp b .nw{white-space:nowrap}.kp b .ar{color:var(--blue);margin:0 3px;font-weight:600}
+.kp b.m{font-size:clamp(.92rem,1.45vw,1.12rem)}.kp b.s{font-size:clamp(.84rem,1.25vw,1rem)}
 .kp b .ja{font-family:var(--fj)}
 .chero-vis{position:relative;justify-self:end;width:100%;max-width:540px}
 .chero-vis a,.chero-vis .fr{display:block;position:relative;aspect-ratio:16/9;border-radius:var(--r2);overflow:hidden;background:var(--bg3);box-shadow:var(--sh3);border:6px solid #fff}
@@ -224,7 +226,8 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 .num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
 .num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
 .num b .nw{white-space:nowrap}
-.num.big b.long{font-size:clamp(1.5rem,3.2vw,2.3rem)}
+.num b.l{font-size:clamp(1.45rem,2.7vw,2.05rem)}.num b.m{font-size:clamp(1.2rem,2.2vw,1.65rem)}.num b.s{font-size:clamp(1.05rem,1.9vw,1.4rem)}
+.num.big b.l{font-size:clamp(1.7rem,3.6vw,2.7rem)}.num.big b.m{font-size:clamp(1.5rem,3vw,2.2rem)}.num.big b.s{font-size:clamp(1.3rem,2.5vw,1.8rem)}
 .num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
 .csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
 .note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
@@ -282,14 +285,14 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <body>
 <header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 09</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">資料・制作物</span></div><h1>資料づくり12工程のうち、人がやるのは2回だけ</h1><p class="lead">ヒアリングから配布 PDF までの12工程で、人の手が要るのは依頼メモの承認と仕上がりの目視だけ。保存のたびに28項目の検査が自動で走り、型は作るほど増える。</p><div class="kpis"><div class="kp"><small>12工程のうち人が入る回数</small><b>2回</b></div><div class="kp"><small>保存時に自動で走る検査</small><b>28項目</b></div><div class="kp"><small>溜まった型と知見</small><b>型24・知見53件</b></div></div></div>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">資料・制作物</span></div><h1>資料づくり12工程のうち、人がやるのは2回だけ</h1><p class="lead">ヒアリングから配布 PDF までの12工程で、人の手が要るのは依頼メモの承認と仕上がりの目視だけ。保存のたびに28項目の検査が自動で走り、型は作るほど増える。</p><div class="kpis"><div class="kp"><small>12工程のうち人が入る回数</small><b class="xl"><span class="nw">2回</span></b></div><div class="kp"><small>保存時に自動で走る検査</small><b class="xl"><span class="nw">28項目</span></b></div><div class="kp"><small>溜まった型と知見</small><b class="m"><span class="nw">型24・知見53件</span></b></div></div></div>
 <div class="chero-vis fi"><div class="fr"><img src="media/case-09_ill.webp" alt="資料づくりで人がやることは2つだけのイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>AIに作らせても、確認の往復で時間が戻ってくる</h2></div><div class="quote">AIに任せても、結局レビューで時間が溶ける</div><p class="csub" style="margin-top:0">生成は速くなっても「これでいい？」の確認が工程ごとに挟まると、結局は人の時間が奪われる。どこで止まるべきかが決まっていないと、確認が無限に増える。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>人が入る場所を2箇所に固定した</h2></div><p class="csub">ヒアリングから配布 PDF までの12工程のうち、人の判断は依頼メモ（ブリーフ）の承認と、仕上がりの目視だけ。途中で「〜しますか？」を挟まない。</p><div class="tools"><small>使った道具</small><span>Claude Code</span></div>
 <div class="in fi"><div class="fig"><img class="zoomable" src="media/case-09_zukai.webp" alt="資料づくりで人がやることは2つだけの図解（これまでとAI導入後）" width="1600" height="900" data-cap="使うほど育つ仕組みを1枚で"><div class="fig-cap"><span>図解を押すと拡大</span><span>使うほど育つ仕組みを1枚で</span></div></div></div></div></section>
 
 <section class="csec alt" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>確認は1件あたり2回で完結する</h2></div>
-<div class="nums fi"><div class="num big"><small>承認と、最後の目視</small><b class="long">12工程 → 人は2回</b></div><div class="num"><small>保存時に自動で走る検査</small><b>28項目</b></div><div class="num"><small>溜まった型と知見</small><b>型24・知見53件</b></div></div><p class="csub" style="margin-top:0">直しが一番安い場所（依頼メモ）と、最後の合否だけを人が見る。差し戻しの戻り先も工程ごとに決めてある。</p></div></section>
+<div class="nums fi"><div class="num big"><small>承認と、最後の目視</small><b class="m"><span class="nw">12工程</span><span class="ar">→</span><span class="nw">人は2回</span></b></div><div class="num"><small>保存時に自動で走る検査</small><b class="xl"><span class="nw">28項目</span></b></div><div class="num"><small>溜まった型と知見</small><b class="m"><span class="nw">型24・知見53件</span></b></div></div><p class="csub" style="margin-top:0">直しが一番安い場所（依頼メモ）と、最後の合否だけを人が見る。差し戻しの戻り先も工程ごとに決めてある。</p></div></section>
 <section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
 <div class="in fi"><div class="fig"><img class="zoomable" src="media/case-09_zukai_s.webp" alt="資料づくりで人がやることは2つだけ：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
 <section class="csec" id="incl"><div class="w"><div class="chd"><span class="tag tag-b">含む</span><h2>この事例に含めている仕組み</h2></div><p class="csub">別々に動いている2つの仕組みを、資料づくりの一連の流れとしてここにまとめています。</p><div class="in incl fi"><div class="inc"><span class="bd bd-live">稼働中</span><h3>資料の品質を機械が見張る</h3><span class="n">28項目</span> <small style="color:var(--tx3);font-size:.78rem">保存した瞬間に自動で走る</small><p>スライドを保存すると、AIっぽさ17種・文章量3種・実描画の崩れ3種・置き場所5種の検査が自動で走る。人が思い出す必要がない</p></div><div class="inc"><span class="bd bd-live">育成中</span><h3>作るほど道具が育つ資料づくり</h3><span class="n">型24 ＋ 知見53件</span> <small style="color:var(--tx3);font-size:.78rem">1枚作るたびに台帳が増える</small><p>スライドを1枚作るたびに、構図の型・色の決まり・外部から取り入れた知見が台帳に1行ずつ足される</p></div></div></div></section>
