@@ -47,14 +47,6 @@ def main():
     ap.add_argument("--src", required=True)
     ap.add_argument("--videos-dir", default=None, help="確定動画の家（営業/事例/動画）。case-NN_短編60秒.{mp4,webm} と _poster.jpg を case-NN_demo.* として上書きする")
     a = ap.parse_args()
-    if a.videos_dir:
-        out = os.path.join(ROOT, "cases", "media"); n = 0
-        for f in sorted(os.listdir(a.videos_dir)):
-            m = re.match(r"(case-\d\d)_短編60秒(_poster\.jpg|\.mp4|\.webm)$", f)
-            if not m: continue
-            dst = os.path.join(out, m.group(1) + "_demo" + m.group(2).replace("_poster.jpg", "_poster.jpg"))
-            shutil.copy2(os.path.join(a.videos_dir, f), dst); n += 1; print("video:", f, "->", os.path.relpath(dst, ROOT))
-        print(f"videos: {n} files")
     zdir = os.path.join(a.src, "anim", "zukai", "本番")
     ddir = os.path.join(a.src, "demo-clips")
     out = os.path.join(os.path.dirname(__file__), "..", "cases", "media")
@@ -86,6 +78,15 @@ def main():
         dst = os.path.join(out, f"{key}.webp")
         scale_png(files[0], dst); done.append(dst)
     print(f"取り込み {len(done)} 件")
+
+    if a.videos_dir:
+        ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..")); out = os.path.join(ROOT, "cases", "media"); n = 0
+        for f in sorted(os.listdir(a.videos_dir)):
+            m = re.match(r"(case-\d\d)_短編60秒(_poster\.jpg|\.mp4|\.webm)$", f)
+            if not m: continue
+            dst = os.path.join(out, m.group(1) + "_demo" + m.group(2).replace("_poster.jpg", "_poster.jpg"))
+            shutil.copy2(os.path.join(a.videos_dir, f), dst); n += 1; print("video:", f, "->", os.path.relpath(dst, ROOT))
+        print(f"videos: {n} files")
 
 if __name__ == "__main__":
     main()

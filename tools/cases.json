@@ -102,7 +102,8 @@
         }
       ],
       "video": true,
-      "source_note": "前職で公開済みの実績スライド"
+      "source_note": "前職で公開済みの実績スライド",
+      "voice": true
     },
     {
       "id": "acrove-docs",
@@ -355,7 +356,8 @@
         }
       ],
       "video": true,
-      "source_note": "自社の実測（毎月の集計）"
+      "source_note": "自社の実測（毎月の集計）",
+      "voice": true
     },
     {
       "id": "shodan-rail",
