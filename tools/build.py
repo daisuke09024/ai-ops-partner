@@ -422,7 +422,7 @@ def case_card(c, root):
 
 def sys_card(l, root):
     ext = l.get("src_origin") == "external"
-    badge = '<span class="bd bd-ext">他社の事例</span>' if ext else f'<span class="bd bd-live">{esc(l["src_status"].split("（")[0].replace("⚡ ","").replace("🧰 ","").replace("🤝 ",""))}</span>'
+    badge = '<span class="bd bd-ext">組める仕組み</span>' if ext else f'<span class="bd bd-live">{esc(l["src_status"].split("（")[0].replace("⚡ ","").replace("🧰 ","").replace("🤝 ",""))}</span>'
     img = l.get("img") or f"{l['key']}.webp"
     full = f' data-full="{root}cases/media/{l["img_full"]}"' if l.get("img_full") else ""
     return f"""<div class="scard zoomable fi" data-cap="{esc(l['src_title'])}"><div class="thumb"><img src="{root}cases/media/{img}"{full} alt="{esc(l['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>

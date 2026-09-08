@@ -522,7 +522,7 @@
         "big": "URL1本",
         "sub": "会社を調べて「御社向け」の文面まで自動"
       },
-      "src_problem": "営業文面が毎回コピペ・フォローが漏れる",
+      "src_problem": "テンプレの文面しか送れず、相手ごとの言葉にならない",
       "src_desc": "企業URLを渡すと会社を調査して営業文を自動生成。リスト管理・商談DB・フォローの自動リマインドまで一式で設計",
       "src_wow": "コピペ営業が消えた。1社ずつ固有の文面と、送った後の追いかけまで仕組みで回る",
       "src_hint": "営業の「文面を考える」と「フォローを忘れない」は、どちらもAIと仕組みに渡せる",
@@ -586,7 +586,7 @@
         "seika": "実例では、放置していた手続き整理タスクをAIが既存資料から期限順リストに変換し、日付の矛盾まで発見して警告。人間の着手前に仕事が進む状態を実現した。"
       },
       "src_category": "記録・振り返り",
-      "src_status": "⚡ 平日毎日稼働中",
+      "src_status": "⚡ 毎日稼働中",
       "src_origin": "self",
       "img": "list-saki_real.webp"
     },
@@ -637,7 +637,8 @@
       },
       "src_category": "会議・議事録",
       "src_status": "🌐 他社事例（参考）",
-      "src_origin": "external"
+      "src_origin": "external",
+      "img": "list-1on1_real.webp"
     },
     {
       "id": "gaisha-sales-process-automation",
