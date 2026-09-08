@@ -486,7 +486,8 @@
       "src_category": "営業・顧客対応",
       "src_status": "🧰 営業で使用中",
       "src_origin": "self",
-      "img": "list-form_real.webp"
+      "img": "list-form_ai.webp",
+      "img_full": "list-form_full.webp"
     },
     {
       "id": "ficks-lp",
@@ -511,7 +512,8 @@
       "src_category": "資料・制作物",
       "src_status": "🤝 実案件で納品",
       "src_origin": "self",
-      "img": "list-lp_real.webp"
+      "img": "list-lp_ai.webp",
+      "img_full": "list-lp_full.webp"
     },
     {
       "id": "task-prep",
@@ -537,7 +539,8 @@
       "src_category": "記録・振り返り",
       "src_status": "⚡ 毎日稼働中",
       "src_origin": "self",
-      "img": "list-saki_real.webp"
+      "img": "list-saki_ai.webp",
+      "img_full": "list-saki_full.webp"
     },
     {
       "id": "diary",
@@ -563,7 +566,8 @@
       "src_category": "記録・振り返り",
       "src_status": "⚡ 毎分記録中",
       "src_origin": "self",
-      "img": "list-nikki_real.webp"
+      "img": "list-nikki_ai.webp",
+      "img_full": "list-nikki_full.webp"
     },
     {
       "id": "gaisha-1on1-prep",
@@ -587,7 +591,8 @@
       "src_category": "会議・議事録",
       "src_status": "🌐 他社事例（参考）",
       "src_origin": "external",
-      "img": "list-1on1_real.webp"
+      "img": "list-1on1_ai.webp",
+      "img_full": "list-1on1_full.webp"
     },
     {
       "id": "gaisha-sales-process-automation",
@@ -610,7 +615,9 @@
       },
       "src_category": "営業・顧客対応",
       "src_status": "🌐 他社事例（参考）",
-      "src_origin": "external"
+      "src_origin": "external",
+      "img": "list-shodan_ai.webp",
+      "img_full": "list-shodan_full.webp"
     },
     {
       "id": "gaisha-member-growth-os",
@@ -633,7 +640,9 @@
       },
       "src_category": "記録・振り返り",
       "src_status": "🌐 他社事例（参考）",
-      "src_origin": "external"
+      "src_origin": "external",
+      "img": "list-growth_ai.webp",
+      "img_full": "list-growth_full.webp"
     },
     {
       "id": "gaisha-slack-engagement",
@@ -656,7 +665,9 @@
       },
       "src_category": "数字の見える化",
       "src_status": "🌐 他社事例（参考）",
-      "src_origin": "external"
+      "src_origin": "external",
+      "img": "list-slack_ai.webp",
+      "img_full": "list-slack_full.webp"
     },
     {
       "id": "ecosystem-map",

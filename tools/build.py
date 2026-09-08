@@ -436,7 +436,7 @@ def sys_card(l, root):
     badge = '<span class="bd bd-ext">組める仕組み</span>' if ext else f'<span class="bd bd-live">{esc(l["src_status"].split("（")[0].replace("⚡ ","").replace("🧰 ","").replace("🤝 ",""))}</span>'
     img = l.get("img") or f"{l['key']}.webp"
     full = f' data-full="{root}cases/media/{l["img_full"]}"' if l.get("img_full") else ""
-    return f"""<div class="scard zoomable fi" data-cap="{esc(l['src_title'])}"><div class="thumb"><img src="{root}cases/media/{img}"{full} alt="{esc(l['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>
+    return f"""<div class="scard zoomable fi" data-cap="{esc(l['src_title'])}"><div class="thumb"><img src="{root}cases/media/{img}"{full} alt="{esc(l['src_title'])}" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><div class="smeta">{esc(l.get('src_category',''))}</div><h3>{esc(l['src_title'])}</h3><p>{esc(l['src_problem'])}</p></div>{badge}</div></div>"""
 
 # ------------------------------------------------------------------ index
@@ -480,7 +480,7 @@ def build_index():
 </div></section>
 
 <section class="sec" id="systems" style="background:var(--bg2)"><div class="w">
-<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">日々動いている仕組み。図解を押すと拡大します。</p></div><div class="count">{len(lists)}<small>件</small></div></div>
+<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">日々動いている仕組み。絵を押すと、これまでとAI導入後の図解が開きます。</p></div><div class="count">{len(lists)}<small>件</small></div></div>
 <div class="sgrid">{"".join(sys_card(l, "") for l in lists)}</div>
 </div></section>
 
