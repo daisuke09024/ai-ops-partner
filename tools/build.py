@@ -305,6 +305,29 @@ const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.a
 (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
 """
 
+JS_FB = r"""
+(function(){if(!/[?&]fb=1(&|$)/.test(location.search))return;
+var KEY='lpfb:'+location.pathname.replace(/\/index\.html$/,'/');var notes=[];try{notes=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+var st=document.createElement('style');st.textContent='.fbx{outline:2px dashed #e11d48!important;outline-offset:2px;position:relative}.fbpin{position:absolute;z-index:99998;background:#e11d48;color:#fff;font:700 12px/22px system-ui;width:22px;height:22px;border-radius:50%;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.3);pointer-events:none}#fbp{position:fixed;right:16px;bottom:16px;z-index:99999;width:340px;max-height:70vh;display:flex;flex-direction:column;background:#fff;border:1px solid #cbd5e1;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.25);font:13px/1.5 system-ui,sans-serif;color:#111}#fbp .h{padding:10px 14px;font-weight:700;background:#e11d48;color:#fff;border-radius:12px 12px 0 0}#fbp .l{overflow:auto;padding:8px 14px;flex:1}#fbp .l div{padding:6px 0;border-bottom:1px solid #eee}#fbp .l b{color:#e11d48;margin-right:6px}#fbp .l small{display:block;color:#64748b}#fbp .b{display:flex;gap:6px;padding:8px 14px;flex-wrap:wrap}#fbp button{font:600 12px system-ui;padding:6px 10px;border-radius:8px;border:1px solid #cbd5e1;background:#f8fafc;cursor:pointer}#fbp button.p{background:#111;color:#fff;border-color:#111}#fbp textarea{margin:0 14px 12px;height:90px;font:11px/1.4 ui-monospace,monospace;border:1px solid #cbd5e1;border-radius:8px;padding:6px}#fbp .t{padding:0 14px 8px;color:#64748b;font-size:11px}';document.head.appendChild(st);
+var panel=document.createElement('div');panel.id='fbp';panel.innerHTML='<div class="h">FBモード（このページ <span id="fbn">0</span> 件）</div><div class="t">直したい場所をクリック → メモを書く。終わったら「コピー」してチャットに貼る</div><div class="l" id="fbl"></div><div class="b"><button class="p" id="fbcopy">このページ分をコピー</button><button id="fball">全ページ分をコピー</button><button id="fbclr">このページ分を消す</button></div><textarea id="fbout" readonly placeholder="コピーした文がここにも出ます"></textarea>';document.body.appendChild(panel);
+function save(){localStorage.setItem(KEY,JSON.stringify(notes));render()}
+function place(){document.querySelectorAll('.fbpin').forEach(function(p){p.remove()});document.querySelectorAll('.fbx').forEach(function(e){e.classList.remove('fbx')});notes.forEach(function(n,i){var el=null;try{el=document.querySelector(n.sel)}catch(e){}if(!el)return;el.classList.add('fbx');var r=el.getBoundingClientRect();var pin=document.createElement('div');pin.className='fbpin';pin.textContent=i+1;pin.style.left=(r.left+scrollX-8)+'px';pin.style.top=(r.top+scrollY-8)+'px';document.body.appendChild(pin)})}
+function render(){document.getElementById('fbn').textContent=notes.length;document.getElementById('fbl').innerHTML=notes.map(function(n,i){return '<div><b>'+(i+1)+'</b>'+esc(n.note)+'<small>'+esc(n.where)+' 「'+esc(n.text)+'」</small></div>'}).join('')||'<div style="color:#94a3b8">まだありません</div>';place()}
+function esc(t){return String(t).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function selOf(el){var parts=[];while(el&&el!==document.body){var t=el.tagName.toLowerCase();if(el.id){parts.unshift('#'+CSS.escape(el.id));break}var i=1,sib=el;while((sib=sib.previousElementSibling))i++;parts.unshift(t+':nth-child('+i+')');el=el.parentElement}return parts.join('>')}
+function whereOf(el){var sec=el.closest('section,header,footer');var h=sec&&sec.querySelector('h1,h2');var w=sec?(sec.id?'#'+sec.id:sec.tagName.toLowerCase()):'';if(h)w+=' '+h.textContent.trim().slice(0,30);return w||'ページ上部'}
+function textOf(el){return (el.innerText||el.alt||el.getAttribute('aria-label')||'').replace(/\s+/g,' ').trim().slice(0,60)}
+function out(txt){var ta=document.getElementById('fbout');ta.value=txt;ta.select();if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(function(){});}
+function md(key,arr){var path=key.replace('lpfb:','');return '## '+path+'\n'+arr.map(function(n,i){return '- ['+(i+1)+'] '+n.where+' 「'+n.text+'」 → '+n.note}).join('\n')+'\n'}
+document.addEventListener('click',function(ev){if(panel.contains(ev.target))return;ev.preventDefault();ev.stopPropagation();var el=ev.target.closest('h1,h2,h3,p,li,a,button,img,video,small,b,span,div');if(!el)return;var note=prompt('この場所へのメモ:\n「'+textOf(el)+'」');if(!note)return;notes.push({sel:selOf(el),where:whereOf(el),text:textOf(el),note:note,at:new Date().toISOString().slice(0,16)});save()},true);
+document.getElementById('fbcopy').addEventListener('click',function(){out(md(KEY,notes))},true);
+document.getElementById('fball').addEventListener('click',function(){var all=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf('lpfb:')===0){try{var a=JSON.parse(localStorage.getItem(k)||'[]');if(a.length)all.push(md(k,a))}catch(e){}}}out(all.join('\n')||'（メモはありません）')},true);
+document.getElementById('fbclr').addEventListener('click',function(){if(confirm('このページのメモを全部消しますか？')){notes=[];save()}},true);
+addEventListener('resize',place);addEventListener('scroll',function(){place()},{passive:true});
+document.querySelectorAll('.fi').forEach(function(e){e.style.opacity='1';e.style.transform='none'});
+render()})();
+"""
+
 JS_INDEX = r"""
 (function(){const cards=[...document.querySelectorAll('#cases .card')];const cnt=document.getElementById('ccount');
 let cat='all';
@@ -384,13 +407,13 @@ def case_card(c, root):
 <div class="thumb"><img src="{ill_src(num, root, "_m")}" alt="{esc(c['src_title'])}のイメージ" loading="lazy" width="1600" height="900"></div>
 <div class="cbody"><div class="cmeta">CASE {num}<span class="cat">{esc(c['cat'])}</span></div>
 {vid}<h3>{esc(c['headline'])}</h3>
-<p>{esc(c['src_problem'])}</p>
 {kpi_html(c['src_face'])}</div></a>"""
 
 def sys_card(l, root):
     ext = l.get("src_origin") == "external"
     badge = '<span class="bd bd-ext">他社の事例</span>' if ext else f'<span class="bd bd-live">{esc(l["src_status"].split("（")[0].replace("⚡ ","").replace("🧰 ","").replace("🤝 ",""))}</span>'
-    return f"""<div class="scard zoomable fi" data-cap="{esc(l['src_title'])}"><div class="thumb"><img src="{root}cases/media/{l['key']}.webp" alt="{esc(l['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>
+    img = l.get("img") or f"{l['key']}.webp"
+    return f"""<div class="scard zoomable fi" data-cap="{esc(l['src_title'])}"><div class="thumb"><img src="{root}cases/media/{img}" alt="{esc(l['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><h3>{esc(l['src_title'])}</h3><p>{esc(l['src_problem'])}</p></div>{badge}</div></div>"""
 
 # ------------------------------------------------------------------ index
@@ -445,7 +468,7 @@ def build_index():
 <div class="note">3営業日以内に返信します。売り込みの電話はしません。</div>
 </div></section>
 {footer("")}
-<script>{JS_COMMON}{JS_INDEX}</script>
+<script>{JS_COMMON}{JS_INDEX}{JS_FB}</script>
 </body></html>"""
     return head(title, desc, f"{SITE}/", f"{SITE}/cases/media/case-01_zukai.webp") + body
 
@@ -526,7 +549,7 @@ def build_case(c, prev_c, next_c):
 <a href="{TALLY}" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
 </div></section>
 {footer("../")}
-<script>{JS_COMMON}{JS_CASE}</script>
+<script>{JS_COMMON}{JS_CASE}{JS_FB}</script>
 </body></html>"""
     return head(title, c["lead"], url, img) + body
 
