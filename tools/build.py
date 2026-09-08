@@ -170,6 +170,7 @@ a{color:inherit}
 .scard:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
 .scard .thumb{aspect-ratio:16/9;border-bottom:1px solid var(--border)}
 .sbody{padding:14px 18px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.smeta{font-family:var(--fj);font-size:.72rem;font-weight:600;color:var(--tx3);margin-bottom:4px}
 .sbody h3{font-size:.98rem;font-weight:800;line-height:1.5;margin-bottom:3px}
 .sbody p{font-size:.8rem;color:var(--tx3);line-height:1.6}
 .sbody .bd{flex-shrink:0;margin-top:2px}
@@ -426,7 +427,7 @@ def sys_card(l, root):
     img = l.get("img") or f"{l['key']}.webp"
     full = f' data-full="{root}cases/media/{l["img_full"]}"' if l.get("img_full") else ""
     return f"""<div class="scard zoomable fi" data-cap="{esc(l['src_title'])}"><div class="thumb"><img src="{root}cases/media/{img}"{full} alt="{esc(l['src_title'])}の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><div><h3>{esc(l['src_title'])}</h3><p>{esc(l['src_problem'])}</p></div>{badge}</div></div>"""
+<div class="sbody"><div><div class="smeta">{esc(l.get('src_category',''))}</div><h3>{esc(l['src_title'])}</h3><p>{esc(l['src_problem'])}</p></div>{badge}</div></div>"""
 
 # ------------------------------------------------------------------ index
 def build_index():
