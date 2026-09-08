@@ -1,0 +1,63 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>書かない日記</title>
+<style>
+html,body{margin:0;background:#fff}
+body{width:1600px;height:900px;position:relative;overflow:hidden;font-family:"Hiragino Sans","Zen Kaku Gothic New","Noto Sans JP",sans-serif;color:#0f1d35}
+.title{position:absolute;left:44px;top:34px;font-size:44px;font-weight:900;letter-spacing:-.01em;line-height:1.2;white-space:nowrap}
+.meta{position:absolute;left:44px;top:96px;font-size:21px;color:#5b6b85;font-weight:700;white-space:nowrap}
+.meta b{color:#2563eb}
+.strip{position:absolute;left:44px;top:150px;width:700px;height:606px;border:1px solid #cbd5e1;border-radius:14px;background:#fff;box-shadow:0 14px 40px rgba(15,29,53,.10);overflow:hidden}
+.strip .bar{height:52px;background:#f1f4f9;border-bottom:1px solid #dbe2ee;display:flex;align-items:center;padding:0 20px;font-size:19px;font-weight:800;gap:12px}
+.strip .bar span{font-size:14px;font-weight:700;color:#6b7a93;margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px}
+.shot{aspect-ratio:16/10;border-radius:6px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);position:relative;overflow:hidden}
+.shot:before{content:'';position:absolute;left:10%;top:12%;width:80%;height:8%;background:#fff;border-radius:2px;opacity:.9}
+.shot:after{content:'';position:absolute;left:10%;top:30%;width:60%;height:6%;background:#fff;border-radius:2px;box-shadow:0 14px 0 #fff,0 28px 0 #fff;opacity:.85}
+.shot.b{background:linear-gradient(135deg,#1e3a8a,#2563eb)}.shot.b:before,.shot.b:after{opacity:.35}
+.shot.s{background:linear-gradient(135deg,#f8fafc,#e2e8f0)}
+.shot i{position:absolute;right:6px;bottom:5px;font-style:normal;font-size:13px;font-weight:800;color:#0f1d35;background:rgba(255,255,255,.85);border-radius:4px;padding:1px 6px;font-family:ui-monospace,Menlo,monospace}
+.more{padding:0 16px 16px;font-size:15px;color:#6b7a93;font-weight:700}
+.arrow{position:absolute;left:760px;top:420px;font-size:56px;font-weight:900;color:#2563eb;line-height:1}
+.doc{position:absolute;left:836px;top:150px;width:720px;height:606px;border:1px solid #cbd5e1;border-radius:14px;background:#fff;box-shadow:0 14px 40px rgba(15,29,53,.10);overflow:hidden}
+.doc .bar{height:52px;background:#0f1d35;color:#fff;display:flex;align-items:center;padding:0 20px;font-size:19px;font-weight:800;gap:10px}
+.doc .bar span{font-size:14px;background:#2563eb;border-radius:6px;padding:2px 8px}
+.doc .body{padding:18px 24px}
+.doc h3{margin:0 0 4px;font-size:24px;font-weight:900;white-space:nowrap}
+.doc .who{font-size:14px;color:#6b7a93;margin-bottom:12px;white-space:nowrap}
+.ent{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid #eef2f7;align-items:start}
+.ent .t{font-family:ui-monospace,Menlo,monospace;font-size:15px;font-weight:700;color:#2563eb;white-space:nowrap;padding-top:2px}
+.ent .w{font-size:17px;font-weight:700;line-height:1.35}
+.ent .w small{display:block;font-size:13px;color:#6b7a93;font-weight:600;margin-top:2px;white-space:nowrap}
+.kiz{margin-top:12px;background:#eef4ff;border-left:4px solid #2563eb;border-radius:6px;padding:10px 14px;font-size:16px;font-weight:700;line-height:1.4}
+.kiz b{color:#2563eb;margin-right:6px}
+.band{position:absolute;left:0;right:0;bottom:0;height:96px;background:#1e3a8a;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 44px}
+.band .msg{font-size:30px;font-weight:800;white-space:nowrap}
+.band .big{font-size:42px;font-weight:900;color:#fde047;letter-spacing:-.01em;white-space:nowrap}
+</style>
+<body>
+<div class="title">1分ごとの画面から、日報が自動で書ける</div>
+<div class="meta"><b>書かない日記</b> — 画面を記録し、毎晩 AI が「今日何をしていたか」を書く（架空の1日）</div>
+<div class="strip">
+  <div class="bar">1分ごとの画面の記録<span>9月8日・朝から</span></div>
+  <div class="grid">
+    <div class="shot s"><i>9:00</i></div><div class="shot"><i>9:01</i></div><div class="shot"><i>9:02</i></div><div class="shot s"><i>9:03</i></div>
+    <div class="shot b"><i>10:31</i></div><div class="shot b"><i>10:32</i></div><div class="shot"><i>10:33</i></div><div class="shot s"><i>10:34</i></div>
+    <div class="shot"><i>13:00</i></div><div class="shot s"><i>13:01</i></div><div class="shot"><i>13:02</i></div><div class="shot b"><i>13:03</i></div>
+    <div class="shot s"><i>15:10</i></div><div class="shot"><i>15:11</i></div><div class="shot s"><i>15:12</i></div><div class="shot"><i>15:13</i></div>
+  </div>
+  <div class="more">…1日ぶんの画面が、そのまま記録になる（手で書くものは無い）</div>
+</div>
+<div class="arrow">→</div>
+<div class="doc">
+  <div class="bar">9月8日の記録 <span>AIが自動で作成</span></div>
+  <div class="body">
+    <h3>今日何をしていたか</h3>
+    <div class="who">21:00 に作成 ／ 元データ: 画面の記録 1日ぶん</div>
+    <div class="ent"><div class="t">9:00–10:30</div><div class="w">提案書の骨子をつくる<small>スライド・過去の提案書を参照</small></div></div>
+    <div class="ent"><div class="t">10:30–11:00</div><div class="w">面談の準備<small>前回の議事録を読み、論点を3つ書く</small></div></div>
+    <div class="ent"><div class="t">13:00–15:00</div><div class="w">LPの文言を直す<small>ブラウザとエディタを行き来</small></div></div>
+    <div class="ent"><div class="t">15:00–16:00</div><div class="w">請求書をつくる<small>スプレッドシートで3件</small></div></div>
+    <div class="kiz"><b>気づき</b>午後に会議が無い日は、制作が2時間続いている</div>
+  </div>
+</div>
+<div class="band"><div class="msg">書く文字は、0</div><div class="big">画面が覚えている</div></div>
+</body></html>

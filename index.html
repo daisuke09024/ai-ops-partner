@@ -1,659 +1,431 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI業務改革パートナー｜AI×業務効率化の伴走支援</title>
-    <meta name="description" content="雇わずに持てる、あなた専属のAI業務改革パートナー。正社員1人分の1/3のコストで、戦略から実装・定着まで。年間6,000時間の削減実績。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI業務改革パートナー｜AIで業務を動かした事例とデモ</title>
+<meta name="description" content="実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。図解と60秒のデモで載せています。">
+<link rel="canonical" href="https://ai-ops-partner.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI業務改革パートナー">
+<meta property="og:title" content="AI業務改革パートナー｜AIで業務を動かした事例とデモ">
+<meta property="og:description" content="実際に動いた（動いている）AI活用の事例9本と、日々動いている仕組み10件。図解と60秒のデモで載せています。">
+<meta property="og:image" content="https://ai-ops-partner.vercel.app/cases/media/case-01_zukai.webp">
+<meta property="og:url" content="https://ai-ops-partner.vercel.app/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2712%27 fill=%27%232563eb%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
 :root{
-    --c:1320px;
-    --bg:#fafbfe;--bg2:#f1f4f9;--bg3:#e8edf5;
-    --card:#fff;
-    --dark:#0c1222;--dark2:#1a2240;
-    --tx:#111827;--tx2:#4b5563;--tx3:#9ca3af;
-    --blue:#2563eb;--blue-d:#1d4ed8;--blue-l:#60a5fa;
-    --blue-bg:rgba(37,99,235,.06);--blue-bg2:rgba(37,99,235,.12);
-    --teal:#0d9488;--teal-bg:rgba(13,148,136,.08);
-    --amber:#d97706;--amber-bg:rgba(217,119,6,.08);
-    --rose:#e11d48;--rose-bg:rgba(225,29,72,.06);
-    --green:#059669;--green-bg:rgba(5,150,105,.08);
-    --border:#e5e7eb;--border2:#d1d5db;
-    --sh:0 1px 3px rgba(0,0,0,.06);
-    --sh2:0 4px 20px rgba(0,0,0,.07);
-    --sh3:0 12px 40px rgba(0,0,0,.1);
-    --r:14px;--r2:20px;--r3:28px;
-    --tr:.3s cubic-bezier(.4,0,.2,1);
-    --fj:'Zen Kaku Gothic New',sans-serif;
-    --fe:'Plus Jakarta Sans',sans-serif;
+  --c:1200px;
+  --bg:#fafbfe;--bg2:#f1f4f9;--bg3:#e8edf5;--card:#fff;
+  --dark:#0c1222;--dark2:#1a2240;
+  --tx:#111827;--tx2:#4b5563;--tx3:#6b7280;
+  --blue:#2563eb;--blue-d:#1d4ed8;--blue-l:#60a5fa;--blue-bg:rgba(37,99,235,.06);--blue-bg2:rgba(37,99,235,.12);
+  --amber:#b45309;--amber-bg:rgba(217,119,6,.10);
+  --rose:#be123c;--rose-bg:rgba(225,29,72,.07);
+  --green:#047857;--green-bg:rgba(5,150,105,.09);
+  --violet:#6d28d9;--violet-bg:rgba(109,40,217,.08);
+  --border:#e5e7eb;--border2:#d1d5db;
+  --sh:0 1px 3px rgba(0,0,0,.06);--sh2:0 6px 24px rgba(15,23,42,.08);--sh3:0 16px 48px rgba(15,23,42,.14);
+  --r:14px;--r2:20px;
+  --tr:.25s cubic-bezier(.4,0,.2,1);
+  --fj:'Zen Kaku Gothic New',sans-serif;--fe:'Plus Jakarta Sans',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--fj);background:var(--bg);color:var(--tx);line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-
-/* === LAYOUT === */
+img,video{max-width:100%;height:auto;display:block}
+a{color:inherit}
 .w{max-width:var(--c);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-.sec{padding:clamp(72px,10vw,120px) 0}
+.sec{padding:clamp(56px,8vw,96px) 0}
+.eyebrow{font-family:var(--fe);font-size:.74rem;font-weight:700;letter-spacing:.16em;color:var(--blue);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:900;line-height:1.4;letter-spacing:-.02em;margin-bottom:12px}
+.lead{font-size:1rem;color:var(--tx2);max-width:760px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px;flex-wrap:wrap}
+.count{font-family:var(--fe);font-weight:800;color:var(--blue);font-size:1.4rem;white-space:nowrap}
+.count small{font-family:var(--fj);font-size:.85rem;color:var(--tx3);font-weight:500;margin-left:4px}
 
-/* === TYPOGRAPHY === */
-.sec-eyebrow{
-    font-family:var(--fj);font-size:.88rem;font-weight:700;
-    color:var(--blue);letter-spacing:.06em;
-    display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:14px;
-}
-.sec-eyebrow::before,.sec-eyebrow::after{content:'';width:24px;height:2px;background:var(--blue);border-radius:2px;opacity:.4}
-.sec-h{font-size:clamp(1.6rem,4.2vw,2.5rem);font-weight:900;line-height:1.4;text-align:center;margin-bottom:16px;letter-spacing:-.02em}
-.sec-p{text-align:center;font-size:1.05rem;color:var(--tx2);max-width:720px;margin:0 auto 60px;line-height:1.85}
-
-/* === HEADER === */
-.hd{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(250,251,254,.88);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(0,0,0,.05);transition:var(--tr)}
-.hd-in{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:var(--c);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-.hd-logo{font-family:var(--fj);font-size:1.05rem;font-weight:900;color:var(--tx);text-decoration:none;display:flex;align-items:center;gap:8px}
+/* header */
+.hd{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(250,251,254,.9);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(0,0,0,.05)}
+.hd-in{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--c);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.hd-logo{font-size:1rem;font-weight:900;color:var(--tx);text-decoration:none;display:flex;align-items:center;gap:8px;white-space:nowrap}
 .hd-logo span{color:var(--blue)}
-.hd-logo-dot{width:8px;height:8px;background:var(--blue);border-radius:50%;display:inline-block}
-.hd-nav{display:flex;align-items:center;gap:32px}
-.hd-nav a{font-size:.88rem;color:var(--tx2);text-decoration:none;font-weight:500;transition:var(--tr);position:relative}
+.hd-logo i{width:8px;height:8px;background:var(--blue);border-radius:50%;display:inline-block}
+.hd-nav{display:flex;align-items:center;gap:26px}
+.hd-nav a{font-size:.88rem;color:var(--tx2);text-decoration:none;font-weight:600;transition:var(--tr)}
 .hd-nav a:hover{color:var(--tx)}
-.hd-cta{background:var(--blue)!important;color:#fff!important;padding:10px 24px!important;border-radius:10px;font-weight:700!important;font-size:.84rem!important;box-shadow:0 2px 8px rgba(37,99,235,.25);transition:var(--tr)}
-.hd-cta:hover{background:var(--blue-d)!important;transform:translateY(-1px);box-shadow:0 4px 14px rgba(37,99,235,.3)}
-.hd-mob-btn{display:none;background:0;border:0;cursor:pointer;padding:8px}
-.hd-mob-btn span{display:block;width:22px;height:2px;background:var(--tx);margin:5px 0;border-radius:2px;transition:var(--tr)}
-.mob-nav{display:none}
-@media(max-width:768px){
-    .hd-nav{display:none}.hd-mob-btn{display:block}
-    .mob-nav.on{display:block;position:fixed;top:68px;left:0;right:0;background:rgba(250,251,254,.98);backdrop-filter:blur(16px);padding:24px;border-bottom:1px solid var(--border)}
-    .mob-nav a{display:block;padding:16px 0;color:var(--tx2);text-decoration:none;font-size:.95rem;border-bottom:1px solid rgba(0,0,0,.04)}
-    .mob-nav .mob-cta{display:block;text-align:center;margin-top:16px;background:var(--blue);color:#fff;padding:14px;border-radius:12px;font-weight:700;text-decoration:none}
-}
+.hd-cta{background:var(--blue)!important;color:#fff!important;padding:9px 20px!important;border-radius:10px;font-weight:700!important;font-size:.84rem!important;box-shadow:0 2px 8px rgba(37,99,235,.25)}
+.hd-cta:hover{background:var(--blue-d)!important;transform:translateY(-1px)}
+.hd-back{font-size:.86rem;color:var(--tx2);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.hd-back:hover{color:var(--blue)}
+@media(max-width:640px){.hd-nav a:not(.hd-cta){display:none}.hd-nav{gap:12px}}
+.progress{position:fixed;top:64px;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--blue),var(--blue-l));z-index:998;transition:width .1s linear}
 
-/* === HERO === */
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:68px;position:relative;overflow:hidden;background:linear-gradient(135deg,#f0f4ff 0%,#e0e8ff 30%,#f5f0ff 60%,#fafbfe 100%)}
-.hero::before{content:'';position:absolute;top:-30%;right:-15%;width:70vw;height:70vw;max-width:900px;max-height:900px;background:radial-gradient(circle,rgba(37,99,235,.08) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-20%;left:-10%;width:50vw;height:50vw;max-width:600px;max-height:600px;background:radial-gradient(circle,rgba(99,102,241,.06) 0%,transparent 70%);pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center;position:relative;z-index:1}
-.hero-text{max-width:600px}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.15);border-radius:100px;font-size:.82rem;font-weight:700;color:var(--blue);margin-bottom:28px}
-.hero-tag::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.3;letter-spacing:-.03em;margin-bottom:22px}
-.hero h1 .hl{color:var(--blue);position:relative}
-.hero-sub{font-size:1.05rem;color:var(--tx2);line-height:1.9;margin-bottom:36px}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 34px;border-radius:12px;font-size:.95rem;font-weight:700;text-decoration:none;transition:var(--tr);cursor:pointer;border:0;font-family:var(--fj)}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;border-radius:12px;font-size:.95rem;font-weight:700;text-decoration:none;transition:var(--tr);cursor:pointer;border:0;font-family:var(--fj);line-height:1.4}
 .btn-p{background:var(--blue);color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.28)}
 .btn-p:hover{background:var(--blue-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.35)}
-.btn-o{background:rgba(255,255,255,.7);color:var(--tx2);border:1px solid var(--border);backdrop-filter:blur(8px)}
-.btn-o:hover{background:#fff;color:var(--tx);border-color:var(--border2)}
-.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.hs{padding:16px 18px;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04);text-align:center;transition:var(--tr)}
-.hs:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
-.hs-n{font-family:var(--fe);font-size:clamp(1.2rem,2vw,1.6rem);font-weight:800;color:var(--blue);line-height:1.2}
-.hs-l{font-size:.82rem;color:var(--tx3);margin-top:3px}
+.btn-o{background:rgba(255,255,255,.75);color:var(--tx2);border:1px solid var(--border2)}
+.btn-o:hover{background:#fff;color:var(--tx)}
+.btn-w{background:#fff;color:var(--blue-d)}
+.btn-w:hover{background:#eef2ff;transform:translateY(-2px)}
 
-/* Hero visual */
-.hero-vis{position:relative;display:flex;align-items:center;justify-content:center}
-.hero-vis-inner{position:relative;width:100%;aspect-ratio:1/1;max-width:480px}
-.hero-card{position:absolute;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.9);border-radius:var(--r2);box-shadow:var(--sh3);padding:24px;transition:var(--tr)}
-.hero-card:hover{transform:translateY(-4px) scale(1.02)}
-.hc-1{top:5%;left:0;width:72%;z-index:3;animation:floatA 6s ease-in-out infinite}
-.hc-2{top:40%;right:0;width:65%;z-index:2;animation:floatB 7s ease-in-out infinite}
-.hc-3{bottom:2%;left:8%;width:55%;z-index:1;animation:floatC 8s ease-in-out infinite}
-@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes floatC{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:10px}
-.hc-icon-b{background:var(--blue-bg2)}
-.hc-icon-t{background:var(--teal-bg)}
-.hc-icon-a{background:var(--amber-bg)}
-.hc-title{font-size:.88rem;font-weight:700;margin-bottom:4px}
-.hc-desc{font-size:.75rem;color:var(--tx3);line-height:1.5}
-.hc-bar{height:6px;background:var(--bg3);border-radius:3px;margin-top:10px;overflow:hidden}
-.hc-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--blue-l))}
+/* badges */
+.bd{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:100px;font-size:.76rem;font-weight:700;line-height:1.5;white-space:nowrap}
+.bd-cat{background:var(--bg2);color:var(--tx2)}
+.bd-video{background:var(--tx);color:#fff}
+.bd-video::before{content:'▶';font-size:.62rem}
+.bd-soon{background:var(--bg2);color:var(--tx3)}
+.bd-ext{background:var(--amber-bg);color:var(--amber)}
+.bd-live{background:var(--green-bg);color:var(--green)}
+.bd-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-.scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tx3);font-size:.7rem;font-family:var(--fe);font-weight:500;letter-spacing:.15em;animation:bob 2.5s ease-in-out infinite}
-.scroll-ind::after{content:'';width:1px;height:24px;background:linear-gradient(to bottom,var(--tx3),transparent)}
-@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+/* ===== index: hero ===== */
+.hero{padding:calc(64px + clamp(40px,6vw,60px)) 0 clamp(40px,5vw,52px);position:relative;background:linear-gradient(180deg,#f7f9fc 0%,#fff 100%);border-bottom:1px solid var(--border)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
+.hero h1{font-size:clamp(1.9rem,4.6vw,2.8rem);font-weight:900;line-height:1.28;letter-spacing:-.03em;margin:8px 0 18px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-lead{font-size:1rem;color:var(--tx2);margin-bottom:26px;max-width:520px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+.stats{display:flex;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:18px;gap:14px 0}
+.st{padding-right:24px;margin-right:24px;border-right:1px solid var(--border)}
+.st:last-child{border-right:0;margin-right:0;padding-right:0}
+.st-n{font-family:var(--fe);font-size:1.5rem;font-weight:800;color:var(--tx);line-height:1.1;letter-spacing:-.02em;white-space:nowrap}
+.st-n small{font-size:.65em;font-weight:700;color:var(--tx2);margin-left:2px}
+.st-l{font-size:.74rem;color:var(--tx3);margin-top:4px;line-height:1.4}
+.hero-vid{position:relative;width:100%;max-width:560px;justify-self:end;padding:10px;background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:0 20px 50px rgba(15,29,53,.12)}
+.hero-vid-fr{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--dark)}
+.hero-vid-fr video,.hero-vid-fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-vid-fr img.still{display:none}
+.hero-vid-cap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;margin:10px 6px 2px}
+.hero-vid-cap b{font-size:.86rem;font-weight:700}
+.hero-vid-cap span{font-size:.74rem;color:var(--tx2);font-weight:700;padding:3px 10px;border-radius:100px;background:var(--bg2)}
+@media(prefers-reduced-motion:reduce){.hero-vid-fr video{display:none}.hero-vid-fr img.still{display:block}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-vid{justify-self:stretch;max-width:100%}}
+@media(max-width:640px){.st{border-right:0;padding-right:18px;margin-right:0}}
 
-@media(max-width:900px){
-    .hero-grid{grid-template-columns:1fr}
-    .hero-vis{display:none}
-    .hero-stats{grid-template-columns:repeat(2,1fr)}
-}
+/* 読み方の帯 */
 
-/* === SECTION STYLES === */
-.bg-w{background:var(--bg)}
-.bg-g{background:var(--bg2)}
-.bg-d{background:var(--dark);color:#fff}
-.bg-d .sec-eyebrow{color:var(--blue-l)}
-.bg-d .sec-eyebrow::before,.bg-d .sec-eyebrow::after{background:var(--blue-l)}
-.bg-d .sec-p{color:rgba(255,255,255,.6)}
+/* filters */
+.filters{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.frow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.frow .flb{font-size:.78rem;color:var(--tx3);font-weight:700;margin-right:4px;white-space:nowrap}
+.chip{border:1px solid var(--border);background:#fff;color:var(--tx2);padding:7px 14px;border-radius:100px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:var(--fj);transition:var(--tr);display:inline-flex;align-items:center;gap:6px}
+.chip small{font-family:var(--fe);font-size:.72rem;color:var(--tx3);font-weight:700}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.chip.on small{color:rgba(255,255,255,.7)}
 
-/* === CHALLENGES === */
-.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.ch-card{padding:clamp(28px,3vw,40px);background:var(--card);border:1px solid var(--border);border-radius:var(--r2);transition:var(--tr);position:relative;overflow:hidden}
-.ch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r2) var(--r2) 0 0;transition:var(--tr);opacity:0}
-.ch-card:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
-.ch-card:hover::before{opacity:1}
-.ch-card:nth-child(1)::before{background:var(--rose)}
-.ch-card:nth-child(2)::before{background:var(--amber)}
-.ch-card:nth-child(3)::before{background:var(--blue)}
-.ch-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:20px}
-.ch-ico-1{background:var(--rose-bg)}
-.ch-ico-2{background:var(--amber-bg)}
-.ch-ico-3{background:var(--blue-bg)}
-.ch-card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px}
-.ch-card>p{font-size:.95rem;color:var(--tx2)}
-.ch-q{margin-top:18px;padding:16px 20px;background:rgba(37,99,235,.04);border-radius:12px;font-size:.95rem;color:var(--tx2);line-height:1.7;position:relative;border:1px solid rgba(37,99,235,.08)}
-.ch-q::before{content:'💬';position:absolute;top:-10px;left:16px;font-size:.9rem;background:var(--bg);padding:0 4px}
-.ch-tgt{margin-top:14px;font-size:.88rem;color:var(--blue);font-weight:600;display:flex;align-items:center;gap:6px}
-.ch-tgt::before{content:'';width:4px;height:4px;background:var(--blue);border-radius:50%}
-@media(max-width:768px){.ch-grid{grid-template-columns:1fr}}
+/* case cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:var(--tr);position:relative}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(15,29,53,.1)}
+.card.hide{display:none}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--bg2);overflow:hidden;border-bottom:1px solid var(--border)}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .thumb img{transform:scale(1.03)}
+.cbody{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.cmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--fe);font-size:.72rem;font-weight:700;color:var(--blue);letter-spacing:.08em;margin-bottom:8px}
+.cmeta .cat{font-family:var(--fj);letter-spacing:0;font-weight:600;color:var(--tx3)}
+.cmeta .cat::before{content:none}
+.cbds{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.card h3{font-size:1.05rem;font-weight:800;line-height:1.55;margin-bottom:8px;letter-spacing:-.01em}
+.card p{font-size:.88rem;color:var(--tx2);line-height:1.7;margin-bottom:16px;flex:1}
+.kpi{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;border-top:1px solid var(--border);padding-top:14px}
+.kpi small{display:block;font-size:.72rem;color:var(--tx3);font-weight:600}
+.kpi b{font-family:var(--fe);font-size:1.25rem;font-weight:800;color:var(--blue-d);letter-spacing:-.01em;line-height:1.3;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.kpi b .ar{color:var(--tx3);font-weight:500}
+.kpi b .old{color:var(--tx3);font-weight:700}
+.kpi .sub{font-size:.76rem;color:var(--tx2);font-weight:500;font-family:var(--fj)}
+.kpi .go{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--blue-bg2);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:800;transition:var(--tr)}
+.card:hover .kpi .go{background:var(--blue);color:#fff}
 
-/* === ROOT CAUSE === */
-.rc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px}
-.rc-card{padding:28px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:var(--tr)}
-.rc-card:hover{box-shadow:var(--sh2)}
-.rc-card h4{font-size:1.05rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.rc-card h4::before{content:'';width:3px;height:16px;background:var(--blue);border-radius:2px;flex-shrink:0}
-.rc-card p{font-size:.95rem;color:var(--tx2)}
-.rc-box{padding:32px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:28px}
-.rc-box h4{font-size:1.05rem;font-weight:700;margin-bottom:20px;color:var(--rose)}
-.rc-row{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.04)}
-.rc-row:last-child{border-bottom:0}
-.rc-x{color:var(--rose);font-weight:800;font-size:1rem;flex-shrink:0;width:20px;text-align:center}
-.rc-row span:last-child{font-size:.95rem;color:var(--tx2)}
-.rc-end{text-align:center;font-size:1.05rem;font-weight:700;padding:24px 32px;background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(99,102,241,.06));border:1px solid rgba(37,99,235,.1);border-radius:var(--r);color:var(--blue)}
-@media(max-width:768px){.rc-grid{grid-template-columns:1fr}}
+/* systems (一覧・図解を2列で大きく) */
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:640px){.sgrid{grid-template-columns:1fr}}
+.scard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:zoom-in;transition:var(--tr)}
+.scard:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
+.scard .thumb{aspect-ratio:16/9;border-bottom:1px solid var(--border)}
+.sbody{padding:14px 18px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.smeta{font-family:var(--fj);font-size:.72rem;font-weight:600;color:var(--tx3);margin-bottom:4px}
+.sbody h3{font-size:.98rem;font-weight:800;line-height:1.5;margin-bottom:3px}
+.sbody p{font-size:.8rem;color:var(--tx3);line-height:1.6}
+.sbody .bd{flex-shrink:0;margin-top:2px}
 
-/* === WHY US === */
-.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.why-card{padding:36px 28px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);transition:var(--tr);position:relative;overflow:hidden}
-.why-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:var(--tr)}
-.why-card:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
-.why-card:hover::after{transform:scaleX(1)}
-.why-ico{width:52px;height:52px;border-radius:14px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:18px}
-.why-card h3{font-size:1.12rem;font-weight:700;margin-bottom:12px}
-.why-card p{font-size:.95rem;color:var(--tx2)}
-@media(max-width:768px){.why-grid{grid-template-columns:1fr}}
-
-/* === COMPARISON === */
-.comp-wrap{overflow-x:auto;border-radius:var(--r2);border:1px solid var(--border);box-shadow:var(--sh2);background:var(--card)}
-.comp-tbl{width:100%;border-collapse:collapse;min-width:720px}
-.comp-tbl th,.comp-tbl td{padding:18px 24px;text-align:left;font-size:1rem;border-bottom:1px solid rgba(0,0,0,.04)}
-.comp-tbl thead th{background:var(--bg2);font-weight:700;font-size:.92rem;color:var(--tx3)}
-.comp-tbl thead th:last-child{background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(99,102,241,.08));color:var(--blue);font-weight:800}
-.comp-tbl tbody td{color:var(--tx2)}
-.comp-tbl tbody td:first-child{font-weight:600;color:var(--tx)}
-.comp-tbl tbody td:last-child{background:rgba(37,99,235,.03);color:var(--blue);font-weight:700}
-.comp-tbl tbody tr:last-child td{border-bottom:0}
-.comp-tbl tbody tr:hover td{background:rgba(37,99,235,.02)}
-.comp-tbl tbody tr:hover td:last-child{background:rgba(37,99,235,.06)}
-.comp-note{text-align:center;margin-top:32px;padding:24px 32px;background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(99,102,241,.1));border:1px solid rgba(37,99,235,.2);border-radius:var(--r);font-weight:700;font-size:1.12rem}
-.comp-note em{font-style:normal;color:var(--blue)}
-
-/* MID CTA */
-.mid-cta{text-align:center;padding:52px 0}
-.mid-cta p{font-size:1rem;color:var(--tx2);margin-bottom:22px}
-.mid-cta-dark p{color:rgba(255,255,255,.6)}
-
-/* === SERVICES === */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.svc-card{padding:32px 26px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);transition:var(--tr);position:relative;overflow:hidden}
-.svc-card:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
-.svc-n{font-family:var(--fe);font-size:.82rem;font-weight:700;color:var(--tx3);margin-bottom:8px;letter-spacing:.05em}
-.svc-card h3{font-size:1.12rem;font-weight:700;margin-bottom:10px;line-height:1.5}
-.svc-card>p{font-size:.95rem;color:var(--tx2);line-height:1.7}
-.svc-res{margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,0,0,.05);font-size:.92rem;color:var(--green);font-weight:600;display:flex;align-items:center;gap:6px}
-.svc-res::before{content:'✓';font-size:.75rem;width:20px;height:20px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.svc-badge{position:absolute;top:0;right:0;padding:6px 16px;font-size:.72rem;font-weight:700;color:#fff;border-radius:0 var(--r2) 0 var(--r)}
-.svc-badge-b{background:var(--blue)}
-.svc-badge-g{background:var(--green)}
-@media(max-width:768px){.svc-grid{grid-template-columns:1fr}}
-
-/* === RESULTS === */
-.res-hi{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px}
-.rh{text-align:center;padding:40px 28px;background:linear-gradient(145deg,rgba(37,99,235,.06),rgba(99,102,241,.08));border:1px solid rgba(37,99,235,.12);border-radius:var(--r2);position:relative;overflow:hidden}
-.rh::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(90deg,var(--blue),var(--blue-l));border-radius:0 0 3px 3px}
-.rh-n{font-family:var(--fe);font-size:clamp(2.5rem,5vw,3.6rem);font-weight:900;color:var(--blue);line-height:1.1}
-.rh-n sub{font-size:.35em;font-weight:700;color:var(--tx2)}
-.rh-lb{font-size:1rem;font-weight:700;color:var(--tx);margin-top:10px}
-.rh-ds{font-size:.92rem;color:var(--tx2);margin-top:10px;line-height:1.7}
-
-/* SVG illustrations for results */
-.rh-illust{margin-bottom:16px}
-.rh-illust svg{width:48px;height:48px}
-
-.case-acc{max-width:960px;margin:0 auto}
-.case-i{margin-bottom:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:var(--tr)}
-.case-i:hover{box-shadow:var(--sh)}
-.case-hd{display:flex;align-items:center;gap:18px;padding:22px 28px;cursor:pointer;background:0;border:0;width:100%;text-align:left;font-family:var(--fj)}
-.case-num{font-family:var(--fe);font-size:.82rem;font-weight:700;color:#fff;background:var(--blue);width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.case-ttl{font-size:1.08rem;font-weight:700;color:var(--tx);flex:1;line-height:1.5}
-.case-arr{font-size:1.1rem;color:var(--tx3);transition:var(--tr);flex-shrink:0}
-.case-i.on .case-arr{transform:rotate(180deg);color:var(--blue)}
-.case-bd{max-height:0;overflow:hidden;transition:max-height .5s ease}
-.case-i.on .case-bd{max-height:600px}
-.case-bd-in{padding:0 28px 28px}
-.case-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px}
-.case-lb{font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.case-lb::before{content:'';width:3px;height:12px;border-radius:2px;flex-shrink:0}
-.case-lb-r{color:var(--rose)}.case-lb-r::before{background:var(--rose)}
-.case-lb-o{color:var(--amber)}.case-lb-o::before{background:var(--amber)}
-.case-lb-g{color:var(--green)}.case-lb-g::before{background:var(--green)}
-.case-g p{font-size:.95rem;color:var(--tx2);line-height:1.7}
-.case-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.case-tag{font-size:.85rem;padding:5px 14px;background:var(--bg2);border-radius:100px;color:var(--tx3);font-weight:500}
-.case-lnk{font-size:.85rem;color:var(--blue);text-decoration:none;font-weight:600;transition:var(--tr);display:inline-flex;align-items:center;gap:4px}
-.case-lnk:hover{color:var(--blue-d);gap:8px}
-.case-more{text-align:center;margin-top:36px}
-@media(max-width:768px){.res-hi{grid-template-columns:1fr}.case-g{grid-template-columns:1fr}}
-
-/* === PRICING === */
-.pri-compare{text-align:center;margin-bottom:48px;padding:28px 36px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);box-shadow:var(--sh2);display:flex;justify-content:center;align-items:center;gap:32px;flex-wrap:wrap}
-.pri-vs{text-align:center}
-.pri-vs-lb{font-size:.82rem;color:var(--tx3);margin-bottom:3px}
-.pri-vs-val{font-size:1.4rem;font-weight:800}
-.pri-vs-old{color:var(--tx3);text-decoration:line-through;text-decoration-color:var(--rose)}
-.pri-vs-new{color:var(--blue)}
-.pri-arrow{font-size:1.6rem;color:var(--tx3)}
-
-.pri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.pri-card{padding:36px 28px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);display:flex;flex-direction:column;transition:var(--tr);position:relative}
-.pri-card:hover{box-shadow:var(--sh2);transform:translateY(-3px)}
-.pri-card.feat{border-color:var(--blue);box-shadow:0 8px 32px rgba(37,99,235,.12)}
-.pri-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:.75rem;font-weight:700;padding:5px 18px;border-radius:100px;white-space:nowrap}
-.pri-card h3{font-size:1.08rem;font-weight:700;margin-bottom:6px}
-.pri-val{font-family:var(--fe);font-size:2.2rem;font-weight:800;color:var(--blue);margin-bottom:2px}
-.pri-sub{font-size:.88rem;color:var(--tx3);margin-bottom:24px}
-.pri-feat{list-style:none;margin-bottom:28px;flex:1}
-.pri-feat li{padding:9px 0;font-size:.95rem;color:var(--tx2);display:flex;align-items:flex-start;gap:10px}
-.pri-feat li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;font-size:.9rem}
-.pri-feat li.hl{color:var(--tx);font-weight:600}
-.pri-ft{text-align:center;margin-top:24px;font-size:.85rem;color:var(--tx3)}
-.pri-ft strong{color:var(--green)}
-@media(max-width:768px){.pri-grid{grid-template-columns:1fr}}
-
-/* === PROCESS === */
-.proc-tl{max-width:760px;margin:0 auto;position:relative}
-.proc-tl::before{content:'';position:absolute;left:27px;top:52px;bottom:52px;width:2px;background:linear-gradient(to bottom,var(--blue),rgba(37,99,235,.1));border-radius:2px}
-.proc-s{display:flex;gap:28px;padding:32px 0;position:relative}
-.proc-n{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:var(--fe);font-size:1.2rem;font-weight:800;color:#fff;flex-shrink:0;position:relative;z-index:1;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.proc-n-1{background:linear-gradient(135deg,var(--amber),#f59e0b)}
-.proc-n-2{background:linear-gradient(135deg,var(--blue),#6366f1)}
-.proc-n-3{background:linear-gradient(135deg,var(--dark),#374151)}
-.proc-c h3{font-size:1.2rem;font-weight:700;margin-bottom:8px}
-.proc-c p{font-size:.98rem;color:var(--tx2);line-height:1.75}
-
-/* === FAQ === */
-.faq-list{max-width:860px;margin:0 auto}
-.faq-i{border-bottom:1px solid rgba(0,0,0,.06)}
-.faq-q{width:100%;background:0;border:0;color:var(--tx);padding:24px 0;font-size:1rem;font-weight:600;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--fj);line-height:1.6;transition:var(--tr)}
-.faq-q:hover{color:var(--blue)}
-.faq-q::after{content:'+';font-size:1.4rem;font-weight:400;color:var(--tx3);transition:var(--tr);flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg2)}
-.faq-i.on .faq-q::after{content:'−';color:var(--blue);background:var(--blue-bg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.faq-i.on .faq-a{max-height:300px}
-.faq-a-in{padding-bottom:24px;font-size:.98rem;color:var(--tx2);line-height:1.85}
-
-/* === FINAL CTA === */
-.fcta{text-align:center;padding:clamp(80px,12vw,128px) 0;background:linear-gradient(135deg,#0c1222 0%,#1a2240 50%,#0f172a 100%);color:#fff;position:relative;overflow:hidden}
-.fcta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(37,99,235,.12) 0%,transparent 70%);pointer-events:none}
-.fcta-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 22px;background:rgba(225,29,72,.12);border:1px solid rgba(225,29,72,.2);border-radius:100px;font-size:.85rem;font-weight:700;color:#fb7185;margin-bottom:24px}
-.fcta h2{font-size:clamp(1.5rem,4vw,2.4rem);font-weight:900;margin-bottom:20px;line-height:1.4}
-.fcta>div>p{font-size:1rem;color:rgba(255,255,255,.6);margin-bottom:6px}
-.fcta-steps{display:flex;justify-content:center;gap:36px;margin:44px 0;flex-wrap:wrap}
-.fcta-s{text-align:center;position:relative}
-.fcta-s-n{font-family:var(--fe);font-size:.72rem;font-weight:700;color:var(--blue-l);margin-bottom:4px}
-.fcta-s-t{font-size:.92rem;font-weight:700;color:#fff}
-.fcta-s-d{font-size:.75rem;color:rgba(255,255,255,.45)}
-
-/* === FOOTER === */
-.ft{padding:40px 0;border-top:1px solid rgba(0,0,0,.05);text-align:center;background:var(--bg)}
-.ft-links{display:flex;justify-content:center;gap:28px;margin-bottom:14px;flex-wrap:wrap}
-.ft-links a{font-size:.85rem;color:var(--tx3);text-decoration:none;transition:var(--tr)}
+/* cta */
+.cta{background:var(--dark);color:#fff;text-align:center;padding:clamp(64px,9vw,96px) 0;position:relative}
+.cta .w{position:relative;z-index:1}
+.cta h2{font-size:clamp(1.4rem,3.6vw,2.2rem);font-weight:900;line-height:1.4;margin-bottom:14px}
+.cta p{color:rgba(255,255,255,.66);font-size:1rem;max-width:640px;margin:0 auto 28px}
+.cta .note{font-size:.8rem;color:rgba(255,255,255,.45);margin-top:14px}
+.ft{padding:36px 0;border-top:1px solid rgba(0,0,0,.05);text-align:center;background:var(--bg)}
+.ft-links{display:flex;justify-content:center;gap:24px;margin-bottom:12px;flex-wrap:wrap}
+.ft-links a{font-size:.84rem;color:var(--tx3);text-decoration:none}
 .ft-links a:hover{color:var(--tx2)}
 .ft-copy{font-size:.75rem;color:var(--tx3)}
 
-/* === ANIMATIONS === */
-.fi{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(12,18,34,.88);z-index:2000;display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lb.on{display:flex}
+.lb img{max-width:min(1600px,96vw);max-height:92vh;width:auto;height:auto;border-radius:10px;box-shadow:var(--sh3);background:#fff}
+.lb-cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.75);font-size:.82rem;white-space:nowrap}
+.zoomable{cursor:zoom-in}
+
+/* ===== case page ===== */
+.chero{padding:calc(64px + clamp(36px,5vw,56px)) 0 clamp(36px,5vw,56px);background:linear-gradient(135deg,#f0f4ff 0%,#e9efff 45%,#fafbfe 100%);position:relative;overflow:hidden}
+.chero::before{content:'';position:absolute;top:-40%;right:-10%;width:52vw;height:52vw;max-width:700px;max-height:700px;background:radial-gradient(circle,rgba(37,99,235,.10) 0%,transparent 70%);pointer-events:none}
+.crumb{font-size:.8rem;color:var(--tx3);display:flex;gap:8px;align-items:center;margin-bottom:16px;font-weight:600}
+.crumb a{color:var(--tx3);text-decoration:none}
+.crumb a:hover{color:var(--blue)}
+.crumb .cur{color:var(--blue);font-family:var(--fe);letter-spacing:.08em}
+.chero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
+.chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chero h1{font-size:clamp(1.6rem,3.6vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1 .seg{display:inline-block}
+.chero h1.l{font-size:clamp(1.5rem,3.4vw,2.15rem)}.chero h1.m{font-size:clamp(1.4rem,3vw,1.9rem)}.chero h1.s{font-size:clamp(1.3rem,2.7vw,1.7rem)}
+@media(max-width:1199px){.chero h1 br.hb{display:none}}
+.chero .lead{margin-bottom:24px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
+.kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.kp small{display:block;font-size:.72rem;color:var(--tx3);font-weight:600;line-height:1.4}
+.kp b{display:block;font-family:var(--fe);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:800;color:var(--blue-d);line-height:1.3;letter-spacing:-.01em;margin-top:3px}
+.kp b .nw{white-space:nowrap}.kp b .ar{color:var(--blue);margin:0 3px;font-weight:600}
+.kp b.m{font-size:clamp(.92rem,1.45vw,1.12rem)}.kp b.s{font-size:clamp(.84rem,1.25vw,1rem)}
+.kp b .ja{font-family:var(--fj)}
+.chero-vis{position:relative;justify-self:end;width:100%;max-width:540px}
+.chero-vis a,.chero-vis .fr{display:block;position:relative;aspect-ratio:16/9;border-radius:var(--r2);overflow:hidden;background:var(--bg3);box-shadow:var(--sh3);border:6px solid #fff}
+.chero-vis img{width:100%;height:100%;object-fit:cover;aspect-ratio:auto}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.play span{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--sh3);padding-left:4px;transition:var(--tr)}
+.chero-vis a:hover .play span{transform:scale(1.08)}
+.vis-cap{font-size:.76rem;color:var(--tx3);margin-top:10px;text-align:center}
+@media(max-width:900px){.chero-grid{grid-template-columns:1fr}.chero-vis{justify-self:stretch;max-width:100%}}
+@media(max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
+
+/* case body（β 物語順: 課題→変えたこと→デモ→結果→仕組み→転用） */
+.chero{background:linear-gradient(180deg,#f7f9fc,#fff);border-bottom:1px solid var(--border)}
+.chero::before{display:none}
+.chero-vis .fr{border:1px solid var(--border);box-shadow:0 20px 50px rgba(15,29,53,.12);background:#fff}
+.csec{padding:clamp(40px,6vw,64px) 0}
+.csec.tight{padding-top:0}
+.csec.alt{background:var(--bg2)}
+.in{max-width:1100px;margin:0 auto}
+.chd{max-width:1100px;margin:0 auto 16px;display:flex;align-items:center;gap:14px}
+.chd h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;line-height:1.45}
+p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);line-height:1.85}
+.quote{max-width:1100px;margin:0 auto 14px;padding:14px 18px;border-left:4px solid var(--rose);background:var(--rose-bg);border-radius:0 12px 12px 0;font-size:1rem;font-weight:700;color:var(--tx)}
+.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3);position:relative}
+.vsnd{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:clamp(.9rem,1.6vw,1.05rem);font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer;z-index:2;white-space:nowrap}
+.vsnd:hover{filter:brightness(1.1)}
+.vsnd[hidden]{display:none}
+.vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
+.vidwrap .vid-cap{padding:10px 8px 2px}
+.nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+.num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh);display:flex;flex-direction:column;justify-content:center}
+.num small{display:block;font-size:.8rem;color:var(--tx3);font-weight:700}
+.num b{display:block;font-family:var(--fe);font-weight:800;color:var(--blue-d);letter-spacing:-.02em;line-height:1.15;margin-top:6px;font-size:clamp(1.7rem,3.4vw,2.6rem)}
+.num.big b{font-size:clamp(2rem,4.6vw,3.4rem);color:var(--tx)}
+.num.big b .ar{color:var(--blue);margin:0 8px;font-weight:600}
+.num b .nw{white-space:nowrap}
+.num b.l{font-size:clamp(1.45rem,2.7vw,2.05rem)}.num b.m{font-size:clamp(1.2rem,2.2vw,1.65rem)}.num b.s{font-size:clamp(1.05rem,1.9vw,1.4rem)}
+.num.big b.l{font-size:clamp(1.7rem,3.6vw,2.7rem)}.num.big b.m{font-size:clamp(1.5rem,3vw,2.2rem)}.num.big b.s{font-size:clamp(1.3rem,2.5vw,1.8rem)}
+.num .sub{font-size:.82rem;color:var(--tx2);margin-top:6px}
+.csec .tools{max-width:1100px;margin:0 auto 16px;border-top:0;padding-top:0}
+.note-box{max-width:1100px;margin:16px auto 0;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;background:#fff}
+.note-box b{display:block;font-size:.8rem;color:var(--amber);letter-spacing:.06em;margin-bottom:4px}
+.note-box p{font-size:.95rem;color:var(--tx2);line-height:1.85}
+.more-fig{max-width:1100px;margin:16px auto 0}
+.more-fig summary{cursor:pointer;font-size:.9rem;font-weight:700;color:var(--blue);padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:#fff}
+.more-fig[open] summary{margin-bottom:12px}
+@media(max-width:900px){.nums{grid-template-columns:1fr}}
+.tag{flex-shrink:0;padding:6px 12px;border-radius:10px;font-size:.78rem;font-weight:800;letter-spacing:.04em;line-height:1.4}
+.tag-b{background:var(--blue-bg2);color:var(--blue-d)}
+.tag-r{background:var(--rose-bg);color:var(--rose)}
+.tag-a{background:var(--amber-bg);color:var(--amber)}
+.tag-g{background:var(--green-bg);color:var(--green)}
+.tag-v{background:var(--violet-bg);color:var(--violet)}
+.tag-d{background:var(--tx);color:#fff}
+.fig{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:10px;box-shadow:var(--sh)}
+.fig img{width:100%;height:auto;aspect-ratio:16/9;border-radius:12px}
+.fig-cap{font-size:.8rem;color:var(--tx3);margin-top:10px;padding:0 6px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.vid{background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
+.vid video{width:100%;border-radius:12px;aspect-ratio:16/9;background:#000}
+.vid-cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:rgba(255,255,255,.65);font-size:.8rem;padding:10px 6px 2px}
+.vid-cap b{color:#fff}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px;padding-top:14px;border-top:1px dashed var(--border)}
+.tools small{font-size:.76rem;color:var(--tx3);font-weight:700;margin-right:2px}
+.tools span{font-size:.8rem;background:var(--bg2);color:var(--tx2);padding:4px 11px;border-radius:100px;font-weight:600}
+.callout{border-radius:var(--r2);padding:22px 24px;background:linear-gradient(135deg,rgba(37,99,235,.07),rgba(109,40,217,.06));border:1px solid rgba(37,99,235,.14)}
+.callout b{display:block;font-size:1rem;margin-bottom:6px}
+.callout p{font-size:.95rem;color:var(--tx2)}
+.incl{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.incl{grid-template-columns:1fr}}
+.inc{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:18px 20px}
+.inc .bd{margin-bottom:8px}
+.inc h3{font-size:.98rem;font-weight:800;line-height:1.5;margin-bottom:6px}
+.inc p{font-size:.86rem;color:var(--tx2);line-height:1.7}
+.inc .n{font-family:var(--fe);font-weight:800;color:var(--blue-d);font-size:1.05rem}
+.next{background:var(--bg2);padding:clamp(40px,6vw,64px) 0}
+.next .h3{font-size:1.1rem;font-weight:800;margin-bottom:16px}
+.ngrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.ngrid{grid-template-columns:1fr}}
+.ncard{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px;text-decoration:none;color:inherit;transition:var(--tr)}
+.ncard:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.ncard img{width:132px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;flex-shrink:0}
+.ncard small{font-family:var(--fe);font-size:.72rem;color:var(--tx3);font-weight:700;letter-spacing:.06em}
+.ncard b{display:block;font-size:.9rem;line-height:1.5;margin-top:2px}
+.back{margin-top:22px}
+.back a{font-size:.9rem;color:var(--blue);font-weight:700;text-decoration:none}
+
+/* reveal */
+.fi{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .fi.vis{opacity:1;transform:translateY(0)}
-.fi-d1{transition-delay:.1s}.fi-d2{transition-delay:.2s}.fi-d3{transition-delay:.3s}
-    </style>
+@media(prefers-reduced-motion:reduce){.fi{opacity:1;transform:none;transition:none}}
+</style>
 </head>
 <body>
+<header class="hd"><div class="hd-in"><a href="#" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="#cases">事例</a><a href="#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header>
+<section class="hero"><div class="w">
+<div class="hero-grid">
+<div class="hero-text">
+<div class="eyebrow">事例とデモ</div>
+<h1>AIに任せた業務の、<br><em>実物だけ。</em></h1>
+<p class="hero-lead">実際に動いたものだけを、図解と60秒のデモで載せています。構想や試作はありません。</p>
+<div class="hero-btns"><a href="#cases" class="btn btn-p">事例を見る ↓</a><a href="https://tally.so/r/QKdxx1" class="btn btn-o" target="_blank" rel="noopener">30分、無料で相談する</a></div>
+<div class="stats">
+<div class="st"><div class="st-n">9</div><div class="st-l">事例</div></div>
+<div class="st"><div class="st-n">7</div><div class="st-l">60秒のデモ</div></div>
+<div class="st"><div class="st-n">10</div><div class="st-l">動いている仕組み</div></div>
+<div class="st"><div class="st-n">1,740<small>万円</small></div><div class="st-l">年間の削減額（3事例の合計）</div></div>
+</div>
+</div>
+<div class="hero-vid fi">
+<div class="hero-vid-fr">
+<video autoplay muted loop playsinline preload="metadata" poster="media/hero_demo_poster.jpg" aria-label="売上集計をAIが自動化する画面のデモ。架空データ・音なし"><source src="media/hero_demo.webm" type="video/webm"><source src="media/hero_demo.mp4" type="video/mp4"></video>
+<img class="still" src="media/hero_demo_poster.jpg" alt="自動集計ダッシュボードの画面（架空データ）">
+</div>
+<div class="hero-vid-cap"><b>3枚のシート → 自動集計ダッシュボード</b><span>デモ</span></div>
+</div>
+</div>
+</div></section>
 
-<!-- HEADER -->
-<header class="hd">
-    <div class="hd-in">
-        <a href="#" class="hd-logo"><span class="hd-logo-dot"></span>AI業務改革<span>パートナー</span></a>
-        <nav class="hd-nav">
-            <a href="#about">選ばれる理由</a>
-            <a href="#evidence">導入事例</a>
-            <a href="#pricing">料金</a>
-            <a href="https://tally.so/r/QKdxx1" class="hd-cta">無料トライアルに申し込む</a>
-        </nav>
-        <button class="hd-mob-btn" onclick="document.getElementById('mn').classList.toggle('on')" aria-label="メニュー"><span></span><span></span><span></span></button>
-    </div>
-    <nav class="mob-nav" id="mn">
-        <a href="#about" onclick="document.getElementById('mn').classList.remove('on')">選ばれる理由</a>
-        <a href="#evidence" onclick="document.getElementById('mn').classList.remove('on')">導入事例</a>
-        <a href="#pricing" onclick="document.getElementById('mn').classList.remove('on')">料金</a>
-        <a href="https://tally.so/r/QKdxx1" class="mob-cta">無料トライアルに申し込む</a>
-    </nav>
-</header>
+<section class="sec" id="cases"><div class="w">
+<div class="sec-head"><div><div class="eyebrow">Cases</div><h2 class="h2">事例</h2><p class="lead">1件1ページ。課題、変えたこと、60秒のデモ、結果まで載せています。</p></div><div class="count"><span id="ccount">9</span><small>件</small></div></div>
+<div class="filters"><div class="frow"><span class="flb">業務</span><button class="chip on" data-cat="all">すべて</button><button class="chip" data-cat="数字の見える化">数字の見える化<small>2</small></button><button class="chip" data-cat="会議・議事録">会議・議事録<small>2</small></button><button class="chip" data-cat="資料・制作物">資料・制作物<small>3</small></button><button class="chip" data-cat="研修・育成">研修・育成<small>1</small></button><button class="chip" data-cat="営業・顧客対応">営業・顧客対応<small>1</small></button></div></div>
+<div class="grid"><a class="card fi" href="cases/case-01.html" data-cat="数字の見える化">
+<div class="thumb"><img src="cases/media/case-01_ill_m.webp" alt="売上集計の自動化のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">数字の見える化</span></div>
+<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>売上集計を自動化し、毎日250分の転記を0分に</h3>
+<div class="kpi"><div><small>毎日の転記作業</small><b><span class="old">250分</span><span class="ar">→</span>0分</b><div class="sub">年240万円分・960時間の削減</div></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-02.html" data-cat="会議・議事録">
+<div class="thumb"><img src="cases/media/case-02_ill_m.webp" alt="議事録の完全自動化のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">会議・議事録</span></div>
+<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>議事録と重要事項が、自動で担当へ届く</h3>
+<div class="kpi"><div><small>議事録は 100%自動。解約の兆し・増額の機会も担当へ</small><b>重要事項が、自動で届く</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-03.html" data-cat="資料・制作物">
+<div class="thumb"><img src="cases/media/case-03_ill_m.webp" alt="資料作成の半自動化のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">資料・制作物</span></div>
+<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>組織全体で月2,000時間の資料作成を、500時間に</h3>
+<div class="kpi"><div><small>資料作成の工数（組織全体）</small><b><span class="old">月2,000時間</span><span class="ar">→</span>月500時間</b><div class="sub">年1,500万円分の削減</div></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-09.html" data-cat="資料・制作物">
+<div class="thumb"><img src="cases/media/case-09_ill_m.webp" alt="資料づくりで人がやることは2つだけのイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">資料・制作物</span></div>
+<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>AIっぽさのない資料が、自社の型で仕上がる</h3>
+<div class="kpi"><div><small>AIっぽさのない資料を、ゼロから配布 PDF まで</small><b>型どおり、速く</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-08.html" data-cat="営業・顧客対応">
+<div class="thumb"><img src="cases/media/case-08_ill_m.webp" alt="商談のたびに営業資産が育つ流れのイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">営業・顧客対応</span></div>
+<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>「商談終わった」の一言で、営業台本と資料が育つ</h3>
+<div class="kpi"><div><small>商談後の分析→台本→資料</small><b>一言で自動</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-07.html" data-cat="数字の見える化">
+<div class="thumb"><img src="cases/media/case-07_ill_m.webp" alt="稼働時間の自動集計のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">数字の見える化</span></div>
+<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>カレンダーに予定を入れるだけ。稼働時間の集計は0分</h3>
+<div class="kpi"><div><small>月次の工数集計</small><b><span class="old">手で集計</span><span class="ar">→</span>0分</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-05.html" data-cat="会議・議事録">
+<div class="thumb"><img src="cases/media/case-05_ill_m.webp" alt="人材会社の面談業務AI（某転職エージェント・顧客のNotionに実装）のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">会議・議事録</span></div>
+<h3>面談1件の記録を20分から約4分に。顧客のNotionに業務ごと実装</h3>
+<div class="kpi"><div><small>面談1件の記録</small><b><span class="old">20分</span><span class="ar">→</span>約4分</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-04.html" data-cat="資料・制作物">
+<div class="thumb"><img src="cases/media/case-04_ill_m.webp" alt="研修教材づくり — 31単元を5日でのイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">資料・制作物</span></div>
+<div class="cbds"><span class="bd bd-video">60秒デモ</span></div><h3>Claude Code の研修教材31単元を、設計から5日で形にする</h3>
+<div class="kpi"><div><small>研修教材の制作（設計から完成まで）</small><b>5日で31単元</b></div><span class="go" aria-hidden="true">↗</span></div></div></a><a class="card fi" href="cases/case-06.html" data-cat="研修・育成">
+<div class="thumb"><img src="cases/media/case-06_ill_m.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="cbody"><div class="cmeta"><span class="cat">研修・育成</span></div>
+<h3>レクチャーの疑問を、次回ではなく当日のうちに返す</h3>
+<div class="kpi"><div><small>疑問が解けるまで</small><b><span class="old">次回</span><span class="ar">→</span>当日</b></div><span class="go" aria-hidden="true">↗</span></div></div></a></div>
+</div></section>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="w">
-        <div class="hero-grid">
-            <div class="hero-text">
-                <div class="hero-tag">AI × 業務効率化</div>
-                <h1>雇わずに持てる、<br>あなた専属の<span class="hl">AI業務改革<br>パートナー。</span></h1>
-                <p class="hero-sub">正社員1人分の1/3のコストで、戦略から実装・定着まで。<br>年間6,000時間の削減実績。</p>
-                <div class="hero-btns">
-                    <a href="https://tally.so/r/QKdxx1" class="btn btn-p">無料トライアルに申し込む</a>
-                    <a href="#service" class="btn btn-o">サービス内容を見る</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hs"><div class="hs-n">6,000h</div><div class="hs-l">年間工数削減</div></div>
-                    <div class="hs"><div class="hs-n">¥1,500万</div><div class="hs-l">人件費削減/年</div></div>
-                    <div class="hs"><div class="hs-n">¥0</div><div class="hs-l">初期費用</div></div>
-                    <div class="hs"><div class="hs-n">40名+</div><div class="hs-l">組織で実践済</div></div>
-                </div>
-            </div>
-            <div class="hero-vis">
-                <div class="hero-vis-inner">
-                    <div class="hero-card hc-1">
-                        <div class="hc-icon hc-icon-b">📊</div>
-                        <div class="hc-title">KPIダッシュボード構築</div>
-                        <div class="hc-desc">月間80時間の工数削減を実現</div>
-                        <div class="hc-bar"><div class="hc-bar-fill" style="width:85%"></div></div>
-                    </div>
-                    <div class="hero-card hc-2">
-                        <div class="hc-icon hc-icon-t">⚡</div>
-                        <div class="hc-title">議事録AI自動生成</div>
-                        <div class="hc-desc">作成工数を100%削減</div>
-                        <div class="hc-bar"><div class="hc-bar-fill" style="width:100%"></div></div>
-                    </div>
-                    <div class="hero-card hc-3">
-                        <div class="hc-icon hc-icon-a">🚀</div>
-                        <div class="hc-title">資料作成の半自動化</div>
-                        <div class="hc-desc">月間500時間を削減</div>
-                        <div class="hc-bar"><div class="hc-bar-fill" style="width:72%"></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="scroll-ind">SCROLL</div>
-</section>
+<section class="sec" id="systems" style="background:var(--bg2)"><div class="w">
+<div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">日々動いている仕組み。絵を押すと、これまでとAI導入後の図解が開きます。</p></div><div class="count">10<small>件</small></div></div>
+<div class="sgrid"><div class="scard zoomable fi" data-cap="フォーム営業の仕組み一式"><div class="thumb"><img src="cases/media/list-form_ai.webp" data-full="cases/media/list-form_full.webp" alt="フォーム営業の仕組み一式" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">営業・顧客対応</div><h3>フォーム営業の仕組み一式</h3><p>テンプレの文面しか送れず、相手ごとの言葉にならない</p></div><span class="bd bd-live">営業で使用中</span></div></div><div class="scard zoomable fi" data-cap="採用LPの制作・納品（某転職エージェント）"><div class="thumb"><img src="cases/media/list-lp_ai.webp" data-full="cases/media/list-lp_full.webp" alt="採用LPの制作・納品（某転職エージェント）" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">資料・制作物</div><h3>採用LPの制作・納品（某転職エージェント）</h3><p>LP・制作物は外注するしかないと思っている</p></div><span class="bd bd-live">実案件で納品</span></div></div><div class="scard zoomable fi" data-cap="タスクの先回り処理"><div class="thumb"><img src="cases/media/list-saki_ai.webp" data-full="cases/media/list-saki_full.webp" alt="タスクの先回り処理" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">記録・振り返り</div><h3>タスクの先回り処理</h3><p>「やらなきゃ」のまま止まっているタスクがある</p></div><span class="bd bd-live">毎日稼働中</span></div></div><div class="scard zoomable fi" data-cap="1分ごとの画面記録から、日報が自動で書ける"><div class="thumb"><img src="cases/media/list-nikki_ai.webp" data-full="cases/media/list-nikki_full.webp" alt="1分ごとの画面記録から、日報が自動で書ける" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">記録・振り返り</div><h3>1分ごとの画面記録から、日報が自動で書ける</h3><p>日報や作業記録は、書く手間がある限り続かない</p></div><span class="bd bd-live">毎分記録中</span></div></div><div class="scard zoomable fi" data-cap="マネージャー1on1準備の自動化"><div class="thumb"><img src="cases/media/list-1on1_ai.webp" data-full="cases/media/list-1on1_full.webp" alt="マネージャー1on1準備の自動化" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">会議・議事録</div><h3>マネージャー1on1準備の自動化</h3><p>1on1の準備が、前回の記録を読み返すところから毎回始まる</p></div><span class="bd bd-ext">組める仕組み</span></div></div><div class="scard zoomable fi" data-cap="営業商談プロセスのAI全自動化"><div class="thumb"><img src="cases/media/list-shodan_ai.webp" data-full="cases/media/list-shodan_full.webp" alt="営業商談プロセスのAI全自動化" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">営業・顧客対応</div><h3>営業商談プロセスのAI全自動化</h3><p>商談前後の準備・フォローが、営業担当それぞれのやり方に依存している</p></div><span class="bd bd-ext">組める仕組み</span></div></div><div class="scard zoomable fi" data-cap="メンバー成長追跡OS（評価・キャリア設計の脱属人化）"><div class="thumb"><img src="cases/media/list-growth_ai.webp" data-full="cases/media/list-growth_full.webp" alt="メンバー成長追跡OS（評価・キャリア設計の脱属人化）" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">記録・振り返り</div><h3>メンバー成長追跡OS（評価・キャリア設計の脱属人化）</h3><p>メンバーの評価やキャリア設計が、上長の記憶と主観に依存している</p></div><span class="bd bd-ext">組める仕組み</span></div></div><div class="scard zoomable fi" data-cap="Slackエンゲージメントスコア月次モニタリング"><div class="thumb"><img src="cases/media/list-slack_ai.webp" data-full="cases/media/list-slack_full.webp" alt="Slackエンゲージメントスコア月次モニタリング" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">数字の見える化</div><h3>Slackエンゲージメントスコア月次モニタリング</h3><p>メンバーのモチベーション低下に気づくのが、本人が不調を訴えてからになりがち</p></div><span class="bd bd-ext">組める仕組み</span></div></div><div class="scard zoomable fi" data-cap="スキルとエージェントの可視化"><div class="thumb"><img src="cases/media/list-map_real.webp" alt="スキルとエージェントの可視化" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">AIの運用基盤</div><h3>スキルとエージェントの可視化</h3><p>AIに何を任せているのか、全体像が誰にも見えない</p></div><span class="bd bd-live">稼働中</span></div></div><div class="scard zoomable fi" data-cap="業務フロー図の自動生成"><div class="thumb"><img src="cases/media/list-flow_real.webp" data-full="cases/media/list-flow_full.webp" alt="業務フロー図の自動生成" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">資料・制作物</div><h3>業務フロー図の自動生成</h3><p>「今どう回っているか」を1枚で説明できる人が社内にいない</p></div><span class="bd bd-live">制作で使用中</span></div></div></div>
+</div></section>
 
-<!-- CHALLENGES -->
-<section class="sec bg-w">
-    <div class="w">
-        <div class="sec-eyebrow fi">課題</div>
-        <h2 class="sec-h fi">こんな課題はありませんか？</h2>
-        <p class="sec-p fi">AI導入や業務効率化PJでは、3つの「ない」が発生しがちです</p>
-        <div class="ch-grid">
-            <div class="ch-card fi fi-d1">
-                <div class="ch-ico ch-ico-1">📊</div>
-                <h3>投資対効果が見えない</h3>
-                <p>成果の不確実性が高く、一歩踏み出せない。</p>
-                <div class="ch-q">「もし成果が出なければ、現場の負担が増えるだけになりそう…」</div>
-                <div class="ch-tgt">社員10-100名の企業で特に多い課題です</div>
-            </div>
-            <div class="ch-card fi fi-d2">
-                <div class="ch-ico ch-ico-2">⏰</div>
-                <h3>社内のリソースが足りない</h3>
-                <p>通常業務に追われ、改善に人手も時間も割けない。</p>
-                <div class="ch-q">「通常業務で手一杯。サイドPJだとコミットメントが上がりません…」</div>
-                <div class="ch-tgt">DX推進室・IT部門がない企業に多い課題です</div>
-            </div>
-            <div class="ch-card fi fi-d3">
-                <div class="ch-ico ch-ico-3">🔄</div>
-                <h3>導入後に定着しない</h3>
-                <p>定着と育成の進め方が分からず、「導入しただけ」に終わる。</p>
-                <div class="ch-q">「どの業務にどう組み込めばいいか具体的にイメージが沸かない…」</div>
-                <div class="ch-tgt">過去にツール導入で失敗した経験がある企業に多い課題です</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ROOT CAUSE -->
-<section class="sec bg-g">
-    <div class="w">
-        <div class="sec-eyebrow fi">原因</div>
-        <h2 class="sec-h fi">なぜ社内だけでは解決できないのか</h2>
-        <p class="sec-p fi"></p>
-        <div class="rc-grid fi">
-            <div class="rc-card"><h4>客観的視点の欠如</h4><p>自社業務に慣れすぎて非効率を客観視できない。改善ポイントが見えない。</p></div>
-            <div class="rc-card"><h4>専門人材がいない</h4><p>設計→実装→定着を一気通貫で推進できる人材が社内に不足。</p></div>
-            <div class="rc-card"><h4>時間・リソース不足</h4><p>日々の緊急業務に追われ、重要だが緊急でない改善に着手できない。</p></div>
-        </div>
-        <div class="rc-box fi">
-            <h4>既存サービスの限界</h4>
-            <div class="rc-row"><span class="rc-x">✕</span><span>多くのコンサルは「戦略まで」、SIerは「ツール導入まで」で止まる</span></div>
-            <div class="rc-row"><span class="rc-x">✕</span><span>便利機能はリリースできても、PLに影響する本質的な改善に至らない</span></div>
-            <div class="rc-row"><span class="rc-x">✕</span><span>高額システム導入を前提とされ、中小企業には現実的でない</span></div>
-        </div>
-        <div class="rc-end fi">だからこそ「現場経験 × 実装力 × 運用定着まで伴走」する外部専門家が必要。</div>
-    </div>
-</section>
-
-<!-- WHY US -->
-<section class="sec bg-w" id="about">
-    <div class="w">
-        <div class="sec-eyebrow fi">選ばれる理由</div>
-        <h2 class="sec-h fi">コンサルでも、SIerでもない。<br>「事業数値」を動かす伴走型パートナー。</h2>
-        <p class="sec-p fi">45名組織のマネジメント経験から、どこに手を打てば利益や組織が変わるかを熟知。<br>戦略だけで終わらず、実装・運用定着まで自ら手を動かして完遂します。</p>
-        <div class="why-grid">
-            <div class="why-card fi fi-d1"><div class="why-ico">📈</div><h3>「PLにヒットする」設計力</h3><p>「便利」ではなく利益に直結する改善を設計。アップセル増・解約減・工数削減など、経営指標を動かすポイントを特定。</p></div>
-            <div class="why-card fi fi-d2"><div class="why-ico">⚡</div><h3>戦略×実装×定着を完遂</h3><p>GAS・Notion・Gemini等を駆使し、現場で使える形に高速実装。「動くけど使えない」で終わらせない。</p></div>
-            <div class="why-card fi fi-d3"><div class="why-ico">💰</div><h3>高額システム不要</h3><p>Google Workspace、Slack、Notion等の既存ツールを最大活用。新規システム導入費0円。ROIが明確になってから段階的に投資する現実的なアプローチ。</p></div>
-        </div>
-    </div>
-</section>
-
-<!-- COMPARISON -->
-<section class="sec bg-d">
-    <div class="w">
-        <div class="sec-eyebrow fi">比較</div>
-        <h2 class="sec-h fi">既存の選択肢と比べてみてください</h2>
-        <p class="sec-p fi"></p>
-        <div class="comp-wrap fi">
-            <table class="comp-tbl">
-                <thead><tr><th></th><th>正社員AI担当</th><th>大手SIer</th><th>単発コンサル</th><th>本サービス</th></tr></thead>
-                <tbody>
-                    <tr><td>初期費用</td><td>採用費50-100万</td><td>数百万〜</td><td>0円</td><td>0円</td></tr>
-                    <tr><td>月額コスト</td><td>50-80万（年収600-1,000万）</td><td>100万〜</td><td>スポット50万〜</td><td>30万〜</td></tr>
-                    <tr><td>戦略設計</td><td>△ 経験依存</td><td>○</td><td>○</td><td>◎</td></tr>
-                    <tr><td>実装（手を動かす）</td><td>○</td><td>外注</td><td>✕ 戦略止まり</td><td>◎ 自ら実装</td></tr>
-                    <tr><td>運用定着</td><td>○</td><td>✕ 納品で終了</td><td>✕</td><td>◎ 伴走</td></tr>
-                    <tr><td>契約縛り</td><td>雇用リスク</td><td>年単位</td><td>なし</td><td>なし</td></tr>
-                    <tr><td>高額システム</td><td>別途必要</td><td>前提</td><td>別途</td><td>不要</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="comp-note fi" style="color:#fff">正社員1人分の<em>約1/2〜1/3のコスト</em>で、戦略から定着まで完遂</div>
-        <div class="mid-cta mid-cta-dark fi"><p>この価格で、まずは無料トライアルから</p><a href="https://tally.so/r/QKdxx1" class="btn btn-p">無料トライアルに申し込む →</a></div>
-    </div>
-</section>
-
-<!-- SERVICES -->
-<section class="sec bg-g" id="service">
-    <div class="w">
-        <div class="sec-eyebrow fi">サービス</div>
-        <h2 class="sec-h fi">ご支援可能内容</h2>
-        <p class="sec-p fi"></p>
-        <div class="svc-grid">
-            <div class="svc-card fi fi-d1" style="order:-2"><div class="svc-badge svc-badge-b">人気 No.1</div><div class="svc-n">01</div><h3>KPI可視化 &amp; ダッシュボード</h3><p>重要指標の整理・定義、スプシやダッシュボードでの一元管理、日次・月次の自動更新の仕組み化。</p><div class="svc-res">月間80時間の工数削減を実現した事例あり</div></div>
-            <div class="svc-card fi fi-d2" style="order:-1"><div class="svc-badge svc-badge-g">成果が出やすい</div><div class="svc-n">02</div><h3>自動化・効率化の導入</h3><p>GAS/Slack連携の自動化、Gemini等のAIツール活用、通知・集計の自動仕組み化。</p><div class="svc-res">年間6,000時間の工数削減を実現した事例あり</div></div>
-            <div class="svc-card fi fi-d3"><div class="svc-n">03</div><h3>会議の運用改善・自動化</h3><p>アジェンダのフォーマット化、議事録作成・共有の自動化、決めたことが守られる仕組み構築。</p><div class="svc-res">議事録作成工数を100%削減した事例あり</div></div>
-            <div class="svc-card fi"><div class="svc-n">04</div><h3>ナレッジ共有基盤の整備</h3><p>Notion等を活用した資産集約、属人性の排除と事例蓄積、新人の学習コスト大幅削減。</p><div class="svc-res">ナレッジの属人化を解消し育成コストを削減</div></div>
-            <div class="svc-card fi"><div class="svc-n">05</div><h3>タスク・PJ管理の最適化</h3><p>管理ツールの整理・統合、現場への定着・伴走支援、Notion等への一元管理移行。</p><div class="svc-res">複数ツールの一元化でマネジメント工数を削減</div></div>
-            <div class="svc-card fi"><div class="svc-n">06</div><h3>AI導入研修 / 定着の伴走</h3><p>社内研修・教育の実施、新しい業務プロセスの導入支援、トレーニング計画の実行。</p><div class="svc-res">全メンバーのAI活用レベルを均質に引き上げ</div></div>
-        </div>
-    </div>
-</section>
-
-<!-- RESULTS -->
-<section class="sec bg-w" id="evidence">
-    <div class="w">
-        <div class="sec-eyebrow fi">導入実績</div>
-        <h2 class="sec-h fi">AIによる業務変革の効果</h2>
-        <p class="sec-p fi">実際の支援事例から生まれた数値をご覧ください</p>
-        <div class="res-hi fi">
-            <div class="rh">
-                <div class="rh-illust"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="20" width="8" height="24" rx="2" fill="#2563eb" opacity=".2"/><rect x="16" y="12" width="8" height="32" rx="2" fill="#2563eb" opacity=".4"/><rect x="28" y="4" width="8" height="40" rx="2" fill="#2563eb" opacity=".6"/><rect x="40" y="8" width="4" height="36" rx="2" fill="#2563eb" opacity=".8"/></svg></div>
-                <div class="rh-n">240<sub>万円</sub></div>
-                <div class="rh-lb">人件費削減（集計業務）/年</div>
-                <div class="rh-ds">年間960時間の工数削減。GASとAIで毎月の集計・事務作業を大幅に効率化。</div>
-            </div>
-            <div class="rh">
-                <div class="rh-illust"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#2563eb" stroke-width="4" opacity=".15"/><path d="M24 4a20 20 0 0 1 0 40" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><text x="24" y="28" text-anchor="middle" fill="#2563eb" font-weight="800" font-size="12" font-family="Plus Jakarta Sans">100</text></svg></div>
-                <div class="rh-n">100<sub>%</sub></div>
-                <div class="rh-lb">議事録作成工数削減</div>
-                <div class="rh-ds">会議議事録の自動生成により、「作成工数」を完全にゼロへ。</div>
-            </div>
-            <div class="rh">
-                <div class="rh-illust"><svg viewBox="0 0 48 48" fill="none"><path d="M4 40L16 28L24 34L44 8" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/><circle cx="44" cy="8" r="4" fill="#2563eb"/><path d="M4 40L16 28L24 34L44 8" stroke="#2563eb" stroke-width="1" stroke-dasharray="4 4" opacity=".2" transform="translate(0,6)"/></svg></div>
-                <div class="rh-n">1,500<sub>万円</sub></div>
-                <div class="rh-lb">人件費削減（資料作成）/年</div>
-                <div class="rh-ds">年間6,000時間の工数削減。AIワークフローで資料作成の属人化を解消。</div>
-            </div>
-        </div>
-
-        <div class="case-acc">
-            <div class="case-i fi">
-                <button class="case-hd" onclick="tgCase(this)"><span class="case-num">01</span><span class="case-ttl">顧客別売上達成状況の可視化と集計の自動化</span><span class="case-arr">∨</span></button>
-                <div class="case-bd"><div class="case-bd-in">
-                    <div class="case-g"><div><div class="case-lb case-lb-r">課題</div><p>案件ごとにシートが分散。毎日250分（月間80時間）の転記工数。</p></div><div><div class="case-lb case-lb-o">施策</div><p>GASによる自動集計＋条件付きアラート＋ダッシュボード構築。</p></div><div><div class="case-lb case-lb-g">成果</div><p>月間80時間の工数削減。リアルタイム数値把握で戦略的早期介入が可能に。</p></div></div>
-                    <div class="case-tags"><span class="case-tag">導入期間：2週間</span><span class="case-tag">GAS / スプレッドシート</span></div>
-                    <a href="https://ai-ops-partner.vercel.app/cases/case-01.html" class="case-lnk">詳細を見る →</a>
-                </div></div>
-            </div>
-            <div class="case-i fi">
-                <button class="case-hd" onclick="tgCase(this)"><span class="case-num">02</span><span class="case-ttl">議事録の自動化/資産化による機会〜危機検知</span><span class="case-arr">∨</span></button>
-                <div class="case-bd"><div class="case-bd-in">
-                    <div class="case-g"><div><div class="case-lb case-lb-r">課題</div><p>属人的な議事録運用。解約兆候・増額機会のリアルタイム把握が不可能。</p></div><div><div class="case-lb case-lb-o">施策</div><p>Google Meet×Gemini連携で構造化議事録を自動生成。リスク/機会のAI自動検知→Slack即時通知。</p></div><div><div class="case-lb case-lb-g">成果</div><p>事務作業の完全撤廃。ナレッジ一元管理。マネージャーの戦略的早期介入が可能に。</p></div></div>
-                    <div class="case-tags"><span class="case-tag">導入期間：3週間</span><span class="case-tag">Google Meet / Gemini / Slack / GAS</span></div>
-                    <a href="https://ai-ops-partner.vercel.app/cases/case-02.html" class="case-lnk">詳細を見る →</a>
-                </div></div>
-            </div>
-            <div class="case-i fi">
-                <button class="case-hd" onclick="tgCase(this)"><span class="case-num">03</span><span class="case-ttl">資料作成の半自動化と「組織知」の資産化</span><span class="case-arr">∨</span></button>
-                <div class="case-bd"><div class="case-bd-in">
-                    <div class="case-g"><div><div class="case-lb case-lb-r">課題</div><p>月間2,000時間の資料作成工数。品質が担当者に依存し、ノウハウが属人化。</p></div><div><div class="case-lb case-lb-o">施策</div><p>GAS×Geminiで資料骨子を5分で自動生成。勝ちパターンのテンプレート化。</p></div><div><div class="case-lb case-lb-g">成果</div><p>月間500時間（3.1人分）の工数削減。全メンバーの提案レベルを均質に引き上げ。</p></div></div>
-                    <div class="case-tags"><span class="case-tag">導入期間：4週間</span><span class="case-tag">GAS / Gemini / Google Slides</span></div>
-                    <a href="https://ai-ops-partner.vercel.app/cases/case-03.html" class="case-lnk">詳細を見る →</a>
-                </div></div>
-            </div>
-        </div>
-        <div class="case-more fi"><a href="https://ai-ops-partner.vercel.app/cases/case-01.html" class="btn btn-p">導入事例を詳しく見る</a></div>
-        <div class="mid-cta fi"><p>この成果を御社でも実現しませんか？</p><a href="https://tally.so/r/QKdxx1" class="btn btn-p">無料トライアルに申し込む →</a></div>
-    </div>
-</section>
-
-<!-- PRICING -->
-<section class="sec bg-g" id="pricing">
-    <div class="w">
-        <div class="sec-eyebrow fi">料金</div>
-        <h2 class="sec-h fi">正社員AI担当の1/3以下のコストで、<br>戦略から定着まで</h2>
-        <p class="sec-p fi"></p>
-        <div class="pri-compare fi">
-            <div class="pri-vs"><div class="pri-vs-lb">正社員AI担当を1名採用</div><div class="pri-vs-val pri-vs-old">月50-80万円</div></div>
-            <div class="pri-arrow">→</div>
-            <div class="pri-vs"><div class="pri-vs-lb">本サービス</div><div class="pri-vs-val pri-vs-new">月30万円〜</div></div>
-        </div>
-        <div class="pri-grid">
-            <div class="pri-card fi">
-                <h3>無料トライアル</h3><div class="pri-val">¥0</div><div class="pri-sub">まずはノーリスクでお試し</div>
-                <ul class="pri-feat"><li>業務ヒアリング（60-90分）</li><li>簡易課題洗い出し</li><li>AI活用余地の概算提示</li><li class="hl">特定業務1つのAI化実装（上限10h）</li></ul>
-                <a href="https://tally.so/r/QKdxx1" class="btn btn-p" style="width:100%">無料トライアルに申し込む</a>
-            </div>
-            <div class="pri-card feat fi">
-                <div class="pri-badge">おすすめ</div>
-                <h3>本格プロジェクト支援</h3><div class="pri-val">¥300,000〜</div><div class="pri-sub">3ヶ月〜 ／ 月額換算 約10万円〜</div>
-                <ul class="pri-feat"><li>業務プロセスの可視化・分析</li><li>AI活用戦略・ロードマップ策定</li><li>複数業務のAI化・自動化実装</li><li>KPI設計・ダッシュボード構築</li><li>社内研修・運用マニュアル作成</li><li>週次定例（月2回）</li><li>月次ROIレポート提供</li></ul>
-                <a href="https://tally.so/r/QKdxx1" class="btn btn-p" style="width:100%">お問い合わせ</a>
-            </div>
-            <div class="pri-card fi">
-                <h3>継続顧問</h3><div class="pri-val">¥100,000〜<span style="font-size:.55em;font-weight:500">/月</span></div><div class="pri-sub">継続顧問契約</div>
-                <ul class="pri-feat"><li>月次定例ミーティング（2-4回）</li><li>継続的改善提案・実装支援</li><li>新規施策の企画・実装支援</li><li>チャットサポート（営業日対応）</li><li>組織拡大に関する壁打ち</li></ul>
-                <a href="https://tally.so/r/QKdxx1" class="btn btn-o" style="width:100%">お問い合わせ</a>
-            </div>
-        </div>
-        <div class="pri-ft fi"><strong>✓ いつでも解約OK</strong>　—　契約期間の縛りはありません。品質で継続していただける自信があります。</div>
-        <div class="mid-cta fi"><a href="https://tally.so/r/QKdxx1" class="btn btn-p">無料トライアルに申し込む →</a></div>
-    </div>
-</section>
-
-<!-- PROCESS -->
-<section class="sec bg-w">
-    <div class="w">
-        <div class="sec-eyebrow fi">導入ステップ</div>
-        <h2 class="sec-h fi">導入までのステップ</h2>
-        <p class="sec-p fi"></p>
-        <div class="proc-tl fi">
-            <div class="proc-s"><div class="proc-n proc-n-1">1</div><div class="proc-c"><h3>無料トライアル</h3><p>無料課題ヒアリングと特定業務1つのAI化実装。改善の方向性と相性をご確認ください。</p></div></div>
-            <div class="proc-s"><div class="proc-n proc-n-2">2</div><div class="proc-c"><h3>本提案・契約</h3><p>支援範囲と優先課題を確定。具体的なプロジェクト計画とKPIを合意します。</p></div></div>
-            <div class="proc-s"><div class="proc-n proc-n-3">3</div><div class="proc-c"><h3>導入・伴走支援</h3><p>施策の実行と定着支援。週次MTG等で進捗を管理し、社内への移転を進めます。</p></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ -->
-<section class="sec bg-g">
-    <div class="w">
-        <div class="sec-eyebrow fi">よくある質問</div>
-        <h2 class="sec-h fi">FAQ</h2>
-        <p class="sec-p fi"></p>
-        <div class="faq-list fi">
-            <div class="faq-i"><button class="faq-q" onclick="this.parentElement.classList.toggle('on')">AI導入の経験がまったくありませんが大丈夫ですか？</button><div class="faq-a"><div class="faq-a-in">はい。むしろそのような企業様が最も成果を実感されています。専門知識は一切不要です。</div></div></div>
-            <div class="faq-i"><button class="faq-q" onclick="this.parentElement.classList.toggle('on')">社内にIT担当者がいませんが問題ありませんか？</button><div class="faq-a"><div class="faq-a-in">問題ありません。戦略設計から実装、社内への定着まですべて伴走します。</div></div></div>
-            <div class="faq-i"><button class="faq-q" onclick="this.parentElement.classList.toggle('on')">無料トライアルで何がわかりますか？</button><div class="faq-a"><div class="faq-a-in">御社の業務における改善ポイントの可視化と、特定業務1つのAI化実装（上限10時間）を無料で実施します。成果が出なければ費用は一切いただきません。</div></div></div>
-            <div class="faq-i"><button class="faq-q" onclick="this.parentElement.classList.toggle('on')">最低契約期間はありますか？</button><div class="faq-a"><div class="faq-a-in">ありません。いつでも解約可能です。品質で継続していただける自信があります。</div></div></div>
-            <div class="faq-i"><button class="faq-q" onclick="this.parentElement.classList.toggle('on')">どのようなツールを使いますか？</button><div class="faq-a"><div class="faq-a-in">Google Workspace、Notion、Slack、GAS、Gemini等の既存ツールを最大活用します。高額な新規システム導入は不要です。</div></div></div>
-            <div class="faq-i"><button class="faq-q" onclick="this.parentElement.classList.toggle('on')">リモートでの支援は可能ですか？</button><div class="faq-a"><div class="faq-a-in">フルリモート対応可能です。Zoom/Google Meetでの定例MTGとチャットサポートで密にコミュニケーションを取ります。</div></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="fcta" id="cta">
-    <div class="w">
-        <div class="fi">
-            <div class="fcta-badge">🔥 先着3社限定｜無料トライアル受付中</div>
-            <h2>まずは無料トライアルで、<br>AIの効果を体感しませんか？</h2>
-            <p>「AIを導入したいが、何から始めればいいか分からない」</p>
-            <p>「社内にIT人材がいないが、業務効率化を進めたい」</p>
-            <p>その第一歩を、<strong style="color:#fff">リスクゼロ</strong>でお試しいただけます。</p>
-            <div class="fcta-steps">
-                <div class="fcta-s"><div class="fcta-s-n">01</div><div class="fcta-s-t">ヒアリング</div><div class="fcta-s-d">60-90分</div></div>
-                <div class="fcta-s"><div class="fcta-s-n">02</div><div class="fcta-s-t">課題特定</div><div class="fcta-s-d">AI活用ポイント提示</div></div>
-                <div class="fcta-s"><div class="fcta-s-n">03</div><div class="fcta-s-t">実装</div><div class="fcta-s-d">上限10時間</div></div>
-                <div class="fcta-s"><div class="fcta-s-n">04</div><div class="fcta-s-t">効果検証</div><div class="fcta-s-d">Before/Afterレポート</div></div>
-            </div>
-            <a href="https://tally.so/r/QKdxx1" class="btn btn-p" style="font-size:1.05rem;padding:18px 48px">【先着3社】無料トライアルに申し込む</a>
-        </div>
-    </div>
-</section>
-
-<footer class="ft">
-    <div class="w">
-        <div class="ft-links"><a href="#about">選ばれる理由</a><a href="#service">サービス</a><a href="#evidence">実績</a><a href="#pricing">料金</a><a href="https://tally.so/r/QKdxx1">お問い合わせ</a></div>
-        <p class="ft-copy">© 2026 AI業務改革パートナー</p>
-    </div>
-</footer>
+<section class="cta"><div class="w">
+<h2>まずは30分、いまの業務を聞かせてください。</h2>
+<p>同じような課題があれば、御社の業務でどう組み替えるかをその場で話します。オンライン・無料です。</p>
+<a href="https://tally.so/r/QKdxx1" class="btn btn-w" target="_blank" rel="noopener">無料で相談する</a>
+<div class="note">3営業日以内に返信します。売り込みの電話はしません。</div>
+</div></section>
+<footer class="ft"><div class="w">
+<div class="ft-links"><a href="index.html#cases">事例</a><a href="index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" target="_blank" rel="noopener">お問い合わせ</a></div>
+<p class="ft-copy">© 2026 AI業務改革パートナー</p></div></footer>
+<div class="lb" id="lb" role="dialog" aria-label="図解を拡大"><img src="" alt=""><div class="lb-cap"></div></div>
 
 <script>
-function tgCase(b){const i=b.parentElement;document.querySelectorAll('.case-i').forEach(x=>{if(x!==i)x.classList.remove('on')});i.classList.toggle('on')}
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -60px 0px'});
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+const lb=document.getElementById('lb');if(lb){const li=lb.querySelector('img'),lc=lb.querySelector('.lb-cap');
+document.querySelectorAll('.zoomable').forEach(el=>{el.addEventListener('click',ev=>{ev.preventDefault();const im=el.tagName==='IMG'?el:el.querySelector('img');li.src=im.dataset.full||im.src;li.alt=im.alt;lc.textContent=el.dataset.cap||im.alt||'';lb.classList.add('on');document.body.style.overflow='hidden'})});
+const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});}
+(function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
+
+(function(){const cards=[...document.querySelectorAll('#cases .card')];const cnt=document.getElementById('ccount');
+let cat='all';
+function apply(){let n=0;cards.forEach(c=>{const ok=(cat==='all'||c.dataset.cat===cat);c.classList.toggle('hide',!ok);if(ok)n++});cnt.textContent=n;}
+document.querySelectorAll('.chip[data-cat]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip[data-cat]').forEach(x=>x.classList.remove('on'));b.classList.add('on');cat=b.dataset.cat;apply()}));
+})();
+
+(function(){if(!/[?&]fb=1(&|$)/.test(location.search))return;
+var KEY='lpfb:'+location.pathname.replace(/\/index\.html$/,'/');var UI='lpfb:ui';var notes=[];try{notes=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+var ui={x:null,y:null,w:340,h:null,min:false};try{ui=Object.assign(ui,JSON.parse(localStorage.getItem(UI)||'{}'))}catch(e){}
+var st=document.createElement('style');st.textContent='.fbx{outline:2px dashed #e11d48!important;outline-offset:2px}.fbpin{position:absolute;z-index:99998;background:#e11d48;color:#fff;font:700 12px/22px system-ui;width:22px;height:22px;border-radius:50%;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.3);pointer-events:none}#fbp{position:fixed;z-index:99999;display:flex;flex-direction:column;background:#fff;border:1px solid #cbd5e1;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.25);font:13px/1.5 system-ui,sans-serif;color:#111;resize:both;overflow:hidden;min-width:260px;min-height:120px;max-width:90vw;max-height:90vh}#fbp.min{height:auto!important;min-height:0;resize:none}#fbp.min>*:not(.h){display:none}#fbp .h{padding:8px 12px;font-weight:700;background:#e11d48;color:#fff;cursor:move;display:flex;align-items:center;gap:8px;user-select:none}#fbp .h span{flex:1}#fbp .h button{background:rgba(255,255,255,.2);border:0;color:#fff;font:700 12px system-ui;padding:3px 8px;border-radius:6px;cursor:pointer}#fbp .t{padding:6px 12px 0;color:#64748b;font-size:11px}#fbp .l{overflow:auto;padding:6px 12px;flex:1;min-height:40px}#fbp .l div.n{padding:6px 0;border-bottom:1px solid #eee;display:flex;gap:6px;align-items:flex-start}#fbp .l b{color:#e11d48;flex:0 0 auto}#fbp .l .x{flex:1;min-width:0}#fbp .l small{display:block;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#fbp .l .o{flex:0 0 auto;display:flex;gap:4px}#fbp .l .o button{font:11px system-ui;padding:2px 6px;border-radius:6px;border:1px solid #cbd5e1;background:#f8fafc;cursor:pointer}#fbp .b{display:flex;gap:6px;padding:6px 12px;flex-wrap:wrap}#fbp .b button{font:600 12px system-ui;padding:6px 10px;border-radius:8px;border:1px solid #cbd5e1;background:#f8fafc;cursor:pointer}#fbp .b button.p{background:#111;color:#fff;border-color:#111}#fbp textarea{margin:0 12px 10px;height:70px;font:11px/1.4 ui-monospace,monospace;border:1px solid #cbd5e1;border-radius:8px;padding:6px;flex:0 0 auto}#fbtoast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100000;background:#111;color:#fff;padding:8px 14px;border-radius:8px;font:13px system-ui;opacity:0;transition:opacity .2s;pointer-events:none}';document.head.appendChild(st);
+var panel=document.createElement('div');panel.id='fbp';panel.innerHTML='<div class="h"><span>FBモード（このページ <em id="fbn">0</em> 件）</span><button id="fbmin" title="小さくする">－</button><button id="fbexit" title="FBモードを終了">終了</button></div><div class="t">直したい文字や画像をクリック → メモを書く。行の「編集」「削除」で直せる。終わったら「コピー」してチャットに貼る。枠は右下をドラッグで大きさ・赤い帯をドラッグで位置</div><div class="l" id="fbl"></div><div class="b"><button class="p" id="fbcopy">このページ分をコピー</button><button id="fball">全ページ分をコピー</button><button id="fbclr">このページ分を消す</button></div><textarea id="fbout" readonly placeholder="コピーした文がここにも出ます"></textarea>';document.body.appendChild(panel);
+var toast=document.createElement('div');toast.id='fbtoast';document.body.appendChild(toast);var tt;function say(m){toast.textContent=m;toast.style.opacity='1';clearTimeout(tt);tt=setTimeout(function(){toast.style.opacity='0'},1800)}
+function applyUI(){panel.style.width=ui.w+'px';if(ui.h)panel.style.height=ui.h+'px';if(ui.x==null){panel.style.right='16px';panel.style.bottom='16px';panel.style.left='';panel.style.top=''}else{panel.style.left=Math.max(0,Math.min(innerWidth-80,ui.x))+'px';panel.style.top=Math.max(0,Math.min(innerHeight-40,ui.y))+'px';panel.style.right='';panel.style.bottom=''}panel.classList.toggle('min',!!ui.min);document.getElementById('fbmin').textContent=ui.min?'＋':'－'}
+function saveUI(){localStorage.setItem(UI,JSON.stringify(ui))}
+applyUI();
+(function(){var h=panel.querySelector('.h'),dx=0,dy=0,drag=false;h.addEventListener('mousedown',function(e){if(e.target.tagName==='BUTTON')return;drag=true;var r=panel.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;e.preventDefault()});addEventListener('mousemove',function(e){if(!drag)return;ui.x=e.clientX-dx;ui.y=e.clientY-dy;applyUI()});addEventListener('mouseup',function(){if(drag){drag=false;saveUI()}});
+new ResizeObserver(function(){if(ui.min)return;var r=panel.getBoundingClientRect();if(r.width>0){ui.w=Math.round(r.width);ui.h=Math.round(r.height);saveUI()}}).observe(panel)})();
+document.getElementById('fbmin').addEventListener('click',function(){ui.min=!ui.min;applyUI();saveUI()},true);
+document.getElementById('fbexit').addEventListener('click',function(){location.href=location.pathname+location.hash},true);
+function save(){localStorage.setItem(KEY,JSON.stringify(notes));render()}
+function esc(t){return String(t).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function place(){document.querySelectorAll('.fbpin').forEach(function(p){p.remove()});document.querySelectorAll('.fbx').forEach(function(e){e.classList.remove('fbx')});notes.forEach(function(n,i){var el=null;try{el=document.querySelector(n.sel)}catch(e){}if(!el)return;el.classList.add('fbx');var r=el.getBoundingClientRect();var pin=document.createElement('div');pin.className='fbpin';pin.textContent=i+1;pin.style.left=(r.left+scrollX-8)+'px';pin.style.top=(r.top+scrollY-8)+'px';document.body.appendChild(pin)})}
+function render(){document.getElementById('fbn').textContent=notes.length;document.getElementById('fbl').innerHTML=notes.map(function(n,i){return '<div class="n"><b>'+(i+1)+'</b><div class="x">'+esc(n.note)+'<small title="'+esc(n.where+' 「'+n.text+'」')+'">'+esc(n.where)+' 「'+esc(n.text)+'」</small></div><div class="o"><button data-e="'+i+'">編集</button><button data-d="'+i+'">削除</button></div></div>'}).join('')||'<div style="color:#94a3b8">まだありません</div>';place()}
+document.getElementById('fbl').addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;ev.stopPropagation();if(b.dataset.e!=null){var i=+b.dataset.e;var v=prompt('メモを直す:',notes[i].note);if(v!=null&&v.trim()){notes[i].note=v.trim();save()}}else if(b.dataset.d!=null){var j=+b.dataset.d;if(confirm('['+(j+1)+'] を削除しますか？\n'+notes[j].note)){notes.splice(j,1);save()}}},true);
+function selOf(el){var parts=[];while(el&&el!==document.body){var t=el.tagName.toLowerCase();if(el.id){parts.unshift('#'+CSS.escape(el.id));break}var i=1,sib=el;while((sib=sib.previousElementSibling))i++;parts.unshift(t+':nth-child('+i+')');el=el.parentElement}return parts.join('>')}
+function whereOf(el){var sec=el.closest('section,header,footer');var h=sec&&sec.querySelector('h1,h2');var w=sec?(sec.id?'#'+sec.id:sec.tagName.toLowerCase()):'';if(h)w+=' '+h.textContent.trim().slice(0,30);return w||'ページ上部'}
+function textOf(el){return (el.innerText||el.alt||el.getAttribute('aria-label')||'').replace(/\s+/g,' ').trim().slice(0,60)}
+function pick(t){var el=t.closest('h1,h2,h3,h4,p,li,a,button,img,video,small,b,strong,em,i,span,figcaption,summary,td,th,label,.kpi,.num,.kp,.st');if(el&&(el.tagName==='IMG'||el.tagName==='VIDEO'||(el.innerText||'').trim().length<=160))return el;if(t.tagName!=='DIV'&&t.tagName!=='SECTION')return t;return null}
+function out(txt){var ta=document.getElementById('fbout');ta.value=txt;ta.select();if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){say('コピーしました')}).catch(function(){say('下の欄から手でコピーしてください')});}
+function md(key,arr){var path=key.replace('lpfb:','');return '## '+path+'\n'+arr.map(function(n,i){return '- ['+(i+1)+'] '+n.where+' 「'+n.text+'」 → '+n.note}).join('\n')+'\n'}
+document.addEventListener('click',function(ev){if(panel.contains(ev.target)||toast.contains(ev.target))return;ev.preventDefault();ev.stopPropagation();var el=pick(ev.target);if(!el){say('文字か画像の上をクリックしてください');return}var note=prompt('この場所へのメモ:\n「'+textOf(el)+'」');if(!note||!note.trim())return;notes.push({sel:selOf(el),where:whereOf(el),text:textOf(el),note:note.trim(),at:new Date().toISOString().slice(0,16)});save();say('['+notes.length+'] を残しました')},true);
+document.getElementById('fbcopy').addEventListener('click',function(){out(md(KEY,notes))},true);
+document.getElementById('fball').addEventListener('click',function(){var all=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf('lpfb:')===0&&k!==UI){try{var a=JSON.parse(localStorage.getItem(k)||'[]');if(a.length)all.push(md(k,a))}catch(e){}}}out(all.join('\n')||'（メモはありません）')},true);
+document.getElementById('fbclr').addEventListener('click',function(){if(confirm('このページのメモを全部消しますか？')){notes=[];save()}},true);
+addEventListener('resize',place);addEventListener('scroll',function(){place()},{passive:true});
+document.querySelectorAll('.fi').forEach(function(e){e.style.opacity='1';e.style.transform='none'});
+render()})();
 </script>
-</body>
-</html>
+</body></html>

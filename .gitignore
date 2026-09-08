@@ -1,0 +1,12 @@
+/*
+!/.gitignore
+!/README.md
+!/index.html
+!/top.html
+!/cases/
+!/media/
+!/tools/
+!/demo/
+__pycache__/
+.playwright-mcp/
+.DS_Store

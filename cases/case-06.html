@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>事例02：議事録と重要事項が、自動で担当へ届く｜AI業務改革パートナー</title>
-<meta name="description" content="Google Meet の録画が終わると Gemini が議事録を書き、NotebookLM に溜まる。決定事項と次の打ち手、解約の兆しや増額の機会といった重要事項を AI が拾い、担当のチャンネルに届ける。">
-<link rel="canonical" href="https://ai-ops-partner.vercel.app/cases/case-02.html">
+<title>事例06：レクチャーの疑問を、次回ではなく当日のうちに返す｜AI業務改革パートナー</title>
+<meta name="description" content="録画から受講者の疑問と、答えられなかった箇所を集める。根拠つきの回答1枚と、次回教材への反映を同じ素材から作る。">
+<link rel="canonical" href="https://ai-ops-partner.vercel.app/cases/case-06.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI業務改革パートナー">
-<meta property="og:title" content="事例02：議事録と重要事項が、自動で担当へ届く｜AI業務改革パートナー">
-<meta property="og:description" content="Google Meet の録画が終わると Gemini が議事録を書き、NotebookLM に溜まる。決定事項と次の打ち手、解約の兆しや増額の機会といった重要事項を AI が拾い、担当のチャンネルに届ける。">
-<meta property="og:image" content="https://ai-ops-partner.vercel.app/cases/media/case-02_ill.webp">
-<meta property="og:url" content="https://ai-ops-partner.vercel.app/cases/case-02.html">
+<meta property="og:title" content="事例06：レクチャーの疑問を、次回ではなく当日のうちに返す｜AI業務改革パートナー">
+<meta property="og:description" content="録画から受講者の疑問と、答えられなかった箇所を集める。根拠つきの回答1枚と、次回教材への反映を同じ素材から作る。">
+<meta property="og:image" content="https://ai-ops-partner.vercel.app/cases/media/case-06_ill.webp">
+<meta property="og:url" content="https://ai-ops-partner.vercel.app/cases/case-06.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2712%27 fill=%27%232563eb%27/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -290,22 +290,20 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 </head>
 <body>
 <header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
-<section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 02</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">会議・議事録</span><span class="bd bd-video">デモあり</span></div><h1 class=""><span class="seg">議事録と重要事項が、</span><br class="hb"><span class="seg">自動で担当へ届く</span></h1><p class="lead">Google Meet の録画が終わると Gemini が議事録を書き、NotebookLM に溜まる。決定事項と次の打ち手、解約の兆しや増額の機会といった重要事項を AI が拾い、担当のチャンネルに届ける。</p><div class="kpis"><div class="kp"><small>議事録の作成工数</small><b class="xl"><span class="nw">100%削減</span></b></div><div class="kp"><small>重要事項の共有</small><b class="s"><span class="nw">担当者頼み</span><span class="ar">→</span><span class="nw">AIが自動</span></b></div><div class="kp"><small>担当チャンネルへの通知</small><b class="l"><span class="nw">その日に</span></b></div></div></div>
-<div class="chero-vis fi"><div class="fr"><img src="media/case-02_ill.webp" alt="議事録の完全自動化のイメージ" width="1600" height="900"></div></div></div></div></section>
-<section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>議事録はメモのまま眠り、重要事項は担当者の頭の中にしかない</h2></div><div class="quote">議事録はメモのまま眠り、重要事項は担当者の頭の中にしかない</div><p class="csub" style="margin-top:0">会議のたびに議事録は残るが、書く人によって粒度が違い、後から読み返されない。どの顧客に解約の兆しや増額の機会があるかは担当者の記憶にあり、マネージャーや第三者が知るのは報告が上がってからだった。</p></div></section>
-<section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>録画が終わると、議事録と重要事項の通知が自動で走る</h2></div><p class="csub">Google Meet の録画が終わった時点で、Gemini が見出しつきの議事録を書く。議事録は Slack に届き、NotebookLM に溜まって全社で引ける。決定事項と次の打ち手、解約の兆しや増額の機会は AI が拾い、担当のチャンネルへ流す。会議に出ていない人も、その日のうちに状況が分かる。</p><div class="tools"><small>使った道具</small><span>Google Meet</span><span>Gemini</span><span>Slack</span><span>NotebookLM</span><span>GAS</span></div>
-<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-02_zukai.webp" alt="議事録の完全自動化の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
-<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-02_demo_poster.jpg" controls aria-label="議事録の完全自動化のデモ（60秒・架空データ）"><source src="media/case-02_demo.webm" type="video/webm"><source src="media/case-02_demo.mp4" type="video/mp4"></video><button class="vsnd" type="button" aria-label="音声つきで先頭から再生する">🔊 音声つきで見る（60秒）</button>
-<div class="vid-cap"><b>60秒・字幕とナレーションつき（自動再生中は無音。ボタンで音声つきに）</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
-<section class="csec" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>会議中は議論だけ。重要事項は第三者にも、その日に見える</h2></div>
-<div class="nums fi"><div class="num big"><small>議事録は 100%自動。解約の兆し・増額の機会も担当へ</small><b class="s"><span class="nw">重要事項が、自動で届く</span></b></div><div class="num"><small>重要事項の共有</small><b class="s"><span class="nw">担当者頼み</span><span class="ar">→</span><span class="nw">AIが自動</span></b></div><div class="num"><small>担当チャンネルへの通知</small><b class="l"><span class="nw">その日に</span></b></div></div><p class="csub" style="margin-top:0">議事録を書く仕事が消え、会議中は議論に集中できる。解約の兆しや増額の機会が担当チャンネルに届くので、担当者以外でも気づけて、マネージャーが早く動ける。過去の議事録は NotebookLM に溜まり、施策を考える時にすぐ引ける。</p></div></section>
-<section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
-<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-02_zukai_s.webp" alt="議事録の完全自動化：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
+<section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 06</span></div>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">研修・育成</span></div><h1 class=""><span class="seg">レクチャーの疑問を、</span><br class="hb"><span class="seg">次回ではなく</span><span class="seg">当日のうちに返す</span></h1><p class="lead">録画から受講者の疑問と、答えられなかった箇所を集める。根拠つきの回答1枚と、次回教材への反映を同じ素材から作る。</p><div class="kpis"><div class="kp"><small>疑問が解けるまで</small><b class="m"><span class="nw">次回</span><span class="ar">→</span><span class="nw">当日</span></b></div><div class="kp"><small>回答1枚の構成</small><b class="s"><span class="nw">結論</span><span class="ar">→</span><span class="nw">根拠</span><span class="ar">→</span><span class="nw">出典</span></b></div><div class="kp"><small>前回の癖が消えたか</small><b class="m"><span class="nw">○×で毎回判定</span></b></div></div></div>
+<div class="chero-vis fi"><div class="fr"><img src="media/case-06_ill.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）のイメージ" width="1600" height="900"></div></div></div></div></section>
+<section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>レクチャーは「やって終わり」になりやすい</h2></div><div class="quote">研修やレクチャーをやりっぱなしにして、受講者の疑問が次回まで放置される</div><p class="csub" style="margin-top:0">内製化支援のレクチャーでは、その場で答えられなかった質問や、あいまいに答えた箇所が必ず出る。録画は残っても、受講者への回答も教材の改善も、次回の準備に押し流されて後回しになる。</p></div></section>
+<section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>疑問と詰まりを1箇所に集め、AI が論点にまとめて次回の教材へ反映</h2></div><p class="csub">録画を手元で文字に起こし、誰が話したかを分ける。推測で答えた箇所、実演に失敗した箇所、わざと飛ばした箇所を拾う。公式の一次情報で裏を取り直し、受講者へ返す回答1枚（結論→根拠→出典）を作る。自分の誤りの訂正を必ず含める。教材への反映と、次回冒頭で答える枠への積み上げまで、同じ流れで進む。</p><div class="tools"><small>使った道具</small><span>文字起こし（ローカル）</span><span>Claude Code</span></div>
+<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-06_zukai.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）の図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
 
-<section class="csec" id="hint"><div class="w"><div class="chd"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div><div class="in fi"><div class="callout"><b>議事録を AI に書かせるだけなら、そこで止めない。会話から決定事項と、解約の兆し、増額の機会を拾って担当に届けるところまで組むと、議事録が動き出す</b><p>「議事録は書くもの」から「重要事項を拾う入口」に変わった。同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div></div></section>
-<section class="next"><div class="w"><div class="h3">ほかの事例</div><div class="ngrid"><a class="ncard" href="case-01.html"><img src="media/case-01_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>前の事例</small><b>売上集計を自動化し、毎日250分の転記を0分に</b></div></a><a class="ncard" href="case-03.html"><img src="media/case-03_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>次の事例</small><b>組織全体で月2,000時間の資料作成を、500時間に</b></div></a></div><div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
+<section class="csec alt" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>疑問が次回まで持ち越されず、当日のうちに解ける</h2></div>
+<div class="nums fi"><div class="num big"><small>疑問が解けるまで</small><b class="m"><span class="nw">次回</span><span class="ar">→</span><span class="nw">当日</span></b></div><div class="num"><small>回答1枚の構成</small><b class="s"><span class="nw">結論</span><span class="ar">→</span><span class="nw">根拠</span><span class="ar">→</span><span class="nw">出典</span></b></div><div class="num"><small>前回の癖が消えたか</small><b class="m"><span class="nw">○×で毎回判定</span></b></div></div><p class="csub" style="margin-top:0">第0回・第1回とも、レクチャー後すぐに疑問への回答を1枚にして返した。回ごとに、前回の癖が消えたかを○×で判定し、3回連続○なら「直った」として畳む。送る判断は人が持ち、AI は作るところまで。</p></div></section>
+<section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
+<div class="in fi"><div class="fig"><img class="zoomable" src="media/case-06_zukai_s.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）：入口→AI→出口→次の行動の流れと成果" width="1600" height="900" data-cap="入口から出口、次の行動まで"><div class="fig-cap"><span>図解を押すと拡大</span><span>入口から出口、次の行動まで</span></div></div></div></div></section>
+
+<section class="csec" id="hint"><div class="w"><div class="chd"><span class="tag tag-v">御社なら</span><h2>御社への転用</h2></div><div class="in fi"><div class="callout"><b>研修・レクチャーは「やって終わり」になりやすいが、録画さえ残っていれば受講者への回答も教材の改善も同じ素材から作れる</b><p>「教えた側が間違えた所」を隠さず、訂正ごと返す。前回の癖が消えたかを毎回○×で判定する。同じ課題があれば、御社のツールと業務の流れに合わせて組み替えます。まずは30分、いまの業務を聞かせてください。</p></div></div></div></section>
+<section class="next"><div class="w"><div class="h3">ほかの事例</div><div class="ngrid"><a class="ncard" href="case-04.html"><img src="media/case-04_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>前の事例</small><b>Claude Code の研修教材31単元を、設計から5日で形にする</b></div></a><a class="ncard" href="case-01.html"><img src="media/case-01_ill_m.webp" alt="" loading="lazy" width="1600" height="900"><div><small>次の事例</small><b>売上集計を自動化し、毎日250分の転記を0分に</b></div></a></div><div class="back"><a href="../index.html#cases">← 事例一覧へ戻る</a></div></div></section>
 
 <section class="cta"><div class="w">
 <h2>同じような課題を抱えていませんか？</h2>

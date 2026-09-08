@@ -1,0 +1,5 @@
+const path=require('path');const [,,pwDir,exe,src,out]=process.argv;const {chromium}=require(pwDir);
+(async()=>{const b=await chromium.launch({executablePath:exe});const p=await b.newPage({viewport:{width:1600,height:900}});
+await p.goto('file://'+path.resolve(src),{waitUntil:'load'});await p.waitForTimeout(600);
+const r=await p.evaluate(()=>{const bad=[];for(const e of document.querySelectorAll('body *')){const cs=getComputedStyle(e);const r=e.getBoundingClientRect();if(!r.width)continue;const t=(e.textContent||'').trim().slice(0,18);if(r.right>1600.5||r.bottom>900.5||r.left<-0.5||r.top<-0.5)bad.push('outside:'+t);if((cs.whiteSpace==='nowrap'||cs.overflow==='hidden')&&(e.scrollWidth>e.clientWidth+1))bad.push('ovfX:'+t);if(cs.overflow==='hidden'&&e.scrollHeight>e.clientHeight+1)bad.push('ovfY:'+t);const fs=parseFloat(cs.fontSize);if(t&&e.children.length===0&&fs<13)bad.push('small:'+t)}return bad.slice(0,30)});
+console.log(path.basename(src),JSON.stringify(r));await p.screenshot({path:out,clip:{x:0,y:0,width:1600,height:900}});await b.close()})().catch(e=>{console.error(e);process.exit(1)});

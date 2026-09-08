@@ -1,0 +1,63 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>タスクの先回り処理</title>
+<style>
+html,body{margin:0;background:#fff}
+body{width:1600px;height:900px;position:relative;overflow:hidden;font-family:"Hiragino Sans","Zen Kaku Gothic New","Noto Sans JP",sans-serif;color:#0f1d35}
+.title{position:absolute;left:44px;top:34px;font-size:44px;font-weight:900;letter-spacing:-.01em;line-height:1.2;white-space:nowrap}
+.meta{position:absolute;left:44px;top:96px;font-size:21px;color:#5b6b85;font-weight:700;white-space:nowrap}
+.meta b{color:#2563eb}
+.win{position:absolute;left:44px;top:150px;width:900px;height:606px;border:1px solid #cbd5e1;border-radius:14px;background:#fff;box-shadow:0 14px 40px rgba(15,29,53,.10);overflow:hidden}
+.bar{height:52px;background:#f1f4f9;border-bottom:1px solid #dbe2ee;display:flex;align-items:center;padding:0 20px;gap:10px;font-size:19px;font-weight:800}
+.bar i{width:12px;height:12px;border-radius:50%;background:#cbd5e1;display:block}
+.bar .sp{flex:1}.bar .clock{font-weight:700;color:#5b6b85;font-family:ui-monospace,Menlo,monospace;font-size:18px}
+.row{display:flex;align-items:center;gap:16px;padding:0 22px;height:90px;border-bottom:1px solid #eef2f7;position:relative}
+.row.on{background:#eef4ff}
+.row .cb{width:22px;height:22px;border:2px solid #94a3b8;border-radius:5px;flex:0 0 auto;background:#fff}
+.row .tx{flex:1;min-width:0}
+.row .tx b{display:block;font-size:22px;font-weight:800;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .tx small{display:block;font-size:15px;color:#6b7a93;margin-top:4px;white-space:nowrap}
+.bg{flex:0 0 auto;font-size:15px;font-weight:800;color:#fff;background:#2563eb;border-radius:20px;padding:6px 14px;white-space:nowrap}
+.bg.g{background:#16a34a}.bg.a{background:#f59e0b}.bg.n{background:#94a3b8}
+.side{position:absolute;left:984px;top:150px;width:572px;height:606px;border:1px solid #cbd5e1;border-radius:14px;background:#fff;box-shadow:0 14px 40px rgba(15,29,53,.10);overflow:hidden}
+.side .hd{height:52px;background:#0f1d35;color:#fff;display:flex;align-items:center;padding:0 20px;font-size:18px;font-weight:800;gap:10px}
+.side .hd span{font-size:14px;background:#2563eb;border-radius:6px;padding:2px 8px}
+.side .body{padding:20px 22px}
+.side h3{margin:0 0 6px;font-size:22px;font-weight:900;white-space:nowrap}
+.side .who{font-size:14px;color:#6b7a93;margin-bottom:14px;white-space:nowrap}
+.side .ln{height:11px;border-radius:5px;background:#e2e8f0;margin:0 0 10px}
+.side .ln.s{width:62%}.side .ln.m{width:84%}
+.side .hdg{font-size:15px;font-weight:800;color:#2563eb;margin:14px 0 8px;white-space:nowrap}
+.side .cta{margin-top:22px;display:flex;gap:10px}
+.side .cta div{font-size:16px;font-weight:800;padding:10px 18px;border-radius:9px;border:1.5px solid #cbd5e1;color:#3b4a63;white-space:nowrap}
+.side .cta div.p{background:#2563eb;border-color:#2563eb;color:#fff}
+.band{position:absolute;left:0;right:0;bottom:0;height:96px;background:#1e3a8a;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 44px}
+.band .msg{font-size:30px;font-weight:800;white-space:nowrap}
+.band .big{font-size:42px;font-weight:900;color:#fde047;letter-spacing:-.01em;white-space:nowrap}
+</style>
+<body>
+<div class="title">朝、開いたら、もう進んでいる</div>
+<div class="meta"><b>タスクの先回り処理</b> — 夜のうちに AI が下書き・調査・準備を済ませておく（架空の一覧）</div>
+<div class="win">
+  <div class="bar"><i></i><i></i><i></i>　今日のタスク<span class="sp"></span><span class="clock">7:02</span></div>
+  <div class="row on"><div class="cb"></div><div class="tx"><b>提案書の構成案をつくる</b><small>AIが 3:10 に下書き。過去の提案書2本を参照</small></div><span class="bg">下書き済み</span></div>
+  <div class="row"><div class="cb"></div><div class="tx"><b>競合3社の価格を調べる</b><small>AIが 3:42 に調査。公開ページから一覧に</small></div><span class="bg g">調査済み</span></div>
+  <div class="row"><div class="cb"></div><div class="tx"><b>面談のアジェンダを用意する</b><small>AIが 4:05 に下書き。前回の議事録を読んで論点3つ</small></div><span class="bg">下書き済み</span></div>
+  <div class="row"><div class="cb"></div><div class="tx"><b>退職後の手続きを整理する</b><small>AIが 4:30 に整理。既存の資料から期限順に並べ替え</small></div><span class="bg g">期限順に整理済み</span></div>
+  <div class="row"><div class="cb"></div><div class="tx"><b>請求書を送る</b><small>金額の確認が要るので止めてある</small></div><span class="bg a">確認待ち</span></div>
+  <div class="row"><div class="cb"></div><div class="tx"><b>採用ページの文言を直す</b><small>7日動きがなければ自動で再評価</small></div><span class="bg n">未着手</span></div>
+</div>
+<div class="side">
+  <div class="hd">AIの下書き <span>確認して送るだけ</span></div>
+  <div class="body">
+    <h3>提案書の構成案</h3>
+    <div class="who">3:10 に作成 ／ 参照: 過去の提案書2本・議事録1本</div>
+    <div class="hdg">1. 現状の課題</div>
+    <div class="ln"></div><div class="ln m"></div><div class="ln s"></div>
+    <div class="hdg">2. 提案する仕組み</div>
+    <div class="ln"></div><div class="ln m"></div>
+    <div class="hdg">3. 進め方と体制</div>
+    <div class="ln m"></div><div class="ln s"></div>
+    <div class="cta"><div class="p">このまま送る</div><div>直してから送る</div></div>
+  </div>
+</div>
+<div class="band"><div class="msg">人がやるのは、確認して送るだけ</div><div class="big">着手の前に、進んでいる</div></div>
+</body></html>
