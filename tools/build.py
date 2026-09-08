@@ -635,7 +635,7 @@ def main():
     if _glossary_hits:
         print("!! 内輪語を置き換えた（JSON 側も直すこと）:", file=sys.stderr)
         for h in sorted(set(_glossary_hits)): print("   ", h, file=sys.stderr)
-    print(f"index.html と cases/case-01〜{cases[-1]['num']}.html を書き出した")
+    print(f"index.html と 事例{len(cases)}本（掲載順 {' '.join(c['num'] for c in cases)}）を書き出した")
 
 if __name__ == "__main__":
     main()

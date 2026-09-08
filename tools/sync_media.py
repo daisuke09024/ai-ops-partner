@@ -16,7 +16,7 @@ CASES = {
     "05": "ca-ai", "06": "naisei-lecture", "07": "case-07",
     "08": "shodan-rail", "09": "shiryo-2gate",
 }
-VIDEO = ["01", "02", "03", "04", "07"]
+VIDEO = ["01", "02", "03", "04", "07", "08", "09"]
 LISTS = ["list-map", "list-flow", "list-form", "list-lp", "list-saki",
          "list-nikki", "list-1on1", "list-shodan", "list-growth", "list-slack"]
 
@@ -85,9 +85,12 @@ def main():
     if a.videos_dir:
         ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..")); out = os.path.join(ROOT, "cases", "media"); n = 0
         for f in sorted(os.listdir(a.videos_dir)):
-            m = re.match(r"(case-\d\d)_短編60秒(_poster\.jpg|\.mp4|\.webm)$", f)
+            m = re.match(r"(.+?)_短編60秒(_poster\.jpg|\.mp4|\.webm)$", f)
             if not m: continue
-            dst = os.path.join(out, m.group(1) + "_demo" + m.group(2).replace("_poster.jpg", "_poster.jpg"))
+            pre = m.group(1)
+            num = next((k for k, v in CASES.items() if v == pre), None)  # 決定版の名前は事例 id（08=shodan-rail・09=shiryo-2gate）
+            if num is None: continue
+            dst = os.path.join(out, f"case-{num}_demo" + m.group(2))
             shutil.copy2(os.path.join(a.videos_dir, f), dst); n += 1; print("video:", f, "->", os.path.relpath(dst, ROOT))
         print(f"videos: {n} files")
 
