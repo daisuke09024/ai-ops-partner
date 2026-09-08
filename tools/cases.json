@@ -534,7 +534,8 @@
       },
       "src_category": "営業・顧客対応",
       "src_status": "🧰 営業で使用中",
-      "src_origin": "self"
+      "src_origin": "self",
+      "img": "list-form_real.webp"
     },
     {
       "id": "ficks-lp",
@@ -558,7 +559,8 @@
       },
       "src_category": "資料・制作物",
       "src_status": "🤝 実案件で納品",
-      "src_origin": "self"
+      "src_origin": "self",
+      "img": "list-lp_real.webp"
     },
     {
       "id": "task-prep",
@@ -583,18 +585,19 @@
       },
       "src_category": "記録・振り返り",
       "src_status": "⚡ 平日毎日稼働中",
-      "src_origin": "self"
+      "src_origin": "self",
+      "img": "list-saki_real.webp"
     },
     {
       "id": "diary",
       "key": "list-nikki",
-      "src_title": "書かない日記",
+      "src_title": "1分ごとの画面記録から、日報が自動で書ける",
       "src_face": {
         "label": "日記に書く文字数",
         "before": "毎日数百字",
         "after": "0文字"
       },
-      "src_problem": "作業記録が続かない",
+      "src_problem": "日報や作業記録は、書く手間がある限り続かない",
       "src_desc": "PCの画面を自動記録し、毎晩AIが「今日何をしていたか」を日記としてNotionへ自動投稿。溜まった記録は振り返りの素材になる",
       "src_wow": "何をしていたか忘れても画面が覚えている。1文字も書かないのに日記が毎日たまる",
       "src_hint": "記録が自動で溜まると、AIが「何をやっていたか」だけでなく「どこで詰まっていたか」まで指摘できるようになる",
@@ -608,7 +611,8 @@
       },
       "src_category": "記録・振り返り",
       "src_status": "⚡ 毎分記録中",
-      "src_origin": "self"
+      "src_origin": "self",
+      "img": "list-nikki_real.webp"
     },
     {
       "id": "gaisha-1on1-prep",
