@@ -1,6 +1,6 @@
 // usage: node render.js <playwright-core dir> <chrome-headless-shell> <html path or url> <out.png> [wait ms] [check]
 const path = require('path');
-const [, , pwDir, exe, src, out, waitMs = '1500', check = '', clipY = '0'] = process.argv;
+const [, , pwDir, exe, src, out, waitMs = '1500', check = '', clipY = '0', clickText = ''] = process.argv;
 const cy = parseInt(clipY, 10);
 const { chromium } = require(pwDir);
 (async () => {
@@ -8,6 +8,7 @@ const { chromium } = require(pwDir);
   const page = await browser.newPage({ viewport: { width: 1600, height: 900 + cy }, deviceScaleFactor: 1 });
   const url = src.startsWith('http') ? src : 'file://' + path.resolve(src);
   await page.goto(url, { waitUntil: 'load' });
+  if (clickText) { await page.click('text=' + clickText); }
   await page.waitForTimeout(parseInt(waitMs, 10));
   if (check) {
     const r = await page.evaluate(() => {

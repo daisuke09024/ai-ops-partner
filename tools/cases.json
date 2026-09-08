@@ -162,8 +162,8 @@
       "num": "04",
       "src_title": "研修教材づくり — 31単元を5日で",
       "src_face": {
-        "big": "31単元",
-        "sub": "設計から5日で形に"
+        "big": "5日で31単元",
+        "sub": "研修教材の制作（設計から完成まで）"
       },
       "src_problem": "研修やマニュアルを作りたいが、まとまった時間が取れず後回しになる",
       "src_desc": "内製化研修のカリキュラム教材（8章31単元のHTML教材＋リソース集）を、素材の棚卸し→骨格の裁定→一括量産→FB反映まで、AIとの分業で5日で構築",
@@ -464,12 +464,12 @@
     {
       "id": "ecosystem-map",
       "key": "list-map",
-      "src_title": "AIエコシステム地図",
+      "src_title": "スキルとエージェントの可視化",
       "src_face": {
         "big": "散らばった仕組み",
         "sub": "つながり付きの地図1枚に"
       },
-      "src_problem": "AIに何を任せられるのか、全体像が見えない",
+      "src_problem": "AIに何を任せているのか、全体像が誰にも見えない",
       "src_desc": "AIの仕組みを、つながり付きの地図1枚に自動描画。AI社員・自動ジョブ・NotionのDBまで全部載っている",
       "src_wow": "「AIを何にどう使ってるの？」への答えがこの1枚。地図そのものもAIが自動生成している",
       "src_hint": "あなたの会社でも「AIの配置図」を最初に作ると、どこから手を付けるかが見える",
@@ -509,7 +509,8 @@
       "src_category": "資料・制作物",
       "src_status": "🧰 制作で使用中",
       "src_origin": "self",
-      "img": "list-flow_real.webp"
+      "img": "list-flow_real.webp",
+      "img_full": "list-flow_full.webp"
     },
     {
       "id": "form-sales",
