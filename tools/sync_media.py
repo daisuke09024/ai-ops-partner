@@ -46,6 +46,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", required=True)
     ap.add_argument("--videos-dir", default=None, help="確定動画の家（営業/事例/動画）。case-NN_短編60秒.{mp4,webm} と _poster.jpg を case-NN_demo.* として上書きする")
+    ap.add_argument("--no-zukai", action="store_true", help="図解（case-NN_zukai*.webp）を触らない。LP 側で作り直した図解（02/03/09）を PJ 本番の旧版で上書きしないための逃げ道")
     a = ap.parse_args()
     zdir = os.path.join(a.src, "anim", "zukai", "本番")
     ddir = os.path.join(a.src, "demo-clips")
@@ -53,8 +54,10 @@ def main():
     os.makedirs(out, exist_ok=True)
     done = []
     for num, pre in CASES.items():
-        files = sorted(glob.glob(os.path.join(zdir, f"{pre}_*.png")))
-        if not files:
+        files = [] if a.no_zukai else sorted(glob.glob(os.path.join(zdir, f"{pre}_*.png")))
+        if a.no_zukai:
+            pass
+        elif not files:
             print(f"!! 図解が無い: {pre}", file=sys.stderr); continue
         for infix, suf in ((None, ""), ("M", "_m"), ("S", "_s")):
             f = pick(files, infix)

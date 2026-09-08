@@ -185,7 +185,10 @@ a{color:inherit}
 .crumb .cur{color:var(--blue);font-family:var(--fe);letter-spacing:.08em}
 .chero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1{font-size:clamp(1.6rem,3.6vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1 .seg{display:inline-block}
+.chero h1.l{font-size:clamp(1.5rem,3.4vw,2.15rem)}.chero h1.m{font-size:clamp(1.4rem,3vw,1.9rem)}.chero h1.s{font-size:clamp(1.3rem,2.7vw,1.7rem)}
+@media(max-width:1199px){.chero h1 br.hb{display:none}}
 .chero .lead{margin-bottom:24px}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
@@ -216,7 +219,10 @@ a{color:inherit}
 .chd h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;line-height:1.45}
 p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);line-height:1.85}
 .quote{max-width:1100px;margin:0 auto 14px;padding:14px 18px;border-left:4px solid var(--rose);background:var(--rose-bg);border-radius:0 12px 12px 0;font-size:1rem;font-weight:700;color:var(--tx)}
-.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
+.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3);position:relative}
+.vsnd{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:clamp(.9rem,1.6vw,1.05rem);font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer;z-index:2;white-space:nowrap}
+.vsnd:hover{filter:brightness(1.1)}
+.vsnd[hidden]{display:none}
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
@@ -285,7 +291,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <body>
 <header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 06</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">研修・育成</span></div><h1>レクチャーの疑問を、次回ではなく当日のうちに返す</h1><p class="lead">録画から受講者の疑問と、答えられなかった箇所を集める。根拠つきの回答1枚と、次回教材への反映を同じ素材から作る。</p><div class="kpis"><div class="kp"><small>疑問が解けるまで</small><b class="m"><span class="nw">次回</span><span class="ar">→</span><span class="nw">当日</span></b></div><div class="kp"><small>回答1枚の構成</small><b class="s"><span class="nw">結論</span><span class="ar">→</span><span class="nw">根拠</span><span class="ar">→</span><span class="nw">出典</span></b></div><div class="kp"><small>前回の癖が消えたか</small><b class="m"><span class="nw">○×で毎回判定</span></b></div></div></div>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">研修・育成</span></div><h1 class=""><span class="seg">レクチャーの疑問を、</span><br class="hb"><span class="seg">次回ではなく</span><span class="seg">当日のうちに返す</span></h1><p class="lead">録画から受講者の疑問と、答えられなかった箇所を集める。根拠つきの回答1枚と、次回教材への反映を同じ素材から作る。</p><div class="kpis"><div class="kp"><small>疑問が解けるまで</small><b class="m"><span class="nw">次回</span><span class="ar">→</span><span class="nw">当日</span></b></div><div class="kp"><small>回答1枚の構成</small><b class="s"><span class="nw">結論</span><span class="ar">→</span><span class="nw">根拠</span><span class="ar">→</span><span class="nw">出典</span></b></div><div class="kp"><small>前回の癖が消えたか</small><b class="m"><span class="nw">○×で毎回判定</span></b></div></div></div>
 <div class="chero-vis fi"><div class="fr"><img src="media/case-06_ill.webp" alt="レクチャー後のフォローアップ自動化（内製化支援・伴走中の案件）のイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>レクチャーは「やって終わり」になりやすい</h2></div><div class="quote">研修やレクチャーをやりっぱなしにして、受講者の疑問が次回まで放置される</div><p class="csub" style="margin-top:0">内製化支援のレクチャーでは、その場で答えられなかった質問や、あいまいに答えた箇所が必ず出る。録画は残っても、受講者への回答も教材の改善も、次回の準備に押し流されて後回しになる。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>疑問と詰まりを1箇所に集め、AI が論点にまとめて次回の教材へ反映</h2></div><p class="csub">録画を手元で文字に起こし、誰が話したかを分ける。推測で答えた箇所、実演に失敗した箇所、わざと飛ばした箇所を拾う。公式の一次情報で裏を取り直し、受講者へ返す回答1枚（結論→根拠→出典）を作る。自分の誤りの訂正を必ず含める。教材への反映と、次回冒頭で答える枠への積み上げまで、同じ流れで進む。</p><div class="tools"><small>使った道具</small><span>文字起こし（ローカル）</span><span>Claude Code</span></div>
@@ -317,6 +323,7 @@ document.querySelectorAll('.zoomable').forEach(el=>{el.addEventListener('click',
 const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});}
 (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
 
+(function(){const w=document.querySelector('#demo .vidwrap');if(!w)return;const v=w.querySelector('video'),b=w.querySelector('.vsnd');if(!v||!b)return;b.addEventListener('click',function(){b.hidden=true;v.loop=false;v.muted=false;v.currentTime=0;v.play().catch(function(){});});function back(){b.hidden=false;v.muted=true;v.loop=true;v.play().catch(function(){});}v.addEventListener('ended',back);v.addEventListener('volumechange',function(){if(v.muted&&b.hidden)back();});})();
 (function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
 
 (function(){if(!/[?&]fb=1(&|$)/.test(location.search))return;

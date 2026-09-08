@@ -185,7 +185,10 @@ a{color:inherit}
 .crumb .cur{color:var(--blue);font-family:var(--fe);letter-spacing:.08em}
 .chero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1{font-size:clamp(1.6rem,3.6vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1 .seg{display:inline-block}
+.chero h1.l{font-size:clamp(1.5rem,3.4vw,2.15rem)}.chero h1.m{font-size:clamp(1.4rem,3vw,1.9rem)}.chero h1.s{font-size:clamp(1.3rem,2.7vw,1.7rem)}
+@media(max-width:1199px){.chero h1 br.hb{display:none}}
 .chero .lead{margin-bottom:24px}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
@@ -216,7 +219,10 @@ a{color:inherit}
 .chd h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;line-height:1.45}
 p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);line-height:1.85}
 .quote{max-width:1100px;margin:0 auto 14px;padding:14px 18px;border-left:4px solid var(--rose);background:var(--rose-bg);border-radius:0 12px 12px 0;font-size:1rem;font-weight:700;color:var(--tx)}
-.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
+.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3);position:relative}
+.vsnd{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:clamp(.9rem,1.6vw,1.05rem);font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer;z-index:2;white-space:nowrap}
+.vsnd:hover{filter:brightness(1.1)}
+.vsnd[hidden]{display:none}
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
@@ -285,7 +291,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <body>
 <header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 09</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">資料・制作物</span></div><h1>AIっぽさのない資料が、自社の型で仕上がる</h1><p class="lead">ゼロから配布 PDF まで、自社のフォーマットと知見を AI が守って作る。人がやるのは承認と最後の目視だけ。</p><div class="kpis"><div class="kp"><small>AIが守る型と知見</small><b class="m"><span class="nw">型24・知見53件</span></b></div><div class="kp"><small>保存のたびに自動で走る検査</small><b class="xl"><span class="nw">28項目</span></b></div><div class="kp"><small>12工程で人が入る回数</small><b class="xl"><span class="nw">2回</span></b></div></div></div>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">資料・制作物</span></div><h1 class=""><span class="seg">AIっぽさのない資料が、</span><br class="hb"><span class="seg">自社の型で仕上がる</span></h1><p class="lead">ゼロから配布 PDF まで、自社のフォーマットと知見を AI が守って作る。人がやるのは承認と最後の目視だけ。</p><div class="kpis"><div class="kp"><small>AIが守る型と知見</small><b class="m"><span class="nw">型24・知見53件</span></b></div><div class="kp"><small>保存のたびに自動で走る検査</small><b class="xl"><span class="nw">28項目</span></b></div><div class="kp"><small>12工程で人が入る回数</small><b class="xl"><span class="nw">2回</span></b></div></div></div>
 <div class="chero-vis fi"><div class="fr"><img src="media/case-09_ill.webp" alt="資料づくりで人がやることは2つだけのイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>資料作成に時間がかかる。AI に作らせても、どこか微妙</h2></div><div class="quote">資料作成に時間がかかる。AI に作らせても、どこか微妙</div><p class="csub" style="margin-top:0">資料は作るのに時間がかかる。AI に書かせれば速いが、文は AI っぽく、レイアウトは自社の型から外れ、結局は人が直す。どこを直せばいいかも毎回違い、AI に任せ切れなかった。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>自社の型と知見を AI に持たせ、ゼロから配布 PDF まで作る</h2></div><p class="csub">型24・知見53件を AI が参照し、自社のフォーマットに沿った資料をゼロから配布 PDF まで作る。保存のたびに28項目の検査が走り、AI っぽい言い回しや崩れたレイアウトはそこで弾く。人の判断は依頼メモの承認と、仕上がりの目視の2回だけ。</p><div class="tools"><small>使った道具</small><span>Claude Code</span></div>
@@ -317,6 +323,7 @@ document.querySelectorAll('.zoomable').forEach(el=>{el.addEventListener('click',
 const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});}
 (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
 
+(function(){const w=document.querySelector('#demo .vidwrap');if(!w)return;const v=w.querySelector('video'),b=w.querySelector('.vsnd');if(!v||!b)return;b.addEventListener('click',function(){b.hidden=true;v.loop=false;v.muted=false;v.currentTime=0;v.play().catch(function(){});});function back(){b.hidden=false;v.muted=true;v.loop=true;v.play().catch(function(){});}v.addEventListener('ended',back);v.addEventListener('volumechange',function(){if(v.muted&&b.hidden)back();});})();
 (function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
 
 (function(){if(!/[?&]fb=1(&|$)/.test(location.search))return;

@@ -185,7 +185,10 @@ a{color:inherit}
 .crumb .cur{color:var(--blue);font-family:var(--fe);letter-spacing:.08em}
 .chero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1{font-size:clamp(1.6rem,3.6vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1 .seg{display:inline-block}
+.chero h1.l{font-size:clamp(1.5rem,3.4vw,2.15rem)}.chero h1.m{font-size:clamp(1.4rem,3vw,1.9rem)}.chero h1.s{font-size:clamp(1.3rem,2.7vw,1.7rem)}
+@media(max-width:1199px){.chero h1 br.hb{display:none}}
 .chero .lead{margin-bottom:24px}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
@@ -216,7 +219,10 @@ a{color:inherit}
 .chd h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;line-height:1.45}
 p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);line-height:1.85}
 .quote{max-width:1100px;margin:0 auto 14px;padding:14px 18px;border-left:4px solid var(--rose);background:var(--rose-bg);border-radius:0 12px 12px 0;font-size:1rem;font-weight:700;color:var(--tx)}
-.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
+.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3);position:relative}
+.vsnd{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:clamp(.9rem,1.6vw,1.05rem);font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer;z-index:2;white-space:nowrap}
+.vsnd:hover{filter:brightness(1.1)}
+.vsnd[hidden]{display:none}
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
@@ -285,14 +291,14 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <body>
 <header class="hd"><div class="hd-in"><a href="../index.html" class="hd-logo"><i></i>AI業務改革<span>パートナー</span></a><nav class="hd-nav"><a href="../index.html#cases">事例一覧</a><a href="../index.html#systems">動いている仕組み</a><a href="https://tally.so/r/QKdxx1" class="hd-cta" target="_blank" rel="noopener">無料で相談する</a></nav></div></header><div class="progress" id="pg"></div>
 <section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE 04</span></div>
-<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">資料・制作物</span><span class="bd bd-video">デモあり</span></div><h1>Claude Code の研修教材31単元を、設計から5日で形にする</h1><p class="lead">Claude Code を社内に広めるための研修教材。素材の棚卸しから骨格の決定、一括量産、修正の反映まで AI と分業した。修正は専用のフォーマットに書くだけで、全ページに反映される。</p><div class="kpis"><div class="kp"><small>教材の規模</small><b class="l"><span class="nw">8章31単元</span></b></div><div class="kp"><small>骨格を決めてから完成まで</small><b class="xl"><span class="nw">5日</span></b></div><div class="kp"><small>一括反映した修正バッチ</small><b class="xl"><span class="nw">11回</span></b></div></div></div>
+<div class="chero-grid"><div><div class="bds"><span class="bd bd-cat">資料・制作物</span><span class="bd bd-video">デモあり</span></div><h1 class="m"><span class="seg">Claude Code の研修教材</span><span class="seg">31単元を、</span><br class="hb"><span class="seg">設計から5日で形にする</span></h1><p class="lead">Claude Code を社内に広めるための研修教材。素材の棚卸しから骨格の決定、一括量産、修正の反映まで AI と分業した。修正は専用のフォーマットに書くだけで、全ページに反映される。</p><div class="kpis"><div class="kp"><small>教材の規模</small><b class="l"><span class="nw">8章31単元</span></b></div><div class="kp"><small>骨格を決めてから完成まで</small><b class="xl"><span class="nw">5日</span></b></div><div class="kp"><small>一括反映した修正バッチ</small><b class="xl"><span class="nw">11回</span></b></div></div></div>
 <div class="chero-vis fi"><div class="fr"><img src="media/case-04_ill.webp" alt="研修教材づくり — 31単元を5日でのイメージ" width="1600" height="900"></div></div></div></div></section>
 <section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>研修教材は「作る時間がない」で後回しになりがち</h2></div><div class="quote">研修やマニュアルを作りたいが、まとまった時間が取れず後回しになる</div><p class="csub" style="margin-top:0">内製化支援の基礎レクチャーに使う教材が必要になった。ゼロから書き下ろすと数週間級の作業で、市販教材では自社の実物・実務とつながらない。</p></div></section>
 <section class="csec tight" id="change"><div class="w"><div class="chd"><span class="tag tag-b">変えたこと</span><h2>素材の棚卸し、骨格の決定、一括量産、修正の反映を AI と分業</h2></div><p class="csub">手元の素材（スライド・ノート・過去資料）を AI が総ざらいして骨格案を作り、人が決める。承認後に8章31単元の HTML 教材を一括で作る。以降の修正は専用のフォーマットに書くだけで、AI が全ページへ反映し、経緯を台帳に残す。</p><div class="tools"><small>使った道具</small><span>Claude Code</span><span>HTML</span></div>
 <div class="in fi"><div class="fig"><img class="zoomable" src="media/case-04_zukai.webp" alt="研修教材づくり — 31単元を5日での図解（これまでとAI導入後）" width="1600" height="900" data-cap="これまでと、AI導入後"><div class="fig-cap"><span>図解を押すと拡大</span><span>これまでと、AI導入後</span></div></div></div></div></section>
 <section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-04_demo_poster.jpg" controls aria-label="研修教材づくり — 31単元を5日でのデモ（60秒・架空データ）"><source src="media/case-04_demo.webm" type="video/webm"><source src="media/case-04_demo.mp4" type="video/mp4"></video>
-<div class="vid-cap"><b>60秒・字幕とナレーションつき（自動再生中は無音）</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-04_demo_poster.jpg" controls aria-label="研修教材づくり — 31単元を5日でのデモ（60秒・架空データ）"><source src="media/case-04_demo.webm" type="video/webm"><source src="media/case-04_demo.mp4" type="video/mp4"></video><button class="vsnd" type="button" aria-label="音声つきで先頭から再生する">🔊 音声つきで見る（60秒）</button>
+<div class="vid-cap"><b>60秒・字幕とナレーションつき（自動再生中は無音。ボタンで音声つきに）</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>
 <section class="csec" id="result"><div class="w"><div class="chd"><span class="tag tag-g">結果</span><h2>設計から5日で、磨き続けられる教材一式に</h2></div>
 <div class="nums fi"><div class="num big"><small>研修教材の制作（設計から完成まで）</small><b class="l"><span class="nw">5日で31単元</span></b></div><div class="num"><small>骨格を決めてから完成まで</small><b class="xl"><span class="nw">5日</span></b></div><div class="num"><small>一括反映した修正バッチ</small><b class="xl"><span class="nw">11回</span></b></div></div><p class="csub" style="margin-top:0">骨格を決めてから5日で全31単元と参考資料集が揃った。11回の修正も、目次と関連ページの整合まで自動で追随した。教材が「作って終わり」ではなく、直すたびに良くなる。</p></div></section>
 <section class="csec tight" id="system"><div class="w"><div class="chd"><span class="tag tag-g">仕組み</span><h2>入口から出口、次の行動まで一本の線で</h2></div>
@@ -319,6 +325,7 @@ document.querySelectorAll('.zoomable').forEach(el=>{el.addEventListener('click',
 const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};lb.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});}
 (function(){var mq=window.matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('video[autoplay]').forEach(function(v){function ap(){if(mq.matches){v.removeAttribute('autoplay');v.pause()}else{var p=v.play();if(p&&p.catch)p.catch(function(){})}}ap();if(mq.addEventListener)mq.addEventListener('change',ap)})})();
 
+(function(){const w=document.querySelector('#demo .vidwrap');if(!w)return;const v=w.querySelector('video'),b=w.querySelector('.vsnd');if(!v||!b)return;b.addEventListener('click',function(){b.hidden=true;v.loop=false;v.muted=false;v.currentTime=0;v.play().catch(function(){});});function back(){b.hidden=false;v.muted=true;v.loop=true;v.play().catch(function(){});}v.addEventListener('ended',back);v.addEventListener('volumechange',function(){if(v.muted&&b.hidden)back();});})();
 (function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
 
 (function(){if(!/[?&]fb=1(&|$)/.test(location.search))return;

@@ -1,4 +1,4 @@
-// 事例9本の FV と結果タイルの「3行落ち・はみ出し」を検査し、切り出し画像を出す: node tools/tile_check.js <playwright-core> <headless-shell> <baseUrl> <outDir> [幅=1280] [noshot]
+// 事例9本の FV と結果タイルの「3行落ち・はみ出し」と、見出しの「4行以上・PC で想定行数と違う・文節の途中で折返し」を検査し、切り出し画像を出す: node tools/tile_check.js <playwright-core> <headless-shell> <baseUrl> <outDir> [幅=1280] [noshot]
 const path = require('path');
 const [, , pwDir, exe, base, outDir, W = '1280', noshot = ''] = process.argv;
 const { chromium } = require(pwDir);
@@ -18,6 +18,13 @@ const { chromium } = require(pwDir);
         if (lines > 2) out.push('3行+: ' + e.textContent.trim());
         if (e.scrollWidth > e.clientWidth + 1) out.push('はみ出し: ' + e.textContent.trim());
       });
+      const h = document.querySelector('.chero h1');
+      if (h) {
+        const lh = parseFloat(getComputedStyle(h).lineHeight); const lines = Math.round(h.getBoundingClientRect().height / lh);
+        if (lines > 3) out.push('見出し4行+: ' + h.textContent.trim());
+        if (window.innerWidth >= 1200) { const n = h.querySelectorAll('br.hb').length + 1; if (lines !== n) out.push('見出し: PCで' + lines + '行（想定' + n + '）'); }
+        h.querySelectorAll('.seg').forEach(s => { if (Math.round(s.getBoundingClientRect().height / lh) > 1) out.push('見出し文節内で折返し: ' + s.textContent); });
+      }
       return out;
     });
     report.push(`case-${n}: ${r.length ? r.join(' / ') : 'ok'}`);

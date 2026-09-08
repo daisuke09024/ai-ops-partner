@@ -203,7 +203,10 @@ a{color:inherit}
 .crumb .cur{color:var(--blue);font-family:var(--fe);letter-spacing:.08em}
 .chero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1{font-size:clamp(1.6rem,3.6vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1 .seg{display:inline-block}
+.chero h1.l{font-size:clamp(1.5rem,3.4vw,2.15rem)}.chero h1.m{font-size:clamp(1.4rem,3vw,1.9rem)}.chero h1.s{font-size:clamp(1.3rem,2.7vw,1.7rem)}
+@media(max-width:1199px){.chero h1 br.hb{display:none}}
 .chero .lead{margin-bottom:24px}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
@@ -234,7 +237,10 @@ a{color:inherit}
 .chd h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;line-height:1.45}
 p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);line-height:1.85}
 .quote{max-width:1100px;margin:0 auto 14px;padding:14px 18px;border-left:4px solid var(--rose);background:var(--rose-bg);border-radius:0 12px 12px 0;font-size:1rem;font-weight:700;color:var(--tx)}
-.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
+.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3);position:relative}
+.vsnd{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:clamp(.9rem,1.6vw,1.05rem);font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer;z-index:2;white-space:nowrap}
+.vsnd:hover{filter:brightness(1.1)}
+.vsnd[hidden]{display:none}
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
@@ -352,6 +358,7 @@ document.querySelectorAll('.chip[data-cat]').forEach(b=>b.addEventListener('clic
 """
 
 JS_CASE = r"""
+(function(){const w=document.querySelector('#demo .vidwrap');if(!w)return;const v=w.querySelector('video'),b=w.querySelector('.vsnd');if(!v||!b)return;b.addEventListener('click',function(){b.hidden=true;v.loop=false;v.muted=false;v.currentTime=0;v.play().catch(function(){});});function back(){b.hidden=false;v.muted=true;v.loop=true;v.play().catch(function(){});}v.addEventListener('ended',back);v.addEventListener('volumechange',function(){if(v.muted&&b.hidden)back();});})();
 (function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
 """
 
@@ -506,10 +513,16 @@ def parts(t):
     return '<span class="ar">→</span>'.join(f'<span class="nw">{esc(x.strip())}</span>' for x in t.split("→"))
 
 def h1_html(t):
-    return esc(t).replace("\n", "<br>")
+    """\\n＝意味の切れ目（PC は固定改行・狭い幅では文節ブロックとして流す）／\\t＝狭い幅でだけ切れてよい所"""
+    return '<br class="hb">'.join("".join(f'<span class="seg">{esc(x.strip())}</span>' for x in ln.split("\t")) for ln in t.split("\n"))
+
+def h1_cls(t):
+    """いちばん長い行が PC の1行に収まるように4段で落とす（半角0.6・全角1）"""
+    n = max(vlen(x.replace("\t", "")) for x in t.split("\n"))
+    return "" if n <= 14 else "l" if n <= 17 else "m" if n <= 20 else "s"
 
 def h1_txt(t):
-    return t.replace("\n", "")
+    return t.replace("\n", "").replace("\t", "")
 
 def kp_tile(k):
     return f'<div class="kp"><small>{esc(k["l"])}</small><b class="{size_cls(k["v"])}">{parts(k["v"])}</b></div>'
@@ -528,7 +541,7 @@ def build_case(c, prev_c, next_c):
         return f'<div class="fig"><img class="zoomable" src="media/case-{num}_zukai{suffix}.webp" alt="{esc(alt)}" width="1600" height="900" data-cap="{esc(cap)}"><div class="fig-cap"><span>図解を押すと拡大</span><span>{esc(cap)}</span></div></div>'
     badges = f'<div class="bds"><span class="bd bd-cat">{esc(c["cat"])}</span>{"<span class=\"bd bd-video\">デモあり</span>" if c["video"] else ""}</div>'
     fv = f"""<section class="chero"><div class="w"><div class="crumb"><a href="../index.html">事例一覧</a><span>›</span><span class="cur">CASE {num}</span></div>
-<div class="chero-grid"><div>{badges}<h1>{h1_html(c['headline'])}</h1><p class="lead">{esc(c['lead'])}</p><div class="kpis">{kpis}</div></div>
+<div class="chero-grid"><div>{badges}<h1 class="{h1_cls(c['headline'])}">{h1_html(c['headline'])}</h1><p class="lead">{esc(c['lead'])}</p><div class="kpis">{kpis}</div></div>
 <div class="chero-vis fi"><div class="fr"><img src="{ill}" alt="{esc(c['src_title'])}のイメージ" width="1600" height="900"></div></div></div></div></section>"""
     sec_problem = f"""<section class="csec" id="problem"><div class="w"><div class="chd"><span class="tag tag-r">課題</span><h2>{esc(sh['haikei_t'])}</h2></div><div class="quote">{esc(c['src_problem'])}</div><p class="csub" style="margin-top:0">{esc(sh['haikei'])}</p></div></section>"""
     overview_cap = c.get("overview_h", "これまでと、AI導入後")
@@ -536,9 +549,10 @@ def build_case(c, prev_c, next_c):
 <div class="in fi">{zukai('', c['src_title'] + 'の図解（これまでとAI導入後）', overview_cap)}</div></div></section>"""
     if c["video"]:
         voice = c.get("voice")
-        cap_b = "60秒・字幕とナレーションつき（自動再生中は無音）" if voice else "60秒・字幕つき"
+        cap_b = "60秒・字幕とナレーションつき（自動再生中は無音。ボタンで音声つきに）" if voice else "60秒・字幕つき"
+        snd_btn = '<button class="vsnd" type="button" aria-label="音声つきで先頭から再生する">🔊 音声つきで見る（60秒）</button>' if voice else ""
         sec_demo = f"""<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}のデモ（60秒・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}のデモ（60秒・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>{snd_btn}
 <div class="vid-cap"><b>{cap_b}</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>"""
     else:
         sec_demo = ""

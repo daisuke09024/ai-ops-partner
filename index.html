@@ -185,7 +185,10 @@ a{color:inherit}
 .crumb .cur{color:var(--blue);font-family:var(--fe);letter-spacing:.08em}
 .chero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;position:relative;z-index:1}
 .chero .bds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.chero h1{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1{font-size:clamp(1.6rem,3.6vw,2.5rem);font-weight:900;line-height:1.38;letter-spacing:-.025em;margin-bottom:16px}
+.chero h1 .seg{display:inline-block}
+.chero h1.l{font-size:clamp(1.5rem,3.4vw,2.15rem)}.chero h1.m{font-size:clamp(1.4rem,3vw,1.9rem)}.chero h1.s{font-size:clamp(1.3rem,2.7vw,1.7rem)}
+@media(max-width:1199px){.chero h1 br.hb{display:none}}
 .chero .lead{margin-bottom:24px}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:720px}
 .kp{padding:12px 14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);box-shadow:0 2px 8px rgba(0,0,0,.04)}
@@ -216,7 +219,10 @@ a{color:inherit}
 .chd h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;line-height:1.45}
 p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);line-height:1.85}
 .quote{max-width:1100px;margin:0 auto 14px;padding:14px 18px;border-left:4px solid var(--rose);background:var(--rose-bg);border-radius:0 12px 12px 0;font-size:1rem;font-weight:700;color:var(--tx)}
-.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3)}
+.vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3);position:relative}
+.vsnd{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:clamp(.9rem,1.6vw,1.05rem);font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer;z-index:2;white-space:nowrap}
+.vsnd:hover{filter:brightness(1.1)}
+.vsnd[hidden]{display:none}
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 .vidwrap .vid-cap{padding:10px 8px 2px}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
@@ -352,9 +358,7 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 
 <section class="sec" id="systems" style="background:var(--bg2)"><div class="w">
 <div class="sec-head"><div><div class="eyebrow">Systems</div><h2 class="h2">動いている仕組み</h2><p class="lead">日々動いている仕組み。図解を押すと拡大します。</p></div><div class="count">10<small>件</small></div></div>
-<div class="sgrid"><div class="scard zoomable fi" data-cap="スキルとエージェントの可視化"><div class="thumb"><img src="cases/media/list-map_real.webp" alt="スキルとエージェントの可視化の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><div><div class="smeta">AIの運用基盤</div><h3>スキルとエージェントの可視化</h3><p>AIに何を任せているのか、全体像が誰にも見えない</p></div><span class="bd bd-live">稼働中</span></div></div><div class="scard zoomable fi" data-cap="業務フロー図の自動生成"><div class="thumb"><img src="cases/media/list-flow_real.webp" data-full="cases/media/list-flow_full.webp" alt="業務フロー図の自動生成の図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><div><div class="smeta">資料・制作物</div><h3>業務フロー図の自動生成</h3><p>「今どう回っているか」を1枚で説明できる人が社内にいない</p></div><span class="bd bd-live">制作で使用中</span></div></div><div class="scard zoomable fi" data-cap="フォーム営業の仕組み一式"><div class="thumb"><img src="cases/media/list-form_real.webp" alt="フォーム営業の仕組み一式の図解" loading="lazy" width="1600" height="900"></div>
+<div class="sgrid"><div class="scard zoomable fi" data-cap="フォーム営業の仕組み一式"><div class="thumb"><img src="cases/media/list-form_real.webp" alt="フォーム営業の仕組み一式の図解" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><div class="smeta">営業・顧客対応</div><h3>フォーム営業の仕組み一式</h3><p>テンプレの文面しか送れず、相手ごとの言葉にならない</p></div><span class="bd bd-live">営業で使用中</span></div></div><div class="scard zoomable fi" data-cap="採用LPの制作・納品（某転職エージェント）"><div class="thumb"><img src="cases/media/list-lp_real.webp" alt="採用LPの制作・納品（某転職エージェント）の図解" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><div class="smeta">資料・制作物</div><h3>採用LPの制作・納品（某転職エージェント）</h3><p>LP・制作物は外注するしかないと思っている</p></div><span class="bd bd-live">実案件で納品</span></div></div><div class="scard zoomable fi" data-cap="タスクの先回り処理"><div class="thumb"><img src="cases/media/list-saki_real.webp" alt="タスクの先回り処理の図解" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><div class="smeta">記録・振り返り</div><h3>タスクの先回り処理</h3><p>「やらなきゃ」のまま止まっているタスクがある</p></div><span class="bd bd-live">毎日稼働中</span></div></div><div class="scard zoomable fi" data-cap="1分ごとの画面記録から、日報が自動で書ける"><div class="thumb"><img src="cases/media/list-nikki_real.webp" alt="1分ごとの画面記録から、日報が自動で書けるの図解" loading="lazy" width="1600" height="900"></div>
@@ -362,7 +366,9 @@ p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);
 <div class="sbody"><div><div class="smeta">会議・議事録</div><h3>マネージャー1on1準備の自動化</h3><p>1on1の準備が、前回の記録を読み返すところから毎回始まる</p></div><span class="bd bd-ext">組める仕組み</span></div></div><div class="scard zoomable fi" data-cap="営業商談プロセスのAI全自動化"><div class="thumb"><img src="cases/media/list-shodan.webp" alt="営業商談プロセスのAI全自動化の図解" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><div class="smeta">営業・顧客対応</div><h3>営業商談プロセスのAI全自動化</h3><p>商談前後の準備・フォローが、営業担当それぞれのやり方に依存している</p></div><span class="bd bd-ext">組める仕組み</span></div></div><div class="scard zoomable fi" data-cap="メンバー成長追跡OS（評価・キャリア設計の脱属人化）"><div class="thumb"><img src="cases/media/list-growth.webp" alt="メンバー成長追跡OS（評価・キャリア設計の脱属人化）の図解" loading="lazy" width="1600" height="900"></div>
 <div class="sbody"><div><div class="smeta">記録・振り返り</div><h3>メンバー成長追跡OS（評価・キャリア設計の脱属人化）</h3><p>メンバーの評価やキャリア設計が、上長の記憶と主観に依存している</p></div><span class="bd bd-ext">組める仕組み</span></div></div><div class="scard zoomable fi" data-cap="Slackエンゲージメントスコア月次モニタリング"><div class="thumb"><img src="cases/media/list-slack.webp" alt="Slackエンゲージメントスコア月次モニタリングの図解" loading="lazy" width="1600" height="900"></div>
-<div class="sbody"><div><div class="smeta">数字の見える化</div><h3>Slackエンゲージメントスコア月次モニタリング</h3><p>メンバーのモチベーション低下に気づくのが、本人が不調を訴えてからになりがち</p></div><span class="bd bd-ext">組める仕組み</span></div></div></div>
+<div class="sbody"><div><div class="smeta">数字の見える化</div><h3>Slackエンゲージメントスコア月次モニタリング</h3><p>メンバーのモチベーション低下に気づくのが、本人が不調を訴えてからになりがち</p></div><span class="bd bd-ext">組める仕組み</span></div></div><div class="scard zoomable fi" data-cap="スキルとエージェントの可視化"><div class="thumb"><img src="cases/media/list-map_real.webp" alt="スキルとエージェントの可視化の図解" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">AIの運用基盤</div><h3>スキルとエージェントの可視化</h3><p>AIに何を任せているのか、全体像が誰にも見えない</p></div><span class="bd bd-live">稼働中</span></div></div><div class="scard zoomable fi" data-cap="業務フロー図の自動生成"><div class="thumb"><img src="cases/media/list-flow_real.webp" data-full="cases/media/list-flow_full.webp" alt="業務フロー図の自動生成の図解" loading="lazy" width="1600" height="900"></div>
+<div class="sbody"><div><div class="smeta">資料・制作物</div><h3>業務フロー図の自動生成</h3><p>「今どう回っているか」を1枚で説明できる人が社内にいない</p></div><span class="bd bd-live">制作で使用中</span></div></div></div>
 </div></section>
 
 <section class="cta"><div class="w">
