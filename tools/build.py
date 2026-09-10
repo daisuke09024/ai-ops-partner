@@ -238,11 +238,13 @@ a{color:inherit}
 p.csub{max-width:1100px;margin:-6px auto 16px;font-size:.95rem;color:var(--tx2);line-height:1.85}
 .quote{max-width:1100px;margin:0 auto 14px;padding:14px 18px;border-left:4px solid var(--rose);background:var(--rose-bg);border-radius:0 12px 12px 0;font-size:1rem;font-weight:700;color:var(--tx)}
 .vidwrap{max-width:1100px;margin:0 auto;background:var(--dark);border-radius:var(--r2);padding:10px;box-shadow:var(--sh3);position:relative}
-.vsnd{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:clamp(.9rem,1.6vw,1.05rem);font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer;z-index:2;white-space:nowrap}
-.vsnd:hover{filter:brightness(1.1)}
-.vsnd[hidden]{display:none}
+.vsnd{flex:0 0 auto;background:var(--blue);color:#fff;border:1px solid transparent;border-radius:999px;padding:9px 17px;font-family:inherit;font-size:.85rem;font-weight:800;line-height:1.4;box-shadow:0 4px 14px rgba(37,99,235,.5);cursor:pointer;white-space:nowrap}
+.vsnd:hover{filter:brightness(1.12)}
+.vsnd.on{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);box-shadow:none}
 .vidwrap video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
-.vidwrap .vid-cap{padding:10px 8px 2px}
+.vidwrap .vid-cap{padding:10px 8px 2px;align-items:center}
+.vidwrap .vid-cap span{margin-left:auto;text-align:right}
+@media(max-width:640px){.vidwrap .vid-cap span{margin-left:0;text-align:left;flex-basis:100%}}
 .nums{max-width:1100px;margin:0 auto 16px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
 .num{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;box-shadow:var(--sh);display:flex;flex-direction:column;justify-content:center}
 .num small{display:block;font-size:.8rem;color:var(--tx3);font-weight:700}
@@ -358,7 +360,7 @@ document.querySelectorAll('.chip[data-cat]').forEach(b=>b.addEventListener('clic
 """
 
 JS_CASE = r"""
-(function(){const w=document.querySelector('#demo .vidwrap');if(!w)return;const v=w.querySelector('video'),b=w.querySelector('.vsnd');if(!v||!b)return;b.addEventListener('click',function(){b.hidden=true;v.loop=false;v.muted=false;v.currentTime=0;v.play().catch(function(){});});function back(){b.hidden=false;v.muted=true;v.loop=true;v.play().catch(function(){});}v.addEventListener('ended',back);v.addEventListener('volumechange',function(){if(v.muted&&b.hidden)back();});})();
+(function(){const w=document.querySelector('#demo .vidwrap');if(!w)return;const v=w.querySelector('video'),b=w.querySelector('.vsnd');if(!v||!b)return;const ON='🔇 音を止める',OFF='🔊 音声つきで最初から見る';function label(on){b.textContent=on?ON:OFF;b.setAttribute('aria-label',on?'音を止めて、無音の繰り返しに戻す':'音声つきで先頭から再生する');b.classList.toggle('on',on);}function sound(){label(true);v.loop=false;v.muted=false;v.currentTime=0;v.play().catch(function(){});}function back(){label(false);v.muted=true;v.loop=true;v.play().catch(function(){});}b.addEventListener('click',function(){if(v.muted)sound();else back();});v.addEventListener('ended',back);v.addEventListener('volumechange',function(){var on=b.classList.contains('on');if(v.muted&&on)back();else if(!v.muted&&!on){label(true);v.loop=false;}});})();
 (function(){const bar=document.getElementById('pg');if(!bar)return;function u(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(Math.max(0,Math.min(1,p))*100)+'%'}document.addEventListener('scroll',u,{passive:true});u();})();
 """
 
@@ -549,11 +551,11 @@ def build_case(c, prev_c, next_c):
 <div class="in fi">{zukai('', c['src_title'] + 'の図解（これまでとAI導入後）', overview_cap)}</div></div></section>"""
     if c["video"]:
         voice = c.get("voice")
-        cap_b = "60秒・字幕とナレーションつき（自動再生中は無音。ボタンで音声つきに）" if voice else "60秒・字幕つき"
-        snd_btn = '<button class="vsnd" type="button" aria-label="音声つきで先頭から再生する">🔊 音声つきで見る（60秒）</button>' if voice else ""
+        cap_b = "60秒・字幕とナレーションつき" if voice else "60秒・字幕つき"
+        snd_btn = '<button class="vsnd" type="button" aria-label="音声つきで先頭から再生する">🔊 音声つきで最初から見る</button>' if voice else ""
         sec_demo = f"""<section class="csec alt" id="demo"><div class="w"><div class="chd"><span class="tag tag-d">デモ</span><h2>実際の動き（60秒）</h2></div><p class="csub">見出しの順に、入口から出口まで通しで動かしています。</p>
-<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}のデモ（60秒・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>{snd_btn}
-<div class="vid-cap"><b>{cap_b}</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>"""
+<div class="vidwrap fi"><video autoplay muted loop playsinline preload="metadata" poster="media/case-{num}_demo_poster.jpg" controls aria-label="{esc(c['src_title'])}のデモ（60秒・架空データ）"><source src="media/case-{num}_demo.webm" type="video/webm"><source src="media/case-{num}_demo.mp4" type="video/mp4"></video>
+<div class="vid-cap">{snd_btn}<b>{cap_b}</b><span>架空データで再現。実際の導入では御社のツールに合わせて組みます。</span></div></div></div></section>"""
     else:
         sec_demo = ""
     if "before" in face:
