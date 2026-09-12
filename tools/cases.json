@@ -361,7 +361,7 @@
           "v": "6種"
         }
       ],
-      "video": false,
+      "video": true,
       "source_note": "顧客環境での設計値"
     },
     {
@@ -461,7 +461,7 @@
           "v": "○×で毎回判定"
         }
       ],
-      "video": false,
+      "video": true,
       "source_note": "実施2回の実測"
     }
   ],

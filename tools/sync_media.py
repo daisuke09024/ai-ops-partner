@@ -89,7 +89,11 @@ def main():
             if not m: continue
             pre = m.group(1)
             num = next((k for k, v in CASES.items() if v == pre), None)  # 決定版の名前は事例 id（08=shodan-rail・09=shiryo-2gate）
-            if num is None: continue
+            if num is None:
+                m2 = re.fullmatch(r"case-(\d{2})", pre)   # 決定版が case-NN の名前で置かれている事例（05・06）も拾う
+                if m2 and m2.group(1) in CASES: num = m2.group(1)
+            if num is None:
+                print(f"!! 対応する事例が無いので飛ばす: {f}", file=sys.stderr); continue   # 黙って落とさない（2026-09-12）
             dst = os.path.join(out, f"case-{num}_demo" + m.group(2))
             shutil.copy2(os.path.join(a.videos_dir, f), dst); n += 1; print("video:", f, "->", os.path.relpath(dst, ROOT))
         print(f"videos: {n} files")
