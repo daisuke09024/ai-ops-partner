@@ -380,6 +380,8 @@ def head(title, desc, url, image, extra=""):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:image" content="{esc(image)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="{esc(url)}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2712%27 fill=%27%232563eb%27/%3E%3C/svg%3E">
@@ -495,7 +497,7 @@ def build_index():
 {footer("")}
 <script>{JS_COMMON}{JS_INDEX}{JS_FB}</script>
 </body></html>"""
-    return head(title, desc, f"{SITE}/", f"{SITE}/cases/media/case-01_zukai.webp") + body
+    return head(title, desc, f"{SITE}/", f"{SITE}/media/ogp/top.jpg") + body
 
 # ------------------------------------------------------------------ case page
 
@@ -535,7 +537,7 @@ def build_case(c, prev_c, next_c):
     num = c["num"]; sh = c["src_sheet"]; face = c["src_face"]
     title = f"事例{num}：{h1_txt(c['headline'])}｜{BRAND}"
     url = f"{SITE}/cases/case-{num}.html"
-    img = f"{SITE}/cases/media/case-{num}_ill.webp"
+    img = f"{SITE}/media/ogp/case-{num}.jpg"   # SNS 用の専用サムネ（1200×630・PJ デモ見せ方の ogp/ で書き出し。2026-09-14 PF-52）
     tools = "".join(f"<span>{esc(t)}</span>" for t in c["tools"])
     kpis = "".join(kp_tile(k) for k in c["kpi"])
     ill = ill_src(num, "", "").replace("cases/", "", 1)
