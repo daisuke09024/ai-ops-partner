@@ -362,6 +362,7 @@
         }
       ],
       "video": true,
+      "voice": true,
       "source_note": "顧客環境での設計値"
     },
     {
