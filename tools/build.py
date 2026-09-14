@@ -428,12 +428,20 @@ def ill_src(num, root, size=""):
         return f"{root}cases/media/{name}"
     return f"{root}cases/media/case-{num}_zukai.webp"
 
+def card_src(num, root, size=""):
+    """トップの事例カード専用のサムネ（見出しを焼き込んだ絵。cases/media/case-NN_card{_m}.webp）。
+    無ければ従来の挿絵（_ill）に戻す。事例ページの FV と「次の事例」の小カードは挿絵のまま（2026-09-14 PF-54）"""
+    name = f"case-{num}_card{size}.webp"
+    if os.path.exists(os.path.join(ROOT, "cases", "media", name)):
+        return f"{root}cases/media/{name}"
+    return ill_src(num, root, size)
+
 
 def case_card(c, root):
     num = c["num"]
     vid = '<div class="cbds"><span class="bd bd-video">60秒デモ</span></div>' if c["video"] else ""
     return f"""<a class="card fi" href="{root}cases/case-{num}.html" data-cat="{esc(c['cat'])}">
-<div class="thumb"><img src="{ill_src(num, root, "_m")}" alt="{esc(c['src_title'])}のイメージ" loading="lazy" width="1600" height="900"></div>
+<div class="thumb"><img src="{card_src(num, root, "_m")}" alt="{esc(c['src_title'])}のイメージ" loading="lazy" width="1600" height="900"></div>
 <div class="cbody"><div class="cmeta"><span class="cat">{esc(c['cat'])}</span></div>
 {vid}<h3>{esc(h1_txt(c['headline']))}</h3>
 {kpi_html(c['src_face'])}</div></a>"""
@@ -614,7 +622,7 @@ def check_assets():
     missing = []
     for c in DATA["cases"]:
         n = c["num"]
-        for f in (f"case-{n}_zukai.webp", f"case-{n}_zukai_m.webp", f"case-{n}_zukai_s.webp", f"case-{n}_ill.webp", f"case-{n}_ill_m.webp"):
+        for f in (f"case-{n}_zukai.webp", f"case-{n}_zukai_m.webp", f"case-{n}_zukai_s.webp", f"case-{n}_ill.webp", f"case-{n}_ill_m.webp", f"case-{n}_card.webp", f"case-{n}_card_m.webp"):
             if not os.path.exists(os.path.join(ROOT, "cases", "media", f)): missing.append(f)
         if c["video"]:
             for f in (f"case-{n}_demo.mp4", f"case-{n}_demo.webm", f"case-{n}_demo_poster.jpg"):
