@@ -642,6 +642,9 @@ def main():
     if miss:
         print("!! 素材が足りない:", ", ".join(miss), file=sys.stderr)
         if a.check: sys.exit(1)
+        # トップの事例カード（_card / _card_m）は無いと card_src() が旧挿絵に黙って戻るので、--check 無しの通常ビルドでも止める（PF-54・坂本 1a・2026-09-14）
+        if any(f.endswith(("_card.webp", "_card_m.webp")) for f in miss):
+            print("!! 事例カードの画像が欠けたまま build しない: 先に cases/media/case-NN_card.webp と _card_m.webp を作る（見出し焼き込み。作り方は CLAUDE.md §生成器）", file=sys.stderr); sys.exit(1)
     elif a.check:
         print("素材は揃っている"); return
     cases = DATA["cases"]
