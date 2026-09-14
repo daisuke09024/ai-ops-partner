@@ -366,7 +366,12 @@ JS_CASE = r"""
 
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
 
+def og_image(name, fallback):
+    """SNS 用の専用サムネ（media/ogp/<name>.jpg・1200×630）。無ければ従来の画像に戻す＝新しい事例でサムネを作り忘れても og:image が 404 にならない（2026-09-14 PF-52）"""
+    return f"{SITE}/media/ogp/{name}.jpg" if os.path.exists(os.path.join(ROOT, "media", "ogp", f"{name}.jpg")) else fallback
+
 def head(title, desc, url, image, extra=""):
+    dims = '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n' if "/media/ogp/" in image else ""
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -380,9 +385,7 @@ def head(title, desc, url, image, extra=""):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:image" content="{esc(image)}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="{esc(url)}">
+{dims}<meta property="og:url" content="{esc(url)}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2712%27 fill=%27%232563eb%27/%3E%3C/svg%3E">
 {FONTS}
@@ -497,7 +500,7 @@ def build_index():
 {footer("")}
 <script>{JS_COMMON}{JS_INDEX}{JS_FB}</script>
 </body></html>"""
-    return head(title, desc, f"{SITE}/", f"{SITE}/media/ogp/top.jpg") + body
+    return head(title, desc, f"{SITE}/", og_image("top", f"{SITE}/cases/media/case-01_zukai.webp")) + body
 
 # ------------------------------------------------------------------ case page
 
@@ -537,7 +540,7 @@ def build_case(c, prev_c, next_c):
     num = c["num"]; sh = c["src_sheet"]; face = c["src_face"]
     title = f"事例{num}：{h1_txt(c['headline'])}｜{BRAND}"
     url = f"{SITE}/cases/case-{num}.html"
-    img = f"{SITE}/media/ogp/case-{num}.jpg"   # SNS 用の専用サムネ（1200×630・PJ デモ見せ方の ogp/ で書き出し。2026-09-14 PF-52）
+    img = og_image(f"case-{num}", f"{SITE}/cases/media/case-{num}_ill.webp")   # SNS 用の専用サムネ（無ければ挿絵）
     tools = "".join(f"<span>{esc(t)}</span>" for t in c["tools"])
     kpis = "".join(kp_tile(k) for k in c["kpi"])
     ill = ill_src(num, "", "").replace("cases/", "", 1)
@@ -620,6 +623,9 @@ def check_assets():
         if not os.path.exists(os.path.join(ROOT, "cases", "media", f"{l['key']}.webp")): missing.append(f"{l['key']}.webp")
     for f in ("hero_demo.mp4", "hero_demo.webm", "hero_demo_poster.jpg"):
         if not os.path.exists(os.path.join(ROOT, "media", f)): missing.append(f)
+    # SNS 用の専用サムネ（無くても生成は通り挿絵で代用するが、--check では欠けとして出す）
+    for name in ["top"] + [f"case-{c['num']}" for c in DATA["cases"]]:
+        if not os.path.exists(os.path.join(ROOT, "media", "ogp", f"{name}.jpg")): missing.append(f"media/ogp/{name}.jpg")
     return missing
 
 def main():
